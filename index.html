@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expired Solutions — Internship Program 2026</title>
+    <style>
+        :root {
+            --green-dark: #1b4332;
+            --green: #2d6a4f;
+            --green-light: #40916c;
+            --green-pale: #b7e4c7;
+            --green-bg: #f0fdf4;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: var(--gray-900);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, var(--green-light) 100%);
+            color: var(--white);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 50px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            color: var(--green-pale);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2.5rem;
+        }
+
+        .hero-stat h3 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .hero-stat p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        /* Section */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--green-dark);
+        }
+
+        section .section-sub {
+            text-align: center;
+            color: var(--gray-500);
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* Project Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+            border-color: var(--green-light);
+        }
+
+        .project-card .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .project-card .card-team {
+            font-size: 0.85rem;
+            color: var(--green);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card p {
+            color: var(--gray-500);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .tech-tag {
+            background: var(--green-bg);
+            color: var(--green);
+            padding: 0.25rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .card-link:hover { text-decoration: underline; }
+
+        .card-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Colors per card */
+        .card-cv .card-icon { background: #dbeafe; }
+        .card-forecast .card-icon { background: #fef3c7; }
+        .card-chatbot .card-icon { background: #d1fae5; }
+        .card-shopper .card-icon { background: #ede9fe; }
+        .card-analytics .card-icon { background: #fce7f3; }
+
+        /* Timeline */
+        .timeline-bg { background: var(--gray-50); }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .phase {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .phase-label {
+            display: inline-block;
+            background: var(--green);
+            color: var(--white);
+            padding: 0.2rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .phase h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .phase .weeks {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            margin-bottom: 0.75rem;
+        }
+
+        .phase ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .phase li {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            padding: 0.25rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .phase li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green-light);
+        }
+
+        /* Tools */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .tool-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            background: var(--white);
+        }
+
+        .tool-card .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tool-card p {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+
+        .tool-card .free-badge {
+            display: inline-block;
+            background: var(--green-bg);
+            color: var(--green);
+            padding: 0.15rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--green-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.95rem;
+        }
+
+        footer a {
+            color: var(--green-pale);
+            text-decoration: none;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .timeline { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="hero-badge">Summer 2026 Internship Program</div>
+    <h1>Expired Solutions<br><span>Internship Program</span></h1>
+    <p>25 CS interns. 5 AI-powered products. 12 weeks of building with cutting-edge tools. Real projects in the grocery-tech space.</p>
+    <div class="hero-stats">
+        <div class="hero-stat">
+            <h3>25</h3>
+            <p>Interns</p>
+        </div>
+        <div class="hero-stat">
+            <h3>5</h3>
+            <p>Team Projects</p>
+        </div>
+        <div class="hero-stat">
+            <h3>12</h3>
+            <p>Weeks</p>
+        </div>
+    </div>
+</div>
+
+<!-- Projects -->
+<section>
+    <h2>Team Projects</h2>
+    <p class="section-sub">Each team of 5 builds a standalone AI product in the Expired Solutions ecosystem</p>
+
+    <div class="projects-grid">
+        <!-- Team 1 -->
+        <div class="project-card card-cv">
+            <div class="card-icon">&#x1F4F7;</div>
+            <h3>FreshEye</h3>
+            <div class="card-team">Team 1 &middot; Computer Vision</div>
+            <p>Upload a photo of produce and get an AI-powered freshness classification with confidence score and storage tips.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">ResNet50</span>
+            </div>
+            <a href="https://github.com/LawrenceHua/es-intern-fresheye" class="card-link" target="_blank">
+                View Repository
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+            </a>
+        </div>
+
+        <!-- Team 2 -->
+        <div class="project-card card-forecast">
+            <div class="card-icon">&#x1F4C8;</div>
+            <h3>ShelfLife</h3>
+            <div class="card-team">Team 2 &middot; ML Forecasting</div>
+            <p>Dashboard that predicts grocery demand, estimates shelf life, and alerts on waste risk using time series ML.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Streamlit</span>
+                <span class="tech-tag">Prophet</span>
+                <span class="tech-tag">scikit-learn</span>
+            </div>
+            <a href="https://github.com/LawrenceHua/es-intern-shelflife" class="card-link" target="_blank">
+                View Repository
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+            </a>
+        </div>
+
+        <!-- Team 3 -->
+        <div class="project-card card-chatbot">
+            <div class="card-icon">&#x1F916;</div>
+            <h3>GroceryBot</h3>
+            <div class="card-team">Team 3 &middot; AI Chatbot</div>
+            <p>AI chatbot that answers produce questions using RAG — storage tips, food safety, recipes from what you have on hand.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Claude API</span>
+                <span class="tech-tag">ChromaDB</span>
+            </div>
+            <a href="https://github.com/LawrenceHua/es-intern-grocerybot" class="card-link" target="_blank">
+                View Repository
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+            </a>
+        </div>
+
+        <!-- Team 4 -->
+        <div class="project-card card-shopper">
+            <div class="card-icon">&#x1F6D2;</div>
+            <h3>SmartCart</h3>
+            <div class="card-team">Team 4 &middot; Shopper Intelligence</div>
+            <p>Mobile-responsive grocery app with smart lists, nutrition scoring, AI recipe suggestions, and price tracking.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">Claude API</span>
+            </div>
+            <a href="https://github.com/LawrenceHua/es-intern-smartcart" class="card-link" target="_blank">
+                View Repository
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+            </a>
+        </div>
+
+        <!-- Team 5 -->
+        <div class="project-card card-analytics">
+            <div class="card-icon">&#x1F4CA;</div>
+            <h3>FreshDash</h3>
+            <div class="card-team">Team 5 &middot; Analytics Platform</div>
+            <p>Store manager dashboard with real-time freshness monitoring, waste KPIs, department drill-downs, and alerts.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Streamlit</span>
+                <span class="tech-tag">Plotly</span>
+                <span class="tech-tag">Pandas</span>
+            </div>
+            <a href="https://github.com/LawrenceHua/es-intern-freshdash" class="card-link" target="_blank">
+                View Repository
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline -->
+<div class="timeline-bg">
+<section>
+    <h2>12-Week Program Timeline</h2>
+    <p class="section-sub">From zero to shipping AI products</p>
+
+    <div class="timeline">
+        <div class="phase">
+            <span class="phase-label">Phase 1</span>
+            <h3>Onboarding</h3>
+            <div class="weeks">Weeks 1-2</div>
+            <ul>
+                <li>Environment setup</li>
+                <li>Git &amp; GitHub bootcamp</li>
+                <li>AI coding tools workshop</li>
+                <li>Python &amp; web basics</li>
+                <li>Cursor IDE training</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <span class="phase-label">Phase 2</span>
+            <h3>Mini-Project</h3>
+            <div class="weeks">Weeks 3-4</div>
+            <ul>
+                <li>Form 5 teams of 5</li>
+                <li>Team "Produce Identifier" sprint</li>
+                <li>Git workflow practice</li>
+                <li>First team presentations</li>
+                <li>Main project assignment</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <span class="phase-label">Phase 3</span>
+            <h3>Main Build</h3>
+            <div class="weeks">Weeks 5-10</div>
+            <ul>
+                <li>6-week sprint cycle</li>
+                <li>Weekly Friday demos</li>
+                <li>Monday standups</li>
+                <li>Wednesday office hours</li>
+                <li>Cross-team integrations</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <span class="phase-label">Phase 4</span>
+            <h3>Ship &amp; Present</h3>
+            <div class="weeks">Weeks 11-12</div>
+            <ul>
+                <li>Code freeze</li>
+                <li>Bug fixes &amp; polish</li>
+                <li>Documentation</li>
+                <li>Demo video recording</li>
+                <li>Final Demo Day</li>
+            </ul>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- Tools -->
+<section>
+    <h2>Tools &amp; Stack</h2>
+    <p class="section-sub">All free tools — AI-first development workflow</p>
+
+    <div class="tools-grid">
+        <div class="tool-card">
+            <div class="tool-icon">&#x1F4BB;</div>
+            <h4>VS Code</h4>
+            <p>Primary code editor</p>
+            <span class="free-badge">Free</span>
+        </div>
+        <div class="tool-card">
+            <div class="tool-icon">&#x2728;</div>
+            <h4>GitHub Copilot</h4>
+            <p>AI code completions</p>
+            <span class="free-badge">Free tier</span>
+        </div>
+        <div class="tool-card">
+            <div class="tool-icon">&#x1F5B1;</div>
+            <h4>Cursor</h4>
+            <p>AI-native IDE</p>
+            <span class="free-badge">Free tier</span>
+        </div>
+        <div class="tool-card">
+            <div class="tool-icon">&#x1F40D;</div>
+            <h4>Python</h4>
+            <p>Backend &amp; ML</p>
+            <span class="free-badge">Free</span>
+        </div>
+        <div class="tool-card">
+            <div class="tool-icon">&#x26A1;</div>
+            <h4>FastAPI</h4>
+            <p>API framework</p>
+            <span class="free-badge">Free</span>
+        </div>
+        <div class="tool-card">
+            <div class="tool-icon">&#x1F4CA;</div>
+            <h4>Streamlit</h4>
+            <p>Dashboard UI</p>
+            <span class="free-badge">Free</span>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <h3>Expired Solutions</h3>
+    <p>AI-powered produce freshness tracking for grocery stores</p>
+    <p style="margin-top: 1rem;">
+        <a href="https://github.com/LawrenceHua">GitHub</a> &middot;
+        Program Lead: Lawrence Hua &middot;
+        Sponsored by <a href="https://www.talkmeup.co">Talk Me Up</a>
+    </p>
+    <p style="margin-top: 1.5rem; opacity: 0.5; font-size: 0.85rem;">&copy; 2026 Expired Solutions. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
