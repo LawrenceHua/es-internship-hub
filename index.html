@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expired Solutions — Internship Program 2026</title>
+    <title>Talk Me Up — Summer Internship 2026</title>
     <style>
         :root {
             --green-dark: #1b4332;
@@ -194,6 +194,81 @@
             height: 16px;
         }
 
+        /* Production Stats */
+        .prod-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .prod-stat-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+
+        .prod-stat-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            transform: translateY(-2px);
+            border-color: var(--green-light);
+        }
+
+        .prod-stat-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 0.25rem;
+        }
+
+        .prod-stat-card p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+        }
+
+        /* Weekly Rhythm */
+        .rhythm-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .rhythm-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+
+        .rhythm-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            transform: translateY(-2px);
+            border-color: var(--green-light);
+        }
+
+        .rhythm-card .rhythm-day {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 0.15rem;
+        }
+
+        .rhythm-card .rhythm-time {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .rhythm-card p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+        }
+
         /* Colors per card */
         .card-cv .card-icon { background: #dbeafe; }
         .card-forecast .card-icon { background: #fef3c7; }
@@ -335,6 +410,8 @@
             .hero-stats { flex-direction: column; gap: 1.5rem; }
             .timeline { grid-template-columns: 1fr; }
             .projects-grid { grid-template-columns: 1fr; }
+            .prod-stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .rhythm-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -343,7 +420,7 @@
 <!-- Hero -->
 <div class="hero">
     <div class="hero-badge">Summer 2026 Internship Program</div>
-    <h1>Expired Solutions<br><span>Internship Program</span></h1>
+    <h1>Talk Me Up<br><span>Summer Internship 2026</span></h1>
     <p>25 CS interns. 5 AI-powered products. 12 weeks of building with cutting-edge tools. Real projects in the grocery-tech space.</p>
     <div class="hero-stats">
         <div class="hero-stat">
@@ -352,11 +429,15 @@
         </div>
         <div class="hero-stat">
             <h3>5</h3>
-            <p>Team Projects</p>
+            <p>Teams</p>
         </div>
         <div class="hero-stat">
             <h3>12</h3>
             <p>Weeks</p>
+        </div>
+        <div class="hero-stat">
+            <h3>596K+</h3>
+            <p>Data Rows</p>
         </div>
     </div>
 </div>
@@ -364,7 +445,7 @@
 <!-- Projects -->
 <section>
     <h2>Team Projects</h2>
-    <p class="section-sub">Each team of 5 builds a standalone AI product in the Expired Solutions ecosystem</p>
+    <p class="section-sub">Each team of 5 builds on a production codebase in the Talk Me Up grocery-tech ecosystem</p>
 
     <div class="projects-grid">
         <!-- Team 1 -->
@@ -372,7 +453,7 @@
             <div class="card-icon">&#x1F4F7;</div>
             <h3>FreshEye</h3>
             <div class="card-team">Team 1 &middot; Computer Vision</div>
-            <p>Upload a photo of produce and get an AI-powered freshness classification with confidence score and storage tips.</p>
+            <p>Extend a 99% accuracy ML pipeline (EfficientNet-B0 + MobileNetV3) with web scanning, multi-item detection, and variety classification. Built on 77-class production models.</p>
             <div class="tech-tags">
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">FastAPI</span>
@@ -390,7 +471,7 @@
             <div class="card-icon">&#x1F4C8;</div>
             <h3>ShelfLife</h3>
             <div class="card-team">Team 2 &middot; ML Forecasting</div>
-            <p>Dashboard that predicts grocery demand, estimates shelf life, and alerts on waste risk using time series ML.</p>
+            <p>Build Prophet and LSTM forecasting models on 596K rows of real grocery data. Includes markdown pricing optimizer and waste prediction engine.</p>
             <div class="tech-tags">
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">Streamlit</span>
@@ -408,7 +489,7 @@
             <div class="card-icon">&#x1F916;</div>
             <h3>GroceryBot</h3>
             <div class="card-team">Team 3 &middot; AI Chatbot</div>
-            <p>AI chatbot that answers produce questions using RAG — storage tips, food safety, recipes from what you have on hand.</p>
+            <p>RAG-powered chatbot using a 100+ item produce knowledge base with nutrition, storage, recipes, and diet compatibility data. Integrates Claude API.</p>
             <div class="tech-tags">
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">FastAPI</span>
@@ -426,7 +507,7 @@
             <div class="card-icon">&#x1F6D2;</div>
             <h3>SmartCart</h3>
             <div class="card-team">Team 4 &middot; Shopper Intelligence</div>
-            <p>Mobile-responsive grocery app with smart lists, nutrition scoring, AI recipe suggestions, and price tracking.</p>
+            <p>Full shopper platform: inventory management, meal planning, receipt scanning, nutrition dashboard, and budget tracking. Mobile-first responsive web app.</p>
             <div class="tech-tags">
                 <span class="tech-tag">JavaScript</span>
                 <span class="tech-tag">FastAPI</span>
@@ -444,7 +525,7 @@
             <div class="card-icon">&#x1F4CA;</div>
             <h3>FreshDash</h3>
             <div class="card-team">Team 5 &middot; Analytics Platform</div>
-            <p>Store manager dashboard with real-time freshness monitoring, waste KPIs, department drill-downs, and alerts.</p>
+            <p>Store operations dashboard with real-time freshness heatmaps, waste KPIs, markdown workflows, employee task boards, and PDF report generation.</p>
             <div class="tech-tags">
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">Streamlit</span>
@@ -459,6 +540,33 @@
     </div>
 </section>
 
+<!-- Built on Production Code -->
+<div class="timeline-bg">
+<section>
+    <h2>Built on Production Code</h2>
+    <p class="section-sub">Interns work with real infrastructure, not toy projects</p>
+
+    <div class="prod-stats-grid">
+        <div class="prod-stat-card">
+            <h3>214 API Endpoints</h3>
+            <p>Production FastAPI backend on Azure</p>
+        </div>
+        <div class="prod-stat-card">
+            <h3>99%+ ML Accuracy</h3>
+            <p>EfficientNet-B0 + MobileNetV3 pipeline</p>
+        </div>
+        <div class="prod-stat-card">
+            <h3>596K Data Rows</h3>
+            <p>Real hourly grocery inventory data</p>
+        </div>
+        <div class="prod-stat-card">
+            <h3>100+ Produce Items</h3>
+            <p>Complete knowledge base with nutrition &amp; recipes</p>
+        </div>
+    </div>
+</section>
+</div>
+
 <!-- Timeline -->
 <div class="timeline-bg">
 <section>
@@ -468,27 +576,26 @@
     <div class="timeline">
         <div class="phase">
             <span class="phase-label">Phase 1</span>
-            <h3>Onboarding</h3>
+            <h3>Setup &amp; Tools</h3>
             <div class="weeks">Weeks 1-2</div>
             <ul>
                 <li>Environment setup</li>
-                <li>Git &amp; GitHub bootcamp</li>
+                <li>Git bootcamp</li>
                 <li>AI coding tools workshop</li>
-                <li>Python &amp; web basics</li>
+                <li>Python crash course</li>
                 <li>Cursor IDE training</li>
             </ul>
         </div>
 
         <div class="phase">
             <span class="phase-label">Phase 2</span>
-            <h3>Mini-Project</h3>
+            <h3>Teams &amp; Mini-Project</h3>
             <div class="weeks">Weeks 3-4</div>
             <ul>
-                <li>Form 5 teams of 5</li>
-                <li>Team "Produce Identifier" sprint</li>
-                <li>Git workflow practice</li>
-                <li>First team presentations</li>
-                <li>Main project assignment</li>
+                <li>Form 5 teams</li>
+                <li>Same mini-project for all</li>
+                <li>Codebase study</li>
+                <li>Architecture planning</li>
             </ul>
         </div>
 
@@ -497,10 +604,10 @@
             <h3>Main Build</h3>
             <div class="weeks">Weeks 5-10</div>
             <ul>
-                <li>6-week sprint cycle</li>
-                <li>Weekly Friday demos</li>
-                <li>Monday standups</li>
-                <li>Wednesday office hours</li>
+                <li>6 weeks building</li>
+                <li>Mon standups 12PM</li>
+                <li>Wed office hours 2PM</li>
+                <li>Fri demos 12PM</li>
                 <li>Cross-team integrations</li>
             </ul>
         </div>
@@ -511,15 +618,37 @@
             <div class="weeks">Weeks 11-12</div>
             <ul>
                 <li>Code freeze</li>
-                <li>Bug fixes &amp; polish</li>
-                <li>Documentation</li>
-                <li>Demo video recording</li>
-                <li>Final Demo Day</li>
+                <li>Demo videos</li>
+                <li>Final presentation to stakeholders</li>
             </ul>
         </div>
     </div>
 </section>
 </div>
+
+<!-- Weekly Rhythm -->
+<section>
+    <h2>Weekly Rhythm</h2>
+    <p class="section-sub">Three touchpoints every week to keep teams aligned</p>
+
+    <div class="rhythm-grid">
+        <div class="rhythm-card">
+            <div class="rhythm-day">Monday</div>
+            <div class="rhythm-time">12:00 PM</div>
+            <p>Standup &amp; Planning</p>
+        </div>
+        <div class="rhythm-card">
+            <div class="rhythm-day">Wednesday</div>
+            <div class="rhythm-time">2:00 PM</div>
+            <p>Office Hours</p>
+        </div>
+        <div class="rhythm-card">
+            <div class="rhythm-day">Friday</div>
+            <div class="rhythm-time">12:00 PM</div>
+            <p>Presentation Day</p>
+        </div>
+    </div>
+</section>
 
 <!-- Tools -->
 <section>
@@ -568,14 +697,12 @@
 
 <!-- Footer -->
 <footer>
-    <h3>Expired Solutions</h3>
-    <p>AI-powered produce freshness tracking for grocery stores</p>
+    <h3>Talk Me Up &mdash; Summer Internship 2026</h3>
     <p style="margin-top: 1rem;">
         <a href="https://github.com/LawrenceHua">GitHub</a> &middot;
-        Program Lead: Lawrence Hua &middot;
-        Sponsored by <a href="https://www.talkmeup.co">Talk Me Up</a>
+        Program Lead: Lawrence Hua
     </p>
-    <p style="margin-top: 1.5rem; opacity: 0.5; font-size: 0.85rem;">&copy; 2026 Expired Solutions. All rights reserved.</p>
+    <p style="margin-top: 1.5rem; opacity: 0.5; font-size: 0.85rem;">&copy; 2026 Talk Me Up Summer Internship</p>
 </footer>
 
 </body>
