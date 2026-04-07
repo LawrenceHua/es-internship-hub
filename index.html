@@ -231,7 +231,7 @@
         /* Weekly Rhythm */
         .rhythm-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
         }
 
@@ -265,6 +265,45 @@
         }
 
         .rhythm-card p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+        }
+
+        /* Guest Speakers */
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .speaker-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+
+        .speaker-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            transform: translateY(-2px);
+            border-color: var(--green-light);
+        }
+
+        .speaker-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .speaker-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .speaker-card p {
             font-size: 0.9rem;
             color: var(--gray-500);
         }
@@ -411,7 +450,8 @@
             .timeline { grid-template-columns: 1fr; }
             .projects-grid { grid-template-columns: 1fr; }
             .prod-stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .rhythm-grid { grid-template-columns: 1fr; }
+            .rhythm-grid { grid-template-columns: repeat(2, 1fr); }
+            .speakers-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -421,18 +461,14 @@
 <div class="hero">
     <div class="hero-badge">Summer 2026 Internship Program</div>
     <h1>Talk Me Up<br><span>Summer Internship 2026</span></h1>
-    <p>25 CS interns. 5 AI-powered products. 12 weeks of building with cutting-edge tools. Real projects in the grocery-tech space.</p>
+    <p>5 AI-powered products. 10 weeks of building with cutting-edge tools. Real projects in the grocery-tech space.</p>
     <div class="hero-stats">
-        <div class="hero-stat">
-            <h3>25</h3>
-            <p>Interns</p>
-        </div>
         <div class="hero-stat">
             <h3>5</h3>
             <p>Teams</p>
         </div>
         <div class="hero-stat">
-            <h3>12</h3>
+            <h3>10</h3>
             <p>Weeks</p>
         </div>
         <div class="hero-stat">
@@ -445,7 +481,7 @@
 <!-- Projects -->
 <section>
     <h2>Team Projects</h2>
-    <p class="section-sub">Each team of 5 builds on a production codebase in the Talk Me Up grocery-tech ecosystem</p>
+    <p class="section-sub">Each team builds on a production codebase in the Talk Me Up grocery-tech ecosystem</p>
 
     <div class="projects-grid">
         <!-- Team 1 -->
@@ -571,7 +607,7 @@
 <!-- Timeline -->
 <div class="timeline-bg">
 <section>
-    <h2>12-Week Program Timeline</h2>
+    <h2>10-Week Program Timeline</h2>
     <p class="section-sub">From zero to shipping AI products</p>
 
     <div class="timeline">
@@ -603,20 +639,20 @@
         <div class="phase">
             <span class="phase-label">Phase 3</span>
             <h3>Main Build</h3>
-            <div class="weeks">Weeks 5-10</div>
+            <div class="weeks">Weeks 5-8</div>
             <ul>
-                <li>6 weeks building</li>
-                <li>Mon standups 12PM</li>
-                <li>Wed office hours 2PM</li>
-                <li>Fri demos 12PM</li>
+                <li>4 weeks building</li>
+                <li>Weekly standups &amp; huddles</li>
+                <li>Fri presentations</li>
                 <li>Cross-team integrations</li>
+                <li>Guest speaker sessions</li>
             </ul>
         </div>
 
         <div class="phase">
             <span class="phase-label">Phase 4</span>
             <h3>Ship &amp; Present</h3>
-            <div class="weeks">Weeks 11-12</div>
+            <div class="weeks">Weeks 9-10</div>
             <ul>
                 <li>Code freeze</li>
                 <li>Demo videos</li>
@@ -630,18 +666,23 @@
 <!-- Weekly Rhythm -->
 <section>
     <h2>Weekly Rhythm</h2>
-    <p class="section-sub">Three touchpoints every week to keep teams aligned</p>
+    <p class="section-sub">Four touchpoints every week to keep teams aligned</p>
 
     <div class="rhythm-grid">
         <div class="rhythm-card">
             <div class="rhythm-day">Monday</div>
             <div class="rhythm-time">12:00 PM</div>
-            <p>Standup &amp; Planning</p>
+            <p>Stand-Up</p>
         </div>
         <div class="rhythm-card">
-            <div class="rhythm-day">Wednesday</div>
+            <div class="rhythm-day">Tuesday</div>
             <div class="rhythm-time">2:00 PM</div>
-            <p>Office Hours</p>
+            <p>Team Huddle</p>
+        </div>
+        <div class="rhythm-card">
+            <div class="rhythm-day">Thursday</div>
+            <div class="rhythm-time">2:00 PM</div>
+            <p>Team Huddle</p>
         </div>
         <div class="rhythm-card">
             <div class="rhythm-day">Friday</div>
@@ -650,6 +691,32 @@
         </div>
     </div>
 </section>
+
+<!-- Guest Speakers -->
+<div class="timeline-bg">
+<section>
+    <h2>Guest Speakers</h2>
+    <p class="section-sub">Industry professionals share real-world insights throughout the program</p>
+
+    <div class="speakers-grid">
+        <div class="speaker-card">
+            <div class="speaker-icon">&#x1F3A4;</div>
+            <h4>Tech Talks</h4>
+            <p>Engineers and founders share lessons from building production systems, AI products, and scaling startups.</p>
+        </div>
+        <div class="speaker-card">
+            <div class="speaker-icon">&#x1F4BC;</div>
+            <h4>Career Panels</h4>
+            <p>Professionals across engineering, product, and data science discuss career paths and industry trends.</p>
+        </div>
+        <div class="speaker-card">
+            <div class="speaker-icon">&#x1F680;</div>
+            <h4>Demo &amp; Feedback</h4>
+            <p>Guest reviewers provide feedback on team projects, simulating real stakeholder presentations.</p>
+        </div>
+    </div>
+</section>
+</div>
 
 <!-- Tools -->
 <section>
