@@ -4,773 +4,1079 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talk Me Up — Summer Internship 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --green-dark: #1b4332;
-            --green: #2d6a4f;
-            --green-light: #40916c;
-            --green-pale: #b7e4c7;
-            --green-bg: #f0fdf4;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-500: #6b7280;
-            --gray-700: #374151;
-            --gray-900: #111827;
-            --white: #ffffff;
+            --primary: #1a3c34;
+            --primary-mid: #2a5a4a;
+            --accent: #3d8b6e;
+            --accent-light: #e8f5ef;
+            --accent-muted: #5ba88a;
+            --surface: #ffffff;
+            --surface-alt: #f7f8fa;
+            --surface-elevated: #ffffff;
+            --border: #e2e5ea;
+            --border-hover: #c8cdd4;
+            --text: #1a1d23;
+            --text-secondary: #5a6170;
+            --text-tertiary: #8891a0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+            --radius: 10px;
+            --radius-lg: 16px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            color: var(--gray-900);
-            background: var(--white);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--surface);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, var(--green-light) 100%);
-            color: var(--white);
-            padding: 5rem 2rem 4rem;
-            text-align: center;
+        /* ── Nav ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
         }
 
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.25);
-            border-radius: 50px;
-            padding: 0.4rem 1.2rem;
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
             font-size: 0.85rem;
             font-weight: 500;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.02em;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.15s;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
+        .nav-links a:hover { color: var(--accent); }
 
-        .hero h1 span {
-            color: var(--green-pale);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 2.5rem;
-        }
-
-        .hero-stat h3 {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .hero-stat p {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin: 0;
-        }
-
-        /* Section */
-        section {
-            padding: 4rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        section h2 {
-            font-size: 2rem;
-            font-weight: 700;
+        /* ── Hero ── */
+        .hero {
+            padding: 8rem 2rem 5rem;
             text-align: center;
-            margin-bottom: 0.5rem;
-            color: var(--green-dark);
-        }
-
-        section .section-sub {
-            text-align: center;
-            color: var(--gray-500);
-            margin-bottom: 2.5rem;
-            font-size: 1.05rem;
-        }
-
-        /* Project Cards */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.25s ease;
+            background: var(--primary);
+            color: #fff;
             position: relative;
             overflow: hidden;
         }
 
-        .project-card:hover {
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-            transform: translateY(-4px);
-            border-color: var(--green-light);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: rgba(61,139,110,0.15);
+            pointer-events: none;
         }
 
-        .project-card .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -15%;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(61,139,110,0.1);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.035em;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            line-height: 1.65;
+            color: rgba(255,255,255,0.72);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .hero-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 3.5rem;
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .hero-metric strong {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-metric span {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── Sections ── */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-alt {
+            background: var(--surface-alt);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: var(--text-tertiary);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* ── Project Cards ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .projects-grid .project-card:last-child {
+            grid-column: 1 / -1;
+            max-width: calc(50% - 0.625rem);
+            justify-self: center;
+        }
+
+        .project-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .project-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .card-illustration {
+            height: 160px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .project-card h3 {
-            font-size: 1.3rem;
+        .card-illustration svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-body h3 {
+            font-size: 1.15rem;
             font-weight: 700;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.01em;
         }
 
-        .project-card .card-team {
-            font-size: 0.85rem;
-            color: var(--green);
+        .card-category {
+            font-size: 0.8rem;
             font-weight: 600;
+            color: var(--accent);
             margin-bottom: 0.75rem;
         }
 
-        .project-card p {
-            color: var(--gray-500);
-            font-size: 0.95rem;
-            margin-bottom: 1.25rem;
+        .card-body p {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-bottom: 1.25rem;
+            gap: 0.35rem;
+            margin-bottom: 1rem;
         }
 
         .tech-tag {
-            background: var(--green-bg);
-            color: var(--green);
-            padding: 0.25rem 0.7rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
+            background: var(--surface-alt);
+            color: var(--text-secondary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
             font-weight: 500;
+            border: 1px solid var(--border);
         }
 
         .card-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            color: var(--green);
+            gap: 0.35rem;
+            color: var(--accent);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
+            transition: gap 0.15s;
         }
 
-        .card-link:hover { text-decoration: underline; }
+        .card-link:hover { gap: 0.55rem; }
 
         .card-link svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
         }
 
-        /* Production Stats */
-        .prod-stats-grid {
+        /* ── Stats ── */
+        .stats-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 1.25rem;
         }
 
-        .prod-stat-card {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: 12px;
+        .stat-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             padding: 1.5rem;
             text-align: center;
-            transition: all 0.25s ease;
         }
 
-        .prod-stat-card:hover {
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-            transform: translateY(-2px);
-            border-color: var(--green-light);
-        }
-
-        .prod-stat-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--green);
+        .stat-card .stat-value {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.02em;
             margin-bottom: 0.25rem;
         }
 
-        .prod-stat-card p {
-            font-size: 0.9rem;
-            color: var(--gray-500);
+        .stat-card .stat-label {
+            font-size: 0.82rem;
+            color: var(--text-tertiary);
         }
 
-        /* Weekly Rhythm */
-        .rhythm-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.5rem;
-        }
-
-        .rhythm-card {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.25s ease;
-        }
-
-        .rhythm-card:hover {
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-            transform: translateY(-2px);
-            border-color: var(--green-light);
-        }
-
-        .rhythm-card .rhythm-day {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--green-dark);
-            margin-bottom: 0.15rem;
-        }
-
-        .rhythm-card .rhythm-time {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--green);
-            margin-bottom: 0.5rem;
-        }
-
-        .rhythm-card p {
-            font-size: 0.9rem;
-            color: var(--gray-500);
-        }
-
-        /* Guest Speakers */
-        .speakers-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .speaker-card {
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.25s ease;
-        }
-
-        .speaker-card:hover {
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-            transform: translateY(-2px);
-            border-color: var(--green-light);
-        }
-
-        .speaker-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .speaker-card h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--green-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .speaker-card p {
-            font-size: 0.9rem;
-            color: var(--gray-500);
-        }
-
-        /* Colors per card */
-        .card-cv .card-icon { background: #dbeafe; }
-        .card-forecast .card-icon { background: #fef3c7; }
-        .card-chatbot .card-icon { background: #d1fae5; }
-        .card-shopper .card-icon { background: #ede9fe; }
-        .card-analytics .card-icon { background: #fce7f3; }
-
-        /* Timeline */
-        .timeline-bg { background: var(--gray-50); }
-
-        .timeline {
+        /* ── Timeline ── */
+        .timeline-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 1.25rem;
+            position: relative;
         }
 
-        .phase {
-            background: var(--white);
-            border-radius: 12px;
+        .timeline-grid::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: calc(12.5% + 0.625rem);
+            right: calc(12.5% + 0.625rem);
+            height: 2px;
+            background: var(--border);
+        }
+
+        .phase-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             padding: 1.5rem;
-            border: 1px solid var(--gray-200);
+            position: relative;
         }
 
-        .phase-label {
-            display: inline-block;
-            background: var(--green);
-            color: var(--white);
-            padding: 0.2rem 0.7rem;
-            border-radius: 50px;
+        .phase-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .phase-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.15rem;
+            letter-spacing: -0.01em;
+        }
+
+        .phase-card .phase-weeks {
+            font-size: 0.8rem;
+            color: var(--accent);
             font-weight: 600;
             margin-bottom: 0.75rem;
         }
 
-        .phase h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .phase .weeks {
-            font-size: 0.85rem;
-            color: var(--gray-500);
-            margin-bottom: 0.75rem;
-        }
-
-        .phase ul {
+        .phase-card ul {
             list-style: none;
             padding: 0;
         }
 
-        .phase li {
-            font-size: 0.9rem;
-            color: var(--gray-700);
-            padding: 0.25rem 0;
-            padding-left: 1.2rem;
+        .phase-card li {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+            padding: 0.2rem 0 0.2rem 1rem;
             position: relative;
         }
 
-        .phase li::before {
+        .phase-card li::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0.6rem;
-            width: 6px;
-            height: 6px;
+            top: 0.55rem;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            background: var(--green-light);
+            background: var(--border-hover);
         }
 
-        /* Tools */
+        /* ── Weekly Rhythm ── */
+        .rhythm-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .rhythm-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            text-align: center;
+            transition: border-color 0.15s;
+        }
+
+        .rhythm-card:hover {
+            border-color: var(--accent);
+        }
+
+        .rhythm-day {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .rhythm-event {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ── Guest Speakers ── */
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .speaker-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .speaker-icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .speaker-icon-wrap svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.8;
+        }
+
+        .speaker-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .speaker-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        /* ── Tools ── */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(6, 1fr);
             gap: 1rem;
         }
 
         .tool-card {
             text-align: center;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--gray-200);
-            background: var(--white);
+            padding: 1.25rem 0.75rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--surface-elevated);
         }
 
-        .tool-card .tool-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+        .tool-logo {
+            width: 36px;
+            height: 36px;
+            margin: 0 auto 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tool-logo svg {
+            width: 28px;
+            height: 28px;
         }
 
         .tool-card h4 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
         }
 
         .tool-card p {
-            font-size: 0.85rem;
-            color: var(--gray-500);
+            font-size: 0.78rem;
+            color: var(--text-tertiary);
         }
 
-        .tool-card .free-badge {
-            display: inline-block;
-            background: var(--green-bg);
-            color: var(--green);
-            padding: 0.15rem 0.5rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-top: 0.5rem;
-        }
-
-        /* Footer */
+        /* ── Footer ── */
         footer {
-            background: var(--green-dark);
-            color: var(--white);
-            text-align: center;
+            background: var(--primary);
+            color: #fff;
             padding: 3rem 2rem;
         }
 
-        footer h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+        .footer-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        footer p {
-            opacity: 0.7;
+        .footer-brand {
+            font-weight: 700;
             font-size: 0.95rem;
         }
 
-        footer a {
-            color: var(--green-pale);
-            text-decoration: none;
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
         }
 
-        footer a:hover { text-decoration: underline; }
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .hero-stats { flex-direction: column; gap: 1.5rem; }
-            .timeline { grid-template-columns: 1fr; }
+        .footer-links a:hover { color: #fff; }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.35);
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
             .projects-grid { grid-template-columns: 1fr; }
-            .prod-stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .rhythm-grid { grid-template-columns: repeat(2, 1fr); }
+            .projects-grid .project-card:last-child {
+                max-width: 100%;
+                grid-column: auto;
+            }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .timeline-grid { grid-template-columns: repeat(2, 1fr); }
+            .timeline-grid::before { display: none; }
+            .tools-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 7rem 1.5rem 3.5rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-metrics { flex-direction: column; gap: 1.5rem; }
+            .nav-links { display: none; }
+            .timeline-grid { grid-template-columns: 1fr; }
+            .rhythm-row { grid-template-columns: repeat(2, 1fr); }
             .speakers-grid { grid-template-columns: 1fr; }
+            .tools-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+            .section { padding: 3.5rem 0; }
         }
     </style>
 </head>
 <body>
 
+<!-- Nav -->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-brand">Talk Me Up</div>
+        <ul class="nav-links">
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#speakers">Speakers</a></li>
+            <li><a href="https://github.com/LawrenceHua" target="_blank">GitHub</a></li>
+        </ul>
+    </div>
+</nav>
+
 <!-- Hero -->
 <div class="hero">
-    <div class="hero-badge">Summer 2026 Internship Program</div>
-    <h1>Talk Me Up<br><span>Summer Internship 2026</span></h1>
-    <p>5 AI-powered products. 10 weeks of building with cutting-edge tools. Real projects in the grocery-tech space.</p>
-    <div class="hero-stats">
-        <div class="hero-stat">
-            <h3>5</h3>
-            <p>Teams</p>
-        </div>
-        <div class="hero-stat">
-            <h3>10</h3>
-            <p>Weeks</p>
-        </div>
-        <div class="hero-stat">
-            <h3>596K+</h3>
-            <p>Data Rows</p>
+    <div class="hero-inner">
+        <div class="hero-label">Summer 2026 Internship Program</div>
+        <h1>Build real AI products<br>from day one.</h1>
+        <p>A 10-week program where teams ship production-grade tools in computer vision, ML forecasting, NLP, and analytics&mdash;on a real grocery-tech platform.</p>
+        <div class="hero-metrics">
+            <div class="hero-metric">
+                <strong>5</strong>
+                <span>Teams</span>
+            </div>
+            <div class="hero-metric">
+                <strong>10</strong>
+                <span>Weeks</span>
+            </div>
+            <div class="hero-metric">
+                <strong>596K+</strong>
+                <span>Data Rows</span>
+            </div>
+            <div class="hero-metric">
+                <strong>214</strong>
+                <span>API Endpoints</span>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Projects -->
-<section>
-    <h2>Team Projects</h2>
-    <p class="section-sub">Each team builds on a production codebase in the Talk Me Up grocery-tech ecosystem</p>
-
-    <div class="projects-grid">
-        <!-- Team 1 -->
-        <div class="project-card card-cv">
-            <div class="card-icon">&#x1F4F7;</div>
-            <h3>FreshEye</h3>
-            <div class="card-team">Team 1 &middot; Computer Vision</div>
-            <p>Extend a 99% accuracy ML pipeline (EfficientNet-B0 + MobileNetV3) with web scanning, multi-item detection, and variety classification. Built on 77-class production models.</p>
-            <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">PyTorch</span>
-                <span class="tech-tag">EfficientNet-B0</span>
-                <span class="tech-tag">MobileNetV3</span>
-            </div>
-            <a href="https://github.com/LawrenceHua/es-intern-fresheye" class="card-link" target="_blank">
-                View Repository
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
-            </a>
+<div class="section" id="projects">
+    <div class="container">
+        <div class="section-header">
+            <h2>Team Projects</h2>
+            <p>Each team builds on a production codebase in the Talk Me Up grocery-tech ecosystem.</p>
         </div>
 
-        <!-- Team 2 -->
-        <div class="project-card card-forecast">
-            <div class="card-icon">&#x1F4C8;</div>
-            <h3>ShelfLife</h3>
-            <div class="card-team">Team 2 &middot; ML Forecasting</div>
-            <p>Build Prophet and LSTM forecasting models on 596K rows of real grocery data. Includes markdown pricing optimizer and waste prediction engine.</p>
-            <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Streamlit</span>
-                <span class="tech-tag">Prophet</span>
-                <span class="tech-tag">scikit-learn</span>
+        <div class="projects-grid">
+            <!-- FreshEye -->
+            <div class="project-card">
+                <div class="card-illustration">
+                    <svg viewBox="0 0 400 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="160" fill="#f0f4f8"/>
+                        <rect x="40" y="30" width="100" height="100" rx="12" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+                        <circle cx="90" cy="80" r="28" fill="#bfdbfe" stroke="#60a5fa" stroke-width="2"/>
+                        <circle cx="90" cy="80" r="12" fill="#3b82f6"/>
+                        <circle cx="90" cy="80" r="5" fill="#fff"/>
+                        <line x1="160" y1="48" x2="360" y2="48" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <line x1="160" y1="68" x2="320" y2="68" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <line x1="160" y1="88" x2="340" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <rect x="160" y="42" width="60" height="12" rx="3" fill="#93c5fd" opacity="0.5"/>
+                        <rect x="160" y="62" width="90" height="12" rx="3" fill="#bfdbfe" opacity="0.4"/>
+                        <rect x="160" y="82" width="75" height="12" rx="3" fill="#93c5fd" opacity="0.3"/>
+                        <path d="M30 120 L50 105 L65 112 L85 95 L105 108 L125 98 L140 110" stroke="#3b82f6" stroke-width="2" fill="none" opacity="0.4"/>
+                        <rect x="300" y="100" width="60" height="30" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
+                        <text x="330" y="119" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6" font-family="Inter, sans-serif">99.2%</text>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <h3>FreshEye</h3>
+                    <div class="card-category">Computer Vision &amp; Scanning</div>
+                    <p>Extend a 99%+ accuracy ML pipeline with web scanning, multi-item detection, and variety classification. Built on 77-class production models.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">EfficientNet-B0</span>
+                        <span class="tech-tag">MobileNetV3</span>
+                    </div>
+                    <a href="https://github.com/LawrenceHua/es-intern-fresheye" class="card-link" target="_blank">
+                        View Repository
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+                    </a>
+                </div>
             </div>
-            <a href="https://github.com/LawrenceHua/es-intern-shelflife" class="card-link" target="_blank">
-                View Repository
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
-            </a>
-        </div>
 
-        <!-- Team 3 -->
-        <div class="project-card card-chatbot">
-            <div class="card-icon">&#x1F916;</div>
-            <h3>GroceryBot</h3>
-            <div class="card-team">Team 3 &middot; AI Chatbot</div>
-            <p>RAG-powered chatbot using a 100+ item produce knowledge base with nutrition, storage, recipes, and diet compatibility data. Integrates Claude API.</p>
-            <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">Claude API</span>
-                <span class="tech-tag">ChromaDB</span>
+            <!-- ShelfLife -->
+            <div class="project-card">
+                <div class="card-illustration">
+                    <svg viewBox="0 0 400 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="160" fill="#fefce8"/>
+                        <rect x="40" y="110" width="28" height="30" rx="3" fill="#fde68a"/>
+                        <rect x="76" y="85" width="28" height="55" rx="3" fill="#fcd34d"/>
+                        <rect x="112" y="65" width="28" height="75" rx="3" fill="#fbbf24"/>
+                        <rect x="148" y="50" width="28" height="90" rx="3" fill="#f59e0b"/>
+                        <rect x="184" y="70" width="28" height="70" rx="3" fill="#fbbf24"/>
+                        <rect x="220" y="45" width="28" height="95" rx="3" fill="#f59e0b"/>
+                        <path d="M54 105 L90 80 L126 60 L162 45 L198 65 L234 40" stroke="#d97706" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <circle cx="54" cy="105" r="4" fill="#d97706"/>
+                        <circle cx="234" cy="40" r="4" fill="#d97706"/>
+                        <path d="M234 40 L280 25 L330 30" stroke="#d97706" stroke-width="2" stroke-dasharray="5 4" fill="none" opacity="0.5"/>
+                        <rect x="290" y="60" width="80" height="48" rx="8" fill="#fff" stroke="#e5e7eb" stroke-width="1"/>
+                        <text x="330" y="78" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e" font-family="Inter, sans-serif">FORECAST</text>
+                        <text x="330" y="97" text-anchor="middle" font-size="16" font-weight="700" fill="#d97706" font-family="Inter, sans-serif">596K</text>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <h3>ShelfLife</h3>
+                    <div class="card-category">ML Forecasting &amp; Waste Intelligence</div>
+                    <p>Build Prophet and LSTM forecasting models on 596K rows of real grocery data. Includes markdown pricing optimizer and waste prediction engine.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Streamlit</span>
+                        <span class="tech-tag">Prophet</span>
+                        <span class="tech-tag">scikit-learn</span>
+                    </div>
+                    <a href="https://github.com/LawrenceHua/es-intern-shelflife" class="card-link" target="_blank">
+                        View Repository
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+                    </a>
+                </div>
             </div>
-            <a href="https://github.com/LawrenceHua/es-intern-grocerybot" class="card-link" target="_blank">
-                View Repository
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
-            </a>
-        </div>
 
-        <!-- Team 4 -->
-        <div class="project-card card-shopper">
-            <div class="card-icon">&#x1F6D2;</div>
-            <h3>SmartCart</h3>
-            <div class="card-team">Team 4 &middot; Shopper Intelligence</div>
-            <p>Full shopper platform: inventory management, meal planning, receipt scanning, nutrition dashboard, and budget tracking. Mobile-first responsive web app.</p>
-            <div class="tech-tags">
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">SQLite</span>
-                <span class="tech-tag">Claude API</span>
+            <!-- GroceryBot -->
+            <div class="project-card">
+                <div class="card-illustration">
+                    <svg viewBox="0 0 400 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="160" fill="#ecfdf5"/>
+                        <rect x="50" y="25" width="160" height="36" rx="18" fill="#a7f3d0" stroke="#6ee7b7" stroke-width="1"/>
+                        <text x="130" y="48" text-anchor="middle" font-size="11" fill="#065f46" font-family="Inter, sans-serif">What pairs well with salmon?</text>
+                        <rect x="190" y="72" width="170" height="36" rx="18" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
+                        <text x="275" y="95" text-anchor="middle" font-size="11" fill="#065f46" font-family="Inter, sans-serif">Asparagus, lemon, dill...</text>
+                        <rect x="50" y="118" width="130" height="28" rx="14" fill="#a7f3d0" stroke="#6ee7b7" stroke-width="1"/>
+                        <circle cx="66" cy="132" r="4" fill="#10b981"/>
+                        <circle cx="78" cy="132" r="4" fill="#10b981" opacity="0.5"/>
+                        <circle cx="90" cy="132" r="4" fill="#10b981" opacity="0.25"/>
+                        <rect x="290" y="20" width="80" height="50" rx="8" fill="#fff" stroke="#d1fae5" stroke-width="1.5"/>
+                        <text x="330" y="38" text-anchor="middle" font-size="8" font-weight="600" fill="#059669" font-family="Inter, sans-serif">KNOWLEDGE</text>
+                        <text x="330" y="50" text-anchor="middle" font-size="8" font-weight="600" fill="#059669" font-family="Inter, sans-serif">BASE</text>
+                        <text x="330" y="63" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46" font-family="Inter, sans-serif">100+</text>
+                        <line x1="290" y1="45" x2="270" y2="90" stroke="#6ee7b7" stroke-width="1.5" stroke-dasharray="4 3"/>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <h3>GroceryBot</h3>
+                    <div class="card-category">Conversational AI &amp; RAG</div>
+                    <p>RAG-powered chatbot using a 100+ item produce knowledge base with nutrition, storage, recipes, and diet compatibility. Integrates Claude API.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Claude API</span>
+                        <span class="tech-tag">ChromaDB</span>
+                    </div>
+                    <a href="https://github.com/LawrenceHua/es-intern-grocerybot" class="card-link" target="_blank">
+                        View Repository
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+                    </a>
+                </div>
             </div>
-            <a href="https://github.com/LawrenceHua/es-intern-smartcart" class="card-link" target="_blank">
-                View Repository
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
-            </a>
-        </div>
 
-        <!-- Team 5 -->
-        <div class="project-card card-analytics">
-            <div class="card-icon">&#x1F4CA;</div>
-            <h3>FreshDash</h3>
-            <div class="card-team">Team 5 &middot; Analytics Platform</div>
-            <p>Store operations dashboard with real-time freshness heatmaps, waste KPIs, markdown workflows, employee task boards, and PDF report generation.</p>
-            <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Streamlit</span>
-                <span class="tech-tag">Plotly</span>
-                <span class="tech-tag">Pandas</span>
+            <!-- SmartCart -->
+            <div class="project-card">
+                <div class="card-illustration">
+                    <svg viewBox="0 0 400 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="160" fill="#f5f3ff"/>
+                        <rect x="130" y="15" width="140" height="130" rx="16" fill="#fff" stroke="#c4b5fd" stroke-width="1.5"/>
+                        <rect x="145" y="30" width="110" height="14" rx="4" fill="#ede9fe"/>
+                        <rect x="145" y="52" width="110" height="32" rx="6" fill="#ddd6fe" opacity="0.5"/>
+                        <rect x="152" y="58" width="60" height="8" rx="2" fill="#8b5cf6" opacity="0.3"/>
+                        <rect x="152" y="70" width="40" height="8" rx="2" fill="#8b5cf6" opacity="0.2"/>
+                        <rect x="145" y="92" width="52" height="22" rx="6" fill="#8b5cf6"/>
+                        <text x="171" y="107" text-anchor="middle" font-size="9" font-weight="600" fill="#fff" font-family="Inter, sans-serif">Add</text>
+                        <rect x="203" y="92" width="52" height="22" rx="6" fill="#ede9fe"/>
+                        <rect x="145" y="122" width="110" height="12" rx="3" fill="#f5f3ff"/>
+                        <rect x="40" y="40" width="65" height="80" rx="8" fill="#fff" stroke="#e5e7eb" stroke-width="1"/>
+                        <rect x="48" y="50" width="49" height="6" rx="2" fill="#ddd6fe"/>
+                        <rect x="48" y="62" width="49" height="6" rx="2" fill="#ede9fe"/>
+                        <rect x="48" y="74" width="49" height="6" rx="2" fill="#ddd6fe"/>
+                        <rect x="48" y="86" width="30" height="6" rx="2" fill="#ede9fe"/>
+                        <text x="72" y="108" text-anchor="middle" font-size="8" font-weight="600" fill="#7c3aed" font-family="Inter, sans-serif">Grocery List</text>
+                        <rect x="310" y="50" width="60" height="60" rx="8" fill="#fff" stroke="#e5e7eb" stroke-width="1"/>
+                        <circle cx="340" cy="72" r="14" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+                        <text x="340" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="#7c3aed" font-family="Inter, sans-serif">$</text>
+                        <text x="340" y="100" text-anchor="middle" font-size="8" font-weight="500" fill="#6b7280" font-family="Inter, sans-serif">Budget</text>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <h3>SmartCart</h3>
+                    <div class="card-category">Shopper Intelligence Platform</div>
+                    <p>Full shopper platform: inventory management, meal planning, receipt scanning, nutrition dashboard, and budget tracking. Mobile-first responsive web app.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">Claude API</span>
+                    </div>
+                    <a href="https://github.com/LawrenceHua/es-intern-smartcart" class="card-link" target="_blank">
+                        View Repository
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+                    </a>
+                </div>
             </div>
-            <a href="https://github.com/LawrenceHua/es-intern-freshdash" class="card-link" target="_blank">
-                View Repository
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
-            </a>
+
+            <!-- FreshDash -->
+            <div class="project-card">
+                <div class="card-illustration">
+                    <svg viewBox="0 0 400 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="160" fill="#fdf2f8"/>
+                        <rect x="30" y="20" width="340" height="120" rx="10" fill="#fff" stroke="#f9a8d4" stroke-width="1"/>
+                        <rect x="42" y="32" width="80" height="44" rx="6" fill="#fce7f3"/>
+                        <text x="82" y="50" text-anchor="middle" font-size="8" font-weight="600" fill="#be185d" font-family="Inter, sans-serif">WASTE RATE</text>
+                        <text x="82" y="68" text-anchor="middle" font-size="18" font-weight="800" fill="#db2777" font-family="Inter, sans-serif">2.4%</text>
+                        <rect x="132" y="32" width="80" height="44" rx="6" fill="#fce7f3"/>
+                        <text x="172" y="50" text-anchor="middle" font-size="8" font-weight="600" fill="#be185d" font-family="Inter, sans-serif">FRESHNESS</text>
+                        <text x="172" y="68" text-anchor="middle" font-size="18" font-weight="800" fill="#db2777" font-family="Inter, sans-serif">94%</text>
+                        <rect x="222" y="32" width="80" height="44" rx="6" fill="#fce7f3"/>
+                        <text x="262" y="50" text-anchor="middle" font-size="8" font-weight="600" fill="#be185d" font-family="Inter, sans-serif">REVENUE</text>
+                        <text x="262" y="68" text-anchor="middle" font-size="18" font-weight="800" fill="#db2777" font-family="Inter, sans-serif">$12K</text>
+                        <rect x="312" y="32" width="46" height="44" rx="6" fill="#fce7f3"/>
+                        <text x="335" y="50" text-anchor="middle" font-size="7" font-weight="600" fill="#be185d" font-family="Inter, sans-serif">ALERTS</text>
+                        <text x="335" y="66" text-anchor="middle" font-size="16" font-weight="800" fill="#db2777" font-family="Inter, sans-serif">3</text>
+                        <path d="M50 100 L90 108 L130 95 L170 102 L210 88 L250 92 L290 85 L330 90 L355 82" stroke="#ec4899" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        <path d="M50 100 L90 108 L130 95 L170 102 L210 88 L250 92 L290 85 L330 90 L355 82 L355 128 L50 128 Z" fill="url(#pinkGrad)" opacity="0.15"/>
+                        <defs><linearGradient id="pinkGrad" x1="200" y1="82" x2="200" y2="128"><stop stop-color="#ec4899"/><stop offset="1" stop-color="#ec4899" stop-opacity="0"/></linearGradient></defs>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <h3>FreshDash</h3>
+                    <div class="card-category">Store Analytics Dashboard</div>
+                    <p>Operations dashboard with real-time freshness heatmaps, waste KPIs, markdown workflows, employee task boards, and PDF report generation.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Streamlit</span>
+                        <span class="tech-tag">Plotly</span>
+                        <span class="tech-tag">Pandas</span>
+                    </div>
+                    <a href="https://github.com/LawrenceHua/es-intern-freshdash" class="card-link" target="_blank">
+                        View Repository
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- Built on Production Code -->
-<div class="timeline-bg">
-<section>
-    <h2>Built on Production Code</h2>
-    <p class="section-sub">Interns work with real infrastructure, not toy projects</p>
-
-    <div class="prod-stats-grid">
-        <div class="prod-stat-card">
-            <h3>214 API Endpoints</h3>
-            <p>Production FastAPI backend on Azure</p>
+<!-- Production Stats -->
+<div class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <h2>Built on Production Code</h2>
+            <p>Real infrastructure, not toy projects.</p>
         </div>
-        <div class="prod-stat-card">
-            <h3>99%+ ML Accuracy</h3>
-            <p>EfficientNet-B0 + MobileNetV3 pipeline</p>
-        </div>
-        <div class="prod-stat-card">
-            <h3>596K Data Rows</h3>
-            <p>Real hourly grocery inventory data</p>
-        </div>
-        <div class="prod-stat-card">
-            <h3>100+ Produce Items</h3>
-            <p>Complete knowledge base with nutrition &amp; recipes</p>
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value">214</div>
+                <div class="stat-label">API Endpoints</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">99%+</div>
+                <div class="stat-label">ML Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">596K</div>
+                <div class="stat-label">Data Rows</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">100+</div>
+                <div class="stat-label">Produce Items</div>
+            </div>
         </div>
     </div>
-</section>
 </div>
 
 <!-- Timeline -->
-<div class="timeline-bg">
-<section>
-    <h2>10-Week Program Timeline</h2>
-    <p class="section-sub">From zero to shipping AI products</p>
-
-    <div class="timeline">
-        <div class="phase">
-            <span class="phase-label">Phase 1</span>
-            <h3>Setup &amp; Tools</h3>
-            <div class="weeks">Weeks 1-2</div>
-            <ul>
-                <li>Environment setup</li>
-                <li>Git bootcamp</li>
-                <li>AI coding tools workshop</li>
-                <li>Python crash course</li>
-                <li>Cursor IDE training</li>
-            </ul>
+<div class="section" id="timeline">
+    <div class="container">
+        <div class="section-header">
+            <h2>10-Week Timeline</h2>
+            <p>From setup to shipping AI products.</p>
         </div>
-
-        <div class="phase">
-            <span class="phase-label">Phase 2</span>
-            <h3>Teams &amp; Mini-Project</h3>
-            <div class="weeks">Weeks 3-4</div>
-            <ul>
-                <li>Form 5 teams</li>
-                <li>Same mini-project for all</li>
-                <li>Codebase study</li>
-                <li>Architecture planning</li>
-            </ul>
-        </div>
-
-        <div class="phase">
-            <span class="phase-label">Phase 3</span>
-            <h3>Main Build</h3>
-            <div class="weeks">Weeks 5-8</div>
-            <ul>
-                <li>4 weeks building</li>
-                <li>Weekly standups &amp; huddles</li>
-                <li>Fri presentations</li>
-                <li>Cross-team integrations</li>
-                <li>Guest speaker sessions</li>
-            </ul>
-        </div>
-
-        <div class="phase">
-            <span class="phase-label">Phase 4</span>
-            <h3>Ship &amp; Present</h3>
-            <div class="weeks">Weeks 9-10</div>
-            <ul>
-                <li>Code freeze</li>
-                <li>Demo videos</li>
-                <li>Final presentation to stakeholders</li>
-            </ul>
+        <div class="timeline-grid">
+            <div class="phase-card">
+                <div class="phase-number">1</div>
+                <h3>Setup &amp; Tools</h3>
+                <div class="phase-weeks">Weeks 1 &ndash; 2</div>
+                <ul>
+                    <li>Environment setup</li>
+                    <li>Git bootcamp</li>
+                    <li>AI coding tools workshop</li>
+                    <li>Python crash course</li>
+                    <li>Cursor IDE training</li>
+                </ul>
+            </div>
+            <div class="phase-card">
+                <div class="phase-number">2</div>
+                <h3>Teams &amp; Mini-Project</h3>
+                <div class="phase-weeks">Weeks 3 &ndash; 4</div>
+                <ul>
+                    <li>Form 5 teams</li>
+                    <li>Same mini-project for all</li>
+                    <li>Codebase study</li>
+                    <li>Architecture planning</li>
+                </ul>
+            </div>
+            <div class="phase-card">
+                <div class="phase-number">3</div>
+                <h3>Main Build</h3>
+                <div class="phase-weeks">Weeks 5 &ndash; 8</div>
+                <ul>
+                    <li>4 weeks building</li>
+                    <li>Weekly standups &amp; huddles</li>
+                    <li>Friday presentations</li>
+                    <li>Cross-team integrations</li>
+                    <li>Guest speaker sessions</li>
+                </ul>
+            </div>
+            <div class="phase-card">
+                <div class="phase-number">4</div>
+                <h3>Ship &amp; Present</h3>
+                <div class="phase-weeks">Weeks 9 &ndash; 10</div>
+                <ul>
+                    <li>Code freeze</li>
+                    <li>Demo videos</li>
+                    <li>Final presentation</li>
+                </ul>
+            </div>
         </div>
     </div>
-</section>
 </div>
 
 <!-- Weekly Rhythm -->
-<section>
-    <h2>Weekly Rhythm</h2>
-    <p class="section-sub">Five touchpoints every week to keep teams aligned</p>
-
-    <div class="rhythm-grid">
-        <div class="rhythm-card">
-            <div class="rhythm-day">Monday</div>
-            <p>Stand-Up</p>
+<div class="section section-alt" id="schedule">
+    <div class="container">
+        <div class="section-header">
+            <h2>Weekly Schedule</h2>
+            <p>Five touchpoints each week to keep teams aligned.</p>
         </div>
-        <div class="rhythm-card">
-            <div class="rhythm-day">Tuesday</div>
-            <p>Team Huddle</p>
-        </div>
-        <div class="rhythm-card">
-            <div class="rhythm-day">Wednesday</div>
-            <p>Office Hours</p>
-        </div>
-        <div class="rhythm-card">
-            <div class="rhythm-day">Thursday</div>
-            <p>Team Huddle</p>
-        </div>
-        <div class="rhythm-card">
-            <div class="rhythm-day">Friday</div>
-            <p>Presentation Day</p>
+        <div class="rhythm-row">
+            <div class="rhythm-card">
+                <div class="rhythm-day">Monday</div>
+                <div class="rhythm-event">Stand-Up</div>
+            </div>
+            <div class="rhythm-card">
+                <div class="rhythm-day">Tuesday</div>
+                <div class="rhythm-event">Team Huddle</div>
+            </div>
+            <div class="rhythm-card">
+                <div class="rhythm-day">Wednesday</div>
+                <div class="rhythm-event">Office Hours</div>
+            </div>
+            <div class="rhythm-card">
+                <div class="rhythm-day">Thursday</div>
+                <div class="rhythm-event">Team Huddle</div>
+            </div>
+            <div class="rhythm-card">
+                <div class="rhythm-day">Friday</div>
+                <div class="rhythm-event">Presentation Day</div>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- Guest Speakers -->
-<div class="timeline-bg">
-<section>
-    <h2>Guest Speakers</h2>
-    <p class="section-sub">Industry professionals share real-world insights throughout the program</p>
-
-    <div class="speakers-grid">
-        <div class="speaker-card">
-            <div class="speaker-icon">&#x1F3A4;</div>
-            <h4>Tech Talks</h4>
-            <p>Engineers and founders share lessons from building production systems, AI products, and scaling startups.</p>
+<div class="section" id="speakers">
+    <div class="container">
+        <div class="section-header">
+            <h2>Guest Speakers</h2>
+            <p>Industry professionals share real-world insights throughout the program.</p>
         </div>
-        <div class="speaker-card">
-            <div class="speaker-icon">&#x1F4BC;</div>
-            <h4>Career Panels</h4>
-            <p>Professionals across engineering, product, and data science discuss career paths and industry trends.</p>
-        </div>
-        <div class="speaker-card">
-            <div class="speaker-icon">&#x1F680;</div>
-            <h4>Demo &amp; Feedback</h4>
-            <p>Guest reviewers provide feedback on team projects, simulating real stakeholder presentations.</p>
+        <div class="speakers-grid">
+            <div class="speaker-card">
+                <div class="speaker-icon-wrap">
+                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/></svg>
+                </div>
+                <h4>Tech Talks</h4>
+                <p>Engineers and founders share lessons from building production systems, AI products, and scaling startups.</p>
+            </div>
+            <div class="speaker-card">
+                <div class="speaker-icon-wrap">
+                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+                </div>
+                <h4>Career Panels</h4>
+                <p>Professionals across engineering, product, and data science discuss career paths and industry trends.</p>
+            </div>
+            <div class="speaker-card">
+                <div class="speaker-icon-wrap">
+                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+                </div>
+                <h4>Demo &amp; Feedback</h4>
+                <p>Guest reviewers provide feedback on team projects, simulating real stakeholder presentations.</p>
+            </div>
         </div>
     </div>
-</section>
 </div>
 
 <!-- Tools -->
-<section>
-    <h2>Tools &amp; Stack</h2>
-    <p class="section-sub">All free tools — AI-first development workflow</p>
-
-    <div class="tools-grid">
-        <div class="tool-card">
-            <div class="tool-icon">&#x1F4BB;</div>
-            <h4>VS Code</h4>
-            <p>Primary code editor</p>
-            <span class="free-badge">Free</span>
+<div class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <h2>Tools &amp; Stack</h2>
+            <p>All free tools, AI-first development workflow.</p>
         </div>
-        <div class="tool-card">
-            <div class="tool-icon">&#x2728;</div>
-            <h4>GitHub Copilot</h4>
-            <p>AI code completions</p>
-            <span class="free-badge">Free tier</span>
-        </div>
-        <div class="tool-card">
-            <div class="tool-icon">&#x1F5B1;</div>
-            <h4>Cursor</h4>
-            <p>AI-native IDE</p>
-            <span class="free-badge">Free tier</span>
-        </div>
-        <div class="tool-card">
-            <div class="tool-icon">&#x1F40D;</div>
-            <h4>Python</h4>
-            <p>Backend &amp; ML</p>
-            <span class="free-badge">Free</span>
-        </div>
-        <div class="tool-card">
-            <div class="tool-icon">&#x26A1;</div>
-            <h4>FastAPI</h4>
-            <p>API framework</p>
-            <span class="free-badge">Free</span>
-        </div>
-        <div class="tool-card">
-            <div class="tool-icon">&#x1F4CA;</div>
-            <h4>Streamlit</h4>
-            <p>Dashboard UI</p>
-            <span class="free-badge">Free</span>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#0078d4" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 7v10M8 12h5l-3 5"/></svg>
+                </div>
+                <h4>VS Code</h4>
+                <p>Code editor</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#1a1d23" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 9l3 3-3 3M13 15h3"/></svg>
+                </div>
+                <h4>GitHub Copilot</h4>
+                <p>AI completions</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 12h6M12 9v6"/></svg>
+                </div>
+                <h4>Cursor</h4>
+                <p>AI-native IDE</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#3776ab" stroke-width="1.5"><path d="M12 3c-4 0-4 2-4 3v2h4v1H6c-2 0-3 1.5-3 4s1 4 3 4h2v-2c0-1.5 1-3 3-3h4c1.5 0 3-1 3-3V6c0-1.5-1-3-3-3h-3z"/><circle cx="9.5" cy="6.5" r="1" fill="#3776ab"/></svg>
+                </div>
+                <h4>Python</h4>
+                <p>Backend &amp; ML</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#009688" stroke-width="1.5"><path d="M13 3l8 5v8l-8 5-8-5V8l8-5z"/><path d="M13 3v10l8 5M13 13l-8 5"/></svg>
+                </div>
+                <h4>FastAPI</h4>
+                <p>API framework</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff4b4b" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+                </div>
+                <h4>Streamlit</h4>
+                <p>Dashboard UI</p>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- Footer -->
 <footer>
-    <h3>Talk Me Up &mdash; Summer Internship 2026</h3>
-    <p style="margin-top: 1rem;">
-        <a href="https://github.com/LawrenceHua">GitHub</a> &middot;
-        Program Lead: Lawrence Hua
-    </p>
-    <p style="margin-top: 1.5rem; opacity: 0.5; font-size: 0.85rem;">&copy; 2026 Talk Me Up Summer Internship</p>
+    <div class="footer-inner">
+        <div class="footer-brand">Talk Me Up &mdash; Summer Internship 2026</div>
+        <div class="footer-links">
+            <a href="https://github.com/LawrenceHua" target="_blank">GitHub</a>
+            <span style="color: rgba(255,255,255,0.2);">|</span>
+            <a href="#">Program Lead: Lawrence Hua</a>
+        </div>
+    </div>
+    <div class="footer-copy">&copy; 2026 Talk Me Up</div>
 </footer>
 
 </body>
