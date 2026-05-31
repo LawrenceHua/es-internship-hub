@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshProof — Talk Me Up Internship 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3c34;
+            --accent: #3d8b6e;
+            --accent-light: #e8f5ef;
+            --accent-muted: #5ba88a;
+            --surface: #ffffff;
+            --surface-alt: #f7f8fa;
+            --border: #e2e5ea;
+            --text: #1a1d23;
+            --text-secondary: #5a6170;
+            --text-tertiary: #8891a0;
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+            --radius: 10px;
+            --radius-lg: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--surface);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--accent); }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 920px; margin: 0 auto; display: flex;
+            align-items: center; justify-content: space-between; height: 56px;
+        }
+        .nav-brand { font-weight: 700; font-size: 0.95rem; color: var(--primary); letter-spacing: -0.01em; }
+        .back-link {
+            font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);
+            text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        .hero {
+            padding: 8rem 2rem 4rem; background: var(--primary); color: #fff;
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -40%; right: -15%;
+            width: 520px; height: 520px; border-radius: 50%;
+            background: rgba(61,139,110,0.16); pointer-events: none;
+        }
+        .hero-inner { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; }
+        .hero-label {
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em;
+            text-transform: uppercase; color: var(--accent-muted); margin-bottom: 1rem;
+        }
+        .hero h1 { font-size: 2.8rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1rem; }
+        .hero p { font-size: 1.12rem; color: rgba(255,255,255,0.74); max-width: 640px; }
+        .hero-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.75rem; }
+        .hero-tag {
+            background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85);
+            padding: 0.25rem 0.7rem; border-radius: 6px; font-size: 0.78rem; font-weight: 500;
+        }
+
+        .wrap { max-width: 920px; margin: 0 auto; padding: 0 2rem; }
+        section.block { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
+        section.block:last-of-type { border-bottom: none; }
+        h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+        .lead { color: var(--text-secondary); font-size: 1.02rem; margin-bottom: 1.75rem; max-width: 680px; }
+        h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 0.3rem; }
+        p { color: var(--text-secondary); }
+
+        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        .pillar {
+            background: var(--surface-alt); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 1.5rem;
+        }
+        .pillar .num {
+            width: 30px; height: 30px; border-radius: 8px; background: var(--accent-light);
+            color: var(--accent); display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700; margin-bottom: 0.9rem;
+        }
+        .pillar p { font-size: 0.88rem; }
+
+        .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.6rem; margin-top: 0.5rem; }
+        .flow-step {
+            flex: 1 1 140px; background: var(--surface-alt); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1rem; font-size: 0.85rem;
+        }
+        .flow-step strong { display: block; color: var(--text); font-size: 0.8rem; margin-bottom: 0.25rem; }
+        .flow-arrow { align-self: center; color: var(--accent-muted); font-weight: 700; }
+
+        pre {
+            background: #0f1a17; color: #d7e7e0; border-radius: var(--radius);
+            padding: 1.25rem; overflow-x: auto; font-size: 0.82rem; line-height: 1.7;
+            font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+        }
+
+        .weeks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+        .week {
+            border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .week:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .week .wk { font-size: 0.78rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem; }
+        .week ul { list-style: none; padding: 0; margin: 0.5rem 0 0; }
+        .week li { font-size: 0.86rem; color: var(--text-secondary); padding: 0.2rem 0 0.2rem 1rem; position: relative; }
+        .week li::before { content: ''; position: absolute; left: 0; top: 0.6rem; width: 4px; height: 4px; border-radius: 50%; background: var(--accent-muted); }
+        .week .demo { margin-top: 0.75rem; font-size: 0.82rem; color: var(--text); background: var(--accent-light); border-radius: 8px; padding: 0.6rem 0.8rem; }
+
+        .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.45rem; text-decoration: none;
+            font-weight: 600; font-size: 0.9rem; padding: 0.7rem 1.2rem; border-radius: 8px;
+        }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-secondary { background: var(--surface-alt); color: var(--text); border: 1px solid var(--border); }
+
+        footer { background: var(--primary); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; font-size: 0.85rem; }
+        .footer-inner { max-width: 920px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
+
+        @media (max-width: 760px) {
+            .hero h1 { font-size: 2.1rem; }
+            .pillars, .weeks { grid-template-columns: 1fr; }
+            .flow-arrow { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <div class="nav-brand">Talk Me Up</div>
+        <a href="index.html" class="back-link">&larr; Back to program</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-label">Flagship Project &middot; Weeks 5&ndash;8 build</div>
+        <h1>FreshProof</h1>
+        <p>Verified digital receipts and item-level provenance for the Expired Solutions shopper app. Prove <em>where</em> and <em>when</em> every item was bought&mdash;the foundation for freshness guarantees and one-tap spoilage refunds.</p>
+        <div class="hero-tags">
+            <span class="hero-tag">Python</span>
+            <span class="hero-tag">FastAPI</span>
+            <span class="hero-tag">OCR</span>
+            <span class="hero-tag">SQLite</span>
+            <span class="hero-tag">Claude API</span>
+            <span class="hero-tag">Signed tokens</span>
+            <span class="hero-tag">JavaScript</span>
+        </div>
+    </div>
+</div>
+
+<div class="wrap">
+
+    <section class="block">
+        <h2>The problem</h2>
+        <p class="lead">When produce spoils days before it should, a shopper has no easy way to prove where or when they bought it&mdash;so they quietly eat the loss, lose trust, and stop buying fresh. Stores, in turn, have no clean signal to honor a guarantee. The missing piece is <strong>trustworthy provenance</strong>: a verifiable record that ties each item to the store, date, and price it came from.</p>
+        <p>FreshProof turns an ordinary receipt into that record. It lives at the moment right after purchase&mdash;a part of the shopper journey nothing else in the platform covers.</p>
+    </section>
+
+    <section class="block">
+        <h2>How it works</h2>
+        <p class="lead">Three capabilities, built in sequence over the 4-week sprint.</p>
+        <div class="pillars">
+            <div class="pillar">
+                <div class="num">1</div>
+                <h3>Receipt Review</h3>
+                <p>The shopper snaps or uploads a receipt. OCR parses every line item; the shopper confirms or corrects, and each item is matched to the produce knowledge base for an estimated shelf life.</p>
+            </div>
+            <div class="pillar">
+                <div class="num">2</div>
+                <h3>FreshTag</h3>
+                <p>Each confirmed item gets a virtual tag&mdash;a cryptographically signed record of item, store, date, and price&mdash;that flows into the shopper's inventory and powers expiry reminders.</p>
+            </div>
+            <div class="pillar">
+                <div class="num">3</div>
+                <h3>Proof of Provenance</h3>
+                <p>Any FreshTag can be verified: a valid signature proves the item genuinely came from that store at that time. Tampered or forged tags fail the check&mdash;the basis for refunds.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="block">
+        <h2>Shopper flow</h2>
+        <div class="flow">
+            <div class="flow-step"><strong>1 &middot; Capture</strong>Snap a receipt photo after shopping.</div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step"><strong>2 &middot; Parse</strong>OCR extracts line items; shopper confirms.</div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step"><strong>3 &middot; Tag</strong>Each item is signed into a FreshTag.</div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step"><strong>4 &middot; Track</strong>Items land in inventory with expiry dates.</div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step"><strong>5 &middot; Prove</strong>Spoiled early? Verify the tag &rarr; claim a refund.</div>
+        </div>
+    </section>
+
+    <section class="block">
+        <h2>Architecture</h2>
+        <p class="lead">A small FastAPI service over SQLite. The "proof" is a signed token (HMAC over the item record with a per-store key)&mdash;no blockchain required, fully verifiable, and teachable in four weeks.</p>
+        <pre>Receipt image
+   │
+   ▼
+[ OCR parser ] ──► line items (name, qty, price)
+   │
+   ▼
+[ Item matcher ] ──► produce KB (shelf life, category)
+   │
+   ▼
+[ FreshTag signer ] ──► HMAC(item + store_id + date + price, store_key)
+   │
+   ├──► SQLite: receipts · items · fresh_tags
+   │
+   ▼
+[ Verify API ] ──► validates signature ──► { genuine, store, date, price }
+   │
+   ▼
+Inventory + expiry reminders · refund-eligibility check</pre>
+    </section>
+
+    <section class="block">
+        <h2>4-week build plan</h2>
+        <p class="lead">Maps to program Weeks 5&ndash;8. Each Friday ends with a live demo.</p>
+        <div class="weeks">
+            <div class="week">
+                <div class="wk">Week 5 &middot; Receipt &rarr; data</div>
+                <ul>
+                    <li>SQLite schema: receipts, items, fresh_tags</li>
+                    <li>Image upload endpoint (HEIC/JPEG/PNG)</li>
+                    <li>OCR parsing of line items</li>
+                    <li>Match items to the produce knowledge base</li>
+                </ul>
+                <div class="demo">Demo: upload a receipt &rarr; see parsed items with estimated shelf life.</div>
+            </div>
+            <div class="week">
+                <div class="wk">Week 6 &middot; FreshTag + review UI</div>
+                <ul>
+                    <li>Sign a FreshTag per confirmed item</li>
+                    <li>Review screen: confirm / correct parsed items</li>
+                    <li>Persist tags; show them on each item</li>
+                    <li>Mobile-first responsive layout</li>
+                </ul>
+                <div class="demo">Demo: confirm a receipt &rarr; every item gets a FreshTag in the review screen.</div>
+            </div>
+            <div class="week">
+                <div class="wk">Week 7 &middot; Provenance verification</div>
+                <ul>
+                    <li>Verify endpoint: validate a tag's signature</li>
+                    <li>Tamper detection (altered store/date/price fails)</li>
+                    <li>Proof view: "Genuine &middot; Store X &middot; June 2"</li>
+                    <li>Shareable proof link or QR</li>
+                </ul>
+                <div class="demo">Demo: verify a tag &rarr; "Genuine"; edit one field &rarr; "Invalid / tampered".</div>
+            </div>
+            <div class="week">
+                <div class="wk">Week 8 &middot; Integrate + harden</div>
+                <ul>
+                    <li>Tags flow into inventory + expiry reminders</li>
+                    <li>Refund-eligibility check (spoiled before shelf life)</li>
+                    <li>Error handling + 10&plus; unit tests</li>
+                    <li>Docs: API contract + setup</li>
+                </ul>
+                <div class="demo">Demo: spoiled item &rarr; "Eligible for refund" with verifiable proof attached.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="block">
+        <h2>Get started</h2>
+        <p class="lead">Clone the starter repository, set up the environment, and run the FastAPI skeleton. The README walks through the first endpoint.</p>
+        <div class="cta-row">
+            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshproof" target="_blank">Starter repository &rarr;</a>
+            <a class="btn btn-secondary" href="index.html">Back to program overview</a>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <div class="footer-inner">
+        <div>Talk Me Up &mdash; Expired Solutions Summer Internship 2026</div>
+        <div>Lead: Lawrence Hua &middot; Co-Lead: Prof. JJ Xu</div>
+    </div>
+</footer>
+
+</body>
+</html>
