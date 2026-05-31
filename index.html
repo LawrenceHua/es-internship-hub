@@ -726,8 +726,8 @@
 <div class="hero">
     <div class="hero-inner">
         <div class="hero-label">Expired Solutions &middot; Summer 2026 Internship</div>
-        <h1>Build one real AI feature.<br>Ship it to shoppers.</h1>
-        <p>A 10-week, AI-first internship where you build and ship <strong>FreshProof</strong>&mdash;verified digital receipts and item-level provenance&mdash;for the Expired Solutions shopper app, on a real grocery-tech platform.</p>
+        <h1>Scan one apple?<br>Scan the whole shelf.</h1>
+        <p>A 10-week, AI-first internship where you build and ship <strong>FreshLens</strong>&mdash;point a camera at a fridge or a produce shelf and every item gets a live freshness score at once&mdash;for the Expired Solutions app, on a real grocery-tech platform.</p>
         <div class="hero-metrics">
             <div class="hero-metric">
                 <strong>10</strong>
@@ -753,29 +753,29 @@
 <div class="section" id="project">
     <div class="container">
         <div class="section-header">
-            <h2>The Project: FreshProof</h2>
-            <p>One feature, built for real and shipped to the Expired Solutions shopper app.</p>
+            <h2>The Project: FreshLens</h2>
+            <p>One AI feature, built for real and shipped to the Expired Solutions app.</p>
         </div>
 
         <p class="project-intro">
-            When produce spoils before its time, shoppers have no easy way to prove <em>where</em> and <em>when</em> they bought it&mdash;so they eat the loss. <strong>FreshProof</strong> fixes that. Shoppers snap or import a receipt, every line item is parsed and given a tamper-evident <strong>FreshTag</strong>, and each tag carries verifiable proof of the store, date, and price it came from. That provenance is what powers freshness guarantees, fast spoilage refunds, and trustworthy expiration tracking.
+            Today the app scans one item at a time. <strong>FreshLens</strong> is the 10x version: point your camera at a whole fridge, basket, or produce shelf and <em>every</em> item lights up at once with a live, color-coded freshness score. Then AI turns that into action&mdash;for shoppers, an &ldquo;eat me first&rdquo; ranking and a recipe to rescue what&rsquo;s about to turn; for store managers, an instant markdown worklist and projected shrink savings.
         </p>
 
         <div class="pillars-grid">
             <div class="pillar-card">
                 <div class="pillar-num">1</div>
-                <h3>Receipt Review</h3>
-                <p>Snap or upload a receipt &rarr; OCR parses every line item, the shopper confirms or corrects, and each item is matched to the produce knowledge base with an estimated shelf life.</p>
+                <h3>Multi-Item Detection</h3>
+                <p>A pretrained object detector finds every produce item in the frame and draws a box around each one&mdash;turning a single-item scanner into a whole-scene scanner.</p>
             </div>
             <div class="pillar-card">
                 <div class="pillar-num">2</div>
-                <h3>FreshTag</h3>
-                <p>Every purchased item gets a virtual tag&mdash;a signed digital record of item, store, date, and price&mdash;that flows into the shopper's inventory and drives smart expiration reminders.</p>
+                <h3>Live Freshness Overlay</h3>
+                <p>Each detected item is scored 0&ndash;100 by the freshness model and shown with a color-coded overlay&mdash;green, amber, red&mdash;right on the camera view.</p>
             </div>
             <div class="pillar-card">
                 <div class="pillar-num">3</div>
-                <h3>Proof of Provenance</h3>
-                <p>Each FreshTag is cryptographically verifiable, so the app can prove an item genuinely came from a given store at a given time&mdash;the backbone of a freshness guarantee and one-tap spoilage refunds.</p>
+                <h3>Act On It</h3>
+                <p>Claude turns scores into action: an &ldquo;eat me first&rdquo; ranking and a recipe for shoppers, or a markdown worklist and shrink-savings estimate for store managers.</p>
             </div>
         </div>
 
@@ -783,17 +783,16 @@
             <div class="tech-tags" style="justify-content: center;">
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">OCR</span>
-                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">YOLO / Ultralytics</span>
                 <span class="tech-tag">Claude API</span>
-                <span class="tech-tag">Signed Tokens</span>
                 <span class="tech-tag">JavaScript</span>
             </div>
-            <a href="freshproof.html" class="card-link">
+            <a href="freshlens.html" class="card-link">
                 View project details
                 <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
             </a>
-            <a href="https://github.com/LawrenceHua/es-intern-freshproof" class="card-link" target="_blank" style="color: var(--text-secondary);">
+            <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link" target="_blank" style="color: var(--text-secondary);">
                 Starter repository
                 <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
             </a>
@@ -898,19 +897,19 @@
                 <ul>
                     <li>Produce mini-app</li>
                     <li>Codebase study</li>
-                    <li>FreshProof architecture plan</li>
+                    <li>FreshLens architecture plan</li>
                     <li>API contract design</li>
                 </ul>
             </div>
             <div class="phase-card">
                 <div class="phase-number">3</div>
-                <h3>Build FreshProof</h3>
+                <h3>Build FreshLens</h3>
                 <div class="phase-weeks">Weeks 5 &ndash; 8 &middot; the 4-week build</div>
                 <ul>
-                    <li>Receipt review + OCR parsing</li>
-                    <li>FreshTag: signed item tags</li>
-                    <li>Provenance verification</li>
-                    <li>Inventory + expiry integration</li>
+                    <li>Multi-item detection pipeline</li>
+                    <li>Live freshness overlay UI</li>
+                    <li>Claude &ldquo;eat me first&rdquo; + recipes</li>
+                    <li>Store manager-mode (stretch)</li>
                     <li>Weekly demos &amp; guest speakers</li>
                 </ul>
             </div>

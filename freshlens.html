@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreshProof — Talk Me Up Internship 2026</title>
+    <title>FreshLens — Talk Me Up Internship 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -148,15 +148,14 @@
 <div class="hero">
     <div class="hero-inner">
         <div class="hero-label">Flagship Project &middot; Weeks 5&ndash;8 build</div>
-        <h1>FreshProof</h1>
-        <p>Verified digital receipts and item-level provenance for the Expired Solutions shopper app. Prove <em>where</em> and <em>when</em> every item was bought&mdash;the foundation for freshness guarantees and one-tap spoilage refunds.</p>
+        <h1>FreshLens</h1>
+        <p>Point your camera at a fridge, basket, or produce shelf&mdash;and every item lights up at once with a live, color-coded freshness score. Then AI tells you what to do about it: rescue what&rsquo;s turning, or mark it down before it&rsquo;s lost.</p>
         <div class="hero-tags">
             <span class="hero-tag">Python</span>
             <span class="hero-tag">FastAPI</span>
-            <span class="hero-tag">OCR</span>
-            <span class="hero-tag">SQLite</span>
+            <span class="hero-tag">PyTorch</span>
+            <span class="hero-tag">YOLO / Ultralytics</span>
             <span class="hero-tag">Claude API</span>
-            <span class="hero-tag">Signed tokens</span>
             <span class="hero-tag">JavaScript</span>
         </div>
     </div>
@@ -165,9 +164,9 @@
 <div class="wrap">
 
     <section class="block">
-        <h2>The problem</h2>
-        <p class="lead">When produce spoils days before it should, a shopper has no easy way to prove where or when they bought it&mdash;so they quietly eat the loss, lose trust, and stop buying fresh. Stores, in turn, have no clean signal to honor a guarantee. The missing piece is <strong>trustworthy provenance</strong>: a verifiable record that ties each item to the store, date, and price it came from.</p>
-        <p>FreshProof turns an ordinary receipt into that record. It lives at the moment right after purchase&mdash;a part of the shopper journey nothing else in the platform covers.</p>
+        <h2>The leap</h2>
+        <p class="lead">Expired Solutions already scans <strong>one</strong> item at a time and scores its freshness 0&ndash;100 across 135 produce types. FreshLens is the 10x: scan the <strong>whole scene</strong> at once. One tap over a fridge or a produce display, and every item is found, scored, and ranked&mdash;live.</p>
+        <p>That single capability serves both sides of the business. Pointed at a shopper&rsquo;s fridge, it&rsquo;s a magic &ldquo;what do I eat first, and what can I cook tonight?&rdquo; moment. Pointed at a store&rsquo;s produce section, it&rsquo;s an instant freshness audit that tells the manager exactly what to mark down&mdash;the heart of the markdown-automation pitch.</p>
     </section>
 
     <section class="block">
@@ -176,112 +175,108 @@
         <div class="pillars">
             <div class="pillar">
                 <div class="num">1</div>
-                <h3>Receipt Review</h3>
-                <p>The shopper snaps or uploads a receipt. OCR parses every line item; the shopper confirms or corrects, and each item is matched to the produce knowledge base for an estimated shelf life.</p>
+                <h3>Multi-Item Detection</h3>
+                <p>A pretrained object detector (YOLO / Ultralytics) finds every produce item in the frame and returns a bounding box for each&mdash;no model training from scratch required.</p>
             </div>
             <div class="pillar">
                 <div class="num">2</div>
-                <h3>FreshTag</h3>
-                <p>Each confirmed item gets a virtual tag&mdash;a cryptographically signed record of item, store, date, and price&mdash;that flows into the shopper's inventory and powers expiry reminders.</p>
+                <h3>Live Freshness Overlay</h3>
+                <p>Each detected item is cropped and scored 0&ndash;100 by the freshness model, then drawn back onto the camera view with a green / amber / red overlay.</p>
             </div>
             <div class="pillar">
                 <div class="num">3</div>
-                <h3>Proof of Provenance</h3>
-                <p>Any FreshTag can be verified: a valid signature proves the item genuinely came from that store at that time. Tampered or forged tags fail the check&mdash;the basis for refunds.</p>
+                <h3>Act On It</h3>
+                <p>Claude turns the scored scene into action: an &ldquo;eat me first&rdquo; ranking plus a recipe to rescue what&rsquo;s turning (shopper), or a markdown worklist and shrink-savings estimate (store).</p>
             </div>
         </div>
     </section>
 
     <section class="block">
-        <h2>Shopper flow</h2>
+        <h2>Shopper flow (the hero demo)</h2>
         <div class="flow">
-            <div class="flow-step"><strong>1 &middot; Capture</strong>Snap a receipt photo after shopping.</div>
+            <div class="flow-step"><strong>1 &middot; Point</strong>Aim the camera at your fridge or basket.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>2 &middot; Parse</strong>OCR extracts line items; shopper confirms.</div>
+            <div class="flow-step"><strong>2 &middot; Detect</strong>Every produce item gets a box.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>3 &middot; Tag</strong>Each item is signed into a FreshTag.</div>
+            <div class="flow-step"><strong>3 &middot; Score</strong>Each item is freshness-scored 0&ndash;100.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>4 &middot; Track</strong>Items land in inventory with expiry dates.</div>
+            <div class="flow-step"><strong>4 &middot; Rank</strong>Color overlay + &ldquo;eat me first&rdquo; order.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>5 &middot; Prove</strong>Spoiled early? Verify the tag &rarr; claim a refund.</div>
+            <div class="flow-step"><strong>5 &middot; Cook</strong>Claude suggests a recipe to use it up.</div>
         </div>
     </section>
 
     <section class="block">
         <h2>Architecture</h2>
-        <p class="lead">A small FastAPI service over SQLite. The "proof" is a signed token (HMAC over the item record with a per-store key)&mdash;no blockchain required, fully verifiable, and teachable in four weeks.</p>
-        <pre>Receipt image
+        <p class="lead">A FastAPI service that chains pretrained vision with the freshness model and an LLM action layer. Beginners assemble proven parts rather than inventing them&mdash;exactly the skill the program teaches.</p>
+        <pre>Camera frame / photo / short clip
    │
    ▼
-[ OCR parser ] ──► line items (name, qty, price)
+[ Object detector ]  YOLO/Ultralytics ──► boxes for each produce item
    │
    ▼
-[ Item matcher ] ──► produce KB (shelf life, category)
+[ Per-item crop ] ──► freshness model (0–100, 135 produce types)
    │
    ▼
-[ FreshTag signer ] ──► HMAC(item + store_id + date + price, store_key)
+[ Overlay renderer ] ──► green / amber / red scores on the frame
    │
-   ├──► SQLite: receipts · items · fresh_tags
+   ├─► Shopper mode:  Claude ──► "eat me first" ranking + rescue recipe
    │
-   ▼
-[ Verify API ] ──► validates signature ──► { genuine, store, date, price }
-   │
-   ▼
-Inventory + expiry reminders · refund-eligibility check</pre>
+   └─► Store mode (stretch):  rules + Claude ──► markdown worklist + shrink $ saved</pre>
     </section>
 
     <section class="block">
         <h2>4-week build plan</h2>
-        <p class="lead">Maps to program Weeks 5&ndash;8. Each Friday ends with a live demo.</p>
+        <p class="lead">Maps to program Weeks 5&ndash;8. Each Friday ends with a live demo. Hero path is the shopper experience; store manager-mode is the Week-8 stretch.</p>
         <div class="weeks">
             <div class="week">
-                <div class="wk">Week 5 &middot; Receipt &rarr; data</div>
+                <div class="wk">Week 5 &middot; Detect + score one frame</div>
                 <ul>
-                    <li>SQLite schema: receipts, items, fresh_tags</li>
                     <li>Image upload endpoint (HEIC/JPEG/PNG)</li>
-                    <li>OCR parsing of line items</li>
-                    <li>Match items to the produce knowledge base</li>
+                    <li>Run a pretrained detector on a fridge/shelf photo</li>
+                    <li>Crop each item; score freshness 0&ndash;100</li>
+                    <li>Return boxes + scores as JSON</li>
                 </ul>
-                <div class="demo">Demo: upload a receipt &rarr; see parsed items with estimated shelf life.</div>
+                <div class="demo">Demo: upload a fridge photo &rarr; every item boxed with a freshness score.</div>
             </div>
             <div class="week">
-                <div class="wk">Week 6 &middot; FreshTag + review UI</div>
+                <div class="wk">Week 6 &middot; The live overlay</div>
                 <ul>
-                    <li>Sign a FreshTag per confirmed item</li>
-                    <li>Review screen: confirm / correct parsed items</li>
-                    <li>Persist tags; show them on each item</li>
-                    <li>Mobile-first responsive layout</li>
+                    <li>Mobile camera capture in the browser</li>
+                    <li>Draw color-coded overlays (green/amber/red)</li>
+                    <li>&ldquo;Eat me first&rdquo; ranking of the scene</li>
+                    <li>Smooth the experience to near real-time</li>
                 </ul>
-                <div class="demo">Demo: confirm a receipt &rarr; every item gets a FreshTag in the review screen.</div>
+                <div class="demo">Demo: aim at a basket &rarr; scores appear live, worst-first list updates.</div>
             </div>
             <div class="week">
-                <div class="wk">Week 7 &middot; Provenance verification</div>
+                <div class="wk">Week 7 &middot; Claude action layer</div>
                 <ul>
-                    <li>Verify endpoint: validate a tag's signature</li>
-                    <li>Tamper detection (altered store/date/price fails)</li>
-                    <li>Proof view: "Genuine &middot; Store X &middot; June 2"</li>
-                    <li>Shareable proof link or QR</li>
+                    <li>Send detected items + scores to Claude</li>
+                    <li>Generate a rescue recipe from what&rsquo;s on hand</li>
+                    <li>Explain &ldquo;why this first&rdquo; in plain language</li>
+                    <li>Handle messy / partial detections gracefully</li>
                 </ul>
-                <div class="demo">Demo: verify a tag &rarr; "Genuine"; edit one field &rarr; "Invalid / tampered".</div>
+                <div class="demo">Demo: scan a fridge &rarr; &ldquo;Use the spinach &amp; tomatoes tonight&mdash;here&rsquo;s a recipe.&rdquo;</div>
             </div>
             <div class="week">
-                <div class="wk">Week 8 &middot; Integrate + harden</div>
+                <div class="wk">Week 8 &middot; Store mode + harden</div>
                 <ul>
-                    <li>Tags flow into inventory + expiry reminders</li>
-                    <li>Refund-eligibility check (spoiled before shelf life)</li>
+                    <li>Store stretch: shelf photo &rarr; markdown worklist</li>
+                    <li>Projected shrink $ saved from the scored scene</li>
                     <li>Error handling + 10&plus; unit tests</li>
                     <li>Docs: API contract + setup</li>
                 </ul>
-                <div class="demo">Demo: spoiled item &rarr; "Eligible for refund" with verifiable proof attached.</div>
+                <div class="demo">Demo: scan a produce shelf &rarr; &ldquo;Mark down these 6 items, save ~$48 today.&rdquo;</div>
             </div>
         </div>
     </section>
 
     <section class="block">
         <h2>Get started</h2>
-        <p class="lead">Clone the starter repository, set up the environment, and run the FastAPI skeleton. The README walks through the first endpoint.</p>
+        <p class="lead">Clone the starter repository, set up the environment, and run the FastAPI skeleton. The README walks through the detection pipeline and the first endpoint.</p>
         <div class="cta-row">
-            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshproof" target="_blank">Starter repository &rarr;</a>
+            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank">Starter repository &rarr;</a>
             <a class="btn btn-secondary" href="index.html">Back to program overview</a>
         </div>
     </section>
