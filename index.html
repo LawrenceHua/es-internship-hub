@@ -542,6 +542,100 @@
             color: var(--text-tertiary);
         }
 
+        /* ── Single Project + Onboarding (2026 restructure) ── */
+        .project-intro {
+            max-width: 740px;
+            margin: 0 auto 2.5rem;
+            text-align: center;
+            font-size: 1.04rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .pillar-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem 1.5rem;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .pillar-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .pillar-num {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: var(--accent-light);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.9rem;
+        }
+
+        .pillar-card h3 {
+            font-size: 1.08rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+            letter-spacing: -0.01em;
+        }
+
+        .pillar-card p {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .project-cta {
+            text-align: center;
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .onboarding-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .startdate-banner {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .startdate-pill {
+            background: var(--accent-light);
+            color: var(--primary);
+            border: 1px solid var(--accent-muted);
+            border-radius: 999px;
+            padding: 0.5rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .pillars-grid { grid-template-columns: 1fr; }
+            .onboarding-grid { grid-template-columns: 1fr; }
+        }
+
         /* ── Footer ── */
         footer {
             background: var(--primary);
@@ -619,10 +713,10 @@
     <div class="nav-inner">
         <div class="nav-brand">Talk Me Up</div>
         <ul class="nav-links">
-            <li><a href="#projects">Projects</a></li>
+            <li><a href="#project">Project</a></li>
+            <li><a href="#onboarding">Onboarding</a></li>
             <li><a href="#timeline">Timeline</a></li>
             <li><a href="#schedule">Schedule</a></li>
-            <li><a href="#speakers">Speakers</a></li>
             <li><a href="https://github.com/LawrenceHua" target="_blank">GitHub</a></li>
         </ul>
     </div>
@@ -631,17 +725,17 @@
 <!-- Hero -->
 <div class="hero">
     <div class="hero-inner">
-        <div class="hero-label">Summer 2026 Internship Program</div>
-        <h1>Build real AI products<br>from day one.</h1>
-        <p>A 10-week program where teams ship production-grade tools in computer vision, ML forecasting, NLP, and analytics&mdash;on a real grocery-tech platform.</p>
+        <div class="hero-label">Expired Solutions &middot; Summer 2026 Internship</div>
+        <h1>Build one real AI feature.<br>Ship it to shoppers.</h1>
+        <p>A 10-week, AI-first internship where you build and ship <strong>FreshProof</strong>&mdash;verified digital receipts and item-level provenance&mdash;for the Expired Solutions shopper app, on a real grocery-tech platform.</p>
         <div class="hero-metrics">
-            <div class="hero-metric">
-                <strong>5</strong>
-                <span>Teams</span>
-            </div>
             <div class="hero-metric">
                 <strong>10</strong>
                 <span>Weeks</span>
+            </div>
+            <div class="hero-metric">
+                <strong>1</strong>
+                <span>Flagship Project</span>
             </div>
             <div class="hero-metric">
                 <strong>596K+</strong>
@@ -655,14 +749,57 @@
     </div>
 </div>
 
-<!-- Projects -->
-<div class="section" id="projects">
+<!-- Project -->
+<div class="section" id="project">
     <div class="container">
         <div class="section-header">
-            <h2>Team Projects</h2>
-            <p>Each team builds on a production codebase in the Talk Me Up grocery-tech ecosystem.</p>
+            <h2>The Project: FreshProof</h2>
+            <p>One feature, built for real and shipped to the Expired Solutions shopper app.</p>
         </div>
 
+        <p class="project-intro">
+            When produce spoils before its time, shoppers have no easy way to prove <em>where</em> and <em>when</em> they bought it&mdash;so they eat the loss. <strong>FreshProof</strong> fixes that. Shoppers snap or import a receipt, every line item is parsed and given a tamper-evident <strong>FreshTag</strong>, and each tag carries verifiable proof of the store, date, and price it came from. That provenance is what powers freshness guarantees, fast spoilage refunds, and trustworthy expiration tracking.
+        </p>
+
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-num">1</div>
+                <h3>Receipt Review</h3>
+                <p>Snap or upload a receipt &rarr; OCR parses every line item, the shopper confirms or corrects, and each item is matched to the produce knowledge base with an estimated shelf life.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-num">2</div>
+                <h3>FreshTag</h3>
+                <p>Every purchased item gets a virtual tag&mdash;a signed digital record of item, store, date, and price&mdash;that flows into the shopper's inventory and drives smart expiration reminders.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-num">3</div>
+                <h3>Proof of Provenance</h3>
+                <p>Each FreshTag is cryptographically verifiable, so the app can prove an item genuinely came from a given store at a given time&mdash;the backbone of a freshness guarantee and one-tap spoilage refunds.</p>
+            </div>
+        </div>
+
+        <div class="project-cta">
+            <div class="tech-tags" style="justify-content: center;">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">OCR</span>
+                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">Claude API</span>
+                <span class="tech-tag">Signed Tokens</span>
+                <span class="tech-tag">JavaScript</span>
+            </div>
+            <a href="https://github.com/LawrenceHua/es-intern-freshproof" class="card-link" target="_blank">
+                View Repository
+                <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ARCHIVED: original 5-team projects grid (hidden; kept in case the program reverts) -->
+<div class="section" id="projects-archived" style="display: none;">
+    <div class="container">
         <div class="projects-grid">
             <!-- FreshEye -->
             <div class="project-card">
@@ -890,12 +1027,54 @@
     </div>
 </div>
 
+<!-- Onboarding -->
+<div class="section" id="onboarding">
+    <div class="container">
+        <div class="section-header">
+            <h2>Get a Head Start</h2>
+            <p>Two weeks of AI-first onboarding before the build begins&mdash;no prior AI-tools experience needed.</p>
+        </div>
+        <div class="onboarding-grid">
+            <div class="phase-card">
+                <div class="phase-number">1</div>
+                <h3>Week 1 &mdash; Tools &amp; Foundations</h3>
+                <div class="phase-weeks">Set up and get fluent</div>
+                <ul>
+                    <li>Environment + Git workflow (branch &rarr; PR)</li>
+                    <li>GitHub Copilot: prompting, /fix, /explain, /tests</li>
+                    <li>Python basics with AI assistance</li>
+                    <li>Capstone: ship a &ldquo;Guess the Number&rdquo; game</li>
+                </ul>
+            </div>
+            <div class="phase-card">
+                <div class="phase-number">2</div>
+                <h3>Week 2 &mdash; APIs &amp; Your First App</h3>
+                <div class="phase-weeks">Build something real</div>
+                <ul>
+                    <li>FastAPI: build /health, /produce, /nutrition</li>
+                    <li>Cursor IDE: Cmd+K, chat, multi-file edits</li>
+                    <li>Frontend that calls your own API</li>
+                    <li>Capstone: a &ldquo;Produce Lookup&rdquo; web app</li>
+                </ul>
+            </div>
+        </div>
+        <p class="project-intro" style="margin-top: 2.5rem; margin-bottom: 0;">
+            The one rule that matters most: <strong>read, test, and understand every line the AI writes.</strong> Using AI well&mdash;and catching when it&rsquo;s wrong&mdash;is the core skill this program builds.
+        </p>
+    </div>
+</div>
+
 <!-- Timeline -->
 <div class="section" id="timeline">
     <div class="container">
         <div class="section-header">
             <h2>10-Week Timeline</h2>
-            <p>From setup to shipping AI products.</p>
+            <p>Two staggered start dates, one shared finish: Demo Day.</p>
+        </div>
+        <div class="startdate-banner">
+            <span class="startdate-pill">Early-start track &middot; June 1</span>
+            <span class="startdate-pill">Full cohort &middot; June 15</span>
+            <span class="startdate-pill">Demo Day &middot; Aug 7</span>
         </div>
         <div class="timeline-grid">
             <div class="phase-card">
@@ -912,25 +1091,25 @@
             </div>
             <div class="phase-card">
                 <div class="phase-number">2</div>
-                <h3>Teams &amp; Mini-Project</h3>
+                <h3>Foundations &amp; Mini-Project</h3>
                 <div class="phase-weeks">Weeks 3 &ndash; 4</div>
                 <ul>
-                    <li>Form 5 teams</li>
-                    <li>Same mini-project for all</li>
+                    <li>Produce mini-app</li>
                     <li>Codebase study</li>
-                    <li>Architecture planning</li>
+                    <li>FreshProof architecture plan</li>
+                    <li>API contract design</li>
                 </ul>
             </div>
             <div class="phase-card">
                 <div class="phase-number">3</div>
-                <h3>Main Build</h3>
-                <div class="phase-weeks">Weeks 5 &ndash; 8</div>
+                <h3>Build FreshProof</h3>
+                <div class="phase-weeks">Weeks 5 &ndash; 8 &middot; the 4-week build</div>
                 <ul>
-                    <li>4 weeks building</li>
-                    <li>Weekly standups &amp; huddles</li>
-                    <li>Friday presentations</li>
-                    <li>Cross-team integrations</li>
-                    <li>Guest speaker sessions</li>
+                    <li>Receipt review + OCR parsing</li>
+                    <li>FreshTag: signed item tags</li>
+                    <li>Provenance verification</li>
+                    <li>Inventory + expiry integration</li>
+                    <li>Weekly demos &amp; guest speakers</li>
                 </ul>
             </div>
             <div class="phase-card">
@@ -952,7 +1131,7 @@
     <div class="container">
         <div class="section-header">
             <h2>Weekly Schedule</h2>
-            <p>Five touchpoints each week to keep teams aligned.</p>
+            <p>Five touchpoints each week to keep the build on track.</p>
         </div>
         <div class="rhythm-row">
             <div class="rhythm-card">
@@ -1069,14 +1248,16 @@
 <!-- Footer -->
 <footer>
     <div class="footer-inner">
-        <div class="footer-brand">Talk Me Up &mdash; Summer Internship 2026</div>
+        <div class="footer-brand">Talk Me Up &mdash; Expired Solutions Summer Internship 2026</div>
         <div class="footer-links">
             <a href="https://github.com/LawrenceHua" target="_blank">GitHub</a>
             <span style="color: rgba(255,255,255,0.2);">|</span>
             <a href="#">Program Lead: Lawrence Hua</a>
+            <span style="color: rgba(255,255,255,0.2);">|</span>
+            <a href="#">Co-Lead: Prof. JJ Xu</a>
         </div>
     </div>
-    <div class="footer-copy">&copy; 2026 Talk Me Up</div>
+    <div class="footer-copy">&copy; 2026 Expired Solutions &middot; Talk Me Up</div>
 </footer>
 
 </body>
