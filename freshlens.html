@@ -4,24 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FreshLens — Talk Me Up Internship 2026</title>
+    <meta name="description" content="FreshLens: point a camera at a fridge or produce shelf and every item lights up with a live freshness score. The Expired Solutions internship flagship project (Weeks 3–8).">
+    <meta name="theme-color" content="#1a3c34">
+    <link rel="canonical" href="https://es-internship-hub.vercel.app/freshlens.html">
+    <!-- Social preview (Open Graph + Twitter) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Expired Solutions AI Internship">
+    <meta property="og:url" content="https://es-internship-hub.vercel.app/freshlens.html">
+    <meta property="og:title" content="FreshLens — Talk Me Up Internship 2026">
+    <meta property="og:description" content="Point a camera at a fridge or produce shelf and every item gets a live freshness score at once — then AI acts on it. The Expired Solutions internship flagship.">
+    <meta property="og:image" content="https://es-internship-hub.vercel.app/og-freshlens.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="FreshLens — scan the whole shelf, score every item">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FreshLens — Talk Me Up Internship 2026">
+    <meta name="twitter:description" content="Scan a whole fridge or shelf — every item gets a live freshness score, then AI acts on it. The Expired Solutions internship flagship.">
+    <meta name="twitter:image" content="https://es-internship-hub.vercel.app/og-freshlens.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a3c34;
-            --accent: #3d8b6e;
+            --primary-mid: #2a5a4a;
+            --accent: #2d6e55;          /* link/interactive text — AA on white */
             --accent-light: #e8f5ef;
             --accent-muted: #5ba88a;
+            --fresh: #2e9e5b;
+            --caution: #e0a106;
+            --urgent: #d23b3b;
             --surface: #ffffff;
-            --surface-alt: #f7f8fa;
+            --surface-alt: #f6f8f7;
             --border: #e2e5ea;
+            --border-hover: #c8cdd4;
             --text: #1a1d23;
             --text-secondary: #5a6170;
-            --text-tertiary: #8891a0;
+            --text-tertiary: #6b7585;    /* AA on white */
             --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
             --radius: 10px;
             --radius-lg: 16px;
+            --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -32,6 +57,9 @@
             -webkit-font-smoothing: antialiased;
         }
         a { color: var(--accent); }
+        a:focus-visible, .back-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+        .freshness-rule { height: 2px; border: none; border-radius: 2px; background: linear-gradient(90deg, var(--fresh) 0%, var(--caution) 58%, var(--urgent) 100%); }
 
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -42,7 +70,8 @@
             max-width: 920px; margin: 0 auto; display: flex;
             align-items: center; justify-content: space-between; height: 56px;
         }
-        .nav-brand { font-weight: 700; font-size: 0.95rem; color: var(--primary); letter-spacing: -0.01em; }
+        .nav-brand { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; font-size: 0.95rem; color: var(--primary); letter-spacing: -0.01em; }
+        .brand-mark { width: 22px; height: 22px; flex-shrink: 0; display: block; }
         .back-link {
             font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);
             text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
@@ -53,14 +82,13 @@
             padding: 8rem 2rem 4rem; background: var(--primary); color: #fff;
             position: relative; overflow: hidden;
         }
-        .hero::before {
-            content: ''; position: absolute; top: -40%; right: -15%;
-            width: 520px; height: 520px; border-radius: 50%;
-            background: rgba(61,139,110,0.16); pointer-events: none;
+        .hero-reticle {
+            position: absolute; top: 3.5rem; right: -3rem;
+            width: 360px; height: 360px; opacity: 0.16; pointer-events: none;
         }
         .hero-inner { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; }
         .hero-label {
-            font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em;
+            font-family: var(--mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em;
             text-transform: uppercase; color: var(--accent-muted); margin-bottom: 1rem;
         }
         .hero h1 { font-size: 2.8rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1rem; }
@@ -70,6 +98,7 @@
             background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85);
             padding: 0.25rem 0.7rem; border-radius: 6px; font-size: 0.78rem; font-weight: 500;
         }
+        .hero-rule { margin-top: 1.75rem; width: 200px; max-width: 60%; }
 
         .wrap { max-width: 920px; margin: 0 auto; padding: 0 2rem; }
         section.block { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
@@ -87,7 +116,7 @@
         .pillar .num {
             width: 30px; height: 30px; border-radius: 8px; background: var(--accent-light);
             color: var(--accent); display: flex; align-items: center; justify-content: center;
-            font-size: 0.8rem; font-weight: 700; margin-bottom: 0.9rem;
+            font-family: var(--mono); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.9rem;
         }
         .pillar p { font-size: 0.88rem; }
 
@@ -102,7 +131,7 @@
         pre {
             background: #0f1a17; color: #d7e7e0; border-radius: var(--radius);
             padding: 1.25rem; overflow-x: auto; font-size: 0.82rem; line-height: 1.7;
-            font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+            font-family: var(--mono);
         }
 
         .weeks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
@@ -111,7 +140,7 @@
             transition: box-shadow 0.2s ease, transform 0.2s ease;
         }
         .week:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-        .week .wk { font-size: 0.78rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem; }
+        .week .wk { font-family: var(--mono); font-size: 0.74rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.35rem; }
         .week ul { list-style: none; padding: 0; margin: 0.5rem 0 0; }
         .week li { font-size: 0.86rem; color: var(--text-secondary); padding: 0.2rem 0 0.2rem 1rem; position: relative; }
         .week li::before { content: ''; position: absolute; left: 0; top: 0.6rem; width: 4px; height: 4px; border-radius: 50%; background: var(--accent-muted); }
@@ -127,10 +156,13 @@
 
         footer { background: var(--primary); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; font-size: 0.85rem; }
         .footer-inner { max-width: 920px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        .footer-brand { display: flex; align-items: center; gap: 0.55rem; color: rgba(255,255,255,0.85); }
+        .footer-copy { max-width: 920px; margin: 1.5rem auto 0; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.78rem; color: rgba(255,255,255,0.5); }
         footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
 
         @media (max-width: 760px) {
             .hero h1 { font-size: 2.1rem; }
+            .hero-reticle { width: 240px; height: 240px; right: -4rem; }
             .pillars, .weeks { grid-template-columns: 1fr; }
             .flow-arrow { display: none; }
         }
@@ -140,14 +172,29 @@
 
 <nav>
     <div class="nav-inner">
-        <div class="nav-brand">Talk Me Up</div>
+        <div class="nav-brand">
+            <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="6" fill="#1a3c34"/>
+                <path d="M8 24 A16 16 0 0 1 24 8" stroke="#3d8b6e" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <line x1="8" y1="24" x2="8" y2="19" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="3" fill="#e0a106"/>
+            </svg>
+            Talk Me Up
+        </div>
         <a href="index.html" class="back-link">&larr; Back to program</a>
     </div>
 </nav>
 
 <div class="hero">
+    <svg class="hero-reticle" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M8 24 A16 16 0 0 1 24 8" stroke="#5ba88a" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <line x1="8" y1="24" x2="8" y2="18.5" stroke="#8fcfb0" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="24" y1="8" x2="18.5" y2="8" stroke="#8fcfb0" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="24" cy="24" r="2.6" fill="#e0a106"/>
+    </svg>
     <div class="hero-inner">
-        <div class="hero-label">Flagship Project &middot; Weeks 5&ndash;8 build</div>
+        <div class="hero-label">Flagship Project &middot; Weeks 3&ndash;8</div>
         <h1>FreshLens</h1>
         <p>Point your camera at a fridge, basket, or produce shelf&mdash;and every item lights up at once with a live, color-coded freshness score. Then AI tells you what to do about it: rescue what&rsquo;s turning, or mark it down before it&rsquo;s lost.</p>
         <div class="hero-tags">
@@ -158,6 +205,7 @@
             <span class="hero-tag">Claude API</span>
             <span class="hero-tag">JavaScript</span>
         </div>
+        <hr class="freshness-rule hero-rule">
     </div>
 </div>
 
@@ -171,7 +219,7 @@
 
     <section class="block">
         <h2>How it works</h2>
-        <p class="lead">Three capabilities, built in sequence over the 4-week sprint.</p>
+        <p class="lead">Three capabilities, built in sequence over Weeks 4&ndash;6 &mdash; then hardened and shipped in Weeks 7&ndash;8.</p>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">1</div>
@@ -222,35 +270,35 @@
    │
    ├─► Shopper mode:  Claude ──► "eat me first" ranking + rescue recipe
    │
-   └─► Store mode (stretch):  rules + Claude ──► markdown worklist + shrink $ saved</pre>
+   └─► Store mode (Week 7 stretch):  rules + Claude ──► markdown worklist + shrink $ saved</pre>
     </section>
 
     <section class="block">
-        <h2>4-week build plan</h2>
-        <p class="lead">Maps to program Weeks 5&ndash;8. Each Friday ends with a live demo. Hero path is the shopper experience; store manager-mode is the Week-8 stretch.</p>
+        <h2>The build plan</h2>
+        <p class="lead">The project runs program Weeks 3&ndash;8. Week 3 is onboarding &amp; planning and Week 8 is Demo Day; the four build missions below are Weeks 4&ndash;7. Each Friday ends with a live demo. The hero path is the shopper experience; store manager-mode is the Week 7 stretch.</p>
         <div class="weeks">
             <div class="week">
-                <div class="wk">Week 5 &middot; Detect + score one frame</div>
+                <div class="wk">Week 4 &middot; Multi-Item Detection</div>
                 <ul>
                     <li>Image upload endpoint (HEIC/JPEG/PNG)</li>
                     <li>Run a pretrained detector on a fridge/shelf photo</li>
-                    <li>Crop each item; score freshness 0&ndash;100</li>
+                    <li>Draw a separate box for every produce item</li>
                     <li>Return boxes + scores as JSON</li>
                 </ul>
                 <div class="demo">Demo: upload a fridge photo &rarr; every item boxed with a freshness score.</div>
             </div>
             <div class="week">
-                <div class="wk">Week 6 &middot; The live overlay</div>
+                <div class="wk">Week 5 &middot; Live Freshness Overlay</div>
                 <ul>
                     <li>Mobile camera capture in the browser</li>
-                    <li>Draw color-coded overlays (green/amber/red)</li>
+                    <li>Score each item 0&ndash;100; draw color overlays (green/amber/red)</li>
                     <li>&ldquo;Eat me first&rdquo; ranking of the scene</li>
                     <li>Smooth the experience to near real-time</li>
                 </ul>
                 <div class="demo">Demo: aim at a basket &rarr; scores appear live, worst-first list updates.</div>
             </div>
             <div class="week">
-                <div class="wk">Week 7 &middot; Claude action layer</div>
+                <div class="wk">Week 6 &middot; Act On It</div>
                 <ul>
                     <li>Send detected items + scores to Claude</li>
                     <li>Generate a rescue recipe from what&rsquo;s on hand</li>
@@ -260,24 +308,25 @@
                 <div class="demo">Demo: scan a fridge &rarr; &ldquo;Use the spinach &amp; tomatoes tonight&mdash;here&rsquo;s a recipe.&rdquo;</div>
             </div>
             <div class="week">
-                <div class="wk">Week 8 &middot; Store mode + harden</div>
+                <div class="wk">Week 7 &middot; Harden, Extend &amp; Team Craft</div>
                 <ul>
-                    <li>Store stretch: shelf photo &rarr; markdown worklist</li>
-                    <li>Projected shrink $ saved from the scored scene</li>
+                    <li>Store stretch: shelf photo &rarr; markdown worklist + shrink $ saved</li>
                     <li>Error handling + 10&plus; unit tests</li>
-                    <li>Docs: API contract + setup</li>
+                    <li>Build more if you want; keep the fallbacks intact</li>
+                    <li>Team workflow: branch &rarr; PR &rarr; <code>/code-review</code> &rarr; merge</li>
                 </ul>
                 <div class="demo">Demo: scan a produce shelf &rarr; &ldquo;Mark down these 6 items, save ~$48 today.&rdquo;</div>
             </div>
         </div>
+        <p style="margin-top:1.25rem; font-size:0.9rem;">Week 3 onboards the codebase and plans the build; Week 8 freezes, records a demo, and presents on Demo Day. Full week-by-week guides live in the repo&rsquo;s <a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">docs/</a>.</p>
     </section>
 
     <section class="block">
         <h2>Get started</h2>
-        <p class="lead">The starter repo is a <strong>complete, runnable app</strong> — clone it and it works on day one (it scans, scores, and suggests a recipe out of the box). The step-by-step <strong>Getting Started</strong> guide takes you from clone to running in your browser in ~15 minutes, and the weekly guides (Week 5&ndash;8) are your build missions. No AI-tools experience needed.</p>
+        <p class="lead">The starter repo is a <strong>complete, runnable app</strong> — clone it and it works on day one (it scans, scores, and suggests a recipe out of the box). The step-by-step <strong>Getting Started</strong> guide takes you from clone to running in your browser in ~15 minutes, and the weekly guides (Weeks 3&ndash;8) are your build missions. No AI-tools experience needed.</p>
         <div class="cta-row">
-            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens#-new-here-start-with-getting_startedmd" target="_blank">Read the Getting Started guide &rarr;</a>
-            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank">Starter repository</a>
+            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">Read the Getting Started guide &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">Starter repository</a>
             <a class="btn btn-secondary" href="index.html">Back to program overview</a>
         </div>
     </section>
@@ -286,9 +335,19 @@
 
 <footer>
     <div class="footer-inner">
-        <div>Talk Me Up &mdash; Expired Solutions Summer Internship 2026</div>
+        <div class="footer-brand">
+            <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="6" fill="#234a40"/>
+                <path d="M8 24 A16 16 0 0 1 24 8" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <line x1="8" y1="24" x2="8" y2="19" stroke="#8fcfb0" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="24" y1="8" x2="19" y2="8" stroke="#8fcfb0" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="3" fill="#e0a106"/>
+            </svg>
+            Talk Me Up &mdash; Expired Solutions Summer Internship 2026
+        </div>
         <div>Lead: Lawrence Hua &middot; Co-Lead: Prof. JJ Xu</div>
     </div>
+    <div class="footer-copy">&copy; 2026 Expired Solutions &middot; Talk Me Up</div>
 </footer>
 
 </body>
