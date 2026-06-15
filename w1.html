@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 — Your First 15 Minutes with Claude Code · Talk Me Up</title>
+    <meta name="description" content="A hands-on, beginner-friendly 15-minute Claude Code tutorial for the Expired Solutions internship: setup, prompting, iteration, planning, and skills like /plan and /code-review.">
+    <meta name="theme-color" content="#1a3c34">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3c34;
+            --primary-mid: #2a5a4a;
+            --accent: #2d6e55;
+            --accent-light: #e8f5ef;
+            --accent-muted: #5ba88a;
+            --fresh: #2e9e5b;
+            --caution: #e0a106;
+            --urgent: #d23b3b;
+            --surface: #ffffff;
+            --surface-alt: #f6f8f7;
+            --border: #e2e5ea;
+            --border-hover: #c8cdd4;
+            --text: #1a1d23;
+            --text-secondary: #5a6170;
+            --text-tertiary: #6b7585;
+            --radius: 10px;
+            --radius-lg: 16px;
+            --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--surface); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: var(--accent); }
+        a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+        .freshness-rule { height: 2px; border: none; border-radius: 2px; background: linear-gradient(90deg, var(--fresh) 0%, var(--caution) 58%, var(--urgent) 100%); }
+
+        /* Nav */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 1.5rem; }
+        .nav-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+        .nav-brand { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; font-size: 0.95rem; color: var(--primary); letter-spacing: -0.01em; text-decoration: none; }
+        .brand-mark { width: 22px; height: 22px; flex-shrink: 0; display: block; }
+        .back-link { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+        .back-link:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero { padding: 8rem 1.5rem 3rem; background: var(--primary); color: #fff; position: relative; overflow: hidden; }
+        .hero-reticle { position: absolute; top: 3rem; right: -2.5rem; width: 300px; height: 300px; opacity: 0.15; pointer-events: none; }
+        .hero-inner { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; }
+        .hero-label { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-muted); }
+        .hero h1 { font-size: 2.6rem; font-weight: 800; line-height: 1.08; letter-spacing: -0.035em; margin: 0.9rem 0 1rem; }
+        .hero p { font-size: 1.08rem; color: rgba(255,255,255,0.78); max-width: 600px; }
+        .hero-meta { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; color: rgba(255,255,255,0.7); margin-top: 1.5rem; }
+        .hero-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+        .hero-chip { font-size: 0.74rem; font-weight: 600; color: #fff; border: 1px solid rgba(255,255,255,0.22); border-radius: 999px; padding: 0.25rem 0.7rem; }
+        .hero .freshness-rule { margin-top: 1.75rem; max-width: 880px; }
+
+        /* Layout */
+        .wrap { max-width: 880px; margin: 0 auto; padding: 0 1.5rem; }
+        .block { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+        .block:last-of-type { border-bottom: none; }
+        .block > h2 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+        .block .lead { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.98rem; }
+        .block p { color: var(--text-secondary); }
+        .eyebrow { font-family: var(--mono); font-size: 0.66rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.5rem; }
+
+        /* Code + prompt blocks */
+        .copyable { position: relative; margin: 0.85rem 0; }
+        .copy-btn { position: absolute; top: 0.5rem; right: 0.5rem; font-family: var(--mono); font-size: 0.6rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 0.2rem 0.45rem; cursor: pointer; transition: all 0.15s; }
+        .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .copy-btn.copied { color: var(--fresh); border-color: var(--fresh); }
+        pre.code { font-family: var(--mono); font-size: 0.78rem; line-height: 1.6; background: #11221d; color: #cfe8dc; border-radius: 8px; padding: 0.85rem 1rem; overflow-x: auto; white-space: pre; }
+        pre.code .c { color: var(--accent-muted); }
+        pre.prompt { font-family: var(--mono); font-size: 0.78rem; line-height: 1.6; background: var(--surface-alt); color: var(--text); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 0.85rem 1rem; white-space: pre-wrap; word-break: break-word; }
+        .prompt-label { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); margin: 0 0 0.3rem 0.1rem; }
+        code.kbd { font-family: var(--mono); font-size: 0.85em; background: var(--accent-light); color: var(--primary); border-radius: 4px; padding: 0.05rem 0.35rem; }
+
+        /* Progress */
+        .progress { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.75rem; }
+        .progress-track { flex: 1; height: 7px; background: var(--border); border-radius: 999px; overflow: hidden; }
+        .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--fresh), var(--accent-muted)); border-radius: 999px; transition: width 0.3s ease; }
+        .progress-text { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--text-secondary); white-space: nowrap; }
+        .timer-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.75rem; }
+        .timer-btn { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: #fff; background: var(--accent); border: none; border-radius: 7px; padding: 0.35rem 0.75rem; cursor: pointer; }
+        .timer-btn:hover { background: var(--primary-mid); }
+        .timer-display { font-family: var(--mono); font-size: 0.85rem; font-weight: 700; color: var(--primary); }
+
+        /* Steps */
+        .step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.4rem; margin-bottom: 1rem; transition: border-color 0.2s; }
+        .step:hover { border-color: var(--border-hover); }
+        .step.done { border-color: var(--accent-muted); background: #fbfdfc; }
+        .step-head { display: flex; align-items: flex-start; gap: 0.9rem; }
+        .step-num { font-family: var(--mono); font-size: 0.85rem; font-weight: 700; color: #fff; background: var(--primary); width: 2rem; height: 2rem; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .step.done .step-num { background: var(--fresh); }
+        .step-head .step-title { flex: 1; min-width: 0; }
+        .step-title h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+        .step-time { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
+        .step-check { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 600; color: var(--text-tertiary); cursor: pointer; white-space: nowrap; user-select: none; }
+        .step-check input { accent-color: var(--accent); width: 15px; height: 15px; }
+        .step-body { padding-top: 0.75rem; }
+        .step-body p { font-size: 0.9rem; }
+        .step-body ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+        .step-body li { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.2rem; }
+        .learn { font-size: 0.84rem; color: var(--text-secondary); background: var(--accent-light); border-radius: 8px; padding: 0.55rem 0.8rem; margin-top: 0.85rem; }
+        .learn strong { color: var(--primary); }
+
+        /* Generic cards / rules */
+        .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .rule { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--accent); border-radius: var(--radius); padding: 1.2rem; }
+        .rule .rule-n { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); font-weight: 700; }
+        .rule h3 { font-size: 0.98rem; font-weight: 700; margin: 0.3rem 0 0.4rem; }
+        .rule p { font-size: 0.85rem; }
+
+        /* Cheat sheet table */
+        .cheat { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+        .cheat th, .cheat td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .cheat th { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); }
+        .cheat td.cmd { font-family: var(--mono); font-size: 0.78rem; color: var(--primary); font-weight: 500; white-space: nowrap; }
+        .cheat td.desc { color: var(--text-secondary); }
+
+        /* Resource links */
+        .links { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem 1.5rem; }
+        .links li { font-size: 0.9rem; }
+        .links a { text-decoration: none; font-weight: 500; }
+        .links a:hover { text-decoration: underline; }
+        .links .free { font-family: var(--mono); font-size: 0.56rem; color: var(--fresh); border: 1px solid var(--fresh); border-radius: 4px; padding: 0 0.25rem; margin-left: 0.3rem; text-transform: uppercase; }
+
+        .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+        .btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; font-weight: 600; text-decoration: none; border-radius: 8px; padding: 0.6rem 1.1rem; }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover { background: var(--primary-mid); }
+        .btn-secondary { background: var(--surface); color: var(--primary); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--accent); }
+
+        .callout { background: var(--surface-alt); border: 1px solid var(--border); border-left: 3px solid var(--caution); border-radius: 8px; padding: 0.8rem 1rem; font-size: 0.86rem; color: var(--text-secondary); margin-top: 1rem; }
+        .callout strong { color: var(--text); }
+
+        /* Footer */
+        footer { background: var(--primary); color: #fff; padding: 2.5rem 1.5rem; }
+        .footer-inner { max-width: 880px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .footer-brand { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; font-size: 0.9rem; }
+        .footer-brand .brand-mark { width: 20px; height: 20px; }
+        .footer-inner a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+        .footer-inner a:hover { color: #fff; }
+
+        @media (max-width: 680px) {
+            .hero { padding: 7rem 1.25rem 2.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero-reticle { width: 200px; height: 200px; right: -3rem; }
+            .rules { grid-template-columns: 1fr; }
+            .links { grid-template-columns: 1fr; }
+            .step-head { flex-wrap: wrap; }
+            .footer-inner { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+    <div class="nav-inner">
+        <a class="nav-brand" href="index.html">
+            <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="6" fill="#1a3c34"/>
+                <path d="M8 24 A16 16 0 0 1 24 8" stroke="#3d8b6e" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <line x1="8" y1="24" x2="8" y2="19" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="3" fill="#e0a106"/>
+            </svg>
+            Talk Me Up
+        </a>
+        <a class="back-link" href="index.html#schedule">&larr; Back to schedule</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+    <svg class="hero-reticle" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+        <path d="M28 172 A144 144 0 0 1 172 28" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="28" y1="172" x2="28" y2="150" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="172" y1="28" x2="150" y2="28" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="172" cy="172" r="6" fill="#e0a106"/>
+    </svg>
+    <div class="hero-inner">
+        <div class="hero-label">Week 1 &middot; AI-Tools Foundations</div>
+        <h1>Your first 15 minutes<br>with Claude Code</h1>
+        <p>A hands-on intro to AI-assisted coding. By the end you&rsquo;ll have installed Claude Code, talked to a codebase, shipped a change, planned a feature, and run a review&mdash;the whole loop you&rsquo;ll use all internship.</p>
+        <div class="hero-meta">15 MIN &middot; 7 STEPS &middot; ABSOLUTE BEGINNER</div>
+        <div class="hero-chips">
+            <span class="hero-chip">Setup</span>
+            <span class="hero-chip">Prompting</span>
+            <span class="hero-chip">Iteration</span>
+            <span class="hero-chip">Planning</span>
+            <span class="hero-chip">Skills</span>
+        </div>
+        <hr class="freshness-rule" aria-hidden="true">
+    </div>
+</div>
+
+<div class="wrap">
+
+    <!-- Before you start -->
+    <section class="block">
+        <div class="eyebrow">Before you start &middot; 2 min</div>
+        <h2>Set up Claude Code</h2>
+        <p class="lead">Claude Code is Anthropic&rsquo;s AI coding tool that lives in your terminal. You talk to it in plain English; it reads your code, makes changes (with your approval), runs commands, and explains what it did. No prior AI-tools experience needed.</p>
+        <p class="prompt-label">1 &middot; Install (pick one)</p>
+        <div class="copyable">
+            <button class="copy-btn" type="button">Copy</button>
+<pre class="code"><span class="c"># macOS / Linux / WSL (official installer)</span>
+curl -fsSL https://claude.ai/install.sh | bash
+
+<span class="c"># or with npm</span>
+npm install -g @anthropic-ai/claude-code
+
+<span class="c"># or with Homebrew (macOS)</span>
+brew install --cask claude-code</pre>
+        </div>
+        <p class="prompt-label">2 &middot; Start a session in any project</p>
+        <div class="copyable">
+            <button class="copy-btn" type="button">Copy</button>
+<pre class="code">cd your-project
+claude          <span class="c"># log in on first run, then type /help</span></pre>
+        </div>
+        <div class="callout"><strong>Our starter for today:</strong> create a file called <code class="kbd">game.py</code> with the scaffold in the &ldquo;Starter project&rdquo; section below, then run <code class="kbd">claude</code> in that folder. You&rsquo;ll turn it into a working game in the 7 steps.</div>
+    </section>
+
+    <!-- The 7 steps -->
+    <section class="block">
+        <div class="eyebrow">The walkthrough</div>
+        <h2>7 steps, 15 minutes</h2>
+        <p class="lead">Do these in order. Tick each one off as you go &mdash; your progress is saved on this device.</p>
+
+        <div class="progress">
+            <div class="progress-track"><div class="progress-fill" id="pf"></div></div>
+            <span class="progress-text" id="pt">0 / 7 done</span>
+        </div>
+        <div class="timer-row">
+            <button class="timer-btn" id="timerBtn" type="button">&#9654; Start 15:00</button>
+            <span class="timer-display" id="timerDisplay">15:00</span>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="step" data-step="1">
+            <div class="step-head">
+                <span class="step-num">1</span>
+                <div class="step-title"><h3>Set up &amp; orient</h3><span class="step-time">2 min &middot; setup</span></div>
+                <label class="step-check"><input type="checkbox"> Done</label>
+            </div>
+            <div class="step-body">
+                <p>Open your terminal, <code class="kbd">cd</code> into the folder with <code class="kbd">game.py</code>, and run <code class="kbd">claude</code>. Log in when prompted. Type <code class="kbd">/help</code> to see what&rsquo;s available, then press Esc to return to the prompt.</p>
+                <p class="learn"><strong>You&rsquo;re learning:</strong> Claude Code is a conversation in your project folder &mdash; it can see the files there.</p>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step" data-step="2">
+            <div class="step-head">
+                <span class="step-num">2</span>
+                <div class="step-title"><h3>Talk to your codebase</h3><span class="step-time">2 min &middot; prompting</span></div>
+                <label class="step-check"><input type="checkbox"> Done</label>
+            </div>
+            <div class="step-body">
+                <p>Before changing anything, ask Claude to explain the file. Use <code class="kbd">@</code> to pull a file into the conversation:</p>
+                <p class="prompt-label">Paste this prompt</p>
+                <div class="copyable">
+                    <button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">@game.py What does this file do? Walk me through it step by step, and flag anything that looks incomplete. Assume I'm a beginner who has never seen this code.</pre>
+                </div>
+                <p class="learn"><strong>You&rsquo;re learning:</strong> let the tool orient <em>you</em> first. <code class="kbd">@file</code> gives Claude exact context instead of guessing.</p>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step" data-step="3">
+            <div class="step-head">
+                <span class="step-num">3</span>
+                <div class="step-title"><h3>Make your first change</h3><span class="step-time">3 min &middot; iteration</span></div>
+                <label class="step-check"><input type="checkbox"> Done</label>
+            </div>
+            <div class="step-body">
+                <p>Give one clear, specific instruction. Notice the pattern: <em>what I have</em> + <em>what&rsquo;s missing</em> + <em>a constraint</em>.</p>
+                <p class="prompt-label">Paste this prompt</p>
+                <div class="copyable">
+                    <button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">I have a Python guessing game in @game.py. Right now play() asks for a guess only once and exits. Add a while loop so it keeps asking until the user guesses the secret number. Keep it under 30 lines and add one short comment per section.</pre>
+                </div>
+                <p>Claude will ask permission before it edits the file &mdash; <strong>read the diff and approve it.</strong> Then run it:</p>
+                <div class="copyable">
+                    <button class="copy-btn" type="button">Copy</button>
+<pre class="code">python game.py</pre>
+                </div>
+                <p class="learn"><strong>You&rsquo;re learning:</strong> Claude proposes, you approve. Always read the change before saying yes, then run it to see it work.</p>
+            </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step" data-step="4">
+            <div class="step-head">
+                <span class="step-num">4</span>
+                <div class="step-title"><h3>Iterate</h3><span class="step-time">2 min &middot; iteration</span></div>
+                <label class="step-check"><input type="checkbox"> Done</label>
+            </div>
+            <div class="step-body">
+                <p>Small follow-ups are the heart of the workflow. Add a feature:</p>
+                <div class="copyable">
+                    <button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">Now tell the player whether each guess is too high or too low. Don't change anything else.</pre>
+                </div>
+                <p>Hit a crash? Paste the <strong>exact</strong> error &mdash; Claude can&rsquo;t see your screen:</p>
+                <div class="copyable">
+                    <button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">It crashed with: ValueError: invalid literal for int() with base 10: ''. That happens when I press Enter without typing anything. Fix just that bug (catch it and ask again) without rewriting the rest of the game.</pre>
+                </div>
+                <p class="learn"><strong>You&rsquo;re learning:</strong> &ldquo;don&rsquo;t change anything else&rdquo; keeps Claude from over-engineering. Paste errors verbatim, never paraphrased.</p>
+            </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step" data-step="5">
+            <div class="step-head">
+                <span class="step-num">5</span>
+                <div class="step-title"><h3>Prompt better + Plan Mode</h3><span class="step-time">3 min &middot; planning</span></div>
+                <label class="step-check"><input type="checkbox"> Done</label>
+            </div>
+            <div class="step-body">
+                <p>For anything bigger than a one-liner, have Claude <strong>plan first</strong>. Plan Mode lets it research and propose without touching files. Turn it on three ways: press <code class="kbd">Shift+Tab</code> to cycle to <em>plan</em>, type <code class="kbd">/plan</code>, or start with <code class="kbd">claude --permission-mode plan</code>.</p>
+                <p class="prompt-label">Paste this prompt (after entering plan mode, or just start it with /plan)</p>
+                <div class="copyable">
+                    <button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">Before writing any code, outline a step-by-step plan to add a high-score feature: save the lowest number of guesses to a file called scores.txt and show it at the start of each game. List the plan as numbered steps, note any risks, and wait for my approval before changing anything.</pre>
+                </div>
+                <p>For a genuinely hard problem, add the keyword <code class="kbd">ultrathink</code> to your prompt for deeper reasoning on that turn.</p>
+                <p class="learn"><strong>You&rsquo;re learning:</strong> plan before you build. A weak prompt (&ldquo;make it better&rdquo;) gets weak results; specifics and a plan get great ones.</p>
+            </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step" data-step="6">
+            <div class="step-head">
+                <span class="step-num">6</span>
+                <div class="step-title"><h3>Review your work + make a skill</h3><span class="step-time">2 min &middot; skills</span></div>
+                <label class="step-check"><input type="checkbox"> Done</label>
+            </div>
+            <div class="step-body">
+                <p>Claude Code ships with <strong>skills</strong> &mdash; reusable commands you trigger with a slash. Two come built in for reviewing your work:</p>
+                <div class="copyable">
+                    <button class="copy-btn" type="button">Copy</button>
+<pre class="code">/code-review        <span class="c"># reviews your current changes for bugs + cleanups</span>
+/security-review    <span class="c"># checks your changes for security issues</span></pre>
+                </div>
+                <p>You can also just ask, in plain English:</p>
+                <div class="copyable">
+                    <button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">Review the change you just made. List any bugs, edge cases that could crash it, and lines that are more complicated than they need to be. Then tell me which are worth fixing now.</pre>
+                </div>
+                <p>Make your <strong>own</strong> skill: create <code class="kbd">.claude/skills/game-review/SKILL.md</code> (or a one-file <code class="kbd">.claude/commands/game-review.md</code>) and you&rsquo;ll have a <code class="kbd">/game-review</code> command. Let Claude build it for you:</p>
+                <div class="copyable">
+                    <button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">Create a skill called game-review for this project. It should read game.py and check for common beginner bugs (missing input validation, bare except clauses, magic numbers), then print a short bulleted report. Save it so I can run it again with /game-review.</pre>
+                </div>
+                <p class="learn"><strong>You&rsquo;re learning:</strong> &ldquo;skills&rdquo; like <code class="kbd">/plan</code> and <code class="kbd">/code-review</code> are real, reusable commands &mdash; and you can write your own.</p>
+            </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="step" data-step="7">
+            <div class="step-head">
+                <span class="step-num">7</span>
+                <div class="step-title"><h3>Make it yours &amp; wrap up</h3><span class="step-time">1 min &middot; memory</span></div>
+                <label class="step-check"><input type="checkbox"> Done</label>
+            </div>
+            <div class="step-body">
+                <p>Run <code class="kbd">/init</code> and Claude writes a <code class="kbd">CLAUDE.md</code> &mdash; persistent project notes it reads at the start of every session. Use <code class="kbd">/clear</code> to start a fresh conversation between unrelated tasks. That&rsquo;s the whole loop. Bring what you built to <strong>Friday&rsquo;s demo</strong> (2&ndash;3 min) and share one thing the AI got wrong.</p>
+                <p class="learn"><strong>You&rsquo;re learning:</strong> <code class="kbd">CLAUDE.md</code> is the tool&rsquo;s memory of your project. Good context in = good help out.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Starter project -->
+    <section class="block">
+        <div class="eyebrow">The starter project</div>
+        <h2>Guess the Number</h2>
+        <p class="lead">A tiny CLI game &mdash; zero setup, runs with one command, short enough to read every line. Create <code class="kbd">game.py</code> with this scaffold (it&rsquo;s intentionally incomplete; you&rsquo;ll finish it in the steps):</p>
+        <div class="copyable">
+            <button class="copy-btn" type="button">Copy</button>
+<pre class="code"><span class="c"># game.py — starter scaffold for the Week 1 tutorial</span>
+import random
+
+def play():
+    secret = random.randint(1, 10)
+    <span class="c"># TODO: ask the user to guess, check it, and repeat until correct</span>
+
+play()</pre>
+        </div>
+        <p>The natural build arc: complete the loop (Step 3) &rarr; add too-high / too-low hints and fix the empty-input crash (Step 4) &rarr; plan and add a high-score file (Step 5) &rarr; review it (Step 6). Infinite room to keep going.</p>
+    </section>
+
+    <!-- Prompt library -->
+    <section class="block">
+        <div class="eyebrow">Keep these handy</div>
+        <h2>Prompt library</h2>
+        <p class="lead">Six patterns worth saving. Good prompts are specific and give context.</p>
+
+        <p class="prompt-label">Understand code</p>
+        <div class="copyable"><button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">What does @path/to/file do? Walk me through it step by step and flag anything incomplete or buggy. Assume I'm new to this code.</pre></div>
+
+        <p class="prompt-label">Specific change ([what I have] + [what's missing] + [constraint])</p>
+        <div class="copyable"><button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">In @file, the X function does A but not B. Add B by doing C. Keep it small and add one comment per section. Don't touch anything else.</pre></div>
+
+        <p class="prompt-label">Fix a crash</p>
+        <div class="copyable"><button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">It crashed with: [paste the full error]. This happens when [what you did]. Fix just that bug without rewriting the rest.</pre></div>
+
+        <p class="prompt-label">Plan before building</p>
+        <div class="copyable"><button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">Before writing any code, outline a numbered plan for [feature]. Note risks and edge cases, then wait for my approval before changing anything.</pre></div>
+
+        <p class="prompt-label">Self-review</p>
+        <div class="copyable"><button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">Review the change you just made for bugs, edge cases, and anything more complicated than it needs to be. Tell me which findings are worth fixing now.</pre></div>
+
+        <p class="prompt-label">Make a reusable skill</p>
+        <div class="copyable"><button class="copy-btn" type="button">Copy</button>
+<pre class="prompt">Create a skill called [name] for this project that [does X]. Save it so I can run it again with /[name].</pre></div>
+    </section>
+
+    <!-- Golden rules -->
+    <section class="block">
+        <div class="eyebrow">The rules that matter most</div>
+        <h2>Three golden rules</h2>
+        <div class="rules">
+            <div class="rule">
+                <div class="rule-n">01</div>
+                <h3>Read every line</h3>
+                <p>AI is confident even when it&rsquo;s wrong. If you can&rsquo;t explain a block out loud, ask Claude to explain it before you ship it. Read the diff, not just the new code.</p>
+            </div>
+            <div class="rule">
+                <div class="rule-n">02</div>
+                <h3>Test it yourself</h3>
+                <p>&ldquo;Should work&rdquo; isn&rsquo;t done. Run it. Try bad input &mdash; empty string, negative, a letter. The happy path is the easy 80%.</p>
+            </div>
+            <div class="rule">
+                <div class="rule-n">03</div>
+                <h3>Commit small &amp; often</h3>
+                <p>Commit before and after AI changes (<code class="kbd">git commit -m "before: X"</code>). It&rsquo;s your instant undo button if a change goes sideways.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cheat sheet -->
+    <section class="block">
+        <div class="eyebrow">Reference</div>
+        <h2>Command cheat-sheet</h2>
+        <table class="cheat">
+            <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+            <tbody>
+                <tr><td class="cmd">claude</td><td class="desc">Start an interactive session in the current project.</td></tr>
+                <tr><td class="cmd">/help</td><td class="desc">List every available command.</td></tr>
+                <tr><td class="cmd">@file</td><td class="desc">Pull a file (or folder) into the conversation as context.</td></tr>
+                <tr><td class="cmd">Shift+Tab</td><td class="desc">Cycle permission modes: default &rarr; accept-edits &rarr; plan.</td></tr>
+                <tr><td class="cmd">/plan</td><td class="desc">Enter Plan Mode &mdash; Claude proposes changes without making them.</td></tr>
+                <tr><td class="cmd">/code-review</td><td class="desc">Review your current changes for bugs and cleanups.</td></tr>
+                <tr><td class="cmd">/security-review</td><td class="desc">Check your changes for security issues.</td></tr>
+                <tr><td class="cmd">/init</td><td class="desc">Generate a CLAUDE.md with your project&rsquo;s conventions.</td></tr>
+                <tr><td class="cmd">/clear</td><td class="desc">Start a fresh conversation (files untouched).</td></tr>
+                <tr><td class="cmd">/compact</td><td class="desc">Summarize the conversation to free up context.</td></tr>
+                <tr><td class="cmd">/permissions</td><td class="desc">See and edit what Claude is allowed to do.</td></tr>
+                <tr><td class="cmd">ultrathink</td><td class="desc">Add to a prompt for deeper reasoning on that turn.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Keep going -->
+    <section class="block">
+        <div class="eyebrow">Go deeper</div>
+        <h2>Keep going</h2>
+        <p class="lead">Free, official resources for Week 1.</p>
+        <ul class="links">
+            <li><a href="https://code.claude.com/docs/en/quickstart" target="_blank" rel="noopener">Claude Code &mdash; Quickstart</a><span class="free">Free</span></li>
+            <li><a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener">Claude Code &mdash; Documentation</a><span class="free">Free</span></li>
+            <li><a href="https://anthropic.skilljar.com" target="_blank" rel="noopener">Anthropic Academy</a><span class="free">Free</span></li>
+            <li><a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" rel="noopener">Course: Claude Code in Action</a><span class="free">Free</span></li>
+            <li><a href="https://github.com/anthropics/prompt-eng-interactive-tutorial" target="_blank" rel="noopener">Interactive Prompt-Engineering Tutorial</a><span class="free">Free</span></li>
+            <li><a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener">Claude Code &mdash; Common workflows</a><span class="free">Free</span></li>
+        </ul>
+        <div class="btn-row">
+            <a class="btn btn-primary" href="index.html#schedule">&larr; Back to the 8-week schedule</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">The project repo</a>
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="6" fill="#0f2a23"/>
+                <path d="M8 24 A16 16 0 0 1 24 8" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <line x1="8" y1="24" x2="8" y2="19" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="24" y1="8" x2="19" y2="8" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="3" fill="#e0a106"/>
+            </svg>
+            Talk Me Up &middot; Week 1
+        </div>
+        <a href="index.html#schedule">&larr; Back to schedule</a>
+    </div>
+</footer>
+
+<script>
+(function () {
+    "use strict";
+
+    // ---- Copy buttons ----
+    document.querySelectorAll(".copyable").forEach(function (box) {
+        var btn = box.querySelector(".copy-btn");
+        var pre = box.querySelector("pre");
+        if (!btn || !pre) return;
+        btn.addEventListener("click", function () {
+            var text = pre.innerText;
+            var done = function () {
+                btn.textContent = "Copied";
+                btn.classList.add("copied");
+                setTimeout(function () { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 1400);
+            };
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(done, fallback);
+                } else { fallback(); }
+            } catch (e) { fallback(); }
+            function fallback() {
+                try {
+                    var ta = document.createElement("textarea");
+                    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+                    document.body.appendChild(ta); ta.select();
+                    document.execCommand("copy"); document.body.removeChild(ta); done();
+                } catch (e2) { btn.textContent = "Select + copy"; }
+            }
+        });
+    });
+
+    // ---- Step progress (persisted) ----
+    var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
+    var total = steps.length;
+    var fill = document.getElementById("pf");
+    var text = document.getElementById("pt");
+    var KEY = "w1-progress-v1";
+
+    function load() {
+        try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; }
+    }
+    function save(state) {
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    }
+    var state = load();
+
+    function render() {
+        var done = 0;
+        steps.forEach(function (step) {
+            var id = step.getAttribute("data-step");
+            var box = step.querySelector('input[type="checkbox"]');
+            var checked = !!state[id];
+            if (box) box.checked = checked;
+            step.classList.toggle("done", checked);
+            if (checked) done++;
+        });
+        if (fill) fill.style.width = total ? (done / total * 100) + "%" : "0%";
+        if (text) text.textContent = done + " / " + total + " done";
+    }
+
+    steps.forEach(function (step) {
+        var id = step.getAttribute("data-step");
+        var box = step.querySelector('input[type="checkbox"]');
+        if (!box) return;
+        box.addEventListener("change", function () {
+            state[id] = box.checked; save(state); render();
+        });
+    });
+    render();
+
+    // ---- 15-minute timer (optional) ----
+    var btn = document.getElementById("timerBtn");
+    var disp = document.getElementById("timerDisplay");
+    var remaining = 15 * 60, tick = null;
+    function show() {
+        var m = Math.floor(remaining / 60), s = remaining % 60;
+        if (disp) disp.textContent = m + ":" + (s < 10 ? "0" + s : s);
+    }
+    if (btn) {
+        btn.addEventListener("click", function () {
+            if (tick) { clearInterval(tick); tick = null; btn.innerHTML = "&#9654; Resume"; return; }
+            btn.innerHTML = "&#10073;&#10073; Pause";
+            tick = setInterval(function () {
+                remaining--; show();
+                if (remaining <= 0) { clearInterval(tick); tick = null; btn.innerHTML = "&#9654; Start 15:00"; remaining = 15 * 60; if (disp) disp.textContent = "Time!"; }
+            }, 1000);
+        });
+    }
+})();
+</script>
+
+</body>
+</html>

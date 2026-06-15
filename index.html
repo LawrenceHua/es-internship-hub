@@ -3,30 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talk Me Up — Summer Internship 2026</title>
+    <title>Talk Me Up — Expired Solutions AI Internship 2026</title>
+    <meta name="description" content="An 8-week, AI-first summer internship by Expired Solutions. Get fluent in Claude Code, Cursor, and Codex, then build and ship FreshLens — a live, whole-shelf produce freshness scanner — on a real grocery-tech platform.">
+    <meta name="theme-color" content="#1a3c34">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a3c34;
             --primary-mid: #2a5a4a;
-            --accent: #3d8b6e;
+            --accent: #2d6e55;          /* link/interactive text — AA on white */
             --accent-light: #e8f5ef;
             --accent-muted: #5ba88a;
+            /* Freshness data palette — used only where a freshness value is implied */
+            --fresh: #2e9e5b;
+            --caution: #e0a106;
+            --urgent: #d23b3b;
             --surface: #ffffff;
-            --surface-alt: #f7f8fa;
+            --surface-alt: #f6f8f7;
             --surface-elevated: #ffffff;
             --border: #e2e5ea;
             --border-hover: #c8cdd4;
             --text: #1a1d23;
             --text-secondary: #5a6170;
-            --text-tertiary: #8891a0;
+            --text-tertiary: #6b7585;    /* AA on white */
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
             --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
             --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
             --radius: 10px;
             --radius-lg: 16px;
+            --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,12 +48,26 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        a:focus-visible,
+        summary:focus-visible,
+        .week > summary:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* Signature: the freshness scale rendered as a hairline (0 = fresh, 100 = urgent) */
+        .freshness-rule {
+            height: 2px;
+            border: none;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--fresh) 0%, var(--caution) 58%, var(--urgent) 100%);
+        }
+
         /* ── Nav ── */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
             background: rgba(255,255,255,0.92);
             backdrop-filter: blur(12px);
@@ -62,17 +85,18 @@
         }
 
         .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
             font-weight: 700;
             font-size: 0.95rem;
             color: var(--primary);
             letter-spacing: -0.01em;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+        .brand-mark { width: 22px; height: 22px; flex-shrink: 0; display: block; }
+
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
 
         .nav-links a {
             font-size: 0.85rem;
@@ -86,68 +110,55 @@
 
         /* ── Hero ── */
         .hero {
-            padding: 8rem 2rem 5rem;
-            text-align: center;
+            padding: 8rem 2rem 4.5rem;
             background: var(--primary);
             color: #fff;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        /* Signature scan-reticle as structural geometry — not a decorative blob */
+        .hero-reticle {
             position: absolute;
-            top: -40%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: rgba(61,139,110,0.15);
-            pointer-events: none;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -15%;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background: rgba(61,139,110,0.1);
+            top: 3.5rem;
+            right: -3rem;
+            width: 360px;
+            height: 360px;
+            opacity: 0.16;
             pointer-events: none;
         }
 
         .hero-inner {
             position: relative;
             z-index: 1;
-            max-width: 720px;
+            max-width: 760px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .hero-label {
             display: inline-block;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--accent-muted);
             margin-bottom: 1.25rem;
         }
 
         .hero h1 {
-            font-size: 3.2rem;
+            font-size: 3.3rem;
             font-weight: 800;
-            line-height: 1.08;
-            letter-spacing: -0.035em;
-            margin-bottom: 1.25rem;
+            line-height: 1.06;
+            letter-spacing: -0.038em;
+            margin-bottom: 1.35rem;
         }
 
         .hero p {
-            font-size: 1.15rem;
+            font-size: 1.12rem;
             line-height: 1.65;
-            color: rgba(255,255,255,0.72);
-            max-width: 520px;
+            color: rgba(255,255,255,0.78);
+            max-width: 580px;
             margin: 0 auto;
         }
 
@@ -155,48 +166,56 @@
             display: flex;
             justify-content: center;
             gap: 3.5rem;
-            margin-top: 3rem;
+            margin-top: 2.75rem;
             padding-top: 2.5rem;
             border-top: 1px solid rgba(255,255,255,0.12);
         }
 
         .hero-metric strong {
             display: block;
-            font-size: 1.8rem;
-            font-weight: 800;
+            font-family: var(--mono);
+            font-size: 1.7rem;
+            font-weight: 700;
             letter-spacing: -0.02em;
         }
 
         .hero-metric span {
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             font-weight: 500;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.72);
             text-transform: uppercase;
             letter-spacing: 0.04em;
         }
 
+        .hero-scale {
+            max-width: 760px;
+            margin: 2.25rem auto 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-scale .freshness-rule { flex: 1; }
+
+        .hero-scale span {
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+        }
+
         /* ── Sections ── */
-        .container {
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 5rem 0; }
+        .section-alt { background: var(--surface-alt); }
 
-        .section {
-            padding: 5rem 0;
-        }
-
-        .section-alt {
-            background: var(--surface-alt);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+        .section-header { text-align: center; margin-bottom: 3rem; }
 
         .section-header h2 {
-            font-size: 1.75rem;
+            font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: -0.025em;
             color: var(--text);
@@ -206,81 +225,47 @@
         .section-header p {
             font-size: 1rem;
             color: var(--text-tertiary);
-            max-width: 480px;
+            max-width: 520px;
             margin: 0 auto;
         }
 
-        /* ── Project Cards ── */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
+        /* ── Single Project + pillars ── */
+        .project-intro {
+            max-width: 740px;
+            margin: 0 auto 2.5rem;
+            text-align: center;
+            font-size: 1.04rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
         }
 
-        .projects-grid .project-card:last-child {
-            grid-column: 1 / -1;
-            max-width: calc(50% - 0.625rem);
-            justify-self: center;
-        }
+        .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 
-        .project-card {
+        .pillar-card {
             background: var(--surface-elevated);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            overflow: hidden;
-            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            padding: 1.75rem 1.5rem;
+            transition: border-color 0.2s ease;
         }
 
-        .project-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
+        .pillar-card:hover { border-color: var(--border-hover); }
+
+        .pillar-num {
+            font-family: var(--mono);
+            width: 30px; height: 30px;
+            border-radius: 8px;
+            background: var(--accent-light);
+            color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700;
+            margin-bottom: 0.9rem;
         }
 
-        .card-illustration {
-            height: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+        .pillar-card h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 0.35rem; letter-spacing: -0.01em; }
+        .pillar-card p { font-size: 0.88rem; line-height: 1.6; color: var(--text-secondary); }
 
-        .card-illustration svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .card-body h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-            letter-spacing: -0.01em;
-        }
-
-        .card-category {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 0.75rem;
-        }
-
-        .card-body p {
-            font-size: 0.88rem;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.35rem;
-            margin-bottom: 1rem;
-        }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 
         .tech-tag {
             background: var(--surface-alt);
@@ -293,32 +278,18 @@
         }
 
         .card-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            color: var(--accent); text-decoration: none;
+            font-weight: 600; font-size: 0.85rem;
             transition: gap 0.15s;
         }
-
         .card-link:hover { gap: 0.55rem; }
+        .card-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-        .card-link svg {
-            width: 14px;
-            height: 14px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2;
-        }
+        .project-cta { text-align: center; margin-top: 2.5rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 
         /* ── Stats ── */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.25rem;
-        }
+        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
 
         .stat-card {
             background: var(--surface-elevated);
@@ -329,25 +300,30 @@
         }
 
         .stat-card .stat-value {
-            font-size: 1.35rem;
-            font-weight: 800;
+            font-family: var(--mono);
+            font-size: 1.4rem; font-weight: 700;
             color: var(--primary);
             letter-spacing: -0.02em;
             margin-bottom: 0.25rem;
         }
 
-        .stat-card .stat-label {
-            font-size: 0.82rem;
-            color: var(--text-tertiary);
-        }
+        .stat-card .stat-label { font-size: 0.82rem; color: var(--text-tertiary); }
 
         /* ── Timeline ── */
-        .timeline-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.25rem;
-            position: relative;
+        .startdate-banner { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+
+        .startdate-pill {
+            background: var(--surface);
+            color: var(--primary);
+            border: 1px solid var(--accent-muted);
+            border-radius: 999px;
+            padding: 0.5rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
+        .startdate-pill .num { font-family: var(--mono); color: var(--accent); }
+
+        .timeline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; position: relative; }
 
         .timeline-grid::before {
             content: '';
@@ -368,340 +344,269 @@
         }
 
         .phase-number {
-            width: 32px;
-            height: 32px;
+            font-family: var(--mono);
+            width: 32px; height: 32px;
             border-radius: 50%;
             background: var(--primary);
             color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 700;
             margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
         }
 
-        .phase-card h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 0.15rem;
-            letter-spacing: -0.01em;
-        }
+        .phase-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.15rem; letter-spacing: -0.01em; }
+        .phase-card .phase-weeks { font-family: var(--mono); font-size: 0.74rem; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; }
+        .phase-card p { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.55; }
 
-        .phase-card .phase-weeks {
-            font-size: 0.8rem;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
+        /* ── Weekly cadence legend ── */
+        .cadence-legend { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin-bottom: 1.25rem; }
 
-        .phase-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .phase-card li {
-            font-size: 0.84rem;
-            color: var(--text-secondary);
-            padding: 0.2rem 0 0.2rem 1rem;
-            position: relative;
-        }
-
-        .phase-card li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.55rem;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: var(--border-hover);
-        }
-
-        /* ── Weekly Rhythm ── */
-        .rhythm-row {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-        }
-
-        .rhythm-card {
-            background: var(--surface-elevated);
+        .cadence-card {
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 1.25rem;
+            padding: 0.95rem 0.9rem;
+        }
+
+        .cadence-day { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary); margin-bottom: 0.45rem; }
+
+        .cadence-time { font-family: var(--mono); font-size: 0.66rem; font-weight: 500; color: var(--accent); margin-bottom: 0.4rem; display: block; }
+        .cadence-time.work { color: var(--text-tertiary); }
+        .cadence-time .opt { color: var(--text-tertiary); }
+
+        .cadence-label { font-size: 0.82rem; color: var(--text-secondary); font-weight: 500; }
+        .cadence-link { display: inline-block; margin-top: 0.55rem; font-family: var(--mono); font-size: 0.62rem; font-weight: 500; color: var(--accent); text-decoration: none; }
+        .cadence-link:hover { text-decoration: underline; }
+        .cadence-link::after { content: ""; }
+
+        .schedule-note {
             text-align: center;
-            transition: border-color 0.15s;
-        }
-
-        .rhythm-card:hover {
-            border-color: var(--accent);
-        }
-
-        .rhythm-day {
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--primary);
-            margin-bottom: 0.35rem;
-        }
-
-        .rhythm-event {
             font-size: 0.88rem;
             color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* ── Guest Speakers ── */
-        .speakers-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.25rem;
-        }
-
-        .speaker-card {
-            background: var(--surface-elevated);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2rem 1.5rem;
-            text-align: center;
-        }
-
-        .speaker-icon-wrap {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: var(--accent-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-        }
-
-        .speaker-icon-wrap svg {
-            width: 22px;
-            height: 22px;
-            stroke: var(--accent);
-            fill: none;
-            stroke-width: 1.8;
-        }
-
-        .speaker-card h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.01em;
-        }
-
-        .speaker-card p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.55;
-        }
-
-        /* ── Tools ── */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 1rem;
-        }
-
-        .tool-card {
-            text-align: center;
-            padding: 1.25rem 0.75rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            background: var(--surface-elevated);
-        }
-
-        .tool-logo {
-            width: 36px;
-            height: 36px;
-            margin: 0 auto 0.6rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tool-logo svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        .tool-card h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.15rem;
-        }
-
-        .tool-card p {
-            font-size: 0.78rem;
-            color: var(--text-tertiary);
-        }
-
-        /* ── Single Project + Onboarding (2026 restructure) ── */
-        .project-intro {
-            max-width: 740px;
+            max-width: 760px;
             margin: 0 auto 2.5rem;
-            text-align: center;
-            font-size: 1.04rem;
-            color: var(--text-secondary);
-            line-height: 1.75;
+            line-height: 1.65;
         }
+        .schedule-note strong { color: var(--text); }
 
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.25rem;
-        }
+        /* ── Week accordions ── */
+        .weeks { display: flex; flex-direction: column; gap: 0.85rem; }
 
-        .pillar-card {
-            background: var(--surface-elevated);
+        .week {
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 1.75rem 1.5rem;
-            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            overflow: hidden;
+            transition: border-color 0.2s ease;
         }
+        .week[open] { border-color: var(--border-hover); box-shadow: var(--shadow-md); }
+        .week:hover { border-color: var(--border-hover); }
 
-        .pillar-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
-        }
-
-        .pillar-num {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            background: var(--accent-light);
-            color: var(--accent);
+        .week > summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1.2rem 1.4rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 0.9rem;
+            gap: 1.1rem;
+        }
+        .week > summary::-webkit-details-marker { display: none; }
+
+        .week-num {
+            font-family: var(--mono);
+            font-size: 0.74rem; font-weight: 700;
+            color: #fff;
+            background: var(--primary);
+            width: 2.5rem; height: 2.5rem;
+            border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            letter-spacing: -0.02em;
+        }
+        .week-num.is-project { background: var(--accent); }
+        .week-num.is-ship { background: var(--primary-mid); }
+
+        .week-head { flex: 1; min-width: 0; }
+        .week-title {
+            font-size: 1.02rem; font-weight: 700; letter-spacing: -0.01em;
+            display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+            margin: 0;
         }
 
-        .pillar-card h3 {
-            font-size: 1.08rem;
-            font-weight: 700;
-            margin-bottom: 0.35rem;
-            letter-spacing: -0.01em;
-        }
-
-        .pillar-card p {
-            font-size: 0.88rem;
-            line-height: 1.6;
+        .phase-tag {
+            font-family: var(--mono);
+            font-size: 0.58rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 0.06em;
             color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 0.08rem 0.4rem;
+        }
+        .phase-tag.is-project { color: var(--accent); border-color: var(--accent-muted); }
+
+        .week-obj { display: block; font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.18rem; font-weight: 400; }
+        .week-dates { font-family: var(--mono); font-size: 0.72rem; color: var(--text-tertiary); white-space: nowrap; flex-shrink: 0; }
+
+        .week-chev {
+            width: 16px; height: 16px; flex-shrink: 0;
+            stroke: var(--text-tertiary); fill: none; stroke-width: 2;
+            transition: transform 0.2s ease;
+        }
+        .week[open] .week-chev { transform: rotate(180deg); }
+
+        .week-launch { font-family: var(--mono); font-size: 0.64rem; font-weight: 500; color: #fff; background: var(--accent); padding: 0.28rem 0.6rem; border-radius: 6px; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.15s; }
+        .week-launch:hover { background: var(--primary-mid); }
+        .tutorial-cta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--primary); color: #fff; border-radius: var(--radius); padding: 0.9rem 1.2rem; text-decoration: none; margin-bottom: 1.25rem; transition: background 0.15s; }
+        .tutorial-cta:hover { background: var(--primary-mid); }
+        .tutorial-cta strong { font-size: 0.95rem; font-weight: 700; }
+        .tutorial-cta .sub { font-size: 0.72rem; color: rgba(255,255,255,0.72); font-family: var(--mono); }
+        .tutorial-cta-arrow { font-size: 1.2rem; flex-shrink: 0; }
+
+        .week-body { padding: 0.4rem 1.4rem 1.4rem; }
+
+        .day-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.7rem; margin-bottom: 1.25rem; }
+
+        .day {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 0.85rem 0.8rem;
         }
 
-        .project-cta {
-            text-align: center;
-            margin-top: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
+        .day-name { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary); }
+        .day-time { font-family: var(--mono); font-size: 0.62rem; color: var(--accent); margin: 0.2rem 0 0.5rem; }
+        .day-time.work { color: var(--text-tertiary); }
+        .day h4 { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.3rem; line-height: 1.3; }
+        .day p { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45; }
+        .day ul { list-style: none; padding: 0; margin: 0; }
+        .day li { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.45; padding-left: 0.7rem; position: relative; margin-bottom: 0.18rem; }
+        .day li::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 3px; height: 3px; border-radius: 50%; background: var(--accent-muted); }
 
-        .onboarding-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-        }
+        .week-sub { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-tertiary); margin: 0 0 0.6rem; }
 
-        .startdate-banner {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 2.5rem;
+        .resource-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem 1.5rem; }
+        .resource-list li { font-size: 0.82rem; line-height: 1.4; }
+        .resource-list a { color: var(--accent); text-decoration: none; font-weight: 500; }
+        .resource-list a:hover { text-decoration: underline; }
+        .resource-list .tag {
+            font-family: var(--mono); font-size: 0.56rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 0.04em;
+            border: 1px solid var(--border); border-radius: 4px;
+            padding: 0 0.25rem; margin-left: 0.3rem; color: var(--text-tertiary);
+            white-space: nowrap;
         }
+        .resource-list .tag.free { color: #1f7a42; border-color: #1f7a42; }
+        .resource-list .desc { color: var(--text-tertiary); }
 
-        .startdate-pill {
-            background: var(--accent-light);
+        .codeline {
+            font-family: var(--mono); font-size: 0.74rem;
+            background: #11221d; color: #cfe8dc;
+            border-radius: 7px; padding: 0.6rem 0.85rem;
+            margin: 0.85rem 0 0.25rem;
+            display: block; max-width: 100%;
+            overflow-x: auto; white-space: pre;
+        }
+        .codeline .c { color: var(--accent-muted); }
+
+        .deliverable {
+            display: flex; gap: 0.7rem; align-items: flex-start;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 1.2rem;
+            font-size: 0.86rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .deliverable svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 0.15rem; }
+        .deliverable strong { color: var(--primary); font-weight: 700; }
+
+        .skills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.9rem; }
+        .skill-tag {
+            font-size: 0.72rem; font-weight: 500;
             color: var(--primary);
-            border: 1px solid var(--accent-muted);
-            border-radius: 999px;
-            padding: 0.5rem 1.1rem;
-            font-size: 0.85rem;
-            font-weight: 600;
+            background: var(--accent-light);
+            border-radius: 6px;
+            padding: 0.2rem 0.55rem;
         }
 
-        @media (max-width: 900px) {
-            .pillars-grid { grid-template-columns: 1fr; }
-            .onboarding-grid { grid-template-columns: 1fr; }
+        .project-band {
+            background: var(--surface);
+            border: 1px solid var(--accent-muted);
+            border-radius: var(--radius);
+            padding: 1.1rem 1.4rem;
+            margin: 0.5rem 0 0.25rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
+        .project-band strong { color: var(--primary); }
+        .project-band-links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 0.7rem; }
+
+        /* ── Guest Speakers ── */
+        .speakers-note {
+            max-width: 720px; margin: 0 auto; text-align: center;
+            font-size: 1rem; color: var(--text-secondary); line-height: 1.7;
+        }
+
+        /* ── Tools (text-forward) ── */
+        .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+        .tool-card {
+            padding: 1.25rem 1.25rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--accent-muted);
+            background: var(--surface-elevated);
+            transition: border-color 0.2s ease;
+        }
+        .tool-card:hover { border-color: var(--border-hover); border-top-color: var(--accent); }
+        .tool-role { font-family: var(--mono); font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-tertiary); margin-bottom: 0.3rem; }
+        .tool-card h3 { font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.15rem; }
+        .tool-card p { font-size: 0.8rem; color: var(--text-secondary); }
 
         /* ── Footer ── */
-        footer {
-            background: var(--primary);
-            color: #fff;
-            padding: 3rem 2rem;
-        }
+        footer { background: var(--primary); color: #fff; padding: 3rem 2rem; }
 
-        .footer-inner {
-            max-width: 1120px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-brand {
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: color 0.15s;
-        }
-
-        .footer-links a:hover { color: #fff; }
-
-        .footer-copy {
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.35);
-            margin-top: 1.5rem;
-            text-align: center;
-        }
+        .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .footer-brand { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; font-size: 0.95rem; }
+        .footer-brand .brand-mark { width: 20px; height: 20px; }
+        .footer-credits { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .footer-credits span { color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 500; }
+        .footer-credits a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.15s; }
+        .footer-credits a:hover { color: #fff; }
+        .footer-sep { color: rgba(255,255,255,0.2); }
+        .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem; text-align: center; }
 
         /* ── Responsive ── */
         @media (max-width: 900px) {
-            .projects-grid { grid-template-columns: 1fr; }
-            .projects-grid .project-card:last-child {
-                max-width: 100%;
-                grid-column: auto;
-            }
+            .pillars-grid { grid-template-columns: 1fr; }
             .stats-row { grid-template-columns: repeat(2, 1fr); }
             .timeline-grid { grid-template-columns: repeat(2, 1fr); }
             .timeline-grid::before { display: none; }
-            .tools-grid { grid-template-columns: repeat(3, 1fr); }
+            .tools-grid { grid-template-columns: repeat(2, 1fr); }
+            .cadence-legend { grid-template-columns: repeat(2, 1fr); }
+            .day-grid { grid-template-columns: repeat(2, 1fr); }
+            .resource-list { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 640px) {
             .hero { padding: 7rem 1.5rem 3.5rem; }
             .hero h1 { font-size: 2.2rem; }
-            .hero-metrics { flex-direction: column; gap: 1.5rem; }
+            .hero-metrics { gap: 2rem; }
+            .hero-reticle { width: 240px; height: 240px; top: 4.5rem; right: -4rem; }
             .nav-links { display: none; }
             .timeline-grid { grid-template-columns: 1fr; }
-            .rhythm-row { grid-template-columns: repeat(2, 1fr); }
-            .speakers-grid { grid-template-columns: 1fr; }
-            .tools-grid { grid-template-columns: repeat(2, 1fr); }
+            .cadence-legend { grid-template-columns: 1fr; }
+            .day-grid { grid-template-columns: 1fr; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .week > summary { flex-wrap: wrap; }
+            .week-dates { width: 100%; padding-left: 3.6rem; }
             .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+            .footer-credits { justify-content: center; }
             .section { padding: 3.5rem 0; }
         }
     </style>
@@ -711,40 +616,49 @@
 <!-- Nav -->
 <nav>
     <div class="nav-inner">
-        <div class="nav-brand">Talk Me Up</div>
+        <div class="nav-brand">
+            <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="6" fill="#1a3c34"/>
+                <path d="M8 24 A16 16 0 0 1 24 8" stroke="#3d8b6e" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <line x1="8" y1="24" x2="8" y2="19" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="3" fill="#e0a106"/>
+            </svg>
+            Talk Me Up
+        </div>
         <ul class="nav-links">
             <li><a href="#project">Project</a></li>
-            <li><a href="#onboarding">Onboarding</a></li>
             <li><a href="#timeline">Timeline</a></li>
             <li><a href="#schedule">Schedule</a></li>
-            <li><a href="https://github.com/LawrenceHua" target="_blank">GitHub</a></li>
+            <li><a href="#tools">Tools</a></li>
+            <li><a href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
     </div>
 </nav>
 
 <!-- Hero -->
 <div class="hero">
+    <svg class="hero-reticle" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+        <path d="M28 172 A144 144 0 0 1 172 28" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="28" y1="172" x2="28" y2="150" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="172" y1="28" x2="150" y2="28" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="92" y1="172" x2="108" y2="172" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="172" y1="92" x2="172" y2="108" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="172" cy="172" r="6" fill="#e0a106"/>
+    </svg>
     <div class="hero-inner">
         <div class="hero-label">Expired Solutions &middot; Summer 2026 Internship</div>
         <h1>Scan one apple?<br>Scan the whole shelf.</h1>
-        <p>A 10-week, AI-first internship where you build and ship <strong>FreshLens</strong>&mdash;point a camera at a fridge or a produce shelf and every item gets a live freshness score at once&mdash;for the Expired Solutions app, on a real grocery-tech platform.</p>
+        <p>An <strong>8-week, AI-first internship</strong>. Spend two weeks getting fluent in Claude Code, Cursor, and Codex, then build and ship <strong>FreshLens</strong>: point a camera at a fridge or produce shelf and every item gets a live freshness score at once, on Expired Solutions&rsquo; real grocery-tech platform.</p>
         <div class="hero-metrics">
-            <div class="hero-metric">
-                <strong>10</strong>
-                <span>Weeks</span>
-            </div>
-            <div class="hero-metric">
-                <strong>1</strong>
-                <span>Flagship Project</span>
-            </div>
-            <div class="hero-metric">
-                <strong>596K+</strong>
-                <span>Data Rows</span>
-            </div>
-            <div class="hero-metric">
-                <strong>214</strong>
-                <span>API Endpoints</span>
-            </div>
+            <div class="hero-metric"><strong>8</strong><span>Weeks</span></div>
+            <div class="hero-metric"><strong>3</strong><span>AI Coding Tools</span></div>
+            <div class="hero-metric"><strong>1</strong><span>Flagship Project</span></div>
+        </div>
+        <div class="hero-scale">
+            <span>Fresh</span>
+            <hr class="freshness-rule" aria-hidden="true">
+            <span>Urgent</span>
         </div>
     </div>
 </div>
@@ -758,7 +672,7 @@
         </div>
 
         <p class="project-intro">
-            Today the app scans one item at a time. <strong>FreshLens</strong> is the 10x version: point your camera at a whole fridge, basket, or produce shelf and <em>every</em> item lights up at once with a live, color-coded freshness score. Then AI turns that into action&mdash;for shoppers, an &ldquo;eat me first&rdquo; ranking and a recipe to rescue what&rsquo;s about to turn; for store managers, an instant markdown worklist and projected shrink savings.
+            Today the app scans one item at a time. <strong>FreshLens</strong> is the 10&times; version: point your camera at a whole fridge, basket, or produce shelf and <em>every</em> item lights up at once with a live, color-coded freshness score. Then AI turns that into action: for shoppers, an &ldquo;eat me first&rdquo; ranking and a recipe to rescue what&rsquo;s about to turn; for store managers, an instant markdown worklist and projected shrink savings.
         </p>
 
         <div class="pillars-grid">
@@ -770,7 +684,7 @@
             <div class="pillar-card">
                 <div class="pillar-num">2</div>
                 <h3>Live Freshness Overlay</h3>
-                <p>Each detected item is scored 0&ndash;100 by the freshness model and shown with a color-coded overlay&mdash;green, amber, red&mdash;right on the camera view.</p>
+                <p>Each detected item is scored 0&ndash;100 by the freshness model and shown with a color-coded overlay (green, amber, red) right on the camera view.</p>
             </div>
             <div class="pillar-card">
                 <div class="pillar-num">3</div>
@@ -790,11 +704,11 @@
             </div>
             <a href="freshlens.html" class="card-link">
                 View project details
-                <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
             </a>
-            <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link" target="_blank" style="color: var(--text-secondary);">
+            <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link" target="_blank" rel="noopener" style="color: var(--text-secondary);">
                 Starter repository
-                <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
             </a>
         </div>
     </div>
@@ -808,60 +722,11 @@
             <p>Real infrastructure, not toy projects.</p>
         </div>
         <div class="stats-row">
-            <div class="stat-card">
-                <div class="stat-value">214</div>
-                <div class="stat-label">API Endpoints</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">99%+</div>
-                <div class="stat-label">ML Accuracy</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">596K</div>
-                <div class="stat-label">Data Rows</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">100+</div>
-                <div class="stat-label">Produce Items</div>
-            </div>
+            <div class="stat-card"><div class="stat-value">214</div><div class="stat-label">API Endpoints</div></div>
+            <div class="stat-card"><div class="stat-value">99%+</div><div class="stat-label">ML Accuracy</div></div>
+            <div class="stat-card"><div class="stat-value">596K</div><div class="stat-label">Data Rows</div></div>
+            <div class="stat-card"><div class="stat-value">100+</div><div class="stat-label">Produce Items</div></div>
         </div>
-    </div>
-</div>
-
-<!-- Onboarding -->
-<div class="section" id="onboarding">
-    <div class="container">
-        <div class="section-header">
-            <h2>Get a Head Start</h2>
-            <p>Two weeks of AI-first onboarding before the build begins&mdash;no prior AI-tools experience needed.</p>
-        </div>
-        <div class="onboarding-grid">
-            <div class="phase-card">
-                <div class="phase-number">1</div>
-                <h3>Week 1 &mdash; Tools &amp; Foundations</h3>
-                <div class="phase-weeks">Set up and get fluent</div>
-                <ul>
-                    <li>Environment + Git workflow (branch &rarr; PR)</li>
-                    <li>GitHub Copilot: prompting, /fix, /explain, /tests</li>
-                    <li>Python basics with AI assistance</li>
-                    <li>Capstone: ship a &ldquo;Guess the Number&rdquo; game</li>
-                </ul>
-            </div>
-            <div class="phase-card">
-                <div class="phase-number">2</div>
-                <h3>Week 2 &mdash; APIs &amp; Your First App</h3>
-                <div class="phase-weeks">Build something real</div>
-                <ul>
-                    <li>FastAPI: build /health, /produce, /nutrition</li>
-                    <li>Cursor IDE: Cmd+K, chat, multi-file edits</li>
-                    <li>Frontend that calls your own API</li>
-                    <li>Capstone: a &ldquo;Produce Lookup&rdquo; web app</li>
-                </ul>
-            </div>
-        </div>
-        <p class="project-intro" style="margin-top: 2.5rem; margin-bottom: 0;">
-            The one rule that matters most: <strong>read, test, and understand every line the AI writes.</strong> Using AI well&mdash;and catching when it&rsquo;s wrong&mdash;is the core skill this program builds.
-        </p>
     </div>
 </div>
 
@@ -869,92 +734,515 @@
 <div class="section" id="timeline">
     <div class="container">
         <div class="section-header">
-            <h2>10-Week Timeline</h2>
-            <p>Two staggered start dates, one shared finish: Demo Day.</p>
+            <h2>The 8-Week Arc</h2>
+            <p>Two weeks learning the tools, four weeks building the Expired Solutions project, two weeks shipping it.</p>
         </div>
         <div class="startdate-banner">
-            <span class="startdate-pill">Early-start track &middot; June 1</span>
-            <span class="startdate-pill">Full cohort &middot; June 15</span>
-            <span class="startdate-pill">Demo Day &middot; Aug 7</span>
+            <span class="startdate-pill">Cohort starts &middot; <span class="num">Jun 15</span></span>
+            <span class="startdate-pill">Demo Day &middot; <span class="num">Aug 7</span></span>
         </div>
         <div class="timeline-grid">
             <div class="phase-card">
                 <div class="phase-number">1</div>
-                <h3>Setup &amp; Tools</h3>
-                <div class="phase-weeks">Weeks 1 &ndash; 2</div>
-                <ul>
-                    <li>Environment setup</li>
-                    <li>Git bootcamp</li>
-                    <li>AI coding tools workshop</li>
-                    <li>Python crash course</li>
-                    <li>Cursor IDE training</li>
-                </ul>
+                <h3>AI-Tools Foundations</h3>
+                <div class="phase-weeks">Weeks 1&ndash;2</div>
+                <p>Get fluent in Claude Code, Cursor, and Codex. Ship a solo project, then build a small app as a team.</p>
             </div>
             <div class="phase-card">
                 <div class="phase-number">2</div>
-                <h3>Foundations &amp; Mini-Project</h3>
-                <div class="phase-weeks">Weeks 3 &ndash; 4</div>
-                <ul>
-                    <li>Produce mini-app</li>
-                    <li>Codebase study</li>
-                    <li>FreshLens architecture plan</li>
-                    <li>API contract design</li>
-                </ul>
+                <h3>Expired Solutions: Detect</h3>
+                <div class="phase-weeks">Weeks 3&ndash;4</div>
+                <p>Onboard the FreshLens codebase, plan the build, and turn the single-item scanner into whole-scene detection.</p>
             </div>
             <div class="phase-card">
                 <div class="phase-number">3</div>
-                <h3>Build FreshLens</h3>
-                <div class="phase-weeks">Weeks 5 &ndash; 8 &middot; the 4-week build</div>
-                <ul>
-                    <li>Multi-item detection pipeline</li>
-                    <li>Live freshness overlay UI</li>
-                    <li>Claude &ldquo;eat me first&rdquo; + recipes</li>
-                    <li>Store manager-mode (stretch)</li>
-                    <li>Weekly demos &amp; guest speakers</li>
-                </ul>
+                <h3>Expired Solutions: Score &amp; Act</h3>
+                <div class="phase-weeks">Weeks 5&ndash;6</div>
+                <p>Add the live freshness overlay, then let Claude turn scores into recipes and markdown worklists.</p>
             </div>
             <div class="phase-card">
                 <div class="phase-number">4</div>
-                <h3>Ship &amp; Present</h3>
-                <div class="phase-weeks">Weeks 9 &ndash; 10</div>
-                <ul>
-                    <li>Code freeze</li>
-                    <li>Demo videos</li>
-                    <li>Final presentation</li>
-                </ul>
+                <h3>Ship &amp; Extend</h3>
+                <div class="phase-weeks">Weeks 7&ndash;8</div>
+                <p>Harden and test, build more if you want, sharpen team-with-AI habits, and present on Demo Day.</p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Weekly Rhythm -->
+<!-- Schedule -->
 <div class="section section-alt" id="schedule">
     <div class="container">
         <div class="section-header">
-            <h2>Weekly Schedule</h2>
-            <p>Five touchpoints each week to keep the build on track.</p>
+            <h2>The 8-Week Schedule</h2>
+            <p>Five touchpoints a week. The first two weeks are mapped day-by-day; click any week to expand it.</p>
         </div>
-        <div class="rhythm-row">
-            <div class="rhythm-card">
-                <div class="rhythm-day">Monday</div>
-                <div class="rhythm-event">Stand-Up</div>
+
+        <!-- Weekly cadence -->
+        <div class="cadence-legend">
+            <div class="cadence-card">
+                <div class="cadence-day">Monday</div>
+                <span class="cadence-time">12:00 PM ET</span>
+                <div class="cadence-label">Standup &amp; assignments</div>
+                <a class="cadence-link" href="https://calendar.app.google/bvLYyBiQkYGkV1Mt9" target="_blank" rel="noopener">Calendar invite &#8599;</a>
             </div>
-            <div class="rhythm-card">
-                <div class="rhythm-day">Tuesday</div>
-                <div class="rhythm-event">Team Huddle</div>
+            <div class="cadence-card">
+                <div class="cadence-day">Tuesday</div>
+                <span class="cadence-time work">Work session</span>
+                <div class="cadence-label">Team huddle</div>
             </div>
-            <div class="rhythm-card">
-                <div class="rhythm-day">Wednesday</div>
-                <div class="rhythm-event">Office Hours</div>
+            <div class="cadence-card">
+                <div class="cadence-day">Wednesday</div>
+                <span class="cadence-time"><span class="opt">Optional</span> &middot; 12:00 PM ET</span>
+                <div class="cadence-label">Office hours</div>
+                <a class="cadence-link" href="https://calendar.app.google/BUh3dnU4eTy6JurH7" target="_blank" rel="noopener">Calendar invite &#8599;</a>
             </div>
-            <div class="rhythm-card">
-                <div class="rhythm-day">Thursday</div>
-                <div class="rhythm-event">Team Huddle</div>
+            <div class="cadence-card">
+                <div class="cadence-day">Thursday</div>
+                <span class="cadence-time work">Work session</span>
+                <div class="cadence-label">Team huddle</div>
             </div>
-            <div class="rhythm-card">
-                <div class="rhythm-day">Friday</div>
-                <div class="rhythm-event">Presentation Day</div>
+            <div class="cadence-card">
+                <div class="cadence-day">Friday</div>
+                <span class="cadence-time">12:00 PM ET</span>
+                <div class="cadence-label">Demo Day</div>
+                <a class="cadence-link" href="https://calendar.app.google/ir7WuHkbN6USPCcd9" target="_blank" rel="noopener">Calendar invite &#8599;</a>
             </div>
+        </div>
+
+        <p class="schedule-note">
+            All times Eastern. <strong>No prior AI-tools experience needed.</strong> The one rule that matters most: <strong>read, test, and understand every line the AI writes.</strong> Using AI well, and catching when it&rsquo;s wrong, is the core skill this program builds.
+        </p>
+
+        <div class="weeks">
+
+            <!-- WEEK 1 -->
+            <details class="week" open>
+                <summary>
+                    <span class="week-num">W1</span>
+                    <span class="week-head">
+                        <h3 class="week-title">Claude Code Foundations <span class="phase-tag">Foundations</span></h3>
+                        <span class="week-obj">Learn Claude Code and ship a small solo project, built primarily with Claude Code.</span>
+                    </span>
+                    <span class="week-dates">Jun 15&ndash;19</span>
+                    <a href="w1.html" class="week-launch">Tutorial &#8599;</a>
+                    <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </summary>
+                <div class="week-body">
+                    <a href="w1.html" class="tutorial-cta">
+                        <span><strong>&#9654; Start the 15-minute Claude Code tutorial</strong><br><span class="sub">Setup &middot; prompting &middot; iteration &middot; planning &middot; /plan &amp; /code-review</span></span>
+                        <span class="tutorial-cta-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                    <div class="day-grid">
+                        <div class="day">
+                            <div class="day-name">Mon</div>
+                            <div class="day-time">12:00 PM ET</div>
+                            <h4>Kickoff &amp; setup</h4>
+                            <ul>
+                                <li>Internship kickoff + program overview</li>
+                                <li>Walkthrough of this Internship Hub</li>
+                                <li>Intro to AI-assisted development</li>
+                                <li>Install &amp; set up Claude Code</li>
+                                <li>First Claude Code tutorial + week-1 expectations</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Tue</div>
+                            <div class="day-time work">Work session</div>
+                            <h4>Learn &amp; start building</h4>
+                            <ul>
+                                <li>Explore Claude Code workflows independently</li>
+                                <li>Begin Anthropic Academy courses</li>
+                                <li>Brainstorm &amp; start your solo project</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Wed</div>
+                            <div class="day-time">Optional &middot; 12 PM ET</div>
+                            <h4>Office hours</h4>
+                            <ul>
+                                <li>Q&amp;A on Claude Code</li>
+                                <li>Troubleshoot setup issues</li>
+                                <li>Guidance on project ideas</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Thu</div>
+                            <div class="day-time work">Work session</div>
+                            <h4>Build with AI</h4>
+                            <ul>
+                                <li>Continue Anthropic Academy courses</li>
+                                <li>Use Claude Code to plan, code, debug, iterate</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Fri</div>
+                            <div class="day-time">12:00 PM ET</div>
+                            <h4>Individual demos</h4>
+                            <ul>
+                                <li>2&ndash;3 min showcase per intern</li>
+                                <li>Share lessons learned &amp; takeaways</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <code class="codeline"><span class="c"># install Claude Code, then run `claude` in any project</span>
+npm install -g @anthropic-ai/claude-code</code>
+
+                    <p class="week-sub">Recommended free resources</p>
+                    <ul class="resource-list">
+                        <li><a href="https://code.claude.com/docs/en/quickstart" target="_blank" rel="noopener">Claude Code &mdash; Quickstart &amp; install</a><span class="tag free">Free</span></li>
+                        <li><a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener">Claude Code &mdash; Documentation</a><span class="tag free">Free</span></li>
+                        <li><a href="https://anthropic.skilljar.com" target="_blank" rel="noopener">Anthropic Academy</a><span class="tag free">Free</span> <span class="desc">&mdash; 20+ courses, completion certificates</span></li>
+                        <li><a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" rel="noopener">Course: Claude Code in Action</a><span class="tag free">Free</span></li>
+                        <li><a href="https://github.com/anthropics/prompt-eng-interactive-tutorial" target="_blank" rel="noopener">Interactive Prompt-Engineering Tutorial</a><span class="tag free">Free</span></li>
+                        <li><a href="https://platform.claude.com/docs/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener">Prompt-Engineering Guide</a><span class="tag free">Free</span></li>
+                        <li><a href="https://github.com/skills/introduction-to-github" target="_blank" rel="noopener">GitHub Skills: Introduction to GitHub</a><span class="tag free">Free</span></li>
+                        <li><a href="https://code.visualstudio.com/docs/getstarted/overview" target="_blank" rel="noopener">VS Code &mdash; Get started</a><span class="tag free">Free</span></li>
+                    </ul>
+
+                    <div class="deliverable">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Deliverable:</strong> one completed individual project, built primarily with Claude Code, demoed Friday.</span>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">Claude Code setup</span>
+                        <span class="skill-tag">Prompt-driven coding</span>
+                        <span class="skill-tag">Debugging with AI</span>
+                        <span class="skill-tag">Git basics</span>
+                        <span class="skill-tag">Reading &amp; verifying AI output</span>
+                        <span class="skill-tag">Shipping a project</span>
+                    </div>
+                </div>
+            </details>
+
+            <!-- WEEK 2 -->
+            <details class="week" open>
+                <summary>
+                    <span class="week-num">W2</span>
+                    <span class="week-head">
+                        <h3 class="week-title">Collaborative App Build <span class="phase-tag">Foundations</span></h3>
+                        <span class="week-obj">Build a small application as a team, adding Cursor and Codex to your toolkit and learning the team Git workflow.</span>
+                    </span>
+                    <span class="week-dates">Jun 22&ndash;26</span>
+                    <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </summary>
+                <div class="week-body">
+                    <div class="day-grid">
+                        <div class="day">
+                            <div class="day-name">Mon</div>
+                            <div class="day-time">12:00 PM ET</div>
+                            <h4>Kickoff &amp; plan</h4>
+                            <ul>
+                                <li>Review Week 1 learnings</li>
+                                <li>Assign the team project + audit the repo</li>
+                                <li>Walk the codebase end-to-end; review architecture</li>
+                                <li>Discuss requirements &amp; plan implementation</li>
+                                <li>Set up Cursor + Codex</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Tue</div>
+                            <div class="day-time work">Work session</div>
+                            <h4>Team build</h4>
+                            <ul>
+                                <li>Pair programming + task assignments</li>
+                                <li>Build core functionality</li>
+                                <li>Branch &rarr; pull-request workflow</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Wed</div>
+                            <div class="day-time">Optional &middot; 12 PM ET</div>
+                            <h4>Office hours</h4>
+                            <ul>
+                                <li>Technical support</li>
+                                <li>Architecture review</li>
+                                <li>Progress check</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Thu</div>
+                            <div class="day-time work">Work session</div>
+                            <h4>Integrate &amp; test</h4>
+                            <ul>
+                                <li>Continue team development</li>
+                                <li>Integrate features</li>
+                                <li>Testing &amp; debugging</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Fri</div>
+                            <div class="day-time">12:00 PM ET</div>
+                            <h4>Team demo</h4>
+                            <ul>
+                                <li>Project walkthrough</li>
+                                <li>Retrospective &amp; lessons learned</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="week-sub">Recommended free resources</p>
+                    <ul class="resource-list">
+                        <li><a href="https://cursor.com/en-US/download" target="_blank" rel="noopener">Cursor &mdash; Download</a><span class="tag">Freemium</span></li>
+                        <li><a href="https://cursor.com/en-US/learn" target="_blank" rel="noopener">Cursor &mdash; Learn (tutorials)</a><span class="tag">Freemium</span></li>
+                        <li><a href="https://cursor.com/docs/agent/overview" target="_blank" rel="noopener">Cursor &mdash; Agent overview</a><span class="tag">Freemium</span></li>
+                        <li><a href="https://developers.openai.com/codex/quickstart" target="_blank" rel="noopener">Codex &mdash; Quickstart</a><span class="tag">Freemium</span></li>
+                        <li><a href="https://developers.openai.com/codex" target="_blank" rel="noopener">Codex &mdash; Documentation</a><span class="tag">Freemium</span></li>
+                        <li><a href="https://github.com/openai/codex" target="_blank" rel="noopener">Codex CLI (open source)</a><span class="tag free">Free</span></li>
+                        <li><a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener">Claude Code &mdash; Common workflows (PRs, tests)</a><span class="tag free">Free</span></li>
+                        <li><a href="https://github.com/skills/introduction-to-git" target="_blank" rel="noopener">GitHub Skills: Introduction to Git</a><span class="tag free">Free</span></li>
+                    </ul>
+
+                    <div class="deliverable">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Deliverable:</strong> one functional, team-built application, walked through and retro&rsquo;d on Friday.</span>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">Team Git (branches, PRs)</span>
+                        <span class="skill-tag">Pair-programming with AI</span>
+                        <span class="skill-tag">Cursor Agent</span>
+                        <span class="skill-tag">Codex</span>
+                        <span class="skill-tag">Multi-file edits</span>
+                        <span class="skill-tag">Integration &amp; testing</span>
+                    </div>
+                </div>
+            </details>
+
+            <!-- PROJECT BAND -->
+            <div class="project-band">
+                <strong>Weeks 3&ndash;6 &mdash; the Expired Solutions project.</strong> The whole cohort now builds <strong>FreshLens</strong> in the starter repo, using everything from the first two weeks. The weekly rhythm stays the same (Monday team session, midweek build, Friday demo) and each week ships one working slice.
+                <span class="project-band-links">
+                    <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link" target="_blank" rel="noopener">Starter repo
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
+                    <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" class="card-link" target="_blank" rel="noopener">Getting started
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
+                    <a href="freshlens.html" class="card-link">Project details
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
+                </span>
+            </div>
+
+            <!-- WEEK 3 -->
+            <details class="week">
+                <summary>
+                    <span class="week-num is-project">W3</span>
+                    <span class="week-head">
+                        <h3 class="week-title">Onboard &amp; Plan the Codebase <span class="phase-tag is-project">Expired Solutions</span></h3>
+                        <span class="week-obj">Clone, run, and fully understand the FreshLens starter repo, then plan the build with Claude Code.</span>
+                    </span>
+                    <span class="week-dates">Jun 29&ndash;Jul 3</span>
+                    <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </summary>
+                <div class="week-body">
+                    <div class="day-grid">
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Project launch</h4><p>Repo walkthrough end-to-end; assign roles &amp; areas.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Run it locally</h4><p>Follow <em>Getting Started</em>; get the app running for everyone.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Environment fixes; architecture Q&amp;A.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Map &amp; plan</h4><p>Read every layer; write a build plan with Claude Code (explore &rarr; plan).</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Running local app + build-plan walkthrough.</p></div>
+                    </div>
+                    <p class="week-sub">Resources</p>
+                    <ul class="resource-list">
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">FreshLens &mdash; Getting Started</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">FreshLens &mdash; Weekly build guides</a></li>
+                        <li><a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">Claude Code &mdash; Best practices (explore/plan)</a><span class="tag free">Free</span></li>
+                        <li><a href="freshlens.html">FreshLens &mdash; Project details</a></li>
+                    </ul>
+                    <div class="deliverable">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Deliverable:</strong> FreshLens running locally for the whole team + a written, Claude-Code-assisted build plan.</span>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">Onboarding a real codebase</span>
+                        <span class="skill-tag">Reading production code</span>
+                        <span class="skill-tag">Planning with AI</span>
+                        <span class="skill-tag">API contracts</span>
+                    </div>
+                </div>
+            </details>
+
+            <!-- WEEK 4 -->
+            <details class="week">
+                <summary>
+                    <span class="week-num is-project">W4</span>
+                    <span class="week-head">
+                        <h3 class="week-title">Multi-Item Detection <span class="phase-tag is-project">Expired Solutions</span></h3>
+                        <span class="week-obj">Turn the single-item scanner into a whole-scene scanner: detect every produce item and box it.</span>
+                    </span>
+                    <span class="week-dates">Jul 6&ndash;10</span>
+                    <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </summary>
+                <div class="week-body">
+                    <div class="day-grid">
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Sprint plan</h4><p>Detection pillar: scope the week, divide the work.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Wire the detector</h4><p>Integrate YOLO / Ultralytics; handle the fallback path.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Model &amp; pipeline troubleshooting.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Draw boxes</h4><p>Return per-item boxes; test on real images.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Whole-scene detection running on real photos.</p></div>
+                    </div>
+                    <p class="week-sub">Resources</p>
+                    <ul class="resource-list">
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">FreshLens &mdash; Weekly build guides</a></li>
+                        <li><a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener">Claude Code &mdash; Common workflows</a><span class="tag free">Free</span></li>
+                    </ul>
+                    <div class="deliverable">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Deliverable:</strong> multi-item detection working&mdash;every produce item in a frame is found and boxed.</span>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">Integrating an ML detector</span>
+                        <span class="skill-tag">Image pipelines</span>
+                        <span class="skill-tag">Testing CV output</span>
+                    </div>
+                </div>
+            </details>
+
+            <!-- WEEK 5 -->
+            <details class="week">
+                <summary>
+                    <span class="week-num is-project">W5</span>
+                    <span class="week-head">
+                        <h3 class="week-title">Live Freshness Overlay <span class="phase-tag is-project">Expired Solutions</span></h3>
+                        <span class="week-obj">Score each detected item 0&ndash;100 and render a color-coded overlay right on the camera view.</span>
+                    </span>
+                    <span class="week-dates">Jul 13&ndash;17</span>
+                    <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </summary>
+                <div class="week-body">
+                    <div class="day-grid">
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Sprint plan</h4><p>Overlay pillar: connect scores to the UI.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Score items</h4><p>Run each crop through the freshness model (0&ndash;100).</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>UI / state troubleshooting.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Color-code</h4><p>Green / amber / red overlay per box.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Live freshness overlay on the camera view.</p></div>
+                    </div>
+                    <p class="week-sub">Resources</p>
+                    <ul class="resource-list">
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">FreshLens &mdash; Weekly build guides</a></li>
+                        <li><a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener">Claude Code &mdash; Common workflows</a><span class="tag free">Free</span></li>
+                    </ul>
+                    <div class="deliverable">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Deliverable:</strong> a live, color-coded freshness overlay&mdash;every detected item shows its 0&ndash;100 score.</span>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">Model output &rarr; UI</span>
+                        <span class="skill-tag">Front-end state</span>
+                        <span class="skill-tag">Color-coded data viz</span>
+                    </div>
+                </div>
+            </details>
+
+            <!-- WEEK 6 -->
+            <details class="week">
+                <summary>
+                    <span class="week-num is-project">W6</span>
+                    <span class="week-head">
+                        <h3 class="week-title">Act On It <span class="phase-tag is-project">Expired Solutions</span></h3>
+                        <span class="week-obj">Let Claude turn freshness scores into shopper action: an &ldquo;eat me first&rdquo; ranking and a rescue recipe. (Store markdown mode is the Week 7 stretch.)</span>
+                    </span>
+                    <span class="week-dates">Jul 20&ndash;24</span>
+                    <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </summary>
+                <div class="week-body">
+                    <div class="day-grid">
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Sprint plan</h4><p>Action pillar: design the Claude prompts.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Shopper mode</h4><p>&ldquo;Eat me first&rdquo; ranking + rescue recipe via Claude.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Prompt &amp; API troubleshooting.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Wire it together</h4><p>Scan &rarr; score &rarr; act, end to end.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Full FreshLens flow on a real fridge/shelf.</p></div>
+                    </div>
+                    <p class="week-sub">Resources</p>
+                    <ul class="resource-list">
+                        <li><a href="https://platform.claude.com/docs/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener">Anthropic &mdash; Prompt-engineering guide</a><span class="tag free">Free</span></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">FreshLens &mdash; Weekly build guides</a></li>
+                    </ul>
+                    <div class="deliverable">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Deliverable:</strong> the end-to-end FreshLens flow: scan a scene, score every item, get an AI action.</span>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">Claude API integration</span>
+                        <span class="skill-tag">Prompt design for action</span>
+                        <span class="skill-tag">Shipping a full feature</span>
+                    </div>
+                </div>
+            </details>
+
+            <!-- WEEK 7 -->
+            <details class="week">
+                <summary>
+                    <span class="week-num is-ship">W7</span>
+                    <span class="week-head">
+                        <h3 class="week-title">Harden, Extend &amp; Team Craft <span class="phase-tag">Ship &amp; Extend</span></h3>
+                        <span class="week-obj">Make FreshLens solid, build more if you want, and sharpen how you work as a team with AI.</span>
+                    </span>
+                    <span class="week-dates">Jul 27&ndash;31</span>
+                    <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </summary>
+                <div class="week-body">
+                    <div class="day-grid">
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Plan the polish</h4><p>Pick hardening targets + optional stretch features.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Test &amp; fix</h4><p>Write tests, handle edge cases, fix bugs.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Code review &amp; architecture help.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Extend (optional)</h4><p>Store manager mode or another stretch feature.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Polished build + any new features.</p></div>
+                    </div>
+                    <p class="week-sub">Resources</p>
+                    <ul class="resource-list">
+                        <li><a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener">Claude Code &mdash; Tests, refactors, PRs</a><span class="tag free">Free</span></li>
+                        <li><a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">Claude Code &mdash; Best practices</a><span class="tag free">Free</span></li>
+                    </ul>
+                    <div class="deliverable">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Deliverable:</strong> a tested, polished build&mdash;plus any stretch features&mdash;merged through clean, team-reviewed PRs.</span>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">Testing</span>
+                        <span class="skill-tag">Code review with AI</span>
+                        <span class="skill-tag">Refactoring</span>
+                        <span class="skill-tag">Team collaboration</span>
+                    </div>
+                </div>
+            </details>
+
+            <!-- WEEK 8 -->
+            <details class="week">
+                <summary>
+                    <span class="week-num is-ship">W8</span>
+                    <span class="week-head">
+                        <h3 class="week-title">Ship &amp; Present <span class="phase-tag">Demo Day</span></h3>
+                        <span class="week-obj">Code freeze, record a demo, and present the finished project on Demo Day.</span>
+                    </span>
+                    <span class="week-dates">Aug 3&ndash;7</span>
+                    <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </summary>
+                <div class="week-body">
+                    <div class="day-grid">
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Presentation plan</h4><p>Outline the story; assign demo segments.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Code freeze</h4><p>Final fixes only; record the demo video.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Dry-run feedback &amp; polish.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Rehearse</h4><p>Full run-through; tighten the narrative.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo Day</h4><p>Final presentations + program retrospective.</p></div>
+                    </div>
+                    <p class="week-sub">Resources</p>
+                    <ul class="resource-list">
+                        <li><a href="freshlens.html">FreshLens &mdash; Project details</a></li>
+                        <li><a href="https://anthropic.skilljar.com" target="_blank" rel="noopener">Anthropic Academy &mdash; keep learning</a><span class="tag free">Free</span></li>
+                    </ul>
+                    <div class="deliverable">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Deliverable:</strong> a final demo video + presentation on Demo Day (Fri Aug 7), plus a retro on building in teams with AI.</span>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">Presenting technical work</span>
+                        <span class="skill-tag">Demo storytelling</span>
+                        <span class="skill-tag">Retrospectives</span>
+                        <span class="skill-tag">Reflection</span>
+                    </div>
+                </div>
+            </details>
+
         </div>
     </div>
 </div>
@@ -964,84 +1252,28 @@
     <div class="container">
         <div class="section-header">
             <h2>Guest Speakers</h2>
-            <p>Industry professionals share real-world insights throughout the program.</p>
+            <p>Practitioners drop in throughout the program.</p>
         </div>
-        <div class="speakers-grid">
-            <div class="speaker-card">
-                <div class="speaker-icon-wrap">
-                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/></svg>
-                </div>
-                <h4>Tech Talks</h4>
-                <p>Engineers and founders share lessons from building production systems, AI products, and scaling startups.</p>
-            </div>
-            <div class="speaker-card">
-                <div class="speaker-icon-wrap">
-                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
-                </div>
-                <h4>Career Panels</h4>
-                <p>Professionals across engineering, product, and data science discuss career paths and industry trends.</p>
-            </div>
-            <div class="speaker-card">
-                <div class="speaker-icon-wrap">
-                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
-                </div>
-                <h4>Demo &amp; Feedback</h4>
-                <p>Guest reviewers provide feedback on team projects, simulating real stakeholder presentations.</p>
-            </div>
-        </div>
+        <p class="speakers-note">
+            Across the eight weeks, working engineers, ML practitioners, and product leaders join sessions for short talks, live Q&amp;A, and feedback on the project at Friday demos. Speakers are announced week to week.
+        </p>
     </div>
 </div>
 
 <!-- Tools -->
-<div class="section section-alt">
+<div class="section section-alt" id="tools">
     <div class="container">
         <div class="section-header">
             <h2>Tools &amp; Stack</h2>
-            <p>All free tools, AI-first development workflow.</p>
+            <p>An AI-first workflow built on free and freemium tools.</p>
         </div>
         <div class="tools-grid">
-            <div class="tool-card">
-                <div class="tool-logo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#0078d4" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 7v10M8 12h5l-3 5"/></svg>
-                </div>
-                <h4>VS Code</h4>
-                <p>Code editor</p>
-            </div>
-            <div class="tool-card">
-                <div class="tool-logo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#1a1d23" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 9l3 3-3 3M13 15h3"/></svg>
-                </div>
-                <h4>GitHub Copilot</h4>
-                <p>AI completions</p>
-            </div>
-            <div class="tool-card">
-                <div class="tool-logo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 12h6M12 9v6"/></svg>
-                </div>
-                <h4>Cursor</h4>
-                <p>AI-native IDE</p>
-            </div>
-            <div class="tool-card">
-                <div class="tool-logo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#3776ab" stroke-width="1.5"><path d="M12 3c-4 0-4 2-4 3v2h4v1H6c-2 0-3 1.5-3 4s1 4 3 4h2v-2c0-1.5 1-3 3-3h4c1.5 0 3-1 3-3V6c0-1.5-1-3-3-3h-3z"/><circle cx="9.5" cy="6.5" r="1" fill="#3776ab"/></svg>
-                </div>
-                <h4>Python</h4>
-                <p>Backend &amp; ML</p>
-            </div>
-            <div class="tool-card">
-                <div class="tool-logo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#009688" stroke-width="1.5"><path d="M13 3l8 5v8l-8 5-8-5V8l8-5z"/><path d="M13 3v10l8 5M13 13l-8 5"/></svg>
-                </div>
-                <h4>FastAPI</h4>
-                <p>API framework</p>
-            </div>
-            <div class="tool-card">
-                <div class="tool-logo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff4b4b" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
-                </div>
-                <h4>Streamlit</h4>
-                <p>Dashboard UI</p>
-            </div>
+            <div class="tool-card"><div class="tool-role">AI Coding</div><h3>Claude Code</h3><p>Anthropic&rsquo;s agentic coding tool in the terminal.</p></div>
+            <div class="tool-card"><div class="tool-role">AI Coding</div><h3>Cursor</h3><p>AI-native IDE with an agent built in.</p></div>
+            <div class="tool-card"><div class="tool-role">AI Coding</div><h3>Codex</h3><p>OpenAI&rsquo;s coding agent (cloud, IDE &amp; CLI).</p></div>
+            <div class="tool-card"><div class="tool-role">Language</div><h3>Python</h3><p>Backend and machine-learning code.</p></div>
+            <div class="tool-card"><div class="tool-role">Framework</div><h3>FastAPI</h3><p>The API layer that powers FreshLens.</p></div>
+            <div class="tool-card"><div class="tool-role">Version Control</div><h3>Git &amp; GitHub</h3><p>Branches, pull requests, and team review.</p></div>
         </div>
     </div>
 </div>
@@ -1049,13 +1281,22 @@
 <!-- Footer -->
 <footer>
     <div class="footer-inner">
-        <div class="footer-brand">Talk Me Up &mdash; Expired Solutions Summer Internship 2026</div>
-        <div class="footer-links">
-            <a href="https://github.com/LawrenceHua" target="_blank">GitHub</a>
-            <span style="color: rgba(255,255,255,0.2);">|</span>
-            <a href="#">Program Lead: Lawrence Hua</a>
-            <span style="color: rgba(255,255,255,0.2);">|</span>
-            <a href="#">Co-Lead: Prof. JJ Xu</a>
+        <div class="footer-brand">
+            <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="6" fill="#0f2a23"/>
+                <path d="M8 24 A16 16 0 0 1 24 8" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <line x1="8" y1="24" x2="8" y2="19" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="24" y1="8" x2="19" y2="8" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="3" fill="#e0a106"/>
+            </svg>
+            Talk Me Up &middot; Expired Solutions Summer Internship 2026
+        </div>
+        <div class="footer-credits">
+            <a href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">GitHub</a>
+            <span class="footer-sep" aria-hidden="true">|</span>
+            <span>Program Lead: Lawrence Hua</span>
+            <span class="footer-sep" aria-hidden="true">|</span>
+            <span>Co-Lead: Prof. JJ Xu</span>
         </div>
     </div>
     <div class="footer-copy">&copy; 2026 Expired Solutions &middot; Talk Me Up</div>
