@@ -6,6 +6,21 @@
     <title>Week 1 — Your First 15 Minutes with Claude Code · Talk Me Up</title>
     <meta name="description" content="A hands-on, beginner-friendly 15-minute Claude Code tutorial for the Expired Solutions internship: setup, prompting, iteration, planning, and skills like /plan and /code-review.">
     <meta name="theme-color" content="#1a3c34">
+    <link rel="canonical" href="https://es-internship-hub.vercel.app/w1.html">
+    <!-- Social preview (Open Graph + Twitter) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Expired Solutions AI Internship">
+    <meta property="og:url" content="https://es-internship-hub.vercel.app/w1.html">
+    <meta property="og:title" content="Week 1 — Your First 15 Minutes with Claude Code">
+    <meta property="og:description" content="A hands-on, beginner-friendly 15-minute Claude Code tutorial: setup, prompting, iteration, planning, and skills like /plan and /code-review.">
+    <meta property="og:image" content="https://es-internship-hub.vercel.app/og-w1.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Week 1 — your first 15 minutes with Claude Code">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Week 1 — Your First 15 Minutes with Claude Code">
+    <meta name="twitter:description" content="A hands-on, beginner-friendly 15-minute Claude Code tutorial: setup, prompting, iteration, planning, review.">
+    <meta name="twitter:image" content="https://es-internship-hub.vercel.app/og-w1.png">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,6 +136,7 @@
         .cheat th { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); }
         .cheat td.cmd { font-family: var(--mono); font-size: 0.78rem; color: var(--primary); font-weight: 500; white-space: nowrap; }
         .cheat td.desc { color: var(--text-secondary); }
+        .cheat-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
         /* Resource links */
         .links { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem 1.5rem; }
@@ -458,6 +474,7 @@ play()</pre>
     <section class="block">
         <div class="eyebrow">Reference</div>
         <h2>Command cheat-sheet</h2>
+        <div class="cheat-wrap">
         <table class="cheat">
             <thead><tr><th>Command</th><th>What it does</th></tr></thead>
             <tbody>
@@ -475,6 +492,7 @@ play()</pre>
                 <tr><td class="cmd">ultrathink</td><td class="desc">Add to a prompt for deeper reasoning on that turn.</td></tr>
             </tbody>
         </table>
+        </div>
     </section>
 
     <!-- Keep going -->
