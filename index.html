@@ -391,6 +391,7 @@
         .cadence-time .opt { color: var(--text-tertiary); }
 
         .cadence-label { font-size: 0.82rem; color: var(--text-secondary); font-weight: 500; }
+        .cadence-desc { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 0.3rem; line-height: 1.4; }
         .cadence-link { display: inline-block; margin-top: 0.55rem; font-family: var(--mono); font-size: 0.62rem; font-weight: 500; color: var(--accent); text-decoration: none; }
         .cadence-link:hover { text-decoration: underline; }
         .cadence-link::after { content: ""; }
@@ -805,6 +806,7 @@
                 <div class="cadence-day">Tuesday</div>
                 <span class="cadence-time work">Work session</span>
                 <div class="cadence-label">Team huddle</div>
+                <p class="cadence-desc">Meet as a team to work together.</p>
             </div>
             <div class="cadence-card">
                 <div class="cadence-day">Wednesday</div>
@@ -816,6 +818,7 @@
                 <div class="cadence-day">Thursday</div>
                 <span class="cadence-time work">Work session</span>
                 <div class="cadence-label">Team huddle</div>
+                <p class="cadence-desc">Meet again as a team.</p>
             </div>
             <div class="cadence-card">
                 <div class="cadence-day">Friday</div>
@@ -1207,6 +1210,7 @@ npm install -g @anthropic-ai/claude-code</code>
                     <ul class="resource-list">
                         <li><a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener">Claude Code &mdash; Tests, refactors, PRs</a><span class="tag free">Free</span></li>
                         <li><a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">Claude Code &mdash; Best practices</a><span class="tag free">Free</span></li>
+                        <li><a href="provenance.html">Provenance receipts &mdash; optional blockchain track</a></li>
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>

@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreshLens — Talk Me Up Internship 2026</title>
-    <meta name="description" content="FreshLens: point a camera at a fridge or produce shelf and every item lights up with a live freshness score. The Expired Solutions internship flagship project (Weeks 3–8).">
+    <title>Provenance Receipts — Talk Me Up Internship 2026</title>
+    <meta name="description" content="A blockchain provenance receipt for produce: sign a scan into a tamper-evident receipt and anchor it on-chain, so a return or refund can be verified later. An Expired Solutions internship initiative (a Week-7 FreshLens track).">
     <meta name="theme-color" content="#1a3c34">
-    <link rel="canonical" href="https://es-internship-hub.vercel.app/freshlens.html">
+    <link rel="canonical" href="https://es-internship-hub.vercel.app/provenance.html">
     <!-- Social preview (Open Graph + Twitter) -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Expired Solutions AI Internship">
-    <meta property="og:url" content="https://es-internship-hub.vercel.app/freshlens.html">
-    <meta property="og:title" content="FreshLens — Talk Me Up Internship 2026">
-    <meta property="og:description" content="Point a camera at a fridge or produce shelf and every item gets a live freshness score at once — then AI acts on it. The Expired Solutions internship flagship.">
+    <meta property="og:url" content="https://es-internship-hub.vercel.app/provenance.html">
+    <meta property="og:title" content="Provenance Receipts — Talk Me Up Internship 2026">
+    <meta property="og:description" content="Sign a produce scan into a tamper-evident receipt and anchor it on-chain, so returns and refunds can be verified — without trusting anyone's word. An Expired Solutions internship initiative.">
     <meta property="og:image" content="https://es-internship-hub.vercel.app/og-freshlens.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="FreshLens — scan the whole shelf, score every item">
+    <meta property="og:image:alt" content="Provenance Receipts — prove what was sold, trustlessly">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FreshLens — Talk Me Up Internship 2026">
-    <meta name="twitter:description" content="Scan a whole fridge or shelf — every item gets a live freshness score, then AI acts on it. The Expired Solutions internship flagship.">
+    <meta name="twitter:title" content="Provenance Receipts — Talk Me Up Internship 2026">
+    <meta name="twitter:description" content="Sign a produce scan into a tamper-evident receipt and anchor it on-chain, so returns and refunds can be verified. An Expired Solutions internship initiative.">
     <meta name="twitter:image" content="https://es-internship-hub.vercel.app/og-freshlens.png">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -128,23 +128,19 @@
         .flow-step strong { display: block; color: var(--text); font-size: 0.8rem; margin-bottom: 0.25rem; }
         .flow-arrow { align-self: center; color: var(--accent-muted); font-weight: 700; }
 
+        .note {
+            background: #fff8e6; border: 1px solid #f0d98a; border-left: 4px solid var(--caution);
+            border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-top: 1rem;
+        }
+        .note strong { color: var(--text); }
+        .note p { color: var(--text-secondary); font-size: 0.92rem; }
+        .note p + p { margin-top: 0.55rem; }
+
         pre {
             background: #0f1a17; color: #d7e7e0; border-radius: var(--radius);
             padding: 1.25rem; overflow-x: auto; font-size: 0.82rem; line-height: 1.7;
             font-family: var(--mono);
         }
-
-        .weeks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
-        .week {
-            border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem;
-            transition: box-shadow 0.2s ease, transform 0.2s ease;
-        }
-        .week:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-        .week .wk { font-family: var(--mono); font-size: 0.74rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.35rem; }
-        .week ul { list-style: none; padding: 0; margin: 0.5rem 0 0; }
-        .week li { font-size: 0.86rem; color: var(--text-secondary); padding: 0.2rem 0 0.2rem 1rem; position: relative; }
-        .week li::before { content: ''; position: absolute; left: 0; top: 0.6rem; width: 4px; height: 4px; border-radius: 50%; background: var(--accent-muted); }
-        .week .demo { margin-top: 0.75rem; font-size: 0.82rem; color: var(--text); background: var(--accent-light); border-radius: 8px; padding: 0.6rem 0.8rem; }
 
         .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
         .btn {
@@ -163,7 +159,7 @@
         @media (max-width: 760px) {
             .hero h1 { font-size: 2.1rem; }
             .hero-reticle { width: 240px; height: 240px; right: -4rem; }
-            .pillars, .weeks { grid-template-columns: 1fr; }
+            .pillars { grid-template-columns: 1fr; }
             .flow-arrow { display: none; }
         }
     </style>
@@ -194,16 +190,15 @@
         <circle cx="24" cy="24" r="2.6" fill="#e0a106"/>
     </svg>
     <div class="hero-inner">
-        <div class="hero-label">Flagship Project &middot; Weeks 3&ndash;8</div>
-        <h1>FreshLens</h1>
-        <p>Point your camera at a fridge, basket, or produce shelf&mdash;and every item lights up at once with a live, color-coded freshness score. Then AI tells you what to do about it: rescue what&rsquo;s turning, or mark it down before it&rsquo;s lost.</p>
+        <div class="hero-label">Initiative &middot; A FreshLens Week-7 track</div>
+        <h1>Provenance Receipts</h1>
+        <p>Turn a produce scan into a <strong>signed, tamper-evident receipt</strong> and anchor its fingerprint on a public blockchain&mdash;so a return or refund can be verified later, without trusting anyone&rsquo;s word.</p>
         <div class="hero-tags">
-            <span class="hero-tag">Python</span>
+            <span class="hero-tag">SHA-256</span>
+            <span class="hero-tag">Digital signatures</span>
+            <span class="hero-tag">Ethereum Sepolia</span>
             <span class="hero-tag">FastAPI</span>
-            <span class="hero-tag">PyTorch</span>
-            <span class="hero-tag">YOLO / Ultralytics</span>
-            <span class="hero-tag">Claude API</span>
-            <span class="hero-tag">JavaScript</span>
+            <span class="hero-tag">FSMA 204</span>
         </div>
         <hr class="freshness-rule hero-rule">
     </div>
@@ -212,124 +207,124 @@
 <div class="wrap">
 
     <section class="block">
-        <h2>The leap</h2>
-        <p class="lead">Expired Solutions already scans <strong>one</strong> item at a time and scores its freshness 0&ndash;100 across 135 produce types. FreshLens is the 10x: scan the <strong>whole scene</strong> at once. One tap over a fridge or a produce display, and every item is found, scored, and ranked&mdash;live.</p>
-        <p>That single capability serves both sides of the business. Pointed at a shopper&rsquo;s fridge, it&rsquo;s a magic &ldquo;what do I eat first, and what can I cook tonight?&rdquo; moment. Pointed at a store&rsquo;s produce section, it&rsquo;s an instant freshness audit that tells the manager exactly what to mark down&mdash;the heart of the markdown-automation pitch.</p>
+        <h2>The pain point</h2>
+        <p class="lead">Expired Solutions already offers a <strong>no-questions-asked 24-hour refund</strong> on discounted perishables&mdash;a real trust advantage, and a real fraud surface.</p>
+        <p>With produce there is nothing tying a specific item to a specific purchase. A barcode says <em>what type</em> it is&mdash;not which store sold this unit, when, or in what condition. So a soggy item returned days later is a he-said-she-said; a receipt can be reused; and an item bought at one store can be &ldquo;returned&rdquo; at another. Across US retail, roughly 15% of 2024 returns&mdash;about $103B&mdash;were fraudulent. Perishables can&rsquo;t be resold, so every disputed return is a write-off. We want the <strong>trust</strong> without the <strong>friction</strong>.</p>
     </section>
 
     <section class="block">
         <h2>How it works</h2>
-        <p class="lead">Three capabilities, built in sequence over Weeks 4&ndash;6 &mdash; then hardened and shipped in Weeks 7&ndash;8.</p>
+        <p class="lead">Four steps. The first two give you a tamper-evident receipt; the third makes it independently checkable by anyone; the fourth is the return desk.</p>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">1</div>
-                <h3>Multi-Item Detection</h3>
-                <p>A pretrained object detector (YOLO / Ultralytics) finds every produce item in the frame and returns a bounding box for each&mdash;no model training from scratch required.</p>
+                <h3>Hash</h3>
+                <p>SHA-256 of the photo plus the scan facts&mdash;store, lot code, UTC time, freshness score, items&mdash;into one canonical fingerprint.</p>
             </div>
             <div class="pillar">
                 <div class="num">2</div>
-                <h3>Live Freshness Overlay</h3>
-                <p>Each detected item is cropped and scored 0&ndash;100 by the freshness model, then drawn back onto the camera view with a green / amber / red overlay.</p>
+                <h3>Sign</h3>
+                <p>Sign the fingerprint so any later edit is detectable and the issuer is provable. HMAC today; an Ed25519 upgrade lets outside parties verify too.</p>
             </div>
             <div class="pillar">
                 <div class="num">3</div>
-                <h3>Act On It</h3>
-                <p>Claude turns the scored scene into action: an &ldquo;eat me first&rdquo; ranking plus a recipe to rescue what&rsquo;s turning (shopper), or a markdown worklist and shrink-savings estimate (store).</p>
+                <h3>Anchor</h3>
+                <p>Write the 32-byte fingerprint to a smart contract on the Ethereum Sepolia testnet&mdash;a public, timestamped record nobody can quietly rewrite.</p>
+            </div>
+        </div>
+        <div class="pillars" style="margin-top:1.25rem;">
+            <div class="pillar">
+                <div class="num">4</div>
+                <h3>Verify</h3>
+                <p>At return time, re-hash the presented receipt and check the signature (issuer) and the anchor (existence + time). Valid &rarr; refund with confidence.</p>
             </div>
         </div>
     </section>
 
     <section class="block">
-        <h2>Shopper flow (the hero demo)</h2>
+        <h2>The refund journey</h2>
         <div class="flow">
-            <div class="flow-step"><strong>1 &middot; Point</strong>Aim the camera at your fridge or basket.</div>
+            <div class="flow-step"><strong>1 &middot; Scan</strong>Shopper scans the produce at pickup.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>2 &middot; Detect</strong>Every produce item gets a box.</div>
+            <div class="flow-step"><strong>2 &middot; Sign</strong>FreshLens signs the scan into a receipt.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>3 &middot; Score</strong>Each item is freshness-scored 0&ndash;100.</div>
+            <div class="flow-step"><strong>3 &middot; Anchor</strong>Its fingerprint is anchored on-chain.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>4 &middot; Rank</strong>Color overlay + &ldquo;eat me first&rdquo; order.</div>
+            <div class="flow-step"><strong>4 &middot; Present</strong>Days later, the shopper opens a return.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>5 &middot; Cook</strong>Claude suggests a recipe to use it up.</div>
+            <div class="flow-step"><strong>5 &middot; Verify</strong>Re-hash &amp; check &rarr; valid, or tampered.</div>
+        </div>
+        <p style="margin-top:1.25rem; font-size:0.92rem;">A fraud attempt fails cleanly: edit the freshness score or swap the store on a saved receipt and the fingerprint no longer matches, so verification returns <code>digest_mismatch</code> and the refund is declined. A fabricated receipt has no valid signature or anchor.</p>
+    </section>
+
+    <section class="block">
+        <h2>What it proves &mdash; and what it doesn&rsquo;t</h2>
+        <div class="note">
+            <p><strong>It proves:</strong> this exact receipt existed at (or before) a point in time, and was issued by a holder of the signing key. Any tampering breaks verification.</p>
+            <p><strong>It does not prove</strong> that the photo is of the real item, or that the freshness score is correct&mdash;<em>garbage in, signed garbage out.</em> It only proves the receipt&rsquo;s existence, time, and issuer. With the starter&rsquo;s placeholder detector every item is a generic &ldquo;produce&rdquo;; real per-item provenance arrives once the detector and freshness model are wired (Weeks 4&ndash;5).</p>
+            <p><strong>On-chain is permanent:</strong> an anchored record cannot be deleted. That&rsquo;s exactly why we anchor only a 32-byte fingerprint&mdash;never the receipt contents or any personal data.</p>
         </div>
     </section>
 
     <section class="block">
         <h2>Architecture</h2>
-        <p class="lead">A FastAPI service that chains pretrained vision with the freshness model and an LLM action layer. Beginners assemble proven parts rather than inventing them&mdash;exactly the skill the program teaches.</p>
-        <pre>Camera frame / photo / short clip
+        <p class="lead">A small FastAPI feature that signs a scan and anchors its fingerprint. It runs offline out of the box (a local hash-chain stands in for the chain); interns wire the real testnet anchor in Week 7.</p>
+        <pre>scan a photo
    │
    ▼
-[ Object detector ]  YOLO/Ultralytics ──► boxes for each produce item
+[ 1. HASH ]   SHA-256(photo + store + lot_code + time + score + items)  ──►  digest
    │
    ▼
-[ Per-item crop ] ──► freshness model (0–100, 135 produce types)
+[ 2. SIGN ]   canonical JSON ──► signature   (HMAC now; Ed25519 = the upgrade)
    │
    ▼
-[ Overlay renderer ] ──► green / amber / red scores on the frame
-   │
-   ├─► Shopper mode:  Claude ──► "eat me first" ranking + rescue recipe
-   │
-   └─► Store mode (Week 7 stretch):  rules + Claude ──► markdown worklist + shrink $ saved</pre>
+[ 3. ANCHOR ] put the 32-byte digest on-chain
+   │           CHAIN_BACKEND = mock     → local hash-chain file (offline default)
+   │                         = sepolia  → ReceiptRegistry contract on the testnet
+   ▼
+[ 4. VERIFY ] re-hash the presented receipt ──► signature ok? + anchored?  ──►  VALID / TAMPERED</pre>
+        <p style="margin-top:1rem; font-size:0.9rem;">A signed hash already delivers the trust for a single store verifying its own receipts; the public anchor earns its place when an outside party (another retailer, an insurer, a court) must verify without trusting that store&rsquo;s server. Large enterprise food-traceability blockchains proved supply-side provenance works; the lesson for a startup is a lightweight anchor, not a consortium chain.</p>
     </section>
 
     <section class="block">
-        <h2>The build plan</h2>
-        <p class="lead">The project runs program Weeks 3&ndash;8. Week 3 is onboarding &amp; planning and Week 8 is Demo Day; the four build missions below are Weeks 4&ndash;7. Each Friday ends with a live demo. The hero path is the shopper experience; store manager-mode is the Week 7 stretch.</p>
-        <div class="weeks">
-            <div class="week">
-                <div class="wk">Week 4 &middot; Multi-Item Detection</div>
-                <ul>
-                    <li>Image upload endpoint (HEIC/JPEG/PNG)</li>
-                    <li>Run a pretrained detector on a fridge/shelf photo</li>
-                    <li>Draw a separate box for every produce item</li>
-                    <li>Return boxes + scores as JSON</li>
-                </ul>
-                <div class="demo">Demo: upload a fridge photo &rarr; every item boxed with a freshness score.</div>
+        <h2>Beyond refunds</h2>
+        <p class="lead">The same signed, timestamped, lot-linked receipt unlocks more than returns.</p>
+        <div class="pillars">
+            <div class="pillar">
+                <h3>Recall management</h3>
+                <p>Find every receipt carrying a recalled <code>lot_code</code> &mdash; a targeted recall instead of a blanket category pull.</p>
             </div>
-            <div class="week">
-                <div class="wk">Week 5 &middot; Live Freshness Overlay</div>
-                <ul>
-                    <li>Mobile camera capture in the browser</li>
-                    <li>Score each item 0&ndash;100; draw color overlays (green/amber/red)</li>
-                    <li>&ldquo;Eat me first&rdquo; ranking of the scene</li>
-                    <li>Smooth the experience to near real-time</li>
-                </ul>
-                <div class="demo">Demo: aim at a basket &rarr; scores appear live, worst-first list updates.</div>
+            <div class="pillar">
+                <h3>Chain of custody</h3>
+                <p>Each supplier&rarr;store handoff issues a signed condition receipt; &ldquo;arrived already bad&rdquo; disputes arbitrate from evidence.</p>
             </div>
-            <div class="week">
-                <div class="wk">Week 6 &middot; Act On It</div>
-                <ul>
-                    <li>Send detected items + scores to Claude</li>
-                    <li>Generate a rescue recipe from what&rsquo;s on hand</li>
-                    <li>Explain &ldquo;why this first&rdquo; in plain language</li>
-                    <li>Handle messy / partial detections gracefully</li>
-                </ul>
-                <div class="demo">Demo: scan a fridge &rarr; &ldquo;Use the spinach &amp; tomatoes tonight&mdash;here&rsquo;s a recipe.&rdquo;</div>
+            <div class="pillar">
+                <h3>Shrink &amp; markdown audit</h3>
+                <p>A signed markdown event (item, photo, manager, time) deters markdown fraud and feeds loss analysis.</p>
             </div>
-            <div class="week">
-                <div class="wk">Week 7 &middot; Harden, Extend &amp; Team Craft</div>
-                <ul>
-                    <li>Store stretch: shelf photo &rarr; markdown worklist + shrink $ saved</li>
-                    <li>Error handling + 10&plus; unit tests</li>
-                    <li>Build more if you want; keep the fallbacks intact</li>
-                    <li><a href="provenance.html">Optional track: blockchain provenance receipts</a></li>
-                    <li>Team workflow: branch &rarr; PR &rarr; <code>/code-review</code> &rarr; merge</li>
-                </ul>
-                <div class="demo">Demo: scan a produce shelf &rarr; &ldquo;Mark down these 6 items, save ~$48 today.&rdquo;</div>
+            <div class="pillar">
+                <h3>Insurance claims</h3>
+                <p>Timestamped, photo-backed condition records make spoilage claims faster and harder to abuse.</p>
+            </div>
+            <div class="pillar">
+                <h3>Loyalty &amp; transparency</h3>
+                <p>&ldquo;This lot received here on the 12th, in good condition&rdquo; &mdash; a freshness story a shopper can scan.</p>
+            </div>
+            <div class="pillar">
+                <h3>FSMA 204 alignment</h3>
+                <p>The <code>lot_code</code> is the same Traceability Lot Code the FDA food-traceability rule mandates upstream (compliance ~2028).</p>
             </div>
         </div>
-        <p style="margin-top:1.25rem; font-size:0.9rem;">Week 3 onboards the codebase and plans the build; Week 8 freezes, records a demo, and presents on Demo Day. Full week-by-week guides live in the repo&rsquo;s <a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">docs/</a>.</p>
     </section>
 
     <section class="block">
-        <h2>Get started</h2>
-        <p class="lead">The starter repo is a <strong>complete, runnable app</strong> — clone it and it works on day one (it scans, scores, and suggests a recipe out of the box). The step-by-step <strong>Getting Started</strong> guide takes you from clone to running in your browser in ~15 minutes, and the weekly guides (Weeks 3&ndash;8) are your build missions. No AI-tools experience needed.</p>
+        <h2>Build it (intern track)</h2>
+        <p class="lead">This is an optional Week-7 FreshLens extension: it ships <strong>runnable today</strong> with a local mock anchor (and a green test suite), and you make the blockchain real by anchoring on Sepolia. It&rsquo;s demo-ware to <em>verify the concept</em>&mdash;production hardening comes later.</p>
         <div class="cta-row">
-            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">Read the Getting Started guide &rarr;</a>
+            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-07-PROVENANCE.md" target="_blank" rel="noopener">Week-7 build guide &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/PROVENANCE-RECEIPT-PRD.md" target="_blank" rel="noopener">Read the spec (PRD)</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">Starter repository</a>
-            <a class="btn btn-secondary" href="provenance.html">Provenance receipts &rarr;</a>
-            <a class="btn btn-secondary" href="index.html">Back to program overview</a>
+            <a class="btn btn-secondary" href="freshlens.html">&larr; FreshLens</a>
         </div>
     </section>
 
