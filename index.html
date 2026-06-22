@@ -525,6 +525,17 @@
         }
         .codeline .c { color: var(--accent-muted); }
 
+        /* ── Week 2 "get started" directions ── */
+        .do-steps { margin: 0.3rem 0 0; padding-left: 1.25rem; }
+        .do-steps > li { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0.7rem; padding-left: 0.25rem; }
+        .do-steps > li::marker { color: var(--accent); font-weight: 700; }
+        .do-steps > li strong { color: var(--primary); font-weight: 600; }
+        .week-body code, .do-steps code {
+            font-family: var(--mono); font-size: 0.8em;
+            background: var(--accent-light); color: var(--primary);
+            padding: 0.05rem 0.32rem; border-radius: 4px; white-space: nowrap;
+        }
+
         .deliverable {
             display: flex; gap: 0.7rem; align-items: flex-start;
             background: var(--surface-alt);
@@ -998,6 +1009,40 @@ npm install -g @anthropic-ai/claude-code</code>
                                 <li>Retrospective &amp; lessons learned</li>
                             </ul>
                         </div>
+                    </div>
+
+                    <p class="week-sub">Get started &mdash; do this on Monday</p>
+                    <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.55; margin:0 0 0.7rem;">
+                        This week the whole team builds <strong>FreshLens</strong> in one shared repo. It already runs out of the box &mdash; your job is to get it running, claim a slice, and ship your first pull request the AI-native way. Everything below is in the starter repo.
+                    </p>
+                    <ol class="do-steps">
+                        <li><strong>Clone &amp; set up</strong> &mdash; about 15 minutes. One command makes the virtual environment, installs everything, arms the safety guardrails, and runs the tests.
+                            <span class="codeline">git clone https://github.com/LawrenceHua/es-intern-freshlens.git
+cd es-intern-freshlens
+./setup.sh   <span class="c"># venv + deps + Claude Code hooks + self-test</span></span>
+                        </li>
+                        <li><strong>Run it and look around.</strong>
+                            <span class="codeline">uvicorn app:app --reload   <span class="c"># then open http://127.0.0.1:8000</span></span>
+                            In Claude Code, run <code>/onboard</code> and read <code>GETTING_STARTED.md</code>. New to Claude Code? Read <code>docs/USING-CLAUDE-CODE.md</code> first.
+                        </li>
+                        <li><strong>Claim a starter task.</strong> Pick one <em>good first issue</em> (there&rsquo;s one per slice: detect &middot; freshness &middot; act &middot; frontend &middot; receipt), then claim it &mdash; this also creates your branch:
+                            <span class="codeline">gh issue develop -c &lt;issue-number&gt;</span>
+                        </li>
+                        <li><strong>Build with AI, then ship.</strong> Work only in <em>your</em> files. Explore &rarr; Plan &rarr; Implement &rarr; run <code>/code-review</code> &rarr; open a pull request. CI (lint, tests, secret-scan) must pass and one teammate approves before it merges. Never push straight to <code>main</code>.</li>
+                    </ol>
+                    <div class="deliverable" style="border-left-color:#b9770e; margin-top:1rem;">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+                        <span><strong>3 non-negotiables:</strong> keep the API shape <code>{"status":"ok","data":&hellip;}</code> &middot; never commit secrets or a <code>.env</code> file &middot; stay in your lane and leave <code>pytest</code> green.</span>
+                    </div>
+                    <div class="project-band-links" style="margin-top:0.9rem;">
+                        <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link" target="_blank" rel="noopener">Starter repo
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
+                        <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" class="card-link" target="_blank" rel="noopener">Getting started guide
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
+                        <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues?q=is%3Aopen+label%3A%22good+first+issue%22" class="card-link" target="_blank" rel="noopener">Good first issues
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
+                        <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/CONTRIBUTING.md" class="card-link" target="_blank" rel="noopener">How we work with AI
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
                     </div>
 
                     <p class="week-sub">Recommended free resources</p>
