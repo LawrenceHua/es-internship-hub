@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Provenance Receipts — Talk Me Up Internship 2026</title>
-    <meta name="description" content="A blockchain provenance receipt for produce: sign a scan into a tamper-evident receipt and anchor it on-chain, so a return or refund can be verified later. An Expired Solutions internship initiative (a Week-7 FreshLens track).">
+    <meta name="description" content="A return-trust receipt for produce: sign a scan into a tamper-evident evidence package, optionally anchor it on-chain, and verify it later at return time. An Expired Solutions internship initiative.">
     <meta name="theme-color" content="#1a3c34">
     <link rel="canonical" href="https://es-internship-hub.vercel.app/provenance.html">
     <!-- Social preview (Open Graph + Twitter) -->
@@ -12,14 +12,14 @@
     <meta property="og:site_name" content="Expired Solutions AI Internship">
     <meta property="og:url" content="https://es-internship-hub.vercel.app/provenance.html">
     <meta property="og:title" content="Provenance Receipts — Talk Me Up Internship 2026">
-    <meta property="og:description" content="Sign a produce scan into a tamper-evident receipt and anchor it on-chain, so returns and refunds can be verified — without trusting anyone's word. An Expired Solutions internship initiative.">
+    <meta property="og:description" content="Sign a produce scan into a tamper-evident evidence package, optionally anchor it on-chain, and verify it later at return time. An Expired Solutions internship initiative.">
     <meta property="og:image" content="https://es-internship-hub.vercel.app/og-freshlens.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Provenance Receipts — prove what was sold, trustlessly">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Provenance Receipts — Talk Me Up Internship 2026">
-    <meta name="twitter:description" content="Sign a produce scan into a tamper-evident receipt and anchor it on-chain, so returns and refunds can be verified. An Expired Solutions internship initiative.">
+    <meta name="twitter:description" content="Sign a produce scan into a tamper-evident evidence package, optionally anchor it on-chain, and verify it later at return time.">
     <meta name="twitter:image" content="https://es-internship-hub.vercel.app/og-freshlens.png">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -192,7 +192,7 @@
     <div class="hero-inner">
         <div class="hero-label">Initiative &middot; A FreshLens Week-7 track</div>
         <h1>Provenance Receipts</h1>
-        <p>Turn a produce scan into a <strong>signed, tamper-evident receipt</strong> and anchor its fingerprint on a public blockchain&mdash;so a return or refund can be verified later, without trusting anyone&rsquo;s word.</p>
+        <p>Turn a produce scan into a <strong>signed, tamper-evident evidence receipt</strong>. A public blockchain can anchor its fingerprint, but the real product is the return decision: store, time, lot, photo, freshness score, account, and policy checked together.</p>
         <div class="hero-tags">
             <span class="hero-tag">SHA-256</span>
             <span class="hero-tag">Digital signatures</span>
@@ -209,12 +209,12 @@
     <section class="block">
         <h2>The pain point</h2>
         <p class="lead">Expired Solutions already offers a <strong>no-questions-asked 24-hour refund</strong> on discounted perishables&mdash;a real trust advantage, and a real fraud surface.</p>
-        <p>With produce there is nothing tying a specific item to a specific purchase. A barcode says <em>what type</em> it is&mdash;not which store sold this unit, when, or in what condition. So a soggy item returned days later is a he-said-she-said; a receipt can be reused; and an item bought at one store can be &ldquo;returned&rdquo; at another. Across US retail, roughly 15% of 2024 returns&mdash;about $103B&mdash;were fraudulent. Perishables can&rsquo;t be resold, so every disputed return is a write-off. We want the <strong>trust</strong> without the <strong>friction</strong>.</p>
+        <p>With produce there is nothing tying a specific loose item to a specific purchase. A barcode says <em>what type</em> it is&mdash;not which store sold this unit, when, or in what condition. So a soggy item returned days later is a he-said-she-said; a receipt can be reused; and an item bought at one store can be &ldquo;returned&rdquo; at another. Returns and return fraud are expensive across retail, and perishables usually cannot be resold, so every disputed return is a write-off. We want the <strong>trust</strong> without the <strong>friction</strong>.</p>
     </section>
 
     <section class="block">
         <h2>How it works</h2>
-        <p class="lead">Four steps. The first two give you a tamper-evident receipt; the third makes it independently checkable by anyone; the fourth is the return desk.</p>
+        <p class="lead">The evidence system has four jobs. Hash and sign make the receipt tamper-evident. Anchor makes backdating harder. Verify turns the evidence into a return decision.</p>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">1</div>
@@ -229,14 +229,14 @@
             <div class="pillar">
                 <div class="num">3</div>
                 <h3>Anchor</h3>
-                <p>Write the 32-byte fingerprint to a smart contract on the Ethereum Sepolia testnet&mdash;a public, timestamped record nobody can quietly rewrite.</p>
+                <p>Optionally write the 32-byte fingerprint to a smart contract on the Ethereum Sepolia testnet&mdash;a public, timestamped record nobody can quietly rewrite.</p>
             </div>
         </div>
         <div class="pillars" style="margin-top:1.25rem;">
             <div class="pillar">
                 <div class="num">4</div>
-                <h3>Verify</h3>
-                <p>At return time, re-hash the presented receipt and check the signature (issuer) and the anchor (existence + time). Valid &rarr; refund with confidence.</p>
+                <h3>Decide</h3>
+                <p>At return time, re-hash the receipt, check the signature and anchor, then apply policy: return window, store, lot, account, photo match, and freshness delta.</p>
             </div>
         </div>
     </section>
@@ -248,13 +248,13 @@
             <div class="flow-arrow">&rarr;</div>
             <div class="flow-step"><strong>2 &middot; Sign</strong>FreshLens signs the scan into a receipt.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>3 &middot; Anchor</strong>Its fingerprint is anchored on-chain.</div>
+            <div class="flow-step"><strong>3 &middot; Anchor</strong>Its fingerprint is anchored, on-chain or in a server ledger.</div>
             <div class="flow-arrow">&rarr;</div>
             <div class="flow-step"><strong>4 &middot; Present</strong>Days later, the shopper opens a return.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>5 &middot; Verify</strong>Re-hash &amp; check &rarr; valid, or tampered.</div>
+            <div class="flow-step"><strong>5 &middot; Decide</strong>Verify evidence, then approve, review, or decline.</div>
         </div>
-        <p style="margin-top:1.25rem; font-size:0.92rem;">A fraud attempt fails cleanly: edit the freshness score or swap the store on a saved receipt and the fingerprint no longer matches, so verification returns <code>digest_mismatch</code> and the refund is declined. A fabricated receipt has no valid signature or anchor.</p>
+        <p style="margin-top:1.25rem; font-size:0.92rem;">A simple fraud attempt fails cleanly: edit the freshness score or swap the store on a saved receipt and the fingerprint no longer matches, so verification returns <code>digest_mismatch</code>. The harder problem is physical substitution: proving the returned item is the same item. That needs policy and extra signals, not just a chain transaction.</p>
     </section>
 
     <section class="block">
@@ -262,13 +262,14 @@
         <div class="note">
             <p><strong>It proves:</strong> this exact receipt existed at (or before) a point in time, and was issued by a holder of the signing key. Any tampering breaks verification.</p>
             <p><strong>It does not prove</strong> that the photo is of the real item, or that the freshness score is correct&mdash;<em>garbage in, signed garbage out.</em> It only proves the receipt&rsquo;s existence, time, and issuer. With the starter&rsquo;s placeholder detector every item is a generic &ldquo;produce&rdquo;; real per-item provenance arrives once the detector and freshness model are wired (Weeks 4&ndash;5).</p>
+            <p><strong>The competitive product is the decision layer:</strong> require the original purchase receipt, store and lot match, return-window check, account risk, a return-time photo, and a freshness-delta comparison. Blockchain helps prevent silent edits and backdating; it does not replace store operations.</p>
             <p><strong>On-chain is permanent:</strong> an anchored record cannot be deleted. That&rsquo;s exactly why we anchor only a 32-byte fingerprint&mdash;never the receipt contents or any personal data.</p>
         </div>
     </section>
 
     <section class="block">
         <h2>Architecture</h2>
-        <p class="lead">A small FastAPI feature that signs a scan and anchors its fingerprint. It runs offline out of the box (a local hash-chain stands in for the chain); interns wire the real testnet anchor in Week 7.</p>
+        <p class="lead">A small FastAPI feature that signs a scan and anchors its fingerprint. It runs offline out of the box with a local hash-chain; interns can wire the real testnet anchor in Week 7 after the evidence and policy path works.</p>
         <pre>scan a photo
    │
    ▼
@@ -278,12 +279,15 @@
 [ 2. SIGN ]   canonical JSON ──► signature   (HMAC now; Ed25519 = the upgrade)
    │
    ▼
-[ 3. ANCHOR ] put the 32-byte digest on-chain
+[ 3. ANCHOR ] store the 32-byte digest
    │           CHAIN_BACKEND = mock     → local hash-chain file (offline default)
    │                         = sepolia  → ReceiptRegistry contract on the testnet
    ▼
-[ 4. VERIFY ] re-hash the presented receipt ──► signature ok? + anchored?  ──►  VALID / TAMPERED</pre>
-        <p style="margin-top:1rem; font-size:0.9rem;">A signed hash already delivers the trust for a single store verifying its own receipts; the public anchor earns its place when an outside party (another retailer, an insurer, a court) must verify without trusting that store&rsquo;s server. Large enterprise food-traceability blockchains proved supply-side provenance works; the lesson for a startup is a lightweight anchor, not a consortium chain.</p>
+[ 4. VERIFY ] re-hash the presented receipt ──► signature ok? + anchored?
+   │
+   ▼
+[ 5. DECIDE ] return window + store + lot + account + photo/freshness delta  ──►  APPROVE / REVIEW / DECLINE</pre>
+        <p style="margin-top:1rem; font-size:0.9rem;">A signed hash already delivers useful trust for a single store verifying its own receipts. The public anchor earns its place when an outside party, insurer, or second retailer must verify without trusting that store&rsquo;s server. The startup version should be lightweight: first signed evidence and a return decision API, then optional public anchoring.</p>
     </section>
 
     <section class="block">
@@ -303,6 +307,10 @@
                 <p>A signed markdown event (item, photo, manager, time) deters markdown fraud and feeds loss analysis.</p>
             </div>
             <div class="pillar">
+                <h3>Return risk scoring</h3>
+                <p>Repeated claims, stale receipts, mismatched stores, and impossible freshness deltas can route a refund to manual review instead of auto-approval.</p>
+            </div>
+            <div class="pillar">
                 <h3>Insurance claims</h3>
                 <p>Timestamped, photo-backed condition records make spoilage claims faster and harder to abuse.</p>
             </div>
@@ -319,7 +327,7 @@
 
     <section class="block">
         <h2>Build it (intern track)</h2>
-        <p class="lead">This is an optional Week-7 FreshLens extension: it ships <strong>runnable today</strong> with a local mock anchor (and a green test suite), and you make the blockchain real by anchoring on Sepolia. It&rsquo;s demo-ware to <em>verify the concept</em>&mdash;production hardening comes later.</p>
+        <p class="lead">This is an optional Week-7 FreshLens extension: it ships <strong>runnable today</strong> with a local mock anchor and a green test suite. The best intern path is evidence first, policy second, Sepolia third. The blockchain demo is useful only if the return decision is already clear.</p>
         <div class="cta-row">
             <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-07-PROVENANCE.md" target="_blank" rel="noopener">Week-7 build guide &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/PROVENANCE-RECEIPT-PRD.md" target="_blank" rel="noopener">Read the spec (PRD)</a>

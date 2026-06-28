@@ -1074,7 +1074,7 @@ cd es-intern-freshlens
 
             <!-- PROJECT BAND -->
             <div class="project-band">
-                <strong>Weeks 3&ndash;6 &mdash; the Expired Solutions project.</strong> The whole cohort now builds <strong>FreshLens</strong> in the starter repo, using everything from the first two weeks. The weekly rhythm stays the same (Monday team session, midweek build, Friday demo) and each week ships one working slice.
+                <strong>Weeks 3&ndash;8 &mdash; the Expired Solutions project.</strong> The whole cohort now builds <strong>FreshLens</strong> in the starter repo, using everything from the first two weeks. Week 3 verifies the integrated codebase and sets the product direction; Weeks 4&ndash;7 ship working slices; Week 8 freezes and presents.
                 <span class="project-band-links">
                     <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link" target="_blank" rel="noopener">Starter repo
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
@@ -1090,36 +1090,83 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num is-project">W3</span>
                     <span class="week-head">
-                        <h3 class="week-title">Onboard &amp; Plan the Codebase <span class="phase-tag is-project">Expired Solutions</span></h3>
-                        <span class="week-obj">Clone, run, and fully understand the FreshLens starter repo, then plan the build with Claude Code.</span>
+                        <h3 class="week-title">Verify, Research &amp; Plan FreshLens <span class="phase-tag is-project">Expired Solutions</span></h3>
+                        <span class="week-obj">Run the integrated repo, understand the product surface, and choose the six-week build direction.</span>
                     </span>
                     <span class="week-dates">Jun 29&ndash;Jul 3</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
                     <div class="day-grid">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Project launch</h4><p>Repo walkthrough end-to-end; assign roles &amp; areas.</p></div>
-                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Run it locally</h4><p>Follow <em>Getting Started</em>; get the app running for everyone.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Environment fixes; architecture Q&amp;A.</p></div>
-                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Map &amp; plan</h4><p>Read every layer; write a build plan with Claude Code (explore &rarr; plan).</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Running local app + build-plan walkthrough.</p></div>
+                        <div class="day">
+                            <div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Reset on main</h4>
+                            <ul>
+                                <li>Walk the current FreshLens app end to end</li>
+                                <li>Confirm every Week 2 PR is merged or accounted for</li>
+                                <li>Assign owners for detection, freshness, frontend, action, report, eval, and provenance</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Run &amp; verify</h4>
+                            <ul>
+                                <li>Follow <em>Getting Started</em> on each machine</li>
+                                <li>Run <code>pytest</code>; trust all-green, not an old test count</li>
+                                <li>Manually test scan, analyze-one-item, recipe, save receipt, verify receipt, and tamper-fail</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4>
+                            <ul>
+                                <li>Fix install and environment blockers</li>
+                                <li>Trace the API contracts together</li>
+                                <li>Review what receipts prove and what they do not prove</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Research &amp; scope</h4>
+                            <ul>
+                                <li>Research return fraud, GS1 / QR traceability, FSMA 204, and store markdown competitors</li>
+                                <li>Decide whether provenance is a core track, Week 7 stretch, or research-only</li>
+                                <li>Draft the six-week roadmap with small, reviewable PR slices</li>
+                            </ul>
+                        </div>
+                        <div class="day">
+                            <div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Direction demo</h4>
+                            <ul>
+                                <li>Show the running app from local main</li>
+                                <li>Walk through the evidence-receipt demo path</li>
+                                <li>Present the roadmap, owners, and first Week 4 issues</li>
+                            </ul>
+                        </div>
                     </div>
+                    <p class="week-sub">Do this before Friday</p>
+                    <ol class="do-steps">
+                        <li><strong>Start from integrated <code>main</code>.</strong> Pull the repo, run the app, and run <code>pytest</code>. If someone reports a different test count, write down the branch they ran. The team ships from <code>main</code>.</li>
+                        <li><strong>Trace one scan through the system.</strong> Follow one image through <code>/api/scan/detect</code>, <code>src/detect.py</code>, <code>src/freshness.py</code>, <code>static/app.js</code>, and <code>/api/scene/act</code>. Each intern should be able to explain the JSON shape.</li>
+                        <li><strong>Exercise the trust loop.</strong> Save a provenance receipt, verify it, change one character, and verify that it fails. Write down exactly what it proves: issuer, timestamp, and no tampering. Also write down what it does not prove: the returned item is physically the same item.</li>
+                        <li><strong>Write a one-page opportunity brief.</strong> Compare FreshLens against surplus marketplaces, markdown optimization tools, digital receipts, QR / GS1 traceability, and blockchain provenance. End with one recommendation: build now, stretch later, or do not pursue.</li>
+                        <li><strong>Turn the decision into issues.</strong> By Friday, every Week 4 task should have an owner, a small file scope, a demo expectation, and a regression test expectation.</li>
+                    </ol>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">FreshLens &mdash; Getting Started</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">FreshLens &mdash; Weekly build guides</a></li>
+                        <li><a href="provenance.html">Return trust &mdash; provenance receipts</a></li>
+                        <li><a href="https://www.expiredsolutions.com/" target="_blank" rel="noopener">Expired Solutions &mdash; product context</a></li>
                         <li><a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">Claude Code &mdash; Best practices (explore/plan)</a><span class="tag free">Free</span></li>
                         <li><a href="freshlens.html">FreshLens &mdash; Project details</a></li>
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> FreshLens running locally for the whole team + a written, Claude-Code-assisted build plan.</span>
+                        <span><strong>Deliverable:</strong> FreshLens running locally from integrated <code>main</code>, all tests green, a one-page return-trust opportunity brief, and a written six-week build plan with owners.</span>
                     </div>
                     <div class="skills">
                         <span class="skill-tag">Onboarding a real codebase</span>
+                        <span class="skill-tag">Product research</span>
                         <span class="skill-tag">Reading production code</span>
                         <span class="skill-tag">Planning with AI</span>
                         <span class="skill-tag">API contracts</span>
+                        <span class="skill-tag">Trust-system scoping</span>
                     </div>
                 </div>
             </details>
