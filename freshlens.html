@@ -197,6 +197,7 @@
         <div class="hero-label">Flagship Project &middot; Weeks 3&ndash;8</div>
         <h1>FreshLens</h1>
         <p>Point your camera at a fridge, basket, or produce shelf&mdash;and every item lights up at once with a live, color-coded freshness score. Then AI tells you what to do about it: rescue what&rsquo;s turning, or mark it down before it&rsquo;s lost.</p>
+        <p style="margin-top:0.9rem; color:rgba(255,255,255,0.9);"><strong style="color:#fff;">This summer the team builds one feature on top: Snap-to-Claim</strong>&thinsp;&mdash;&thinsp;a capped, evidence-backed, human-in-the-loop refund loop for perishables that arrive spoiled.</p>
         <div class="hero-tags">
             <span class="hero-tag">Python</span>
             <span class="hero-tag">FastAPI</span>
@@ -218,115 +219,157 @@
     </section>
 
     <section class="block">
-        <h2>How it works</h2>
-        <p class="lead">Three capabilities, built in sequence over Weeks 4&ndash;6 &mdash; then hardened and shipped in Weeks 7&ndash;8.</p>
+        <h2>This summer&rsquo;s build: Snap-to-Claim</h2>
+        <p class="lead">On top of the FreshLens base, the team builds <strong>one</strong> focused feature for Weeks 3&ndash;8: <strong>Snap-to-Claim (Return Trust)</strong> &mdash; a capped, evidence-backed, human-in-the-loop refund loop for perishables that arrive spoiled.</p>
+        <p>A shopper let down by a discounted perishable snaps the item + receipt in-app. The Expired Solutions freshness model <em>advises</em> on condition. A capped policy <em>decides</em> &mdash; auto-approve a small, obvious case, or route it to a human. Every step is duplicate-checked, given a provenance receipt, and written to a tamper-evident audit log. The wedge isn&rsquo;t the freshness score &mdash; it&rsquo;s the <strong>closed, verifiable-evidence loop</strong>.</p>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">1</div>
-                <h3>Multi-Item Detection</h3>
-                <p>A pretrained object detector (YOLO / Ultralytics) finds every produce item in the frame and returns a bounding box for each&mdash;no model training from scratch required.</p>
+                <h3>Advise</h3>
+                <p>The model scores the photo 0&ndash;100 on the canonical scale (<strong>0&nbsp;=&nbsp;fresh, 100&nbsp;=&nbsp;spoiled/urgent</strong>). It&rsquo;s an <em>advisory input</em>, never a guarantee &mdash; copy never says &ldquo;our AI confirms this is spoiled&rdquo;.</p>
             </div>
             <div class="pillar">
                 <div class="num">2</div>
-                <h3>Live Freshness Overlay</h3>
-                <p>Each detected item is cropped and scored 0&ndash;100 by the freshness model, then drawn back onto the camera view with a green / amber / red overlay.</p>
+                <h3>Decide (capped)</h3>
+                <p>A deterministic policy auto-approves only the narrow obvious-defect band (and only after calibration); everything else goes to a human. A rolling <strong>$15 / 30-day</strong> cap limits exposure. The policy never auto-declines.</p>
             </div>
             <div class="pillar">
                 <div class="num">3</div>
-                <h3>Act On It</h3>
-                <p>Claude turns the scored scene into action: an &ldquo;eat me first&rdquo; ranking plus a recipe to rescue what&rsquo;s turning (shopper), or a markdown worklist and shrink-savings estimate (store).</p>
+                <h3>Prove</h3>
+                <p>Every decision gets a provenance receipt that verifies and one hash-chained audit event. Cap + duplicate checks run <em>before</em> the model is ever called.</p>
             </div>
         </div>
+        <p style="margin-top:1.25rem; font-size:0.9rem;">Four guardrails are non-negotiable: advisory language only &middot; human-in-the-loop outside the narrow band &middot; calibration before any auto-threshold &middot; cap + duplicate checks before the model. Full detail in <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/INITIATIVE-freshness-guarantee.md" target="_blank" rel="noopener">INITIATIVE-freshness-guarantee.md</a> and the executable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/SPEC-claim-loop.md" target="_blank" rel="noopener">SPEC-claim-loop.md</a>.</p>
     </section>
 
     <section class="block">
-        <h2>Shopper flow (the hero demo)</h2>
+        <h2>The claim flow</h2>
         <div class="flow">
-            <div class="flow-step"><strong>1 &middot; Point</strong>Aim the camera at your fridge or basket.</div>
+            <div class="flow-step"><strong>1 &middot; Snap</strong>Shopper photographs the item + receipt in-app.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>2 &middot; Detect</strong>Every produce item gets a box.</div>
+            <div class="flow-step"><strong>2 &middot; Check</strong>Cap + duplicate checks run first (before the model).</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>3 &middot; Score</strong>Each item is freshness-scored 0&ndash;100.</div>
+            <div class="flow-step"><strong>3 &middot; Advise</strong>Model scores condition (0&nbsp;=&nbsp;fresh &rarr; 100&nbsp;=&nbsp;urgent).</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>4 &middot; Rank</strong>Color overlay + &ldquo;eat me first&rdquo; order.</div>
+            <div class="flow-step"><strong>4 &middot; Decide</strong>Capped policy: auto-approve or human-review.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>5 &middot; Cook</strong>Claude suggests a recipe to use it up.</div>
+            <div class="flow-step"><strong>5 &middot; Prove</strong>Receipt verifies + audit event appended.</div>
         </div>
+        <p style="margin-top:1rem; font-size:0.9rem;"><strong>Mind the direction.</strong> The canonical FreshLens scale is <strong>0 = perfectly fresh, 100 = spoiled / urgent</strong> (low = green/fresh, high = red/use-now). The raw model returns the opposite (high = fresh); the <code>es_api</code> adapter inverts it at the seam, so all claim code works on the canonical scale.</p>
     </section>
 
     <section class="block">
         <h2>Architecture</h2>
-        <p class="lead">A FastAPI service that chains pretrained vision with the freshness model and an LLM action layer. Beginners assemble proven parts rather than inventing them&mdash;exactly the skill the program teaches.</p>
-        <pre>Camera frame / photo / short clip
-   │
-   ▼
-[ Object detector ]  YOLO/Ultralytics ──► boxes for each produce item
-   │
-   ▼
-[ Per-item crop ] ──► freshness model (0–100, 135 produce types)
-   │
-   ▼
-[ Overlay renderer ] ──► green / amber / red scores on the frame
-   │
-   ├─► Shopper mode:  Claude ──► "eat me first" ranking + rescue recipe
-   │
-   └─► Store mode (Week 7 stretch):  rules + Claude ──► markdown worklist + shrink $ saved</pre>
+        <p class="lead">A FastAPI service that puts a capped, audited policy <em>around</em> the freshness model. Beginners assemble proven parts rather than inventing them &mdash; exactly the skill the program teaches.</p>
+        <pre>in-app photo (item) + receipt
+   |
+   v
+[ cap check ] -> [ duplicate check ] -> [ capture-metadata check ]   (ALL before the model)
+   |
+   v
+[ freshness model ]  analyze_image()  -> score 0-100 (canonical: 0 fresh / 100 urgent) + confidence
+   |
+   v
+[ policy.adjudicate() ]  -> auto_approve (narrow band)  |  human_review (everything else)
+   |
+   v
+[ provenance receipt ] (verifies)  +  [ append-only hash-chain audit ]
+   |
+   +-- human reviewer can approve / decline any escalated claim</pre>
     </section>
 
     <section class="block">
-        <h2>The build plan</h2>
-        <p class="lead">The project runs program Weeks 3&ndash;8. Week 3 verifies the integrated repo, researches the strongest product direction, and turns it into issues. Week 8 is Demo Day; the four build missions below are Weeks 4&ndash;7. Each Friday ends with a live demo. The hero path is the shopper experience; store manager-mode and return-trust receipts are Week 7 extensions.</p>
+        <h2>The build plan (Weeks 3&ndash;8)</h2>
+        <p class="lead">One feature, built in vertical slices &mdash; each Friday ends with a live demo. <strong>Week 3 is the most important week:</strong> the calibration experiment gates everything after it.</p>
         <div class="weeks">
             <div class="week">
-                <div class="wk">Week 4 &middot; Multi-Item Detection</div>
+                <div class="wk">Week 3 &middot; Calibration + Walking Skeleton</div>
                 <ul>
-                    <li>Image upload endpoint (HEIC/JPEG/PNG)</li>
-                    <li>Run a pretrained detector on a fridge/shelf photo</li>
-                    <li>Draw a separate box for every produce item</li>
-                    <li>Return boxes + scores as JSON</li>
+                    <li>Run 150&ndash;300 real phone photos through the model</li>
+                    <li>Write the calibration gate (<code>docs/CALIBRATION.md</code>)</li>
+                    <li>Stand up the minimal claim loop end-to-end (advisory)</li>
+                    <li>Lock scope based on what calibration shows</li>
                 </ul>
-                <div class="demo">Demo: upload a fridge photo &rarr; every item boxed with a freshness score.</div>
+                <div class="demo">Demo: calibration scorecard + one photo through the skeleton (scored &rarr; advisory decision &rarr; receipt verifies &rarr; audit event).</div>
             </div>
             <div class="week">
-                <div class="wk">Week 5 &middot; Live Freshness Overlay</div>
+                <div class="wk">Week 4 &middot; Policy Engine + Audit Trail</div>
                 <ul>
-                    <li>Mobile camera capture in the browser</li>
-                    <li>Score each item 0&ndash;100; draw color overlays (green/amber/red)</li>
-                    <li>&ldquo;Eat me first&rdquo; ranking of the scene</li>
-                    <li>Smooth the experience to near real-time</li>
+                    <li>Deterministic <code>adjudicate()</code> tier decision</li>
+                    <li>Rolling cap + duplicate detection</li>
+                    <li>Hash-chained audit on every state change</li>
                 </ul>
-                <div class="demo">Demo: aim at a basket &rarr; scores appear live, worst-first list updates.</div>
+                <div class="demo">Demo: obvious spoilage auto-approves under the cap; a duplicate &rarr; human-review; audit entry for each.</div>
             </div>
             <div class="week">
-                <div class="wk">Week 6 &middot; Act On It</div>
+                <div class="wk">Week 5 &middot; Evidence Quality</div>
                 <ul>
-                    <li>Send detected items + scores to Claude</li>
-                    <li>Generate a rescue recipe from what&rsquo;s on hand</li>
-                    <li>Explain &ldquo;why this first&rdquo; in plain language</li>
-                    <li>Handle messy / partial detections gracefully</li>
+                    <li>Receipt parsing + item-identity match</li>
+                    <li>Fraud signals (item mismatch, recycled photo)</li>
+                    <li>Capture-metadata validation</li>
                 </ul>
-                <div class="demo">Demo: scan a fridge &rarr; &ldquo;Use the spinach &amp; tomatoes tonight&mdash;here&rsquo;s a recipe.&rdquo;</div>
+                <div class="demo">Demo: banana photo + &ldquo;strawberry&rdquo; receipt &rarr; human-review (item mismatch); a genuine match &rarr; auto-approve within cap.</div>
             </div>
             <div class="week">
-                <div class="wk">Week 7 &middot; Harden, Extend &amp; Team Craft</div>
+                <div class="wk">Week 6 &middot; Shopper UX + Business Review</div>
                 <ul>
-                    <li>Store stretch: shelf photo &rarr; markdown worklist + shrink $ saved</li>
-                    <li>Error handling + 10&plus; unit tests</li>
-                    <li>Build more if you want; keep the fallbacks intact</li>
-                    <li><a href="provenance.html">Optional track: return-trust provenance receipts</a></li>
-                    <li>Team workflow: branch &rarr; PR &rarr; <code>/code-review</code> &rarr; merge</li>
+                    <li>Shopper claim wizard (in-app capture)</li>
+                    <li>Store-manager review queue</li>
+                    <li>Monthly-cap config panel</li>
                 </ul>
-                <div class="demo">Demo: scan a produce shelf &rarr; &ldquo;Mark down these 6 items, save ~$48 today.&rdquo;</div>
+                <div class="demo">Demo: shopper four-screen claim end-to-end; manager review queue + cap config.</div>
+            </div>
+            <div class="week">
+                <div class="wk">Week 7 &middot; Provenance Hardening</div>
+                <ul>
+                    <li>Ed25519-signed receipts (verify without forging)</li>
+                    <li>On-chain anchor of the receipt digest</li>
+                    <li><a href="provenance.html">Optional track: blockchain provenance receipts</a></li>
+                </ul>
+                <div class="demo">Demo: signed receipt verifies green &rarr; tamper one character &rarr; verifies red; audit shows the receipt ID.</div>
+            </div>
+            <div class="week">
+                <div class="wk">Week 8 &middot; Integration, Freeze &amp; Demo Day</div>
+                <ul>
+                    <li>Wire the loop into the host app UI</li>
+                    <li>Freeze, record the demo</li>
+                    <li>Present on Demo Day</li>
+                </ul>
+                <div class="demo">Demo: shopper claim &rarr; capped decision &rarr; receipt verifies; business review &rarr; approve &rarr; download the audit log.</div>
             </div>
         </div>
-        <p style="margin-top:1.25rem; font-size:0.9rem;">Week 3 onboards the codebase and plans the build; Week 8 freezes, records a demo, and presents on Demo Day. Full week-by-week guides live in the repo&rsquo;s <a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">docs/</a>.</p>
+        <p style="margin-top:1.25rem; font-size:0.9rem;">Full week-by-week missions live in the repo&rsquo;s <a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">docs/</a> (<code>WEEK-03.md &hellip; WEEK-08.md</code>).</p>
+    </section>
+
+    <section class="block">
+        <h2>This week &mdash; Week 3: what to do</h2>
+        <p class="lead">Two threads: <strong>(a)</strong> the calibration experiment that decides whether the model is trustworthy enough to ever auto-approve, and <strong>(b)</strong> the walking skeleton that proves the claim loop runs end-to-end. Nine starter tasks are filed as GitHub issues &mdash; <strong>nobody is preassigned; pick the one that fits you.</strong></p>
+        <div class="pillars">
+            <div class="pillar">
+                <div class="num">A</div>
+                <h3>Calibration (the gate)</h3>
+                <p>Collect 150&ndash;300 labeled phone photos (<strong>#29</strong>), run them through the proxy (<strong>#32</strong>), score + write <code>docs/CALIBRATION.md</code> (<strong>#33</strong>), AI-fake probe (<strong>#34</strong>). This chain is the critical path &mdash; Friday&rsquo;s go/no-go depends on it.</p>
+            </div>
+            <div class="pillar">
+                <div class="num">B</div>
+                <h3>Walking skeleton</h3>
+                <p>Policy stub, human-review-only (<strong>#30</strong>); <code>POST /api/claims</code> + evaluate (<strong>#35</strong>); the hash-chain audit (<strong>#31</strong>); skeleton tests (<strong>#36</strong>). These start on day one.</p>
+            </div>
+            <div class="pillar">
+                <div class="num">C</div>
+                <h3>Design</h3>
+                <p>Claim-flow wireframe v0 (<strong>#37</strong>) &mdash; how a shopper moves through snap &rarr; decision &rarr; receipt.</p>
+            </div>
+        </div>
+        <p style="margin-top:1.25rem; font-size:0.9rem;">Grab one with <code>gh issue develop &lt;N&gt; --checkout</code> (that&rsquo;s how you claim it, so two people don&rsquo;t collide). Detail + acceptance criteria: <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-03.md" target="_blank" rel="noopener">WEEK-03.md</a> and <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-01-ISSUES.md" target="_blank" rel="noopener">WEEK-01-ISSUES.md</a>. <strong>Friday gate:</strong> if calibration shows &ge;85% accuracy at &ge;0.80 confidence, Weeks 4&ndash;8 build the tiered auto-approve; if not, the loop stays human-review-only.</p>
     </section>
 
     <section class="block">
         <h2>Get started</h2>
-        <p class="lead">The starter repo is a <strong>complete, runnable app</strong> — clone it and it works on day one (it scans, scores, and suggests a recipe out of the box). The step-by-step <strong>Getting Started</strong> guide takes you from clone to running in your browser in ~15 minutes, and the weekly guides (Weeks 3&ndash;8) are your build missions. No AI-tools experience needed.</p>
+        <p class="lead">The starter repo is a <strong>complete, runnable app</strong> &mdash; clone it and it works on day one, offline, with no API key (placeholder freshness scorer). The <strong>Getting Started</strong> guide takes you from clone to running in your browser in ~15 minutes; then <strong>Week 3</strong> (<code>docs/WEEK-03.md</code>) is your first mission. To use the <em>real</em> Expired Solutions model you point the app at the read-only proxy with your own intern key (handed out privately) &mdash; see <code>docs/ES-MODEL-ACCESS.md</code>. No prior AI-tools experience needed; the repo includes a guide for using Claude Code well (and keeping it cheap on a $20 plan).</p>
         <div class="cta-row">
             <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">Read the Getting Started guide &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-03.md" target="_blank" rel="noopener">Week 3 mission &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">Starter repository</a>
             <a class="btn btn-secondary" href="provenance.html">Provenance receipts &rarr;</a>
             <a class="btn btn-secondary" href="index.html">Back to program overview</a>
