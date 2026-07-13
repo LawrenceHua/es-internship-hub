@@ -783,15 +783,15 @@
             </div>
             <div class="phase-card">
                 <div class="phase-number">3</div>
-                <h3>Expired Solutions: Score &amp; Act</h3>
+                <h3>Expired Solutions: Evidence &amp; UX</h3>
                 <div class="phase-weeks">Weeks 5&ndash;6</div>
-                <p>Add the live freshness overlay, then let Claude turn scores into recipes and markdown worklists.</p>
+                <p>Make claim evidence trustworthy&mdash;receipt, identity, fraud signals&mdash;then put the claim flow and review queue in the browser.</p>
             </div>
             <div class="phase-card">
                 <div class="phase-number">4</div>
                 <h3>Ship &amp; Extend</h3>
                 <div class="phase-weeks">Weeks 7&ndash;8</div>
-                <p>Harden and test, build more if you want, sharpen team-with-AI habits, and present on Demo Day.</p>
+                <p>Harden provenance, integrate and freeze the build, and present the finished feature on Demo Day.</p>
             </div>
         </div>
     </div>
@@ -1212,33 +1212,35 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num is-project">W5</span>
                     <span class="week-head">
-                        <h3 class="week-title">Live Freshness Overlay <span class="phase-tag is-project">Expired Solutions</span></h3>
-                        <span class="week-obj">Score each detected item 0&ndash;100 and render a color-coded overlay right on the camera view.</span>
+                        <h3 class="week-title">Evidence Quality: Receipt, Identity, Fraud <span class="phase-tag is-project">Expired Solutions</span></h3>
+                        <span class="week-obj">Make the evidence the policy engine sees trustworthy: parse the receipt, verify the photo shows that item, and flag fraudulent photos.</span>
                     </span>
                     <span class="week-dates">Jul 13&ndash;17</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
                     <div class="day-grid">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Sprint plan</h4><p>Overlay pillar: connect scores to the UI.</p></div>
-                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Score items</h4><p>Run each crop through the freshness model (0&ndash;100).</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>UI / state troubleshooting.</p></div>
-                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Color-code</h4><p>Green / amber / red overlay per box.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Live freshness overlay on the camera view.</p></div>
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Sprint plan</h4><p>Evidence pillar: receipt, identity, fraud. Owners are assigned &mdash; issues <strong>#76&ndash;#82</strong>.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Receipt + identity</h4><p><code>parse_receipt_text</code> and <code>matches_receipt_item</code>: does the photo show what was bought?</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Classifier fallbacks, EXIF, evidence troubleshooting.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Fraud signals + wiring</h4><p><code>compute_fraud_signals</code>; wire all three evidence checks into claim evaluation, before the model.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Banana photo on a strawberry receipt &rarr; human review; a genuine, matching claim &rarr; policy decides.</p></div>
                     </div>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
-                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">FreshLens &mdash; Weekly build guides</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-05.md" target="_blank" rel="noopener">WEEK-05.md &mdash; the full mission + Friday definition of done</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues" target="_blank" rel="noopener">Week-5 issues #76&ndash;#82 &mdash; one per owner, acceptance criteria inside</a></li>
                         <li><a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener">Claude Code &mdash; Common workflows</a><span class="tag free">Free</span></li>
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> a live, color-coded freshness overlay&mdash;every detected item shows its 0&ndash;100 score.</span>
+                        <span><strong>Deliverable:</strong> every claim decision is evidence-backed&mdash;receipt parsed, item identity checked, fraud signals computed&mdash;with all three in the evaluate response and the audit chain, and <code>pytest</code> green offline.</span>
                     </div>
                     <div class="skills">
-                        <span class="skill-tag">Model output &rarr; UI</span>
-                        <span class="skill-tag">Front-end state</span>
-                        <span class="skill-tag">Color-coded data viz</span>
+                        <span class="skill-tag">Receipt parsing</span>
+                        <span class="skill-tag">Item-identity matching</span>
+                        <span class="skill-tag">Fraud signals</span>
+                        <span class="skill-tag">Offline-first testing</span>
                     </div>
                 </div>
             </details>
@@ -1248,33 +1250,33 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num is-project">W6</span>
                     <span class="week-head">
-                        <h3 class="week-title">Act On It <span class="phase-tag is-project">Expired Solutions</span></h3>
-                        <span class="week-obj">Let Claude turn freshness scores into shopper action: an &ldquo;eat me first&rdquo; ranking and a rescue recipe. (Store markdown mode is the Week 7 stretch.)</span>
+                        <h3 class="week-title">Shopper UX + Business Review <span class="phase-tag is-project">Expired Solutions</span></h3>
+                        <span class="week-obj">Make the claim flow real in the browser: the shopper&rsquo;s one-thing-per-page claim flow, plus the business review queue and policy config UI.</span>
                     </span>
                     <span class="week-dates">Jul 20&ndash;24</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
                     <div class="day-grid">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Sprint plan</h4><p>Action pillar: design the Claude prompts.</p></div>
-                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Shopper mode</h4><p>&ldquo;Eat me first&rdquo; ranking + rescue recipe via Claude.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Prompt &amp; API troubleshooting.</p></div>
-                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Wire it together</h4><p>Scan &rarr; score &rarr; act, end to end.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Full FreshLens flow on a real fridge/shelf.</p></div>
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Sprint plan</h4><p>UX pillar: shopper flow + review queue, split the screens.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Shopper flow</h4><p>One-thing-per-page: photo &rarr; purchase details &rarr; review &rarr; decision.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Front-end state &amp; API troubleshooting.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Business review</h4><p>Review queue for human-review claims + the policy config UI.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Two tabs side-by-side: shopper submits, business reviews.</p></div>
                     </div>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
-                        <li><a href="https://platform.claude.com/docs/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener">Anthropic &mdash; Prompt-engineering guide</a><span class="tag free">Free</span></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06.md" target="_blank" rel="noopener">WEEK-06.md &mdash; the full mission</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">FreshLens &mdash; Weekly build guides</a></li>
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> the end-to-end FreshLens flow: scan a scene, score every item, get an AI action.</span>
+                        <span><strong>Deliverable:</strong> the claim loop in the browser, end to end: a shopper submits an evidence-backed claim, and a reviewer decides it in the queue.</span>
                     </div>
                     <div class="skills">
-                        <span class="skill-tag">Claude API integration</span>
-                        <span class="skill-tag">Prompt design for action</span>
-                        <span class="skill-tag">Shipping a full feature</span>
+                        <span class="skill-tag">One-thing-per-page UX</span>
+                        <span class="skill-tag">Front-end state</span>
+                        <span class="skill-tag">Review-queue design</span>
                     </div>
                 </div>
             </details>
@@ -1284,19 +1286,19 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num is-ship">W7</span>
                     <span class="week-head">
-                        <h3 class="week-title">Harden, Extend &amp; Team Craft <span class="phase-tag">Ship &amp; Extend</span></h3>
-                        <span class="week-obj">Make FreshLens solid, build more if you want, and sharpen how you work as a team with AI.</span>
+                        <h3 class="week-title">Provenance Hardening <span class="phase-tag">Ship &amp; Extend</span></h3>
+                        <span class="week-obj">Make the tamper-evident receipt story airtight: asymmetric signing, receipt verification, and the on-chain existence proof.</span>
                     </span>
                     <span class="week-dates">Jul 27&ndash;31</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
                     <div class="day-grid">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Plan the polish</h4><p>Pick hardening targets + optional stretch features.</p></div>
-                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Test &amp; fix</h4><p>Write tests, handle edge cases, fix bugs.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Code review &amp; architecture help.</p></div>
-                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Extend (optional)</h4><p>Store manager mode or another stretch feature.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Polished build + any new features.</p></div>
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Sprint plan</h4><p>Provenance pillar: signing, verification, anchoring.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Sign &amp; verify</h4><p>Upgrade receipts to asymmetric signing; verify end to end.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Crypto, receipts &amp; audit-chain help.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Anchor + harden</h4><p>Existence proof via <code>src/anchor.py</code>; edge cases and tests.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Claim &rarr; signed receipt saved &rarr; receipt independently verified.</p></div>
                     </div>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
@@ -1306,13 +1308,13 @@ cd es-intern-freshlens
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> a tested, polished build&mdash;plus any stretch features&mdash;merged through clean, team-reviewed PRs.</span>
+                        <span><strong>Deliverable:</strong> tamper-evident provenance, hardened&mdash;every adjudicated claim carries a signed receipt anyone can verify.</span>
                     </div>
                     <div class="skills">
+                        <span class="skill-tag">Digital signatures</span>
+                        <span class="skill-tag">Audit chains</span>
                         <span class="skill-tag">Testing</span>
                         <span class="skill-tag">Code review with AI</span>
-                        <span class="skill-tag">Refactoring</span>
-                        <span class="skill-tag">Team collaboration</span>
                     </div>
                 </div>
             </details>
@@ -1322,8 +1324,8 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num is-ship">W8</span>
                     <span class="week-head">
-                        <h3 class="week-title">Ship &amp; Present <span class="phase-tag">Demo Day</span></h3>
-                        <span class="week-obj">Code freeze, record a demo, and present the finished project on Demo Day.</span>
+                        <h3 class="week-title">Integration, Freeze &amp; Demo Day <span class="phase-tag">Demo Day</span></h3>
+                        <span class="week-obj">Merge everything into one working, testable feature; code freeze, record a demo, and present on Demo Day.</span>
                     </span>
                     <span class="week-dates">Aug 3&ndash;7</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>

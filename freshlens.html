@@ -342,26 +342,26 @@
     </section>
 
     <section class="block">
-        <h2>This week &mdash; Week 3: what to do</h2>
-        <p class="lead">Two threads: <strong>(a)</strong> the calibration experiment that decides whether the model is trustworthy enough to ever auto-approve, and <strong>(b)</strong> the walking skeleton that proves the claim loop runs end-to-end. Nine starter tasks are filed as GitHub issues &mdash; <strong>nobody is preassigned; pick the one that fits you.</strong></p>
+        <h2>This week &mdash; Week 5: evidence quality</h2>
+        <p class="lead">Make the evidence the policy engine sees <strong>trustworthy</strong>. Three pieces: parse the purchase receipt, verify the photo shows the same item the receipt says, and handle the fraud case &mdash; photos that are AI-generated or don&rsquo;t show genuine spoilage. Seven tasks are filed as GitHub issues <strong>#76&ndash;#82 &mdash; each one is preassigned to its owner</strong>; yours is waiting in your notifications.</p>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">A</div>
-                <h3>Calibration (the gate)</h3>
-                <p>Collect 150&ndash;300 labeled phone photos (<strong>#29</strong>), run them through the proxy (<strong>#32</strong>), score + write <code>docs/CALIBRATION.md</code> (<strong>#33</strong>), AI-fake probe (<strong>#34</strong>). This chain is the critical path &mdash; Friday&rsquo;s go/no-go depends on it.</p>
+                <h3>Photo trust</h3>
+                <p>Item-identity match &mdash; does the photo show what the receipt says? &mdash; plus the fraud-signal baseline (<strong>#76</strong>, Lisa). Receipt text parsing with integer-cents money + optional OCR stretch (<strong>#77</strong>, Lezhi).</p>
             </div>
             <div class="pillar">
                 <div class="num">B</div>
-                <h3>Walking skeleton</h3>
-                <p>Policy stub, human-review-only (<strong>#30</strong>); <code>POST /api/claims</code> + evaluate (<strong>#35</strong>); the hash-chain audit (<strong>#31</strong>); skeleton tests (<strong>#36</strong>). These start on day one.</p>
+                <h3>Into the claim loop</h3>
+                <p>Wire receipt, identity, and fraud gates into <code>evaluate_claim</code> &mdash; evidence first, model <em>last</em> (<strong>#78</strong>, Jinming). Redacted evidence fields in the hash-chain audit (<strong>#80</strong>, Bill). Offline test coverage for all of it (<strong>#79</strong>, Tony).</p>
             </div>
             <div class="pillar">
                 <div class="num">C</div>
-                <h3>Design</h3>
-                <p>Claim-flow wireframe v0 (<strong>#37</strong>) &mdash; how a shopper moves through snap &rarr; decision &rarr; receipt.</p>
+                <h3>Measure + design</h3>
+                <p>Evidence-quality eval by confidence band against the calibration set (<strong>#81</strong>, Yizhou). The evidence-backed shopper claim-flow wireframe (<strong>#82</strong>, Ziyun).</p>
             </div>
         </div>
-        <p style="margin-top:1.25rem; font-size:0.9rem;">Grab one with <code>gh issue develop &lt;N&gt; --checkout</code> (that&rsquo;s how you claim it, so two people don&rsquo;t collide). Detail + acceptance criteria: <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-03.md" target="_blank" rel="noopener">WEEK-03.md</a> and <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-01-ISSUES.md" target="_blank" rel="noopener">WEEK-01-ISSUES.md</a>. <strong>Friday gate:</strong> if calibration shows &ge;85% accuracy at &ge;0.80 confidence, Weeks 4&ndash;8 build the tiered auto-approve; if not, the loop stays human-review-only.</p>
+        <p style="margin-top:1.25rem; font-size:0.9rem;">Start with <code>gh issue develop &lt;N&gt; --checkout</code> on your issue. Full instructions + acceptance criteria: <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-05.md" target="_blank" rel="noopener">WEEK-05.md</a>. <strong>Friday demo:</strong> a banana photo on a strawberry receipt routes to <code>human_review</code>; a genuine, matching spoilage claim goes to the policy engine (on the placeholder backend it still routes to human review &mdash; that&rsquo;s correct).</p>
     </section>
 
     <section class="block">
@@ -369,7 +369,7 @@
         <p class="lead">The starter repo is a <strong>complete, runnable app</strong> &mdash; clone it and it works on day one, offline, with no API key (placeholder freshness scorer). The <strong>Getting Started</strong> guide takes you from clone to running in your browser in ~15 minutes; then <strong>Week 3</strong> (<code>docs/WEEK-03.md</code>) is your first mission. To use the <em>real</em> Expired Solutions model you point the app at the read-only proxy with your own intern key (handed out privately) &mdash; see <code>docs/ES-MODEL-ACCESS.md</code>. No prior AI-tools experience needed; the repo includes a guide for using Claude Code well (and keeping it cheap on a $20 plan).</p>
         <div class="cta-row">
             <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">Read the Getting Started guide &rarr;</a>
-            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-03.md" target="_blank" rel="noopener">Week 3 mission &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-05.md" target="_blank" rel="noopener">Week 5 mission &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">Starter repository</a>
             <a class="btn btn-secondary" href="provenance.html">Provenance receipts &rarr;</a>
             <a class="btn btn-secondary" href="index.html">Back to program overview</a>
