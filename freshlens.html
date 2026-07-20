@@ -146,6 +146,20 @@
         .week li::before { content: ''; position: absolute; left: 0; top: 0.6rem; width: 4px; height: 4px; border-radius: 50%; background: var(--accent-muted); }
         .week .demo { margin-top: 0.75rem; font-size: 0.82rem; color: var(--text); background: var(--accent-light); border-radius: 8px; padding: 0.6rem 0.8rem; }
 
+        .status-callout {
+            margin: 1rem 0 1.5rem; padding: 1rem 1.15rem; border-left: 4px solid var(--caution);
+            background: #fff9e8; border-radius: 0 var(--radius) var(--radius) 0;
+            color: var(--text-secondary); font-size: 0.91rem;
+        }
+        .status-callout strong { color: var(--text); }
+        .ownership-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1rem; }
+        .owner-task { border-top: 2px solid var(--border); padding: 0.85rem 0.25rem 0.25rem; }
+        .owner-task h3 { display: flex; justify-content: space-between; gap: 0.75rem; align-items: baseline; }
+        .owner-task h3 span { font-family: var(--mono); color: var(--accent); font-size: 0.72rem; white-space: nowrap; }
+        .owner-task p { font-size: 0.86rem; }
+        .workstreams { columns: 2; column-gap: 2rem; margin: 0.8rem 0 0 1.1rem; }
+        .workstreams li { break-inside: avoid; color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 0.55rem; padding-left: 0.2rem; }
+
         .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
         .btn {
             display: inline-flex; align-items: center; gap: 0.45rem; text-decoration: none;
@@ -163,7 +177,10 @@
         @media (max-width: 760px) {
             .hero h1 { font-size: 2.1rem; }
             .hero-reticle { width: 240px; height: 240px; right: -4rem; }
-            .pillars, .weeks { grid-template-columns: 1fr; }
+            .pillars, .weeks, .ownership-grid { grid-template-columns: 1fr; }
+            .workstreams { columns: 1; }
+            .owner-task h3 { align-items: flex-start; flex-direction: column; gap: 0.2rem; }
+            .owner-task h3 span { white-space: normal; overflow-wrap: anywhere; }
             .flow-arrow { display: none; }
         }
     </style>
@@ -308,16 +325,17 @@
                     <li>Fraud signals (item mismatch, recycled photo)</li>
                     <li>Capture-metadata validation</li>
                 </ul>
-                <div class="demo">Demo: banana photo + &ldquo;strawberry&rdquo; receipt &rarr; human-review (item mismatch); a genuine match &rarr; auto-approve within cap.</div>
+                <div class="demo">Demo: mismatched, unavailable, or unparseable evidence fails closed to human review; a genuine match reaches the policy engine.</div>
             </div>
             <div class="week">
                 <div class="wk">Week 6 &middot; Shopper UX + Business Review</div>
                 <ul>
-                    <li>Shopper claim wizard (in-app capture)</li>
-                    <li>Store-manager review queue</li>
-                    <li>Monthly-cap config panel</li>
+                    <li>Shopper claim wizard + receipt capture</li>
+                    <li>Human-review queue + effective policy config</li>
+                    <li>Safe ES model insights, reports, evals, and joined tests</li>
+                    <li>One team-owned golden path across every layer</li>
                 </ul>
-                <div class="demo">Demo: shopper four-screen claim end-to-end; manager review queue + cap config.</div>
+                <div class="demo">Demo: shopper submits &rarr; evidence routes to human review &rarr; reviewer decides &rarr; report, receipt, and audit verify.</div>
             </div>
             <div class="week">
                 <div class="wk">Week 7 &middot; Provenance Hardening</div>
@@ -341,36 +359,61 @@
         <p style="margin-top:1.25rem; font-size:0.9rem;">Full week-by-week missions live in the repo&rsquo;s <a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">docs/</a> (<code>WEEK-03.md &hellip; WEEK-08.md</code>).</p>
     </section>
 
-    <section class="block">
-        <h2>This week &mdash; Week 5: evidence quality</h2>
-        <p class="lead">Make the evidence the policy engine sees <strong>trustworthy</strong>. Three pieces: parse the purchase receipt, verify the photo shows the same item the receipt says, and handle the fraud case &mdash; photos that are AI-generated or don&rsquo;t show genuine spoilage. Eight tasks are filed as GitHub issues <strong>#76&ndash;#82 and #85 &mdash; each one is preassigned to its owner</strong>; yours is waiting in your notifications.</p>
+    <section class="block" id="week-6">
+        <h2>This week &mdash; Week 6: make the claim loop real</h2>
+        <p class="lead"><strong>Jul 20&ndash;24.</strong> Build the shopper&rsquo;s four-step claim wizard and the reviewer&rsquo;s operating view, connect them to safe ES model insights, and finish with one joined path that every intern can explain and run.</p>
+        <div class="status-callout"><strong>Calibration status: GATE: RE-SCOPE (human-review-only).</strong> The effective auto-approve sentinel stays at <code>2.0</code>. Model, identity, receipt, date-label, and nutrition signals are advisory; no Week 6 screen or endpoint may describe them as a guarantee or silently enable automatic approval.</div>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">A</div>
-                <h3>Photo trust</h3>
-                <p>Item-identity match &mdash; does the photo show what the receipt says? &mdash; plus the fraud-signal baseline (<strong>#76</strong>, Lisa). Receipt text parsing with integer-cents money + optional OCR stretch (<strong>#77</strong>, Lezhi).</p>
+                <h3>Shopper + reviewer</h3>
+                <p>One question per screen, camera and receipt capture, an evidence summary, and honest pending copy. The reviewer gets a filterable queue, claim detail, effective policy view, and explicit approve/decline actions.</p>
             </div>
             <div class="pillar">
                 <div class="num">B</div>
-                <h3>Into the claim loop</h3>
-                <p>Wire receipt, identity, and fraud gates into <code>evaluate_claim</code> &mdash; evidence first, model <em>last</em> (<strong>#78</strong>, Jinming). Redacted evidence fields in the hash-chain audit (<strong>#80</strong>, Bill). Offline test coverage for all of it (<strong>#79</strong>, Tony).</p>
+                <h3>Safe real-model access</h3>
+                <p>The restricted Week-6 set is <code>/score</code>, <code>/nutrition/{produce_type}</code>, <code>/model-info</code>, <code>/budget</code>, <code>/date-label/decode</code>, and <code>/markdown/suggest</code>&mdash;but call a route only when <code>/capabilities</code> advertises it. <code>/score</code> is a stateful advisory exception: it updates shared counters/cache, and training persistence is <strong>INCONCLUSIVE</strong>. Training data, predictions, broad analysis, batches, and account inventory stay out of scope.</p>
             </div>
             <div class="pillar">
                 <div class="num">C</div>
-                <h3>Measure + design</h3>
-                <p>Evidence-quality eval by confidence band against the calibration set (<strong>#81</strong>, Yizhou). The evidence-backed shopper claim-flow wireframe (<strong>#82</strong>, Ziyun). The evidence gold set &mdash; identity pairs + fraud fixtures &mdash; that both consume (<strong>#85</strong>, Mohan).</p>
+                <h3>One golden path</h3>
+                <p>Submit &rarr; validate evidence &rarr; advise &rarr; human review &rarr; report &rarr; verify receipt and audit. Offline tests remain deterministic; live proxy probes are a separate, opt-in verification step.</p>
             </div>
         </div>
-        <p style="margin-top:1.25rem; font-size:0.9rem;">Start with <code>gh issue develop &lt;N&gt; --checkout</code> on your issue. Full instructions + acceptance criteria: <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-05.md" target="_blank" rel="noopener">WEEK-05.md</a>. <strong>Friday demo:</strong> a banana photo on a strawberry receipt routes to <code>human_review</code>; a genuine, matching spoilage claim goes to the policy engine (on the placeholder backend it still routes to human review &mdash; that&rsquo;s correct).</p>
-        <p style="margin-top:0.75rem; font-size:0.9rem;"><strong>New stretch track &mdash; Rescue Recipes</strong> (only after your core issue merges): an in-house recipe retrieval model &mdash; no paid API &mdash; over a license-clean, team-authored corpus. Issues <strong>#86</strong> (corpus, Mohan + everyone), <strong>#87</strong> (BM25 + embeddings engine, Lisa + Yizhou), <strong>#88</strong> (eval floors, Tony). Design: <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/RECIPES-TRACK.md" target="_blank" rel="noopener">RECIPES-TRACK.md</a>. Week-7 Friday demo target.</p>
+
+        <h2 style="margin-top:2.25rem;">Ownership &mdash; all eight people ship</h2>
+        <p class="lead">Each owner has a vertical slice plus a team contract. Every number below links to the assigned, standalone GitHub issue.</p>
+        <div class="ownership-grid">
+            <div class="owner-task"><h3>Ziyun <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></span></h3><p>Build the accessible shopper wizard and the business review/config screens; publish loading, error, empty, and mobile states.</p></div>
+            <div class="owner-task"><h3>Jinming <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></span></h3><p>Extend the authenticated review queue and effective-policy contract; make capped reviewer actions idempotent and auditable.</p></div>
+            <div class="owner-task"><h3>Lisa <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/108">#108</a></span></h3><p>Add identity and nutrition advisory output without duplicating claim fields; co-own the canonical produce vocabulary contract.</p></div>
+            <div class="owner-task"><h3>Lezhi <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a></span></h3><p>Add the receipt-image seam and date-label cross-check; reconcile the optional OCR branch and co-own normalization.</p></div>
+            <div class="owner-task"><h3>Mohan <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a></span></h3><p>Repair reproducible evidence fixtures, characterize only approved data, and provide deterministic in-process demo seeds.</p></div>
+            <div class="owner-task"><h3>Bill <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/111">#111</a></span></h3><p>Ship account-scoped claim reports with model provenance while preserving existing report and response-envelope contracts.</p></div>
+            <div class="owner-task"><h3>Tony <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/112">#112</a></span></h3><p>Own joined API/browser tests, lint enforcement, and the proxy capability doctor; test failures and unavailable signals explicitly.</p></div>
+            <div class="owner-task"><h3>Yizhou <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a></span></h3><p>Build reproducible UX/evidence evaluation with in-process seeding, confidence bands, and offline structural checks.</p></div>
+        </div>
+
+        <h2 style="margin-top:2.25rem;">Shared feature tracks</h2>
+        <ul class="workstreams">
+            <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a></strong> &mdash; capability-aware ES proxy client and setup doctor (Bill + Tony).</li>
+            <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/114">#114</a></strong> &mdash; receipt/item vocabulary and alias normalization (Lisa + Lezhi + Mohan + Yizhou).</li>
+            <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/115">#115</a></strong> &mdash; rescue-recipe baseline, gated on the existing #86&ndash;#88 prerequisites (Lisa + Mohan + Yizhou + Tony).</li>
+            <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/116">#116</a></strong> &mdash; golden-path demo runner, runbook, accessibility pass, and all-team handoff.</li>
+        </ul>
+
+        <div class="status-callout"><strong>Week 5 runtime closeout is VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/117">PR #117</a>.</strong> Fail-closed evidence handling, rollback/concurrency tests, raw-image bounds, and real lint enforcement are merged. The remaining carryovers are the #85 fixture repair in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a>, optional OCR review in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a>, and their vocabulary/docs reconciliation. Close them only with command or browser evidence.</div>
+        <p style="font-size:0.9rem;"><strong>Wednesday, Jul 22 at noon ET:</strong> freeze request/response shapes, DOM selectors, fixture IDs, error semantics, and the capability matrix. Every owner posts one consumer-ready example and one failing-path test. <strong>Friday, Jul 24 at noon ET:</strong> run the golden path live in two browser views, then show the offline suite, report export, receipt verification, and audit-chain verification.</p>
     </section>
 
     <section class="block">
         <h2>Get started</h2>
-        <p class="lead">The starter repo is a <strong>complete, runnable app</strong> &mdash; clone it and it works on day one, offline, with no API key (placeholder freshness scorer). The <strong>Getting Started</strong> guide takes you from clone to running in your browser in ~15 minutes; then <strong>Week 3</strong> (<code>docs/WEEK-03.md</code>) is your first mission. To use the <em>real</em> Expired Solutions model you point the app at the read-only proxy with your own intern key (handed out privately) &mdash; see <code>docs/ES-MODEL-ACCESS.md</code>. No prior AI-tools experience needed; the repo includes a guide for using Claude Code well (and keeping it cheap on a $20 plan).</p>
+        <p class="lead">The starter repo is a <strong>complete, runnable app</strong> &mdash; clone it and it works on day one, offline, with no API key (placeholder freshness scorer). The <strong>Getting Started</strong> guide takes you from clone to running in your browser in ~15 minutes. For Week 6, read <code>START_HERE.md</code> and kickoff #118 first. Real-model access uses an intern-scoped, fail-closed allowlist with a private key; <code>/score</code> is stateful advisory access, not a pure read, while other routes are available only when <code>/capabilities</code> advertises them. See <code>docs/ES-MODEL-ACCESS.md</code>.</p>
         <div class="cta-row">
+            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/issues/118" target="_blank" rel="noopener">Week 6 kickoff #118 &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/START_HERE.md" target="_blank" rel="noopener">Week 6 START_HERE &rarr;</a>
             <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">Read the Getting Started guide &rarr;</a>
-            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-05.md" target="_blank" rel="noopener">Week 5 mission &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06.md" target="_blank" rel="noopener">Week 6 mission &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/API.md" target="_blank" rel="noopener">API reference &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">Starter repository</a>
             <a class="btn btn-secondary" href="provenance.html">Provenance receipts &rarr;</a>

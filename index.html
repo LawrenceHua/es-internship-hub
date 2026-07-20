@@ -846,7 +846,7 @@
         <div class="weeks">
 
             <!-- WEEK 1 -->
-            <details class="week" open>
+            <details class="week">
                 <summary>
                     <span class="week-num">W1</span>
                     <span class="week-head">
@@ -946,7 +946,7 @@ npm install -g @anthropic-ai/claude-code</code>
             </details>
 
             <!-- WEEK 2 -->
-            <details class="week" open>
+            <details class="week">
                 <summary>
                     <span class="week-num">W2</span>
                     <span class="week-head">
@@ -1247,37 +1247,65 @@ cd es-intern-freshlens
             </details>
 
             <!-- WEEK 6 -->
-            <details class="week">
+            <details class="week" id="week-6-overview" open>
                 <summary>
                     <span class="week-num is-project">W6</span>
                     <span class="week-head">
-                        <h3 class="week-title">Shopper UX + Business Review <span class="phase-tag is-project">Expired Solutions</span></h3>
-                        <span class="week-obj">Make the claim flow real in the browser: the shopper&rsquo;s one-thing-per-page claim flow, plus the business review queue and policy config UI.</span>
+                        <h3 class="week-title">Shopper UX + Business Review <span class="phase-tag is-project">Project Build</span></h3>
+                        <span class="week-obj">Make the human-review claim loop real in the browser, add safe model insights, and join every owner&rsquo;s work into one verifiable golden path.</span>
                     </span>
                     <span class="week-dates">Jul 20&ndash;24</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
                     <div class="day-grid">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Sprint plan</h4><p>UX pillar: shopper flow + review queue, split the screens.</p></div>
-                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Shopper flow</h4><p>One-thing-per-page: photo &rarr; purchase details &rarr; review &rarr; decision.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Front-end state &amp; API troubleshooting.</p></div>
-                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Business review</h4><p>Review queue for human-review claims + the policy config UI.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Two tabs side-by-side: shopper submits, business reviews.</p></div>
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Kickoff + safety gate</h4><p>Read <code>START_HERE.md</code>. Calibration remains <strong>GATE: RE-SCOPE</strong>: human-review-only, with auto-approve sentinel <code>2.0</code>. Claim a core issue and a shared contract.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Build session</div><h4>Vertical slices</h4><p>Shopper wizard, review operations, advisory insights, report export, data fixtures, eval harness, and joined tests all advance in parallel.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">12:00 PM ET</div><h4>Contract freeze</h4><p>Freeze API shapes, selectors, fixture IDs, unavailable-signal behavior, and proxy capabilities. Post one consumer example and one failing-path test.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Integration day</div><h4>Join the loop</h4><p>Wire shopper &rarr; evidence &rarr; advisory model &rarr; human review &rarr; report &rarr; receipt + audit. Runtime and lint hardening are VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/117">PR #117</a>; finish #85/#110, OCR/#109, vocabulary, and docs carryovers.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Golden-path demo</h4><p>Two browser views, one claim. Show the reviewer decision, account report, receipt verification, audit-chain verification, and offline suite evidence.</p></div>
                     </div>
+                    <div class="deliverable" style="border-left-color:#b9770e; margin-bottom:1.25rem;">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Restricted model surface:</strong> use a route only when <code>/capabilities</code> advertises it. The Week-6 set is <code>/score</code>, <code>/nutrition/{produce_type}</code>, <code>/model-info</code>, <code>/budget</code>, <code>/date-label/decode</code>, and <code>/markdown/suggest</code>. <code>/score</code> is stateful advisory access: shared counters/cache change and training persistence is <strong>INCONCLUSIVE</strong>. Training data, predictions, broad analysis, batches, and account inventory are not intern capabilities.</span>
+                    </div>
+                    <p class="week-sub">Eight owners &mdash; substantial vertical slices</p>
+                    <ul class="resource-list">
+                        <li><strong>Ziyun &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></strong> &mdash; accessible shopper wizard plus business review/config screens, including mobile, empty, loading, and error states.</li>
+                        <li><strong>Jinming &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></strong> &mdash; authenticated review queue, effective-policy contract, and idempotent audited reviewer actions.</li>
+                        <li><strong>Lisa &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/108">#108</a></strong> &mdash; identity + nutrition advisory output and the canonical produce-vocabulary contract.</li>
+                        <li><strong>Lezhi &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a></strong> &mdash; receipt-image seam, date-label cross-check, optional OCR review, and normalization contract.</li>
+                        <li><strong>Mohan &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a></strong> &mdash; reproducible evidence fixtures, approved-data characterization, and deterministic in-process demo seeds.</li>
+                        <li><strong>Bill &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/111">#111</a></strong> &mdash; account-scoped claims report + model provenance with backward-compatible envelopes.</li>
+                        <li><strong>Tony &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/112">#112</a></strong> &mdash; joined API/browser tests, capability doctor, failing-path coverage, and real lint enforcement.</li>
+                        <li><strong>Yizhou &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a></strong> &mdash; reproducible evidence/UX evaluation, confidence bands, in-process seeding, and offline structural checks.</li>
+                    </ul>
+                    <p class="week-sub">Shared features &mdash; owners must integrate, not queue behind one another</p>
+                    <ul class="resource-list">
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a></strong> &mdash; capability-aware ES proxy client and setup doctor (Bill + Tony).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/114">#114</a></strong> &mdash; receipt/item alias normalization (Lisa + Lezhi + Mohan + Yizhou).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/115">#115</a></strong> &mdash; rescue-recipe baseline, gated on prerequisites #86&ndash;#88 (Lisa + Mohan + Yizhou + Tony).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/116">#116</a></strong> &mdash; all-team golden-path runner, runbook, accessibility pass, and handoff.</li>
+                    </ul>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/118" target="_blank" rel="noopener">Kickoff #118 &mdash; read first</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/START_HERE.md" target="_blank" rel="noopener">START_HERE.md &mdash; Week 6 commands and owner map</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06.md" target="_blank" rel="noopener">WEEK-06.md &mdash; the full mission</a></li>
-                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">FreshLens &mdash; Weekly build guides</a></li>
+                        <li><a href="freshlens.html#week-6">FreshLens Week 6 &mdash; ownership, safe capabilities, shared tracks, and carryovers</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues" target="_blank" rel="noopener">Assigned GitHub issues &mdash; acceptance commands and coordination notes</a></li>
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> the claim loop in the browser, end to end: a shopper submits an evidence-backed claim, and a reviewer decides it in the queue.</span>
+                        <span><strong>Deliverable:</strong> one human-review golden path in the browser: shopper submits, evidence fails closed, reviewer decides, report exports, receipt verifies, and audit chain verifies&mdash;backed by deterministic offline tests.</span>
                     </div>
                     <div class="skills">
                         <span class="skill-tag">One-thing-per-page UX</span>
                         <span class="skill-tag">Front-end state</span>
                         <span class="skill-tag">Review-queue design</span>
+                        <span class="skill-tag">Capability-aware integration</span>
+                        <span class="skill-tag">Contract testing</span>
+                        <span class="skill-tag">Accessibility</span>
                     </div>
                 </div>
             </details>
