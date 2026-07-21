@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talk Me Up — Expired Solutions AI Internship 2026</title>
-    <meta name="description" content="An 8-week, AI-first summer internship by Expired Solutions. Get fluent in Claude Code, Cursor, and Codex, then build and ship FreshLens — a live, whole-shelf produce freshness scanner — on a real grocery-tech platform.">
+    <meta name="description" content="An 8-week, AI-first summer internship by Expired Solutions. Get fluent in Claude Code, Cursor, and Codex, then build toward FreshLens, a whole-shelf produce freshness-scanner vision, on a real grocery-tech platform.">
     <meta name="theme-color" content="#1a3c34">
     <link rel="canonical" href="https://es-internship-hub.vercel.app/">
     <!-- Social preview (Open Graph + Twitter) -->
@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="Expired Solutions AI Internship">
     <meta property="og:url" content="https://es-internship-hub.vercel.app/">
     <meta property="og:title" content="Talk Me Up — Expired Solutions AI Internship 2026">
-    <meta property="og:description" content="An 8-week, AI-first internship. Get fluent in Claude Code, Cursor, and Codex, then build and ship FreshLens — a live whole-shelf produce-freshness scanner.">
+    <meta property="og:description" content="An 8-week, AI-first internship. Get fluent in Claude Code, Cursor, and Codex, then build toward the FreshLens whole-shelf produce-scanner vision.">
     <meta property="og:image" content="https://es-internship-hub.vercel.app/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -551,6 +551,12 @@
         }
         .deliverable svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 0.15rem; }
         .deliverable strong { color: var(--primary); font-weight: 700; }
+        .deliverable.spaced { margin-bottom: 1.25rem; }
+        .deliverable.caution { border-left-color: #b9770e; }
+        .deliverable.caution svg { stroke: #8a5708; }
+        .deliverable.verified { border-left-color: #1f8b4c; }
+        .deliverable.blocked { border-left-color: #b42318; }
+        .deliverable.blocked svg { stroke: #b42318; }
 
         .skills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.9rem; }
         .skill-tag {
@@ -677,7 +683,7 @@
     <div class="hero-inner">
         <div class="hero-label">Expired Solutions &middot; Summer 2026 Internship</div>
         <h1>Scan one apple?<br>Scan the whole shelf.</h1>
-        <p>An <strong>8-week, AI-first internship</strong>. Spend two weeks getting fluent in Claude Code, Cursor, and Codex, then build and ship <strong>FreshLens</strong>: point a camera at a fridge or produce shelf and every item gets a live freshness score at once, on Expired Solutions&rsquo; real grocery-tech platform.</p>
+        <p>An <strong>8-week, AI-first internship</strong>. Spend two weeks getting fluent in Claude Code, Cursor, and Codex, then build toward <strong>FreshLens</strong>: the target experience scores a fridge or produce shelf in one scene and turns advisory results into action on Expired Solutions&rsquo; grocery-tech platform.</p>
         <div class="hero-metrics">
             <div class="hero-metric"><strong>8</strong><span>Weeks</span></div>
             <div class="hero-metric"><strong>3</strong><span>AI Coding Tools</span></div>
@@ -700,7 +706,7 @@
         </div>
 
         <p class="project-intro">
-            Today the app scans one item at a time. <strong>FreshLens</strong> is the 10&times; version: point your camera at a whole fridge, basket, or produce shelf and <em>every</em> item lights up at once with a live, color-coded freshness score. Then AI turns that into action: for shoppers, an &ldquo;eat me first&rdquo; ranking and a recipe to rescue what&rsquo;s about to turn; for store managers, an instant markdown worklist and projected shrink savings.
+            Today the app scans one item at a time. <strong>FreshLens</strong> is the 10&times; target: point your camera at a whole fridge, basket, or produce shelf and score every item in one scene. Then advisory AI turns that into action: for shoppers, an &ldquo;eat me first&rdquo; ranking and a recipe to rescue what&rsquo;s about to turn; for store managers, a markdown worklist and projected shrink savings. The real whole-scene detector/live-service path is not yet reproducible in a clean checkout.
         </p>
 
         <div class="pillars-grid">
@@ -1263,46 +1269,57 @@ cd es-intern-freshlens
                         <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Kickoff + safety gate</h4><p>Read <code>START_HERE.md</code> and <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/118">kickoff #118</a>. Calibration remains <strong>GATE: RE-SCOPE</strong>: human-review-only, with auto-approve sentinel <code>2.0</code>. Lezhi (<code>@LezhiFu</code>) coordinates Week 6; keep any access grants least-privilege and task-scoped.</p></div>
                         <div class="day"><div class="day-name">Tue</div><div class="day-time work">Build session</div><h4>Vertical slices</h4><p>Shopper/reviewer UX, advisory insights, recipe ML, receipt binding, physical-device study, reports, work sync, fixtures, evals, and joined tests all advance in parallel.</p></div>
                         <div class="day"><div class="day-name">Wed</div><div class="day-time">12:00 PM ET</div><h4>Contract freeze</h4><p>Freeze API shapes, selectors, fixture IDs, unavailable-signal behavior, and proxy capabilities. Every owner posts a consumer example, failing-path test, user impact, operational impact, and monitoring signal.</p></div>
-                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Integration day</div><h4>Join the loop</h4><p>Wire shopper &rarr; evidence &rarr; advisory model &rarr; human review &rarr; report &rarr; receipt + audit. Runtime and lint hardening are VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/117">PR #117</a>; finish the <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/81">#81</a> reproducible empirical report, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/85">#85</a>/<a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a>, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">OCR/#109</a>, vocabulary, and docs carryovers.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Golden-path + feature demos</h4><p>Show the two-browser claim path, recipe model, device findings, anchor/replay proof, weekly report, account report, receipt/audit verification, and exact offline suite evidence.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Integration day</div><h4>Join the loop</h4><p>Wire shopper &rarr; evidence &rarr; advisory model &rarr; assigned-store human review &rarr; atomic receipt binding/anchor &rarr; scoped report. Runtime and lint hardening are VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/117">PR #117</a>; finish the <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/81">#81</a> reproducible empirical report, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/85">#85</a>/<a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a>, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">OCR/#109</a>, vocabulary, and docs carryovers.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Golden-path + feature demos</h4><p>Show the physical-camera/two-browser claim path, recipe model, device findings, atomic anchor/replay proof, weekly report, account report, receipt/audit verification, and exact offline suite evidence.</p></div>
                     </div>
-                    <div class="deliverable" style="border-left-color:#b9770e; margin-bottom:1.25rem;">
+                    <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
                         <span><strong>Restricted model surface:</strong> use a route only when <code>/capabilities</code> advertises it. The Week-6 set is <code>/score</code>, <code>/nutrition/{produce_type}</code>, <code>/model-info</code>, <code>/budget</code>, <code>/date-label/decode</code>, and <code>/markdown/suggest</code>. <code>/score</code> is stateful advisory access: shared counters/cache change and training persistence is <strong>INCONCLUSIVE</strong>. Training data, predictions, broad analysis, batches, and account inventory are not intern capabilities.</span>
                     </div>
-                    <div class="deliverable" style="margin-bottom:1.25rem;">
+                    <div class="deliverable spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Private product-source sandbox is ready:</strong> all eight interns have a pending <code>write</code> invitation to the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a>. Accept it, read <code>ACCESS.md</code>, and follow the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Week 6 access guide</a>. Work only on branches and PRs; protected <code>main</code> requires safety CI and code-owner review. Use synthetic fixtures only&mdash;never add secrets, customer receipts/photos/data, or deployment material. The canonical product repository remains out of scope. Live advisory access stays behind the <a href="https://freshlens-proxy.fly.dev" target="_blank" rel="noopener">intern proxy</a>, with individual keys delivered privately.</span>
+                        <span><strong>Private product-source sandbox is VERIFIED:</strong> all eight interns have accepted <code>write</code> access to the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a>. Read <code>ACCESS.md</code> and follow the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Week 6 access guide</a>. Work only on branches and PRs; protected <code>main</code> requires the <code>safety</code> check, one approval, and code-owner review. Use synthetic fixtures only&mdash;never add secrets, customer receipts/photos/data, or deployment material. The canonical product repository remains out of scope. Live advisory access stays behind the <a href="https://freshlens-proxy.fly.dev" target="_blank" rel="noopener">intern proxy</a>, with individual keys delivered privately.</span>
+                    </div>
+                    <div class="deliverable verified spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Authorization/policy hardening is VERIFIED on <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/140">PR #140</a>, but not merged:</strong> shopper, assigned-store reviewer, and policy-admin principals are separate; cap ceilings are immutable; policy writes require a revision and roll back with their audit event. Jinming and Lezhi review this baseline before #131 merges.</span>
+                    </div>
+                    <div class="deliverable blocked spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>End-to-end approval/payability is BLOCKED on <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a>:</strong> cap reservation, reviewer decision, public audit, complete signed receipt binding, anchor finalization, and approved/payable state must succeed as one recoverable operation with failure-injection proof.</span>
                     </div>
                     <p class="week-sub">Eight owners &mdash; substantial vertical slices</p>
                     <ul class="resource-list">
-                        <li><strong>Ziyun &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></strong> &mdash; accessible shopper wizard plus business review/config screens, including mobile, empty, loading, and error states.</li>
-                        <li><strong>Jinming &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a> + recipes</strong> &mdash; authenticated review/policy contract, idempotent audited reviewer actions, and primary recipe interface/evaluation ownership.</li>
-                        <li><strong>Lisa &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/108">#108</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a> + recipes</strong> &mdash; identity/nutrition explanations, primary recipe model ownership, and all four receipt-binding/duplicate-proof packages.</li>
-                        <li><strong>Lezhi &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a></strong> &mdash; receipt-image seam, date-label cross-check, optional OCR review, and normalization contract.</li>
-                        <li><strong>Mohan &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a> + recipe support</strong> &mdash; reproducible evidence fixtures, deterministic demo seeds, and recipe ML/corpus/evaluation support.</li>
-                        <li><strong>Bill &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/111">#111</a></strong> &mdash; capability client plus account-scoped claims report and model provenance.</li>
-                        <li><strong>Tony &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/112">#112</a></strong> &mdash; joined regressions, capability doctor, failing-path coverage, and real lint enforcement.</li>
-                        <li><strong>Yizhou &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a></strong> &mdash; reproducible evidence/UX evaluation and deterministic automatic weekly work-sync MVP.</li>
+                        <li><strong>Ziyun &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></strong> &mdash; true four-screen shopper wizard and shared reviewer surface with create idempotency, API-derived results, behavioral/browser/accessibility proof, and one peer review.</li>
+                        <li><strong>Jinming &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a> + recipes</strong> &mdash; three-role review/policy contract through #140, idempotent audited actions, one shared console contract, and primary recipe interface/evaluation ownership.</li>
+                        <li><strong>Lisa &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/108">#108</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a> + recipes</strong> &mdash; identity/nutrition explanations, primary recipe model ownership, and atomic cap/decision/audit/binding/anchor/payable finalization with failure injection.</li>
+                        <li><strong>Lezhi &middot; Week 6 lead + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/114">#114</a></strong> &mdash; bounded receipt-image seam, date-label/OCR/normalization work, blocker routing, shared contract, device, and golden-path coordination.</li>
+                        <li><strong>Mohan &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a> + recipe support</strong> &mdash; privacy-safe deterministic fixtures, safe output-path/symlink tests, demo seeds, and recipe ML/corpus/evaluation support.</li>
+                        <li><strong>Bill &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/111">#111</a></strong> &mdash; fail-closed capability client and bounded account-scoped report with role isolation, formula safety, public audit fields, and token redaction.</li>
+                        <li><strong>Tony &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/112">#112</a></strong> &mdash; joined regression net, capability doctor, full role matrix, retry/concurrency, #120 failure proof, and real lint enforcement.</li>
+                        <li><strong>Yizhou &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a></strong> &mdash; completeness scorecard that cannot false-green and deterministic/redacted work sync with a single-writer atomic scheduler.</li>
                     </ul>
                     <p class="week-sub">Complete live issue set &mdash; owners integrate, not queue behind one another</p>
                     <ul class="resource-list">
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a></strong> &mdash; capability-aware ES proxy client and setup doctor (Bill + Tony).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a></strong> &mdash; review queue listing and guarded policy configuration (Jinming).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a></strong> &mdash; mobile shopper claim wizard, evidence to result (Ziyun).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></strong> &mdash; internal review queue and human-review-only policy view (Jinming + Ziyun).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a></strong> &mdash; role-separated review queue and ceiling/revision-safe policy administration (Jinming).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a></strong> &mdash; four-screen idempotent mobile shopper wizard, evidence to returned result (Ziyun).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></strong> &mdash; assigned-store review queue and separate policy-admin view (Jinming + Ziyun).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/108">#108</a></strong> &mdash; identity explanations and optional nutrition advisory (Lisa).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a></strong> &mdash; receipt-photo seam, date-label advisory, and OCR review (Lezhi).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a></strong> &mdash; deterministic fixture CLI and demo seeds (Mohan).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a></strong> &mdash; deterministic fixture CLI and demo seeds with safe output-path/symlink handling (Mohan).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/111">#111</a></strong> &mdash; account-scoped claims CSV/Markdown export (Bill).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/112">#112</a></strong> &mdash; joined offline claim/review/report/UI regressions (Tony).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a></strong> &mdash; reproducible Week 6 UX/API completeness scorecard (Yizhou).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a></strong> &mdash; reproducible Week 6 UX/API scorecard with role and hostile-DOM proof (Yizhou).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/114">#114</a></strong> &mdash; receipt/item alias normalization (Lisa + Lezhi + Mohan + Yizhou).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/115">#115</a></strong> &mdash; required offline recipe ML baseline/evaluation (Lisa + Jinming primary; Mohan supports).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/116">#116</a></strong> &mdash; all-team golden-path runner, runbook, accessibility pass, and handoff.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/116">#116</a></strong> &mdash; all-team golden-path runner, finalization proof, runbook, accessibility pass, and handoff.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/118">#118</a></strong> &mdash; kickoff, baseline truth, coordinator, deadlines, and owner map.</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/119">#119</a></strong> &mdash; all-team physical-device TestFlight return-flow UX study; Lezhi (<code>@LezhiFu</code>) coordinates.</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a></strong> &mdash; receipt binding and duplicate-proof anchor verification (Lisa).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a></strong> &mdash; automatic weekly work-sync MVP and one-page report (Yizhou).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a></strong> &mdash; atomic cap/decision/audit/receipt binding/anchor/payable finalization and duplicate proof (Lisa).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a></strong> &mdash; automatic weekly work-sync MVP with single-writer atomic publication (Yizhou).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/126">#126</a></strong> &mdash; all-team branch, sandbox, proxy, and device readiness evidence.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/129">#129</a></strong> &mdash; all-team host contract and compatibility proof across every Week 6 seam.</li>
                     </ul>
                     <p class="week-sub">Required parallel feature tracks &mdash; due Friday at noon ET</p>
                     <ul class="resource-list">
@@ -1310,7 +1327,7 @@ cd es-intern-freshlens
                         <li><strong>Receipt/anchor proof:</strong> Lisa completes all four <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a> packages&mdash;canonical binding, atomic idempotency, integrity-aware verification, and exact/altered/distinct/concurrent replay tests.</li>
                         <li><strong>Automatic work sync:</strong> Yizhou&rsquo;s <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a> emits deterministic one-page Markdown and chart data from approved read-only sources, with visible partial-source status.</li>
                     </ul>
-                    <div class="deliverable" style="border-left-color:#b9770e; margin-bottom:1.25rem;">
+                    <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
                         <span><strong>Physical-device truth boundary:</strong> #119 uses a private program-lead invite; never publish it. The July 8 notice verified beta <code>3.4.5 (2026070701)</code> for iOS 17+, but exact source commit/branch mapping is <strong>INCONCLUSIVE</strong>. Record the build actually installed and file <code>NOT_PRESENT</code>/<code>GAP</code> if the return flow is absent; a simulator or web demo cannot substitute for real-camera acceptance.</span>
                     </div>
@@ -1319,13 +1336,15 @@ cd es-intern-freshlens
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/118" target="_blank" rel="noopener">Kickoff #118 &mdash; read first</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-05-VERIFICATION.md" target="_blank" rel="noopener">Week 5 verification &mdash; merged runtime proof and explicit carryovers</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/START_HERE.md" target="_blank" rel="noopener">START_HERE.md &mdash; Week 6 commands and owner map</a></li>
-                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06.md" target="_blank" rel="noopener">WEEK-06.md &mdash; the full mission</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/dd1059b73afc0be509a73d3c601cce4ae60af3a8/docs/WEEK-06.md" target="_blank" rel="noopener">Audited WEEK-06.md &mdash; the full mission</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/dd1059b73afc0be509a73d3c601cce4ae60af3a8/docs/WEEK-06-SECURITY-CONTRACT.md" target="_blank" rel="noopener">Week 6 security contract &mdash; role, cap, audit, and finalization boundaries</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/140" target="_blank" rel="noopener">PR #140 &mdash; verified authorization/policy baseline awaiting review</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-ISSUES.md" target="_blank" rel="noopener">WEEK-06-ISSUES.md &mdash; complete assignments and dependencies</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-TESTFLIGHT.md" target="_blank" rel="noopener">WEEK-06-TESTFLIGHT.md &mdash; real-device setup, scenarios, and feedback template</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-WORK-SYNC.md" target="_blank" rel="noopener">WEEK-06-WORK-SYNC.md &mdash; Yizhou&rsquo;s MVP contract</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-EXTRA-WORK.md" target="_blank" rel="noopener">WEEK-06-EXTRA-WORK.md &mdash; quality improvements, model fallbacks, and portfolio work</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-LEAD-CHECKLIST.md" target="_blank" rel="noopener">WEEK-06-LEAD-CHECKLIST.md &mdash; Lezhi&rsquo;s coordination checklist</a></li>
-                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">WEEK-06-PRODUCT-ACCESS.md &mdash; accept the sandbox invite and start safely</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Product access guide &mdash; enter the accepted sandbox safely</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">Private product sandbox &mdash; real guarded source for accepted interns</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/RECIPES-TRACK.md" target="_blank" rel="noopener">RECIPES-TRACK.md &mdash; required recipe model contract</a></li>
                         <li><a href="freshlens.html#week-6">FreshLens Week 6 &mdash; ownership, safe capabilities, shared tracks, and carryovers</a></li>
@@ -1333,7 +1352,7 @@ cd es-intern-freshlens
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> one human-review golden path in the browser: shopper submits, evidence fails closed, reviewer decides, report exports, receipt verifies, and audit chain verifies&mdash;backed by deterministic offline tests.</span>
+                        <span><strong>Friday target (currently BLOCKED on #120):</strong> one human-review golden path in the browser: shopper submits, evidence fails closed, an assigned-store reviewer decides, atomic receipt binding/anchor completes, report exports, and receipt/audit verify&mdash;backed by deterministic offline tests.</span>
                     </div>
                     <div class="skills">
                         <span class="skill-tag">One-thing-per-page UX</span>
