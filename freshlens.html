@@ -58,6 +58,13 @@
         }
         a { color: var(--accent); }
         a:focus-visible, .back-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+        .skip-link {
+            position: fixed; top: 0.5rem; left: 0.5rem; z-index: 200;
+            transform: translateY(-180%); padding: 0.6rem 0.9rem;
+            background: var(--primary); color: #fff; border-radius: 6px;
+            font-weight: 700; text-decoration: none;
+        }
+        .skip-link:focus { transform: translateY(0); }
 
         .freshness-rule { height: 2px; border: none; border-radius: 2px; background: linear-gradient(90deg, var(--fresh) 0%, var(--caution) 58%, var(--urgent) 100%); }
 
@@ -72,6 +79,12 @@
         }
         .nav-brand { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; font-size: 0.95rem; color: var(--primary); letter-spacing: -0.01em; }
         .brand-mark { width: 22px; height: 22px; flex-shrink: 0; display: block; }
+        .nav-actions { display: flex; align-items: center; gap: 1rem; }
+        .nav-week-link {
+            font-size: 0.82rem; font-weight: 700; color: var(--accent);
+            text-decoration: none; padding: 0.3rem 0.55rem;
+            background: var(--accent-light); border-radius: 6px;
+        }
         .back-link {
             font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);
             text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
@@ -89,7 +102,7 @@
         .hero-inner { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; }
         .hero-label {
             font-family: var(--mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em;
-            text-transform: uppercase; color: var(--accent-muted); margin-bottom: 1rem;
+            text-transform: uppercase; color: #a5d9c4; margin-bottom: 1rem;
         }
         .hero h1 { font-size: 2.8rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1rem; }
         .hero p { font-size: 1.12rem; color: rgba(255,255,255,0.74); max-width: 640px; }
@@ -168,6 +181,17 @@
         .owner-task p { font-size: 0.86rem; }
         .workstreams { columns: 2; column-gap: 2rem; margin: 0.8rem 0 0 1.1rem; }
         .workstreams li { break-inside: avoid; color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 0.55rem; padding-left: 0.2rem; }
+        .do-now {
+            margin: 1.25rem 0 1.5rem; padding: 1.1rem 1.25rem;
+            border: 1px solid var(--accent-muted); border-radius: var(--radius);
+            background: var(--accent-light);
+        }
+        .do-now h3 { color: var(--primary); }
+        .do-now ol { margin: 0.6rem 0 0 1.25rem; }
+        .do-now li { color: var(--text-secondary); margin: 0.35rem 0; }
+        .week6-details { margin-top: 1.25rem; border-top: 1px solid var(--border); padding-top: 0.9rem; }
+        .week6-details > summary { color: var(--primary); font-weight: 700; cursor: pointer; }
+        .week6-details[open] > summary { margin-bottom: 0.8rem; }
 
         .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
         .btn {
@@ -191,10 +215,15 @@
             .owner-task h3 { align-items: flex-start; flex-direction: column; gap: 0.2rem; }
             .owner-task h3 span { white-space: normal; overflow-wrap: anywhere; }
             .flow-arrow { display: none; }
+            .nav-actions { gap: 0.45rem; }
+            .back-link { font-size: 0.76rem; }
+            .nav-week-link { font-size: 0.76rem; }
         }
     </style>
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <nav>
     <div class="nav-inner">
@@ -208,10 +237,14 @@
             </svg>
             Talk Me Up
         </div>
-        <a href="index.html" class="back-link">&larr; Back to program</a>
+        <div class="nav-actions">
+            <a href="#week-6" class="nav-week-link">This week</a>
+            <a href="index.html" class="back-link">&larr; Program</a>
+        </div>
     </div>
 </nav>
 
+<main id="main-content">
 <div class="hero">
     <svg class="hero-reticle" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <path d="M8 24 A16 16 0 0 1 24 8" stroke="#5ba88a" stroke-width="1.4" stroke-linecap="round" fill="none"/>
@@ -371,13 +404,21 @@
     <section class="block" id="week-6">
         <h2>This week &mdash; Week 6: make the claim loop real</h2>
         <p class="lead"><strong>Jul 20&ndash;24.</strong> Build the shopper&rsquo;s four-step claim wizard and the reviewer&rsquo;s operating view, connect them to safe ES model insights, and finish with one joined path that every intern can explain and run. <strong>Lezhi (<code>@LezhiFu</code>) is the Week 6 coordination lead</strong>. All 22 scoped issues are grouped in the <a href="https://github.com/LawrenceHua/es-intern-freshlens/milestone/1" target="_blank" rel="noopener">Week 6 &mdash; Joined Claim Loop milestone</a>; keep any access grants least-privilege and task-scoped.</p>
+        <div class="do-now">
+            <h3>Do this now</h3>
+            <ol>
+                <li>Read the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7f77f3103d888d8e1b25d0c649a68145cb45d995/START_HERE.md" target="_blank" rel="noopener">audited Week 6 START_HERE</a>.</li>
+                <li>Open your assigned work in the <a href="https://github.com/LawrenceHua/es-intern-freshlens/milestone/1" target="_blank" rel="noopener">22-issue Week 6 milestone</a> and post your plan on that issue.</li>
+                <li>Update <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/126" target="_blank" rel="noopener">#126</a> with branch, sandbox, proxy, and device evidence; route blockers to Lezhi.</li>
+            </ol>
+        </div>
         <div class="status-callout"><strong>Calibration status: GATE: RE-SCOPE (human-review-only).</strong> The effective auto-approve sentinel stays at <code>2.0</code>. Model, identity, receipt, date-label, and nutrition signals are advisory; no Week 6 screen or endpoint may describe them as a guarantee or silently enable automatic approval.</div>
         <div class="status-callout verified"><strong>Private product-source access is VERIFIED.</strong> All eight interns have accepted <code>write</code> access to the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a>. Read its <code>ACCESS.md</code>, then follow the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Week 6 access guide</a>. Protected <code>main</code> requires the <code>safety</code> check, one approval, and code-owner review. Only synthetic fixtures are allowed. Never add secrets, real receipts, customer photos/data, or deployment material; the canonical product repository remains out of scope. Live advisory access stays behind the <a href="https://freshlens-proxy.fly.dev" target="_blank" rel="noopener">intern proxy</a>, with individual keys delivered privately.</div>
         <div class="status-callout review"><strong>Readiness is not complete.</strong> All eight interns have posted a record in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/126" target="_blank" rel="noopener">#126</a>, but Lisa still owes full guard/test/baseline evidence; several Windows records carry the known setup-test assertion; and proxy/TestFlight/device results remain incomplete. The test-only setup fix is green in <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/pull/3" target="_blank" rel="noopener">sandbox PR #3</a> and awaits review.</div>
         <div class="status-callout review"><strong>The complete Week 6 specification is CODE-SHIPPED-NOT-VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/142" target="_blank" rel="noopener">PR #142</a>.</strong> All four checks pass; the 22-issue milestone, per-intern work, #129 host contract, scenario ownership, prior-week dependencies, and exact blockers are documented. Independent review and merge are still required.</div>
-        <div class="status-callout verified"><strong>Authorization and policy hardening is VERIFIED; Jinming merged <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/140" target="_blank" rel="noopener">PR #140</a> into <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/131" target="_blank" rel="noopener">PR #131</a> at <code>cc553e9</code>.</strong> Shopper, assigned-store reviewer, and policy-admin principals are separate; actors and scope come from the bearer; the immutable ceilings are $15 per rolling 30 days and $10 per claim; policy writes require an expected revision and roll back with their audit event. All four #131 checks pass, but #131 still needs independent review and merge to <code>main</code>.</div>
+        <div class="status-callout verified"><strong>PR #140&rsquo;s security slice is VERIFIED on PR #131&rsquo;s branch; NOT MERGED TO <code>main</code> (as of 2026-07-21 21:55 UTC).</strong> Jinming merged <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/140" target="_blank" rel="noopener">PR #140</a> into <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/131" target="_blank" rel="noopener">PR #131</a> at <code>cc553e9</code>. Shopper, assigned-store reviewer, and policy-admin principals are separate; actors and scope come from the bearer; immutable ceilings are $15 per rolling 30 days and $10 per claim; policy writes require an expected revision and roll back with their audit event. All four #131 checks pass, but independent review and merge are still required.</div>
         <div class="status-callout blocked"><strong>End-to-end approval/payability is BLOCKED on <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120" target="_blank" rel="noopener">#120</a>.</strong> A claim cannot become approved or payable until cap reservation, reviewer decision, public audit, the complete signed provenance binding, anchor finalization, and final status succeed together. Failure injection must prove no orphan artifact, false approved amount, or spent cap remains.</div>
-        <div class="status-callout review"><strong>Shopper/reviewer UI is CODE-SHIPPED-NOT-VERIFIED on <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/137" target="_blank" rel="noopener">PR #137</a> at <code>3c60e8e</code>.</strong> Role-separated credentials, four focused screens, corrected evidence keys, safe DOM, frozen lost-response retry, GET-returned policy revision, and executable client-behavior tests are green (<code>844 passed, 15 skipped</code>). Merge still needs hostile-text, real focus/keyboard, 320-pixel, desktop, 200%-zoom, screenshot/recording, physical-device, and independent-review evidence.</div>
+        <div class="status-callout review"><strong>Shopper/reviewer UI is CODE-SHIPPED-NOT-VERIFIED on <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/137" target="_blank" rel="noopener">PR #137</a> at <code>3c60e8e</code> (as of 2026-07-21 21:55 UTC).</strong> Role-separated credentials, four focused screens, corrected evidence keys, safe DOM, frozen lost-response retry, GET-returned policy revision, and executable client-behavior tests are green (<code>844 passed, 15 skipped</code>). Merge still needs hostile-text, real focus/keyboard, 320-pixel, desktop, 200%-zoom, screenshot/recording, physical-device, and independent-review evidence.</div>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">A</div>
@@ -396,20 +437,21 @@
             </div>
         </div>
 
-        <h2 class="section-heading">Ownership &mdash; all eight people ship</h2>
+        <h2 class="section-heading">Assigned Week 6 work</h2>
         <p class="lead">Each owner has a vertical slice plus a team contract. Every number below links to the assigned, standalone GitHub issue.</p>
         <div class="ownership-grid">
-            <div class="owner-task"><h3>Ziyun <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></span></h3><p>Build the true four-screen shopper wizard and shared reviewer surface; add purchase-date validation, create idempotency, API-derived results, hostile-input/bearer checks, behavioral browser tests, accessibility proof, and one peer review.</p></div>
-            <div class="owner-task"><h3>Jinming <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a> + recipes</span></h3><p>Finish review/merge of #131 with the adopted three-role #140 contract, keep actions idempotent and auditable, share one console contract with Ziyun, and co-lead the required recipe model/interface.</p></div>
-            <div class="owner-task"><h3>Lisa <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/108">#108</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a> + recipes</span></h3><p>Ship identity/nutrition explanations, co-lead the required recipe model, and make cap, decision, audit, complete receipt binding, anchor, and payable state one recoverable finalization boundary with failure-injection proof.</p></div>
-            <div class="owner-task"><h3>Lezhi <span>Week 6 lead + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/114">#114</a></span></h3><p>Add the bounded receipt-image seam and date-label cross-check, reconcile optional OCR, coordinate the shared contract/runbook/device gates, route blockers, and keep every owner moving toward #116.</p></div>
-            <div class="owner-task"><h3>Mohan <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a> + recipe support</span></h3><p>Repair reproducible evidence fixtures with privacy and safe output-path tests, provide deterministic demo seeds, and support recipe corpus, model, evaluation, and fallback quality.</p></div>
-            <div class="owner-task"><h3>Bill <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/111">#111</a></span></h3><p>Co-own the fail-closed capability client and ship bounded account-scoped reports; prove role/store/account isolation, public-audit-only output, formula safety, and token redaction.</p></div>
-            <div class="owner-task"><h3>Tony <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/112">#112</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120 verify</a></span></h3><p>Own the joined API/browser regression net, capability doctor, full role matrix, retry/concurrency cases, and independent #120 finalization-failure proof; make every unavailable signal and lint failure explicit.</p></div>
-            <div class="owner-task"><h3>Yizhou <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a></span></h3><p>Build a completeness scorecard that cannot false-green and a read-only weekly work-sync MVP with deterministic/redacted inputs, single-writer scheduling, atomic report publication, one-page output, and visualization-ready data.</p></div>
+            <div class="owner-task"><h3>Ziyun <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></span></h3><p>Build the true four-screen shopper wizard and shared reviewer surface; add purchase-date validation, create idempotency, API-derived results, hostile-input/bearer checks, behavioral browser tests, accessibility proof, and one peer review. <strong>#129 contribution:</strong> shopper states and transitions.</p></div>
+            <div class="owner-task"><h3>Jinming <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a> + recipes</span></h3><p>Finish review/merge of #131 with the adopted three-role #140 contract, keep actions idempotent and auditable, share one console contract with Ziyun, and co-lead the required recipe model/interface. <strong>#129 contribution:</strong> states, permissions, and policy contract.</p></div>
+            <div class="owner-task"><h3>Lisa <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/108">#108</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a> + recipes</span></h3><p>Ship identity/nutrition explanations, co-lead the required recipe model, and make cap, decision, audit, complete receipt binding, anchor, and payable state one recoverable finalization boundary with failure-injection proof. <strong>#129 contribution:</strong> identity, binding, and replay fields.</p></div>
+            <div class="owner-task"><h3>Lezhi <span>Week 6 lead + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/114">#114</a></span></h3><p>Add the bounded receipt-image seam and date-label cross-check, reconcile optional OCR, coordinate the shared contract/runbook/device gates, route blockers, and keep every owner moving toward #116. <strong>#129 contribution:</strong> receipt lifecycle and redaction.</p></div>
+            <div class="owner-task"><h3>Mohan <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a> + recipe support</span></h3><p>Repair reproducible evidence fixtures with privacy and safe output-path tests, provide deterministic demo seeds, and support recipe corpus, model, evaluation, and fallback quality. <strong>#129 contribution:</strong> deterministic shared fixtures.</p></div>
+            <div class="owner-task"><h3>Bill <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/111">#111</a></span></h3><p>Co-own the fail-closed capability client and ship bounded account-scoped reports; prove role/store/account isolation, public-audit-only output, formula safety, and token redaction. <strong>#129 contribution:</strong> envelopes, money, and report correlation.</p></div>
+            <div class="owner-task"><h3>Tony <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/112">#112</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120 verify</a></span></h3><p>Own the joined API/browser regression net, capability doctor, full role matrix, retry/concurrency cases, and independent #120 finalization-failure proof; make every unavailable signal and lint failure explicit. <strong>#129 contribution:</strong> negative validator cases.</p></div>
+            <div class="owner-task"><h3>Yizhou <span><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a></span></h3><p>Build a completeness scorecard that cannot false-green and a read-only weekly work-sync MVP with deterministic/redacted inputs, single-writer scheduling, atomic report publication, one-page output, and visualization-ready data. <strong>#129 contribution:</strong> versioning and observability fields.</p></div>
         </div>
 
-        <h2 class="section-heading">Complete live issue set</h2>
+        <details class="week6-details">
+        <summary>Complete live issue set &mdash; 22 issues</summary>
         <ul class="workstreams">
             <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/86">#86</a></strong> &mdash; privacy-clean recipe corpus, safety schema, and held-out scenes (Lisa + Jinming; Mohan supports).</li>
             <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/87">#87</a></strong> &mdash; deterministic recipe retrieval model and stable offline interface (Lisa + Jinming; Mohan supports).</li>
@@ -434,6 +476,7 @@
             <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/126">#126</a></strong> &mdash; all-team branch, sandbox, proxy, and device readiness evidence.</li>
             <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/129">#129</a></strong> &mdash; all-team host contract and compatibility proof across every Week 6 seam.</li>
         </ul>
+        </details>
 
         <h2 class="section-heading">Required Friday feature tracks</h2>
         <div class="pillars">
@@ -469,6 +512,10 @@
             <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/issues/118" target="_blank" rel="noopener">Week 6 kickoff #118 &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7f77f3103d888d8e1b25d0c649a68145cb45d995/START_HERE.md" target="_blank" rel="noopener">Audited Week 6 START_HERE &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/milestone/1" target="_blank" rel="noopener">22-issue milestone &rarr;</a>
+        </div>
+        <details class="week6-details">
+            <summary>More setup guides and reference links</summary>
+            <div class="cta-row">
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7f77f3103d888d8e1b25d0c649a68145cb45d995/docs/WEEK-06-ISSUES.md" target="_blank" rel="noopener">Complete issue map &rarr;</a>
             <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">Read the Getting Started guide &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7f77f3103d888d8e1b25d0c649a68145cb45d995/docs/WEEK-06.md" target="_blank" rel="noopener">Audited Week 6 mission &rarr;</a>
@@ -487,10 +534,12 @@
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">Starter repository</a>
             <a class="btn btn-secondary" href="provenance.html">Provenance receipts &rarr;</a>
             <a class="btn btn-secondary" href="index.html">Back to program overview</a>
-        </div>
+            </div>
+        </details>
     </section>
 
 </div>
+</main>
 
 <footer>
     <div class="footer-inner">
