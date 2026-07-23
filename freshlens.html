@@ -190,6 +190,30 @@
         .do-now ol { margin: 0.6rem 0 0 1.25rem; }
         .do-now li { color: var(--text-secondary); margin: 0.35rem 0; }
         .status-snapshot { margin: 0 0 0.8rem; font-family: var(--mono); font-size: 0.78rem; color: var(--text-tertiary); }
+        .readiness-panel {
+            margin: 1.5rem 0 2rem; padding: 1.25rem;
+            border: 1px solid var(--border); border-radius: var(--radius-lg);
+            background: var(--surface-alt);
+        }
+        .readiness-panel h3 { margin-bottom: 0.3rem; }
+        .readiness-panel > p { margin-bottom: 1rem; font-size: 0.88rem; }
+        .readiness-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+        .readiness-table { width: 100%; min-width: 720px; border-collapse: collapse; }
+        .readiness-table caption { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+        .readiness-table th, .readiness-table td { padding: 0.8rem 0.9rem; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; font-size: 0.82rem; line-height: 1.5; }
+        .readiness-table th { color: var(--text); background: var(--accent-light); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
+        .readiness-table tr:last-child td { border-bottom: 0; }
+        .readiness-table td:first-child { color: var(--text); font-weight: 700; width: 22%; }
+        .readiness-table td:nth-child(2) { width: 23%; }
+        .status-label {
+            display: inline-block; border-radius: 999px; padding: 0.2rem 0.5rem;
+            font-family: var(--mono); font-size: 0.66rem; font-weight: 700;
+            line-height: 1.25; white-space: nowrap;
+        }
+        .status-label.verified { color: #17633a; background: #dff3e7; }
+        .status-label.shipped { color: #725000; background: #fff0bd; }
+        .status-label.blocked { color: #8d2118; background: #ffe1df; }
+        .status-label.inconclusive { color: #554b72; background: #ece8f7; }
         .week6-details { margin-top: 1.25rem; border-top: 1px solid var(--border); padding-top: 0.9rem; }
         .week6-details > summary { color: var(--primary); font-weight: 700; cursor: pointer; }
         .week6-details[open] > summary { margin-bottom: 0.8rem; }
@@ -413,14 +437,75 @@
                 <li>Update <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/126" target="_blank" rel="noopener">#126</a> with branch, sandbox, proxy, and device evidence; route blockers to Lezhi.</li>
             </ol>
         </div>
-        <p class="status-snapshot"><strong>Status snapshot &mdash; 2026-07-21 21:55 UTC.</strong> PR heads, checks, reviews, access, and device evidence can change after this time.</p>
+        <p class="status-snapshot"><strong>Status snapshot &mdash; 2026-07-23 18:59 UTC.</strong> PR heads, checks, reviews, access, and device evidence can change after this time.</p>
         <div class="status-callout"><strong>Calibration status: GATE: RE-SCOPE (human-review-only).</strong> The effective auto-approve sentinel stays at <code>2.0</code>. Model, identity, receipt, date-label, and nutrition signals are advisory; no Week 6 screen or endpoint may describe them as a guarantee or silently enable automatic approval.</div>
-        <div class="status-callout verified"><strong>Private product-source access is VERIFIED.</strong> All eight interns have accepted <code>write</code> access to the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a>. Read its <code>ACCESS.md</code>, then follow the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Week 6 access guide</a>. Protected <code>main</code> requires the <code>safety</code> check, one approval, and code-owner review. Only synthetic fixtures are allowed. Never add secrets, real receipts, customer photos/data, or deployment material; the canonical product repository remains out of scope. Live advisory access stays behind the <a href="https://freshlens-proxy.fly.dev" target="_blank" rel="noopener">intern proxy</a>, with individual keys delivered privately.</div>
+        <div class="status-callout verified"><strong>Private product-source access is VERIFIED.</strong> All eight interns have accepted <code>write</code> access to the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a> (accepted GitHub access required). Read its <code>ACCESS.md</code>, then follow the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Week 6 access guide</a>. Protected <code>main</code> requires the <code>safety</code> check, one approval, and code-owner review. Only synthetic fixtures are allowed. Never add secrets, real receipts, customer photos/data, or deployment material; the canonical product repository remains out of scope. Live advisory access stays behind the <a href="https://freshlens-proxy.fly.dev/health" target="_blank" rel="noopener">intern proxy health endpoint</a>, with individual keys delivered privately.</div>
         <div class="status-callout review"><strong>Readiness is not complete.</strong> All eight interns have posted a record in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/126" target="_blank" rel="noopener">#126</a>, but Lisa still owes full guard/test/baseline evidence; several Windows records carry the known setup-test assertion; and proxy/TestFlight/device results remain incomplete. The test-only setup fix is green in <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/pull/3" target="_blank" rel="noopener">sandbox PR #3</a> and awaits review.</div>
-        <div class="status-callout review"><strong>The complete Week 6 specification is CODE-SHIPPED-NOT-VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/142" target="_blank" rel="noopener">PR #142</a>.</strong> All four checks pass; the 22-issue milestone, per-intern work, #129 host contract, scenario ownership, prior-week dependencies, and exact blockers are documented. Independent review and merge are still required.</div>
+        <div class="status-callout review"><strong>The complete Week 6 specification is CODE-SHIPPED-NOT-VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/142" target="_blank" rel="noopener">PR #142</a>.</strong> It is approved and all four checks pass; the 22-issue milestone, per-intern work, #129 host contract, scenario ownership, prior-week dependencies, and exact blockers are documented. Merge and joined runtime proof are still required.</div>
         <div class="status-callout verified"><strong>PR #140&rsquo;s security slice is VERIFIED on PR #131&rsquo;s branch; NOT MERGED TO <code>main</code>.</strong> Jinming merged <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/140" target="_blank" rel="noopener">PR #140</a> into <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/131" target="_blank" rel="noopener">PR #131</a> at <code>cc553e9</code>. Shopper, assigned-store reviewer, and policy-admin principals are separate; actors and scope come from the bearer; immutable ceilings are $15 per rolling 30 days and $10 per claim; policy writes require an expected revision and roll back with their audit event. All four #131 checks pass, but independent review and merge are still required.</div>
         <div class="status-callout blocked"><strong>End-to-end approval/payability is BLOCKED on <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120" target="_blank" rel="noopener">#120</a>.</strong> A claim cannot become approved or payable until cap reservation, reviewer decision, public audit, the complete signed provenance binding, anchor finalization, and final status succeed together. Failure injection must prove no orphan artifact, false approved amount, or spent cap remains.</div>
-        <div class="status-callout review"><strong>Shopper/reviewer UI is CODE-SHIPPED-NOT-VERIFIED on <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/137" target="_blank" rel="noopener">PR #137</a> at <code>3c60e8e</code>.</strong> Role-separated credentials, four focused screens, corrected evidence keys, safe DOM, frozen lost-response retry, GET-returned policy revision, and executable client-behavior tests are green (<code>844 passed, 15 skipped</code>). Merge still needs hostile-text, real focus/keyboard, 320-pixel, desktop, 200%-zoom, screenshot/recording, physical-device, and independent-review evidence.</div>
+        <div class="status-callout review"><strong>Shopper/reviewer UI is CODE-SHIPPED-NOT-VERIFIED on <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/137" target="_blank" rel="noopener">PR #137</a> at <code>48402d5</code>.</strong> CI is green, but the PR is behind <code>main</code> and still has a changes-requested review. Hostile-text, real focus/keyboard, 320-pixel, desktop, 200%-zoom, screenshot/recording, physical-device, and independent-review evidence remain required.</div>
+        <div class="status-callout review"><strong>The claim-host contract is CODE-SHIPPED-NOT-VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/148" target="_blank" rel="noopener">PR #148</a>.</strong> Its checks are green, but it is contract-only and behind <code>main</code>: live claim routes, create idempotency, finalization, and the capture-metadata decision are not implemented.</div>
+
+        <div class="readiness-panel" id="shopper-cv-readiness">
+            <h3>Shopper app + CV readiness &mdash; evidence snapshot</h3>
+            <p>The current shopper build is useful for scanner, inventory, and recipe testing, but the joined Week 6 return loop and the CV release gates are not ready. Keep model output advisory and route every claim to a separately authorized human reviewer.</p>
+            <div class="readiness-table-wrap" tabindex="0" role="region" aria-label="Scrollable shopper app and computer vision readiness table">
+                <table class="readiness-table">
+                    <caption>Shopper app and computer vision readiness as of July 23, 2026</caption>
+                    <thead>
+                        <tr><th scope="col">Area</th><th scope="col">Status</th><th scope="col">Evidence and next gate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Build + unit baseline</td>
+                            <td><span class="status-label verified">VERIFIED</span></td>
+                            <td>Shopper <code>3.4.5 (2026072201)</code> maps to source commit <code>6722921</code>; the simulator build succeeded and all 149 shopper unit tests passed.</td>
+                        </tr>
+                        <tr>
+                            <td>Screen coverage</td>
+                            <td><span class="status-label inconclusive">INCONCLUSIVE</span></td>
+                            <td>Representative scanner, result, inventory, recipe, settings, permission, and nudge states were inspected. The combined UI run passed 20 of 28 tests; eight failures or runner terminations, a multi-item chip/gauge collision, premature location prompting, and theme fragmentation remain.</td>
+                        </tr>
+                        <tr>
+                            <td>OTA model bootstrap</td>
+                            <td><span class="status-label verified">VERIFIED</span></td>
+                            <td>Both v4 Core ML artifacts downloaded, checksum-validated, compiled, and loaded after a clean simulator install in about 23 seconds. Offline-first, cellular, and physical-iPhone behavior are outside this proof.</td>
+                        </tr>
+                        <tr>
+                            <td>Produce type CV</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>On 2,092 held-out images covering 67 classes, the primary OTA type head reached 76.1% top-1, 86.2% top-5, and 0.688 macro-F1. It needs per-class repair and real-camera confirmation before a release claim.</td>
+                        </tr>
+                        <tr>
+                            <td>Freshness CV</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>On the current 264-record leak-screened gold set, the OTA quality head scored 0.311 macro-F1 and 0% spoiled recall: none of 91 spoiled images was predicted spoiled, and 48 were called fresh. It fails the gold and calibration gates.</td>
+                        </tr>
+                        <tr>
+                            <td>OOD + whole-scene CV</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>The live hover gate accepted 20 of 28 QR images as <code>beans</code>, all labeled fresh; a black frame also passed the hover threshold. No operational object detector is bundled or served, so a full-frame fallback is not multi-item detection.</td>
+                        </tr>
+                        <tr>
+                            <td>Receipt + claim/return</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>Receipt/OCR and return screens are absent from production navigation, legacy <code>/shopper/*</code> routes return 404, and PR #148 defines contracts rather than live routes. Do not activate the legacy immediate-refund flow.</td>
+                        </tr>
+                        <tr>
+                            <td>Physical TestFlight run</td>
+                            <td><span class="status-label shipped">CODE-SHIPPED-NOT-VERIFIED</span></td>
+                            <td>The archive/source mapping is known, but real camera, receipt OCR, model latency/thermal behavior, push/location prompts, and the complete return scenario still require a physical iPhone.</td>
+                        </tr>
+                        <tr>
+                            <td>Feedback + recipe safety</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>Correction storage/export does not yet form a working retraining loop. Extended allergy and avoidance controls must persist and fail closed through recipe generation before those settings can be described as protective.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">A</div>
@@ -499,7 +584,7 @@
             </div>
         </div>
 
-        <div class="status-callout"><strong>Physical-device study:</strong> <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/119">#119</a> assigns each intern one happy-path or negative scenario, a required device pair when needed, and a Friday presenter. iPhone owners use a private invite and the real camera; never publish the invite. The July 8 notice verified beta <code>3.4.5 (2026070701)</code> for iOS 17+, but the exact source commit/branch mapping is <strong>INCONCLUSIVE</strong> until reconciled. Record the build actually installed; if the return flow is absent, file <code>NOT_PRESENT</code>/<code>GAP</code> rather than substituting the web demo.</div>
+        <div class="status-callout"><strong>Physical-device study:</strong> <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/119">#119</a> assigns each intern one happy-path or negative scenario, a required device pair when needed, and a Friday presenter. iPhone owners use a private invite and the real camera; never publish the invite. The current archive is <code>3.4.5 (2026072201)</code> from source commit <code>6722921</code>. That mapping is VERIFIED, but physical-device camera/model behavior and the return journey remain <strong>CODE-SHIPPED-NOT-VERIFIED</strong>. Record the build actually installed; if the return flow is absent, file <code>NOT_PRESENT</code>/<code>GAP</code> rather than substituting the web demo.</div>
 
         <div class="status-callout"><strong>Week 5 runtime closeout is VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/117">PR #117</a> and the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-05-VERIFICATION.md">durable verification report</a>.</strong> Fail-closed evidence handling, rollback/concurrency tests, raw-image bounds, and real lint enforcement are merged. The remaining carryovers include the reproducible, privacy-clean empirical accuracy report from <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/81">#81</a>, the #85 fixture repair in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a>, optional OCR review in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a>, and their vocabulary/docs reconciliation. Close them only with command or browser evidence.</div>
         <div class="status-callout"><strong>The weeks do form one product path:</strong> Week 2 provides the scanner and receipt/provenance primitives; Week 3 supplies the calibration gate and claim skeleton; Week 4 supplies deterministic caps, decisions, review transitions, and hash-chain audit; Week 5 supplies receipt, identity, fraud, redaction, fixtures, and wireframes; Week 6 adds the shopper and operations surfaces, real-device evidence, final binding, report, and joined proof. The remaining seams are explicit: #109 carries receipt pixels into bounded evidence; #120 finalizes approval atomically; #129 freezes one host schema/fixture set; and #112/#113/#116 must test and run that same real path rather than divergent UI-only mocks.</div>

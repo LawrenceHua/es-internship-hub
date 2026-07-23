@@ -1241,7 +1241,7 @@ cd es-intern-freshlens
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> multi-item detection working&mdash;every produce item in a frame is found and boxed.</span>
+                        <span><strong>Target &mdash; currently BLOCKED:</strong> operational multi-item detection that finds and boxes every produce item in a frame. The shopper build currently has no bundled or served detector; one full-frame fallback does not satisfy this deliverable.</span>
                     </div>
                     <div class="skills">
                         <span class="skill-tag">Integrating an ML detector</span>
@@ -1317,14 +1317,14 @@ cd es-intern-freshlens
                         <div class="day"><div class="day-name">Thu</div><div class="day-time work">Integration day</div><h4>Join the loop</h4><p>Wire shopper &rarr; evidence &rarr; advisory model &rarr; assigned-store human review &rarr; atomic receipt binding/anchor &rarr; scoped report. Runtime and lint hardening are VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/117">PR #117</a>; finish the <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/81">#81</a> reproducible empirical report, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/85">#85</a>/<a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a>, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">OCR/#109</a>, vocabulary, and docs carryovers.</p></div>
                         <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Golden-path + feature demos</h4><p>Show the physical-camera/two-browser claim path, recipe model, device findings, atomic anchor/replay proof, weekly report, account report, receipt/audit verification, and exact offline suite evidence.</p></div>
                     </div>
-                    <p class="status-snapshot"><strong>Status snapshot &mdash; 2026-07-21 21:55 UTC.</strong> PR heads, checks, reviews, access, and device evidence can change after this time.</p>
+                    <p class="status-snapshot"><strong>Status snapshot &mdash; 2026-07-23 18:59 UTC.</strong> PR heads, checks, reviews, access, and device evidence can change after this time.</p>
                     <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
                         <span><strong>Restricted model surface:</strong> use a route only when <code>/capabilities</code> advertises it. The Week-6 set is <code>/score</code>, <code>/nutrition/{produce_type}</code>, <code>/model-info</code>, <code>/budget</code>, <code>/date-label/decode</code>, and <code>/markdown/suggest</code>. <code>/score</code> is stateful advisory access: shared counters/cache change and training persistence is <strong>INCONCLUSIVE</strong>. Training data, predictions, broad analysis, batches, and account inventory are not intern capabilities.</span>
                     </div>
                     <div class="deliverable spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Private product-source sandbox is VERIFIED:</strong> all eight interns have accepted <code>write</code> access to the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a>. Read <code>ACCESS.md</code> and follow the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Week 6 access guide</a>. Work only on branches and PRs; protected <code>main</code> requires the <code>safety</code> check, one approval, and code-owner review. Use synthetic fixtures only&mdash;never add secrets, customer receipts/photos/data, or deployment material. The canonical product repository remains out of scope. Live advisory access stays behind the <a href="https://freshlens-proxy.fly.dev" target="_blank" rel="noopener">intern proxy</a>, with individual keys delivered privately.</span>
+                        <span><strong>Private product-source sandbox is VERIFIED:</strong> all eight interns have accepted <code>write</code> access to the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a> (accepted GitHub access required). Read <code>ACCESS.md</code> and follow the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Week 6 access guide</a>. Work only on branches and PRs; protected <code>main</code> requires the <code>safety</code> check, one approval, and code-owner review. Use synthetic fixtures only&mdash;never add secrets, customer receipts/photos/data, or deployment material. The canonical product repository remains out of scope. Live advisory access stays behind the <a href="https://freshlens-proxy.fly.dev/health" target="_blank" rel="noopener">intern proxy health endpoint</a>, with individual keys delivered privately.</span>
                     </div>
                     <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
@@ -1332,7 +1332,7 @@ cd es-intern-freshlens
                     </div>
                     <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
-                        <span><strong>The complete Week 6 specification is CODE-SHIPPED-NOT-VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/142">PR #142</a>:</strong> all four checks pass; the 22-issue milestone, per-intern work, #129 host contract, scenario ownership, prior-week dependencies, and exact blockers are documented. Independent review and merge are still required.</span>
+                        <span><strong>The complete Week 6 specification is CODE-SHIPPED-NOT-VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/142">PR #142</a>:</strong> it is approved and all four checks pass; the 22-issue milestone, per-intern work, #129 host contract, scenario ownership, prior-week dependencies, and exact blockers are documented. Merge and joined runtime proof are still required.</span>
                     </div>
                     <div class="deliverable verified spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -1344,7 +1344,15 @@ cd es-intern-freshlens
                     </div>
                     <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
-                        <span><strong>UI is CODE-SHIPPED-NOT-VERIFIED on <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/137">PR #137</a> at <code>3c60e8e</code>:</strong> role-separated credentials, four focused screens, corrected evidence fields, safe DOM, frozen lost-response retry, GET-returned policy revision, and executable client-behavior tests are green (<code>844 passed, 15 skipped</code>). Hostile-text, real focus/keyboard, 320-pixel, desktop, 200%-zoom, screenshot/recording, physical-device, and independent-review evidence still block merge.</span>
+                        <span><strong>UI is CODE-SHIPPED-NOT-VERIFIED on <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/137">PR #137</a> at <code>48402d5</code>:</strong> CI is green, but the PR is behind <code>main</code> and still has a changes-requested review. Hostile-text, real focus/keyboard, 320-pixel, desktop, 200%-zoom, screenshot/recording, physical-device, and independent-review evidence still block merge.</span>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Shopper app + CV readiness is BLOCKED:</strong> the current build and 149 unit tests are green, but its freshness quality head has 0% spoiled recall on the 264-record gold set; the hover gate accepts QR images as fresh produce; no operational multi-item detector is present; and receipt/return screens are not in production navigation. Read the <a href="freshlens.html#shopper-cv-readiness">full evidence matrix and next gates</a>.</span>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>The claim-host contract is CODE-SHIPPED-NOT-VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/148">PR #148</a>:</strong> checks are green, but it is contract-only and behind <code>main</code>. Live routes, create idempotency, finalization, and the capture-metadata decision remain unimplemented.</span>
                     </div>
                     <p class="week-sub">Assigned Week 6 work</p>
                     <ul class="resource-list">
@@ -1392,7 +1400,7 @@ cd es-intern-freshlens
                     </ul>
                     <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
-                        <span><strong>Physical-device truth boundary:</strong> #119 gives each intern one happy-path or negative scenario, a named device pair when needed, and a Friday presenter. It uses a private program-lead invite; never publish it. The July 8 notice verified beta <code>3.4.5 (2026070701)</code> for iOS 17+, but exact source commit/branch mapping is <strong>INCONCLUSIVE</strong>. Record the build actually installed and file <code>NOT_PRESENT</code>/<code>GAP</code> if the return flow is absent; a simulator or web demo cannot substitute for real-camera acceptance.</span>
+                        <span><strong>Physical-device truth boundary:</strong> #119 gives each intern one happy-path or negative scenario, a named device pair when needed, and a Friday presenter. It uses a private program-lead invite; never publish it. The current archive is <code>3.4.5 (2026072201)</code> from source commit <code>6722921</code>. That mapping is VERIFIED, but camera/model behavior and the return journey remain <strong>CODE-SHIPPED-NOT-VERIFIED</strong>. Record the build actually installed and file <code>NOT_PRESENT</code>/<code>GAP</code> if the return flow is absent; a simulator or web demo cannot substitute for real-camera acceptance.</span>
                     </div>
                     <details class="week6-details">
                     <summary>Resources and audited reference documents</summary>
