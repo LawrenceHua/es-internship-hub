@@ -263,7 +263,7 @@
             Talk Me Up
         </div>
         <div class="nav-actions">
-            <a href="#week-6" class="nav-week-link">This week</a>
+            <a href="#final-convergence" class="nav-week-link">Next up</a>
             <a href="index.html" class="back-link">&larr; Program</a>
         </div>
     </div>
@@ -320,7 +320,7 @@
             <div class="pillar">
                 <div class="num">3</div>
                 <h3>Prove</h3>
-                <p>The target is one verifiable provenance receipt and hash-chained audit trail per decision. Cap + duplicate checks run before the model; complete receipt binding and anchor finalization remain blocked on #120.</p>
+                <p>The local candidate now creates one immutable signed decision artifact and verifies its mock-anchor state. Durable storage, external trust, and money issuance remain separate blocked capabilities.</p>
             </div>
         </div>
         <p class="detail-note-roomy">Four guardrails are non-negotiable: advisory language only &middot; human-in-the-loop outside the narrow band &middot; calibration before any auto-threshold &middot; cap + duplicate checks before the model. Full detail in <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/INITIATIVE-freshness-guarantee.md" target="_blank" rel="noopener">INITIATIVE-freshness-guarantee.md</a> and the executable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/SPEC-claim-loop.md" target="_blank" rel="noopener">SPEC-claim-loop.md</a>.</p>
@@ -335,16 +335,16 @@
             <div class="flow-arrow">&rarr;</div>
             <div class="flow-step"><strong>3 &middot; Advise</strong>Model scores condition (0&nbsp;=&nbsp;fresh &rarr; 100&nbsp;=&nbsp;urgent).</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>4 &middot; Decide</strong>Week 6 routes to human review; auto-approval remains calibration-gated off.</div>
+            <div class="flow-step"><strong>4 &middot; Decide</strong>The current gate routes every claim to a separately authorized human reviewer.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>5 &middot; Prove</strong>Target: bind + anchor the complete receipt and audit. BLOCKED until #120.</div>
+            <div class="flow-step"><strong>5 &middot; Prove</strong>The local prototype binds the decision, verifies its mock anchor, and exports an account-scoped report.</div>
         </div>
         <p class="detail-note"><strong>Mind the direction.</strong> The canonical FreshLens scale is <strong>0 = perfectly fresh, 100 = spoiled / urgent</strong> (low = green/fresh, high = red/use-now). The raw model returns the opposite (high = fresh); the <code>es_api</code> adapter inverts it at the seam, so all claim code works on the canonical scale.</p>
     </section>
 
     <section class="block">
         <h2>Target architecture</h2>
-        <p class="lead">A FastAPI service that puts a capped, audited policy <em>around</em> the freshness model. Week 6 remains human-review-only, and the final receipt-binding/anchor boundary below is not complete until #120 lands.</p>
+        <p class="lead">A FastAPI service that puts a capped, audited policy <em>around</em> the freshness model. The current local candidate remains human-review-only and verifies the receipt-binding/mock-anchor boundary; it is not a durable production or issuance architecture.</p>
         <pre>in-app photo (item) + receipt
    |
    v
@@ -402,33 +402,134 @@
                     <li>Recipe ML, atomic receipt binding/anchor, device UX, and work-sync tracks</li>
                     <li>One team-owned golden path across every layer</li>
                 </ul>
-                <div class="demo">Demo: physical-phone capture &rarr; evidence routes to human review &rarr; separately authorized reviewer decides &rarr; binding, anchor, report, receipt, and audit verify.</div>
+                <div class="demo">Verified local demo: synthetic evidence &rarr; human review &rarr; assigned-store decision &rarr; signed binding, mock anchor, report, receipt, and audit checks. Physical-phone integration remains separate.</div>
             </div>
             <div class="week">
-                <div class="wk">Week 7 &middot; Provenance Hardening</div>
+                <div class="wk">Week 7 &middot; Trust, Native Seam + Model Evidence</div>
                 <ul>
-                    <li>Ed25519-signed receipts (verify without forging)</li>
-                    <li>On-chain anchor of the receipt digest</li>
-                    <li><a href="provenance.html">Optional track: blockchain provenance receipts</a></li>
+                    <li>Add an explicit Ed25519 path while preserving HMAC compatibility</li>
+                    <li>Freeze the host adapter and feature-flagged native seam</li>
+                    <li>Run CV, OOD, recipe, security, rendered UX, and operations gates</li>
+                    <li>Finish an evidence-backed <code>rc1</code> manifest</li>
                 </ul>
-                <div class="demo">Demo: signed receipt verifies green &rarr; tamper one character &rarr; verifies red; audit shows the receipt ID.</div>
+                <div class="demo">Demo: eight connected evidence segments spanning signing, binding, authority, UX, adversarial tests, operations, reproducibility, and model/data boundaries.</div>
             </div>
             <div class="week">
                 <div class="wk">Week 8 &middot; Integration, Freeze &amp; Demo Day</div>
                 <ul>
-                    <li>Wire the loop into the host app UI</li>
-                    <li>Freeze, record the demo</li>
-                    <li>Present on Demo Day</li>
+                    <li>Freeze one traceable candidate at noon ET on Aug 3</li>
+                    <li>Run the full quality matrix and repair only release-critical defects</li>
+                    <li>Reconcile source, native build, device, model, website, and backup evidence</li>
+                    <li>Record, rehearse, present, and hand off on Aug 7</li>
                 </ul>
-                <div class="demo">Demo: shopper claim &rarr; capped decision &rarr; receipt verifies; business review &rarr; approve &rarr; download the audit log.</div>
+                <div class="demo">Demo: one honest joined story, exact artifacts, a reproducible backup, and named owners for every remaining block.</div>
             </div>
         </div>
         <p class="detail-note-roomy">Full week-by-week missions live in the repo&rsquo;s <a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">docs/</a> (<code>WEEK-03.md &hellip; WEEK-08.md</code>).</p>
     </section>
 
+    <section class="block" id="final-convergence">
+        <h2>Next up &mdash; Weeks 7&ndash;8: harden, integrate, and prove</h2>
+        <p class="lead"><strong>Jul 27&ndash;Aug 7.</strong> Turn the Week 6 candidate into one traceable release candidate, test every important boundary, record the demo, and hand off exact evidence by Friday, August 7. <strong>Lezhi coordinates the closeout</strong>; everyone owns implementation, a negative test, a cross-review, device evidence, and a demo segment. Track the joined program in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">all-team issue #164</a>.</p>
+        <div class="do-now">
+            <h3>Start Monday from evidence, not assumptions</h3>
+            <ol>
+                <li>Use candidate checkpoint <code>7fa8d33</code> only after a clean checkout reproduces its core gates; do not substitute a different branch, native build, or model artifact.</li>
+                <li>Read the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7fa8d333e6376c9c7f62bf3f92351afabe7ce63b/docs/WEEK-07.md" target="_blank" rel="noopener">Week 7 plan</a>, <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7fa8d333e6376c9c7f62bf3f92351afabe7ce63b/docs/WEEK-08.md" target="_blank" rel="noopener">Week 8 plan</a>, and <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7fa8d333e6376c9c7f62bf3f92351afabe7ce63b/docs/QUALITY-GATES.md" target="_blank" rel="noopener">quality gates</a>.</li>
+                <li>Post one consumer-ready artifact, one failing-path test, one operational signal, and one current canonical status on your assigned issue. Route contract conflicts to Lezhi before implementation diverges.</li>
+            </ol>
+        </div>
+        <p class="status-snapshot"><strong>Evidence snapshot &mdash; July 24, 2026.</strong> These results are from a local FreshLens integration candidate. They are not proof of a merge, deployment, native archive, TestFlight lineage, model promotion, or production release.</p>
+        <div class="status-callout verified"><strong>Local joined path is VERIFIED.</strong> The offline golden path completed <strong>16/16</strong> required checks twice with byte-identical output. The focused security/policy/binding slice reported <strong>668 passed, 1 skipped</strong>; the full suite reported <strong>1436 passed, 20 skipped</strong>. The skip and full-suite skips do not prove native or live-provider behavior.</div>
+        <div class="status-callout verified"><strong>Structural shopper/reviewer coverage is VERIFIED.</strong> The UI/API scorecard completed <strong>55/55</strong> checks twice with byte-identical output, and its anti-false-green test file reported <strong>44 passed</strong> (<strong>51 passed</strong> joined with claim E2E). This is structural and API evidence, not a rendered accessibility or physical-device pass.</div>
+        <div class="status-callout"><strong>Model/data truth:</strong> the synthetic placeholder freshness check is <strong>8/10 = 0.80</strong>, exactly at its floor; real-photo CV/OOD release quality is not certified. Recipe serving remains <strong>BLOCKED</strong> at 0 approved rows, and authorized calibration fixtures remain <strong>BLOCKED</strong> at 0/60 photos.</div>
+        <div class="status-callout"><strong>Safety boundary: GATE: RE-SCOPE (human-review-only).</strong> Shopper, assigned-store reviewer, and policy administrator remain separate. A reviewer may record a bounded approved amount; no automatic approval, refund, credit, payout, redemption, settlement, or issuance occurs.</div>
+
+        <div class="readiness-panel">
+            <h3>What the current candidate does&mdash;and does not&mdash;prove</h3>
+            <p>Each surface keeps its own status. A green local core does not turn an unrelated native, model, data, durability, or publication gate green.</p>
+            <section class="readiness-table-wrap" tabindex="0" aria-label="Scrollable final convergence readiness table">
+                <table class="readiness-table">
+                    <caption>Final convergence readiness as of July 24, 2026</caption>
+                    <thead>
+                        <tr><th scope="col">Surface</th><th scope="col">Status</th><th scope="col">Evidence and next gate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Local claim core</td>
+                            <td><span class="status-label verified">VERIFIED</span></td>
+                            <td>Human review, assigned-store authorization, $15 / 30-day and $10 / claim ceilings, revision-safe policy writes, signed decision binding, mock-anchor verification, retry protection, redaction, and account-scoped reporting are exercised together in the local candidate.</td>
+                        </tr>
+                        <tr>
+                            <td>Rendered web UX</td>
+                            <td><span class="status-label inconclusive">INCONCLUSIVE</span></td>
+                            <td>Desktop/mobile screenshots, keyboard/focus, 200% zoom, reduced motion, hostile rendered strings, and loading/empty/error states still need direct browser observation.</td>
+                        </tr>
+                        <tr>
+                            <td>Native + TestFlight</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>Build 3.4.4 embeds a retired hostname and cannot create accounts. Build 3.4.5 (<code>2026072201</code>) embeds the live API and is in internal testing/external review, but it predates this candidate and physical-device account creation is still unproved. Do not reconnect the obsolete return-completion routes.</td>
+                        </tr>
+                        <tr>
+                            <td>Freshness, OOD + detector</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>The evaluated freshness artifact fails its quality gate; representative OOD evidence and an approved multi-item detector are missing. Model output remains advisory and quarantined.</td>
+                        </tr>
+                        <tr>
+                            <td>Recipe serving</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>Fail-closed validation is present, but the approved shopper-serving corpus has 0 rows. Approval, a frozen evaluation contract, and passing release floors are required before serving.</td>
+                        </tr>
+                        <tr>
+                            <td>Authorized evidence data</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>The candidate has 0 of the required 60 privacy-clean calibration photos. Synthetic golden-path fixtures do not replace authorized empirical data.</td>
+                        </tr>
+                        <tr>
+                            <td>Durability + external trust</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>Claims, policy, retry, evidence, and anchor intent are still process-local. Database constraints, private object storage, transaction/outbox recovery, retention, migration, and independently verified external anchoring remain product work.</td>
+                        </tr>
+                        <tr>
+                            <td>Approved-amount issuance</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>No refund, credit, payout, redemption, settlement, or issuance contract is implemented. A bounded human decision is not proof that money moved.</td>
+                        </tr>
+                        <tr>
+                            <td>Website publication</td>
+                            <td><span class="status-label inconclusive">INCONCLUSIVE</span></td>
+                            <td>This hub update and the candidate are local until reviewed, pushed, merged or deployed as authorized, and live-probed at their final revisions.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <h2 class="section-heading">Substantial closeout ownership &mdash; all eight interns</h2>
+        <p class="lead">No lane is just &ldquo;help with integration.&rdquo; Each owner has a concrete implementation artifact, adversarial proof, cross-review, operational or user impact, reproducibility evidence, and a short demo segment.</p>
+        <div class="ownership-grid">
+            <div class="owner-task"><h3>Lezhi <span>Trust + coordination &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/156" target="_blank" rel="noopener">#156</a></span></h3><p>Add the explicit Ed25519 signing/verification path, key identity and rotation contract, public-key discovery, and HMAC compatibility. Coordinate contract freeze, clean-clone setup, device matrix, and blocker rollup; Bill and Tony cross-review.</p></div>
+            <div class="owner-task"><h3>Lisa <span>Binding + recipe approval &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/157" target="_blank" rel="noopener">#157</a></span></h3><p>Extend immutable decision binding with algorithm/key identity; prove tamper, replay, duplicate, retry, and anchor reconciliation; prepare the recipe approval package with Jinming and Mohan. Tony fault-injects the critical paths.</p></div>
+            <div class="owner-task"><h3>Jinming <span>Host adapter + authority &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/158" target="_blank" rel="noopener">#158</a></span></h3><p>Freeze the host-adapter reference, state/role/store mapping, and integration sequence without weakening server-derived authority or policy ceilings. Review the recipe interface; Ziyun and Tony cross-review UX and authorization.</p></div>
+            <div class="owner-task"><h3>Ziyun <span>Native seam + rendered UX &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/159" target="_blank" rel="noopener">#159</a></span></h3><p>Build the feature-flagged native claim states without reconnecting the legacy return flow. Own rendered desktop/mobile accessibility, failure recovery, and the exact browser-versus-native evidence boundary.</p></div>
+            <div class="owner-task"><h3>Tony <span>Adversarial release gate &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/160" target="_blank" rel="noopener">#160</a></span></h3><p>Own authority-escalation, replay, conflict, concurrency, partial-failure, restart, dependency, and test-validity review. Demonstrate one prevented exploit and name any architecture limitation that remains.</p></div>
+            <div class="owner-task"><h3>Bill <span>Operations + observability &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/161" target="_blank" rel="noopener">#161</a></span></h3><p>Ship privacy-safe correlation, structured logs, report/audit lineage, metrics, recovery, and rollback evidence. Lezhi reproduces the runbook; Lisa reviews binding redaction.</p></div>
+            <div class="owner-task"><h3>Yizhou <span>Gate orchestration + work sync &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/162" target="_blank" rel="noopener">#162</a></span></h3><p>Combine provenance, UX, model, and work-sync checks into a deterministic release scorecard that cannot false-green. Independently rerun Mohan&rsquo;s model/OOD outputs and Ziyun&rsquo;s UX matrix.</p></div>
+            <div class="owner-task"><h3>Mohan <span>CV/OOD/recipe evidence &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/163" target="_blank" rel="noopener">#163</a></span></h3><p>Version privacy-clean OOD/evidence fixtures, run exact-hash CV and detector-gap evaluation, and prepare recipe corpus fixtures and model cards. Yizhou verifies the output; Lisa reviews identity vocabulary.</p></div>
+        </div>
+
+        <h2 class="section-heading">Two-week checkpoints</h2>
+        <div class="pillars">
+            <div class="pillar"><div class="num">W7</div><h3>Jul 27&ndash;31 &middot; <code>rc1</code></h3><p>Mon contract freeze; Tue draft artifacts and cross-review; Wed browser/native/device lab; Thu red-team and model/data gates; Fri eight-part evidence demo and an evidence-backed release-manifest snapshot.</p></div>
+            <div class="pillar"><div class="num">W8</div><h3>Aug 3&ndash;6 &middot; freeze + verify</h3><p>Freeze features Monday at noon ET. Tuesday runs the full quality matrix; Wednesday reconciles any authorized source-linked native archive and physical-device evidence; Thursday locks the backup and rehearses.</p></div>
+            <div class="pillar"><div class="num">8/7</div><h3>Demo Day + handoff</h3><p>Show one honest joined flow, receipt mutation rejection, separate authority, exact source/build/model evidence, and every remaining block. Deliver the manifest, runbook, recording, contribution ledger, and named next owners.</p></div>
+        </div>
+        <p class="compact-copy"><strong>Stop rule:</strong> a capability is <code>VERIFIED</code> only with current evidence on its exact source, build, model, or dataset. Otherwise record <code>CODE-SHIPPED-NOT-VERIFIED</code>, <code>BLOCKED</code>, or <code>INCONCLUSIVE</code> with the owner, blocker, next action, and recovery path.</p>
+    </section>
+
     <section class="block" id="week-6">
-        <h2>This week &mdash; Week 6: make the claim loop real</h2>
-        <p class="lead"><strong>Jul 20&ndash;24.</strong> Build the shopper&rsquo;s four-step claim wizard and the reviewer&rsquo;s operating view, connect them to safe ES model insights, and finish with one joined path that every intern can explain and run. <strong>Lezhi (<code>@LezhiFu</code>) is the Week 6 coordination lead</strong>. All 22 scoped issues are grouped in the <a href="https://github.com/LawrenceHua/es-intern-freshlens/milestone/1" target="_blank" rel="noopener">Week 6 &mdash; Joined Claim Loop milestone</a>; keep any access grants least-privilege and task-scoped.</p>
+        <h2>Week 6 closeout record &mdash; make the claim loop real</h2>
+        <p class="lead"><strong>Jul 20&ndash;24 historical snapshot.</strong> This record preserves the owner map, issue links, and evidence known during Week 6. The July 24 local-candidate status above supersedes any older readiness count or blocker wording here. <strong>Lezhi (<code>@LezhiFu</code>) was the Week 6 coordination lead</strong>.</p>
         <div class="do-now">
             <h3>Do this now</h3>
             <ol>
@@ -452,7 +553,7 @@
         <div class="readiness-panel" id="shopper-cv-readiness">
             <h3>Shopper app + CV readiness &mdash; evidence snapshot</h3>
             <p>The current shopper build is useful for scanner, inventory, and recipe testing, but the joined Week 6 return loop and the CV release gates are not ready. Keep model output advisory and route every claim to a separately authorized human reviewer.</p>
-            <div class="readiness-table-wrap" tabindex="0" role="region" aria-label="Scrollable shopper app and computer vision readiness table">
+            <section class="readiness-table-wrap" tabindex="0" aria-label="Scrollable shopper app and computer vision readiness table">
                 <table class="readiness-table">
                     <caption>Shopper app and computer vision readiness as of July 23, 2026</caption>
                     <thead>
@@ -506,7 +607,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </section>
         </div>
         <div class="pillars">
             <div class="pillar">
@@ -596,15 +697,20 @@
 
     <section class="block">
         <h2>Get started</h2>
-        <p class="lead">The starter repo is a <strong>complete, runnable app</strong> &mdash; clone it and it works on day one, offline, with no API key (placeholder freshness scorer). The <strong>Getting Started</strong> guide takes you from clone to running in your browser in ~15 minutes. For Week 6, read <code>START_HERE.md</code> and kickoff #118 first. Real-model access uses an intern-scoped, fail-closed allowlist with a private key; <code>/score</code> is stateful advisory access, not a pure read, while other routes are available only when <code>/capabilities</code> advertises them. See <code>docs/ES-MODEL-ACCESS.md</code>.</p>
+        <p class="lead">For the closeout sprint, begin with the exact July 24 candidate and its status board. Reproduce the local gates before editing, keep real-model signals advisory, and never treat a browser demo, native archive, model file, or green pull request as proof of another surface.</p>
         <div class="cta-row">
-            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/issues/118" target="_blank" rel="noopener">Week 6 kickoff #118 &rarr;</a>
-            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/START_HERE.md" target="_blank" rel="noopener">Audited Week 6 START_HERE &rarr;</a>
-            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/milestone/1" target="_blank" rel="noopener">22-issue milestone &rarr;</a>
+            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">All-team closeout tracker #164 &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7fa8d333e6376c9c7f62bf3f92351afabe7ce63b/docs/WEEK-07.md" target="_blank" rel="noopener">Week 7 mission &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7fa8d333e6376c9c7f62bf3f92351afabe7ce63b/docs/WEEK-08.md" target="_blank" rel="noopener">Week 8 closeout &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7fa8d333e6376c9c7f62bf3f92351afabe7ce63b/docs/WEEK-06-INTEGRATION-READINESS.md" target="_blank" rel="noopener">Candidate readiness board &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7fa8d333e6376c9c7f62bf3f92351afabe7ce63b/docs/PROGRAM-CLOSEOUT-2026-08-07.md" target="_blank" rel="noopener">August 7 closeout plan &rarr;</a>
         </div>
         <details class="week6-details">
             <summary>More setup guides and reference links</summary>
             <div class="cta-row">
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7fa8d333e6376c9c7f62bf3f92351afabe7ce63b/docs/QUALITY-GATES.md" target="_blank" rel="noopener">Quality gates &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7fa8d333e6376c9c7f62bf3f92351afabe7ce63b/docs/RELEASE-MANIFEST-2026-08-07.md" target="_blank" rel="noopener">Release manifest contract &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/7fa8d333e6376c9c7f62bf3f92351afabe7ce63b/START_HERE.md" target="_blank" rel="noopener">Current START_HERE &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/docs/WEEK-06-ISSUES.md" target="_blank" rel="noopener">Complete issue map &rarr;</a>
             <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">Read the Getting Started guide &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/docs/WEEK-06.md" target="_blank" rel="noopener">Audited Week 6 mission &rarr;</a>
