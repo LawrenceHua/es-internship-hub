@@ -116,7 +116,7 @@
         .hero-rule { margin-top: 1.75rem; width: 200px; max-width: 60%; }
 
         .wrap { max-width: 920px; margin: 0 auto; padding: 0 2rem; }
-        section.block { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
+        section.block { padding: 3.5rem 0; border-bottom: 1px solid var(--border); scroll-margin-top: 76px; }
         section.block:last-of-type { border-bottom: none; }
         h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
         .lead { color: var(--text-secondary); font-size: 1.02rem; margin-bottom: 1.75rem; max-width: 680px; }
@@ -281,7 +281,7 @@
         <div class="hero-label">Flagship Project &middot; Weeks 3&ndash;8</div>
         <h1>FreshLens</h1>
         <p>The FreshLens target is simple: point your camera at a fridge, basket, or produce shelf and score every item in one scene. Then turn the advisory result into action: rescue what&rsquo;s turning, or mark it down before it&rsquo;s lost. The real YOLO/live-service path is not yet reproducible in a clean checkout.</p>
-        <p class="hero-callout"><strong>This summer the team builds one feature on top: Snap-to-Claim</strong>&thinsp;&mdash;&thinsp;a capped, evidence-backed, human-in-the-loop refund loop for perishables that arrive spoiled.</p>
+        <p class="hero-callout"><strong>This summer the team builds one feature on top: Snap-to-Claim</strong>&thinsp;&mdash;&thinsp;a capped, evidence-backed, human-review claim and recovery loop for perishables that arrive spoiled.</p>
         <div class="hero-tags">
             <span class="hero-tag">Python</span>
             <span class="hero-tag">FastAPI</span>
@@ -304,8 +304,8 @@
 
     <section class="block">
         <h2>This summer&rsquo;s build: Snap-to-Claim</h2>
-        <p class="lead">On top of the FreshLens base, the team builds <strong>one</strong> focused feature for Weeks 3&ndash;8: <strong>Snap-to-Claim (Return Trust)</strong> &mdash; a capped, evidence-backed, human-in-the-loop refund loop for perishables that arrive spoiled.</p>
-        <p>A shopper let down by a discounted perishable snaps the item + receipt in-app. The ES freshness model <em>advises</em> on condition. A capped policy decides, with auto-approval disabled under the current calibration gate. The intended result is duplicate-checked, bound to a provenance receipt, and written to a tamper-evident audit trail. The wedge is not the freshness score; it is the <strong>closed, verifiable-evidence loop</strong>.</p>
+        <p class="lead">On top of the FreshLens base, the team builds <strong>one</strong> focused feature for Weeks 3&ndash;8: <strong>Snap-to-Claim (Return Trust)</strong> &mdash; a capped, evidence-backed, human-review claim and recovery loop for perishables that arrive spoiled.</p>
+        <p>In the local candidate, a shopper submits item and receipt evidence. The freshness model <em>advises</em> on condition; deterministic cap and duplicate checks run before it; and a separately authorized, assigned-store reviewer records any approval or decline. The resulting decision is bound to a signed artifact and tamper-evident audit trail. The wedge is not the freshness score; it is the <strong>closed, verifiable-evidence loop</strong>. No refund, credit, payout, or other issuance occurs.</p>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">1</div>
@@ -315,7 +315,7 @@
             <div class="pillar">
                 <div class="num">2</div>
                 <h3>Decide (capped)</h3>
-                <p>The target policy can auto-approve only a calibrated narrow band. The current <code>RE-SCOPE</code> gate sends every case to a human. A rolling <strong>$15 / 30-day</strong> and <strong>$10 / claim</strong> ceiling limits exposure; the policy never auto-declines.</p>
+                <p>The current <code>RE-SCOPE</code> gate disables automatic approval and routes every otherwise eligible case to an assigned human reviewer. A rolling <strong>$15 / 30-day</strong> and <strong>$10 / claim</strong> ceiling bounds any recorded approval; deterministic cap and duplicate gates still fail closed.</p>
             </div>
             <div class="pillar">
                 <div class="num">3</div>
@@ -323,7 +323,7 @@
                 <p>The local candidate now creates one immutable signed decision artifact and verifies its mock-anchor state. Durable storage, external trust, and money issuance remain separate blocked capabilities.</p>
             </div>
         </div>
-        <p class="detail-note-roomy">Four guardrails are non-negotiable: advisory language only &middot; human-in-the-loop outside the narrow band &middot; calibration before any auto-threshold &middot; cap + duplicate checks before the model. Full detail in <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/INITIATIVE-freshness-guarantee.md" target="_blank" rel="noopener">INITIATIVE-freshness-guarantee.md</a> and the executable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/SPEC-claim-loop.md" target="_blank" rel="noopener">SPEC-claim-loop.md</a>.</p>
+        <p class="detail-note-roomy">Four guardrails are non-negotiable: advisory language only &middot; human review for every otherwise eligible case under the current gate &middot; a separately approved calibration gate before any auto-threshold &middot; cap + duplicate checks before the model. Full detail in <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/INITIATIVE-freshness-guarantee.md" target="_blank" rel="noopener">INITIATIVE-freshness-guarantee.md</a> and the executable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/SPEC-claim-loop.md" target="_blank" rel="noopener">SPEC-claim-loop.md</a>.</p>
     </section>
 
     <section class="block">
@@ -357,7 +357,7 @@
 [ policy.adjudicate() ]  -&gt; human_review now  |  auto_approve only after a future GO gate
    |
    v
-[ provenance receipt + binding + anchor ] (#120 target)  +  [ hash-chain audit ]
+[ merged local receipt + binding + mock anchor ] (#120 / PR #147)  +  [ hash-chain audit ]
    |
    +-- assigned-store reviewer can approve / decline an authorized escalated claim</pre>
     </section>
@@ -405,14 +405,14 @@
                 <div class="demo">Verified local demo: synthetic evidence &rarr; human review &rarr; assigned-store decision &rarr; signed binding, mock anchor, report, receipt, and audit checks. Physical-phone integration remains separate.</div>
             </div>
             <div class="week">
-                <div class="wk">Week 7 &middot; Trust, Native Seam + Model Evidence</div>
+                <div class="wk">Week 7 &middot; One evidence-backed <code>rc1</code></div>
                 <ul>
-                    <li>Add an explicit Ed25519 path while preserving HMAC compatibility</li>
-                    <li>Freeze the host adapter and feature-flagged native seam</li>
-                    <li>Run CV, OOD, recipe, security, rendered UX, and operations gates</li>
-                    <li>Finish an evidence-backed <code>rc1</code> manifest</li>
+                    <li>Freeze shared contracts and the release-result schema</li>
+                    <li>Preserve the human-review core on one clean source commit</li>
+                    <li>Prove trust, authorization, rendered UX, recovery, and combined gates</li>
+                    <li>Record unavailable native, model, data, recipe, durability, and publication inputs honestly</li>
                 </ul>
-                <div class="demo">Demo: eight connected evidence segments spanning signing, binding, authority, UX, adversarial tests, operations, reproducibility, and model/data boundaries.</div>
+                <div class="demo">Demo: one traceable candidate, reproduced negative paths, and a mixed-status manifest with an owner and next action for every open capability.</div>
             </div>
             <div class="week">
                 <div class="wk">Week 8 &middot; Integration, Freeze &amp; Demo Day</div>
@@ -429,17 +429,39 @@
     </section>
 
     <section class="block" id="final-convergence">
-        <h2>Next up &mdash; Weeks 7&ndash;8: harden, integrate, and prove</h2>
-        <p class="lead"><strong>Jul 27&ndash;Aug 7.</strong> Turn the Week 6 candidate into one traceable release candidate, test every important boundary, record the demo, and hand off exact evidence by Friday, August 7. <strong>Lezhi coordinates the closeout</strong>; everyone owns implementation, a negative test, a cross-review, device evidence, and a demo segment. Track the joined program in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">all-team issue #164</a>.</p>
+        <h2>This week&rsquo;s goal &mdash; one honest, evidence-backed <code>rc1</code></h2>
+        <p class="lead"><strong>Week 7 &middot; Jul 27&ndash;31.</strong> By Friday, cut an evidence-backed <code>rc1</code> manifest for one clean FreshLens commit that preserves the human-review core, proves the highest-risk trust, authorization, rendered-UX, and recovery boundaries, and carries every unavailable dependency forward with an exact owner and next action. <strong>Lezhi coordinates the closeout</strong>; every intern owns a bounded contribution or blocker, a negative test, a cross-review, and a demo segment. Track the joined program in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">all-team issue #164</a>.</p>
         <div class="do-now">
             <h3>Start Monday from evidence, not assumptions</h3>
             <ol>
                 <li>Start from current <code>main</code> <code>b6f9665</code>, the protected squash merge of <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/155" target="_blank" rel="noopener">PR #155</a>; record the source revision with every result.</li>
-                <li>Read the immutable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/b6f9665a29a966aa2c5dddea4b25e41f6c0a3c25/docs/PROGRAM-STATUS-2026-07-26.md" target="_blank" rel="noopener">July 26 status</a>, <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-07.md" target="_blank" rel="noopener">Week 7 plan</a>, <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-08.md" target="_blank" rel="noopener">Week 8 plan</a>, and <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md" target="_blank" rel="noopener">quality gates</a>.</li>
-                <li>Post one consumer-ready artifact, one failing-path test, one operational signal, and one current canonical status on your assigned issue. Route contract conflicts to Lezhi before implementation diverges.</li>
+                <li>Read the immutable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/b6f9665a29a966aa2c5dddea4b25e41f6c0a3c25/docs/PROGRAM-STATUS-2026-07-26.md" target="_blank" rel="noopener">July 26 status</a>, the proposed <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/167" target="_blank" rel="noopener">Weeks 7&ndash;8 action-plan PR</a>, and the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md" target="_blank" rel="noopener">quality gates</a>.</li>
+                <li>By Monday&rsquo;s checkpoint, post file scope, artifact, consumer, reviewer, command, dependency, and canonical status. By Tuesday noon, open a scoped draft PR of no more than 300 changed lines with a negative test, or post an exact <code>BLOCKED</code> update.</li>
             </ol>
         </div>
-        <p class="status-snapshot"><strong>Evidence snapshot &mdash; July 26, 2026 at 23:04 UTC.</strong> FreshLens <code>main</code> is <code>b6f9665</code>, the protected squash merge of PR #155. Exact-head CI passed 5/5, the merge tree matched the tested head, and a clean post-merge checkout repeated the full local gate. These results are not proof of rendered product UX, native lineage, model promotion, deployment, or production release.</p>
+        <p class="status-snapshot"><strong>Plan snapshot &mdash; July 27, 2026 at 00:19 UTC.</strong> PR #167 is open and mergeable with 5/5 successful checks and zero submitted reviews. Issues #156&ndash;#164 are open and assigned, with zero acknowledgement comments. The plan remains <code>INCONCLUSIVE</code> pending substantive human review and owner acknowledgements.</p>
+        <h2 class="section-heading">Why this goal matters</h2>
+        <div class="pillars">
+            <div class="pillar"><div class="num">S</div><h3>For shoppers</h3><p>Make every outcome understandable, bounded, recoverable, and human-reviewed. Prove the evidence and decision path without implying a model guarantee or that money moved.</p></div>
+            <div class="pillar"><div class="num">O</div><h3>For operations</h3><p>Give the team one traceable source commit, one manifest, reproducible recovery and rollback evidence, and a named owner for every blocker before Week 8 freezes.</p></div>
+            <div class="pillar"><div class="num">T</div><h3>For the team</h3><p>Every intern builds or documents a blocker, breaks a negative path, cross-reviews a peer, reproduces evidence, and explains one limitation. That is the full evidence-backed shipping skill.</p></div>
+        </div>
+        <h2 class="section-heading">The Week 7 priority contract</h2>
+        <div class="pillars">
+            <div class="pillar"><div class="num">M</div><h3>Must win</h3><p>Bootstrap and validate <code>rc0</code>; freeze shared contracts; preserve the local human-review path; prove authorization, caps, replay/tamper, binding, desktop/mobile recovery, operations, and the combined gate.</p></div>
+            <div class="pillar"><div class="num">C</div><h3>Conditional</h3><p>Ed25519, native mapping, and CV/OOD/evidence/recipe evaluation proceed only when their contract, access, evaluator, and authorized exact-hash inputs are present. A missing dependency blocks only its consuming lane.</p></div>
+            <div class="pillar"><div class="num">B</div><h3>Carry forward</h3><p>Keep native distribution, model promotion, general OOD/multi-item claims, recipe serving, empirical-photo claims, durability, external trust, managed integration, issuance, and unprobed publication <code>BLOCKED</code>.</p></div>
+        </div>
+        <div class="status-callout"><strong><code>rc0</code> bootstrap is BLOCKED.</strong> Only the manifest template exists. Create and validate <code>rc0</code> in a separate evidence worktree, pin its source SHA and file drivers, then freeze dependency order before consuming lanes diverge.</div>
+        <h2 class="section-heading">Monday through Friday gates</h2>
+        <div class="ownership-grid">
+            <div class="owner-task"><h3>Monday <span>truth bootstrap + freeze</span></h3><p>Create and validate <code>rc0</code> separately. Pin file drivers, consumers, reviewers, commands, artifacts, dependencies, result schema, and failure vocabulary. An unresolved dependency blocks only its consuming lane.</p></div>
+            <div class="owner-task"><h3>Tuesday <span>noon ET checkpoint</span></h3><p>Each lane opens a scoped draft PR no larger than 300 changed lines with a negative test, or posts a canonical blocker. Cross-review authority, replay, partial failure, privacy, recovery, and abstention.</p></div>
+            <div class="owner-task"><h3>Wednesday <span>noon ET contract cutoff</span></h3><p>Integrate eligible lanes and render desktop/mobile recovery states. Historical installed behavior cannot prove current source; preserve exact browser, native, build, and device identities.</p></div>
+            <div class="owner-task"><h3>Thursday <span>attack + repair</span></h3><p>Repair only P0/P1 and false-green defects. Run adversarial and eligible model/data gates without weakening nonzero thresholds or tuning them after observing results.</p></div>
+            <div class="owner-task"><h3>Friday <span>test C, then write <code>rc1</code></span></h3><p>Test one clean source commit C. Generate and validate the manifest in a separate evidence worktree with C as its source SHA, then demo contributions, negative proofs, limitations, and next owners.</p></div>
+        </div>
+        <p class="status-snapshot"><strong>Evidence snapshot &mdash; July 26, 2026 at 23:04 UTC.</strong> FreshLens <code>main</code> is <code>b6f9665</code>, whose tree matches the audited PR #155 head. All five checks succeeded. The equivalent audited tree recorded 2,075 passed / 21 skipped, 45/45 joined tests, 16/16 demo hops, and 56/56 structural checks. PR #155 had zero submitted reviews; that was a historical lead-authorized exception, not Week 7/8 precedent. These results are not rendered product UX, native lineage, model promotion, deployment, or production-release proof.</p>
         <div class="status-callout verified"><strong>Local joined path is VERIFIED.</strong> The offline golden path completed <strong>16/16</strong> required checks, the joined regression file reports <strong>45 passed</strong>, and the full local suite passes in the declared audit environment. Skips do not prove native or live-provider behavior.</div>
         <div class="status-callout verified"><strong>Structural shopper/reviewer coverage is VERIFIED.</strong> The UI/API scorecard completed <strong>56/56</strong> checks with zero required failures. This is structural and API evidence, not exact-head rendered accessibility or physical-device proof.</div>
         <div class="status-callout"><strong>Model/data truth:</strong> the synthetic placeholder freshness check is <strong>8/10 = 0.80</strong>, exactly at its floor; real-photo CV/OOD release quality is not certified. Recipe serving remains <strong>BLOCKED</strong> at 0 approved rows, and authorized calibration fixtures remain <strong>BLOCKED</strong> at 0/60 photos.</div>
@@ -468,7 +490,7 @@
                         <tr>
                             <td>Native + TestFlight</td>
                             <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>All eight device-result rows are posted for build 3.4.5 (<code>2026072201</code>). Scanner and inventory behavior were exercised, but receipt capture, claim submission, refund/return resolution, and human-review submission are <code>NOT_PRESENT</code>; exact archive-to-source lineage remains <code>INCONCLUSIVE</code>.</td>
+                            <td>All eight device-result rows prove only named historical build 3.4.5 (<code>2026072201</code>), not current source. Scanner and inventory behavior were exercised, but the distributed build lacks the joined claim-submission, status, and reviewer-decision states; exact archive-to-source lineage remains <code>INCONCLUSIVE</code>. The retired immediate-return flow must not be reconnected.</td>
                         </tr>
                         <tr>
                             <td>Freshness, OOD + detector</td>
@@ -497,8 +519,8 @@
                         </tr>
                         <tr>
                             <td>Website publication</td>
-                            <td><span class="status-label inconclusive">INCONCLUSIVE</span></td>
-                            <td>This update is published as hub PR #10 preview work, not production. It still needs a fresh approval, merge, Vercel deployment, and final-revision live probes.</td>
+                            <td><span class="status-label blocked">BLOCKED</span></td>
+                            <td>Hub PR #10 is preview-only. Production still serves the older Week 6 revision. Publication remains blocked pending an exact-head approval, protected merge, production deployment, and post-deploy live probes.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -506,23 +528,23 @@
         </div>
 
         <h2 class="section-heading">Substantial closeout ownership &mdash; all eight interns</h2>
-        <p class="lead">No lane is just &ldquo;help with integration.&rdquo; Each owner has a concrete implementation artifact, adversarial proof, cross-review, operational or user impact, reproducibility evidence, and a short demo segment.</p>
+        <p class="lead">No lane is just &ldquo;help with integration.&rdquo; Each owner has a bounded contribution or evidence-backed blocker, adversarial proof, cross-review, operational or user impact, reproducibility evidence, and a short demo segment.</p>
         <div class="ownership-grid">
-            <div class="owner-task"><h3>Lezhi <span>Trust + coordination &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/156" target="_blank" rel="noopener">#156</a></span></h3><p>Add the explicit Ed25519 signing/verification path, key identity and rotation contract, public-key discovery, and HMAC compatibility. Coordinate contract freeze, clean-clone setup, device matrix, and blocker rollup; Bill and Tony cross-review.</p></div>
+            <div class="owner-task"><h3>Lezhi <span>Trust + coordination &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/156" target="_blank" rel="noopener">#156</a></span></h3><p>Freeze the signature/key contract and coordinate <code>rc0</code>, clean-clone setup, file drivers, and blocker rollup. Add Ed25519 only if its dependency and compatibility contract are ready; otherwise preserve HMAC and record the blocker. Bill and Tony cross-review.</p></div>
             <div class="owner-task"><h3>Lisa <span>Binding + recipe approval &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/157" target="_blank" rel="noopener">#157</a></span></h3><p>Extend immutable decision binding with algorithm/key identity; prove tamper, replay, duplicate, retry, and anchor reconciliation; prepare the recipe approval package with Jinming and Mohan. Tony fault-injects the critical paths.</p></div>
             <div class="owner-task"><h3>Jinming <span>Host adapter + authority &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/158" target="_blank" rel="noopener">#158</a></span></h3><p>Freeze the host-adapter reference, state/role/store mapping, and integration sequence without weakening server-derived authority or policy ceilings. Review the recipe interface; Ziyun and Tony cross-review UX and authorization.</p></div>
-            <div class="owner-task"><h3>Ziyun <span>Native seam + rendered UX &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/159" target="_blank" rel="noopener">#159</a></span></h3><p>Build the feature-flagged native claim states without reconnecting the legacy return flow. Own rendered desktop/mobile accessibility, failure recovery, and the exact browser-versus-native evidence boundary.</p></div>
+            <div class="owner-task"><h3>Ziyun <span>Rendered UX + conditional native seam &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/159" target="_blank" rel="noopener">#159</a></span></h3><p>Own rendered desktop/mobile accessibility, failure recovery, and the exact browser-versus-native evidence boundary. Map feature-flagged native claim states only with exact repository, commit, seam, and access; never reconnect the retired immediate-return flow.</p></div>
             <div class="owner-task"><h3>Tony <span>Adversarial release gate &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/160" target="_blank" rel="noopener">#160</a></span></h3><p>Own authority-escalation, replay, conflict, concurrency, partial-failure, restart, dependency, and test-validity review. Demonstrate one prevented exploit and name any architecture limitation that remains.</p></div>
             <div class="owner-task"><h3>Bill <span>Operations + observability &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/161" target="_blank" rel="noopener">#161</a></span></h3><p>Ship privacy-safe correlation, structured logs, report/audit lineage, metrics, recovery, and rollback evidence. Lezhi reproduces the runbook; Lisa reviews binding redaction.</p></div>
             <div class="owner-task"><h3>Yizhou <span>Gate orchestration + work sync &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/162" target="_blank" rel="noopener">#162</a></span></h3><p>Combine provenance, UX, model, and work-sync checks into a deterministic release scorecard that cannot false-green. Independently rerun Mohan&rsquo;s model/OOD outputs and Ziyun&rsquo;s UX matrix.</p></div>
-            <div class="owner-task"><h3>Mohan <span>CV/OOD/recipe evidence &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/163" target="_blank" rel="noopener">#163</a></span></h3><p>Version privacy-clean OOD/evidence fixtures, run exact-hash CV and detector-gap evaluation, and prepare recipe corpus fixtures and model cards. Yizhou verifies the output; Lisa reviews identity vocabulary.</p></div>
+            <div class="owner-task"><h3>Mohan <span>Model/data decision &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/163" target="_blank" rel="noopener">#163</a></span></h3><p>Freeze the evaluator contract and inventory authorized exact-hash inputs. Run CV/OOD/evidence/recipe evaluation only when those inputs exist; otherwise publish the reproducible blocker and model/data boundary. Yizhou verifies the output; Lisa reviews identity vocabulary.</p></div>
         </div>
 
-        <h2 class="section-heading">Two-week checkpoints</h2>
+        <h2 class="section-heading">Week 8 freeze and handoff</h2>
         <div class="pillars">
-            <div class="pillar"><div class="num">W7</div><h3>Jul 27&ndash;31 &middot; <code>rc1</code></h3><p>Mon contract freeze; Tue draft artifacts and cross-review; Wed browser/native/device lab; Thu red-team and model/data gates; Fri eight-part evidence demo and an evidence-backed release-manifest snapshot.</p></div>
-            <div class="pillar"><div class="num">W8</div><h3>Aug 3&ndash;6 &middot; freeze + verify</h3><p>Freeze features Monday at noon ET. Tuesday runs the full quality matrix; Wednesday reconciles any authorized source-linked native archive and physical-device evidence; Thursday locks the backup and rehearses.</p></div>
+            <div class="pillar"><div class="num">W8</div><h3>Aug 3&ndash;6 &middot; freeze + verify</h3><p>Freeze features Monday at noon ET; optional unfinished work becomes a documented limitation. Tuesday runs the full quality matrix. Wednesday reconciles native/device work only if Lawrence authorizes exact source-linked access; Thursday locks the backup and rehearses.</p></div>
             <div class="pillar"><div class="num">8/7</div><h3>Demo Day + handoff</h3><p>Show one honest joined flow, receipt mutation rejection, separate authority, exact source/build/model evidence, and every remaining block. Deliver the manifest, runbook, recording, contribution ledger, and named next owners.</p></div>
+            <div class="pillar"><div class="num">R</div><h3>Release decision</h3><p><code>rc1</code> is a release candidate, not an automatic production, native, model, recipe, external-trust, or issuance release. Each surface keeps its own evidence gate and release authority.</p></div>
         </div>
         <p class="compact-copy"><strong>Stop rule:</strong> a capability is <code>VERIFIED</code> only with current evidence on its exact source, build, model, or dataset. Otherwise record <code>CODE-SHIPPED-NOT-VERIFIED</code>, <code>BLOCKED</code>, or <code>INCONCLUSIVE</code> with the owner, blocker, next action, and recovery path.</p>
     </section>
@@ -530,6 +552,8 @@
     <section class="block" id="week-6">
         <h2>Week 6 closeout record &mdash; make the claim loop real</h2>
         <p class="lead"><strong>Jul 20&ndash;24 historical snapshot.</strong> This record preserves the owner map, issue links, and evidence known during Week 6. The current merged-baseline status above supersedes any older readiness count or blocker wording here. <strong>Lezhi (<code>@LezhiFu</code>) was the Week 6 coordination lead</strong>.</p>
+        <details class="week6-details">
+        <summary>Open the complete historical Week 6 record</summary>
         <div class="do-now">
             <h3>Historical Week 6 instructions: do not use for closeout</h3>
             <ol>
@@ -538,7 +562,7 @@
                 <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/126" target="_blank" rel="noopener">#126</a> preserves the historical branch, sandbox, proxy, and device-access record.</li>
             </ol>
         </div>
-        <p class="status-snapshot"><strong>Status snapshot &mdash; 2026-07-23 23:47 UTC.</strong> PR heads, checks, reviews, access, and device evidence can change after this time.</p>
+        <p class="status-snapshot"><strong>Status snapshot &mdash; July 23, 2026 at 23:47 UTC.</strong> PR heads, checks, reviews, access, and device evidence can change after this time.</p>
         <div class="status-callout"><strong>Calibration status: GATE: RE-SCOPE (human-review-only).</strong> The effective auto-approve sentinel stays at <code>2.0</code>. Model, identity, receipt, date-label, and nutrition signals are advisory; no Week 6 screen or endpoint may describe them as a guarantee or silently enable automatic approval.</div>
         <div class="status-callout verified"><strong>Private product-source access is VERIFIED.</strong> All eight interns have accepted <code>write</code> access to the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a> (accepted GitHub access required). Read its <code>ACCESS.md</code>, then follow the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Week 6 access guide</a>. Protected <code>main</code> requires the <code>safety</code> check, one approval, and code-owner review. Only synthetic fixtures are allowed. Never add secrets, real receipts, customer photos/data, or deployment material; the canonical product repository remains out of scope. Live advisory access stays behind the <a href="https://freshlens-proxy.fly.dev/health" target="_blank" rel="noopener">intern proxy health endpoint</a>, with individual keys delivered privately.</div>
         <div class="status-callout verified"><strong>Week 5&rsquo;s code baseline is VERIFIED.</strong> PRs <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/91" target="_blank" rel="noopener">#91</a>&ndash;<a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/103" target="_blank" rel="noopener">#103</a> are merged with all four checks green, and the Week 5 audit baseline passed 915 tests with 20 skips. The empirical privacy-clean evidence report remains honestly open on <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/81" target="_blank" rel="noopener">#81</a>; Week 6 consumes Week 5&rsquo;s receipt, identity, fraud, redaction, evaluation, fixture, and wireframe contracts rather than rebuilding them.</div>
@@ -668,7 +692,7 @@
         </ul>
         </details>
 
-        <h2 class="section-heading">Required Friday feature tracks</h2>
+        <h2 class="section-heading">Historical Week 6 feature tracks</h2>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">1</div>
@@ -687,12 +711,13 @@
             </div>
         </div>
 
-        <div class="status-callout"><strong>Physical-device study:</strong> <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/119">#119</a> now has 8/8 result rows for build <code>3.4.5 (2026072201)</code>. Tony&rsquo;s final row verified duplicate-safe inventory saving. The receipt/claim/reviewer journey remains <code>NOT_PRESENT</code>, exact archive-to-source lineage remains <code>INCONCLUSIVE</code>, and final <code>4fefc4a</code> confirmations remain 3/8.</div>
+        <div class="status-callout"><strong>Historical physical-device study:</strong> <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/119">#119</a> recorded 8/8 result rows for build <code>3.4.5 (2026072201)</code>. Tony&rsquo;s final row verified duplicate-safe inventory saving. The joined receipt/claim/reviewer journey remained <code>NOT_PRESENT</code>, archive-to-source lineage remained <code>INCONCLUSIVE</code>, and only 3/8 rows confirmed historical candidate <code>4fefc4a</code>. Those confirmations describe Week 6 only; current work starts from merged baseline <code>b6f9665</code>.</div>
 
         <div class="status-callout"><strong>Week 5 runtime closeout is VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/117">PR #117</a> and the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-05-VERIFICATION.md">durable verification report</a>.</strong> Fail-closed evidence handling, rollback/concurrency tests, raw-image bounds, and real lint enforcement are merged. The remaining carryovers include the reproducible, privacy-clean empirical accuracy report from <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/81">#81</a>, the #85 fixture repair in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a>, optional OCR review in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a>, and their vocabulary/docs reconciliation. Close them only with command or browser evidence.</div>
         <div class="status-callout"><strong>The weeks do form one product path:</strong> Week 2 provides the scanner and receipt/provenance primitives; Week 3 supplies the calibration gate and claim skeleton; Week 4 supplies deterministic caps, decisions, review transitions, and hash-chain audit; Week 5 supplies receipt, identity, fraud, redaction, fixtures, and wireframes; Week 6 adds the shopper and operations surfaces, real-device evidence, final binding, report, and joined proof. Local #120 finalization and the #129 host contract are merged. Remaining seams are durable multi-worker/outbox recovery and external trust, source-linked native integration (#159), adversarial restart proof (#160), exact-hash model/data evidence (#163), and issuance.</div>
         <p class="compact-copy"><strong>Wednesday, Jul 22 at noon ET:</strong> freeze request/response shapes, DOM selectors, fixture IDs, error semantics, and the capability matrix. Every owner posts one consumer-ready example, one failing-path test, user impact, operational impact, and a monitoring signal. <strong>Friday, Jul 24 at noon ET:</strong> run the golden path live in two browser views, then show the offline suite, recipe demo, device-study synthesis, anchor/replay proof, weekly report, report export, receipt verification, and audit-chain verification.</p>
         <p class="compact-copy"><strong>After core acceptance:</strong> every intern ships one or two quality improvements and records one portfolio-safe artifact. Use the approved model available in your region: plan/review with a strong reasoning model, implement system code through Codex, and use an accessible frontend-capable model when useful. No one is blocked solely because one vendor is unavailable; never move secrets or private data between tools.</p>
+        </details>
     </section>
 
     <section class="block">
@@ -700,7 +725,7 @@
         <p class="lead">For the closeout sprint, begin with the merged July 26 baseline and its status board. Reproduce the local gates before editing, keep real-model signals advisory, and never treat a browser demo, native archive, model file, or green pull request as proof of another surface.</p>
         <div class="cta-row">
             <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">All-team closeout tracker #164 &rarr;</a>
-            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-07.md" target="_blank" rel="noopener">Week 7 mission &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/pull/167" target="_blank" rel="noopener">Proposed Week 7&ndash;8 plan (INCONCLUSIVE) &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-08.md" target="_blank" rel="noopener">Week 8 closeout &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/b6f9665a29a966aa2c5dddea4b25e41f6c0a3c25/docs/PROGRAM-STATUS-2026-07-26.md" target="_blank" rel="noopener">July 26 status &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/PROGRAM-CLOSEOUT-2026-08-07.md" target="_blank" rel="noopener">August 7 closeout plan &rarr;</a>
