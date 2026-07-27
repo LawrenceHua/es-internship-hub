@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talk Me Up — Expired Solutions AI Internship 2026</title>
-    <meta name="description" content="An 8-week, AI-first summer internship by Expired Solutions. Get fluent in Claude Code, Cursor, and Codex, then build and ship FreshLens — a live, whole-shelf produce freshness scanner — on a real grocery-tech platform.">
+    <title>ES AI Internship 2026</title>
+    <meta name="description" content="An 8-week, AI-first summer internship building and validating FreshLens, a whole-scene produce and evidence-loop prototype.">
     <meta name="theme-color" content="#1a3c34">
     <link rel="canonical" href="https://es-internship-hub.vercel.app/">
     <!-- Social preview (Open Graph + Twitter) -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Expired Solutions AI Internship">
+    <meta property="og:site_name" content="ES AI Internship">
     <meta property="og:url" content="https://es-internship-hub.vercel.app/">
-    <meta property="og:title" content="Talk Me Up — Expired Solutions AI Internship 2026">
-    <meta property="og:description" content="An 8-week, AI-first internship. Get fluent in Claude Code, Cursor, and Codex, then build and ship FreshLens — a live whole-shelf produce-freshness scanner.">
+    <meta property="og:title" content="ES AI Internship 2026">
+    <meta property="og:description" content="An 8-week, AI-first internship. Get fluent in Claude Code, Cursor, and Codex, then build toward the FreshLens whole-shelf produce-scanner vision.">
     <meta property="og:image" content="https://es-internship-hub.vercel.app/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Talk Me Up — Expired Solutions 8-week AI internship">
+    <meta property="og:image:alt" content="ES 8-week AI internship">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Talk Me Up — Expired Solutions AI Internship 2026">
-    <meta name="twitter:description" content="An 8-week, AI-first internship. Get fluent in Claude Code, Cursor, and Codex, then build and ship FreshLens.">
+    <meta name="twitter:title" content="ES AI Internship 2026">
+    <meta name="twitter:description" content="An 8-week, AI-first internship building and validating FreshLens.">
     <meta name="twitter:image" content="https://es-internship-hub.vercel.app/og.png">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -30,10 +30,10 @@
         :root {
             --primary: #1a3c34;
             --primary-mid: #2a5a4a;
-            --accent: #2d6e55;          /* link/interactive text — AA on white */
+            --accent: #2d6e55;          /* link/interactive text, AA on white */
             --accent-light: #e8f5ef;
             --accent-muted: #5ba88a;
-            /* Freshness data palette — used only where a freshness value is implied */
+            /* Freshness data palette, used only where a freshness value is implied */
             --fresh: #2e9e5b;
             --caution: #e0a106;
             --urgent: #d23b3b;
@@ -70,6 +70,13 @@
             outline-offset: 3px;
             border-radius: 4px;
         }
+        .skip-link {
+            position: fixed; top: 0.5rem; left: 0.5rem; z-index: 200;
+            transform: translateY(-180%); padding: 0.6rem 0.9rem;
+            background: var(--primary); color: #fff; border-radius: 6px;
+            font-weight: 700; text-decoration: none;
+        }
+        .skip-link:focus { transform: translateY(0); }
 
         /* Signature: the freshness scale rendered as a hairline (0 = fresh, 100 = urgent) */
         .freshness-rule {
@@ -122,6 +129,12 @@
         }
 
         .nav-links a:hover { color: var(--accent); }
+        .nav-week-link {
+            font-size: 0.82rem; font-weight: 700; color: var(--accent);
+            text-decoration: none; padding: 0.3rem 0.6rem;
+            background: var(--accent-light); border-radius: 6px;
+            white-space: nowrap;
+        }
 
         /* ── Hero ── */
         .hero {
@@ -132,7 +145,7 @@
             overflow: hidden;
         }
 
-        /* Signature scan-reticle as structural geometry — not a decorative blob */
+        /* Signature scan-reticle as structural geometry, not a decorative blob */
         .hero-reticle {
             position: absolute;
             top: 3.5rem;
@@ -157,7 +170,7 @@
             font-weight: 600;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--accent-muted);
+            color: #a5d9c4;
             margin-bottom: 1.25rem;
         }
 
@@ -281,6 +294,7 @@
         .pillar-card p { font-size: 0.88rem; line-height: 1.6; color: var(--text-secondary); }
 
         .tech-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+        .tech-tags.centered { justify-content: center; }
 
         .tech-tag {
             background: var(--surface-alt);
@@ -300,6 +314,7 @@
         }
         .card-link:hover { gap: 0.55rem; }
         .card-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+        .card-link.secondary { color: var(--text-secondary); }
 
         .project-cta { text-align: center; margin-top: 2.5rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 
@@ -472,8 +487,6 @@
         }
         .week[open] .week-chev { transform: rotate(180deg); }
 
-        .week-launch { font-family: var(--mono); font-size: 0.64rem; font-weight: 500; color: #fff; background: var(--accent); padding: 0.28rem 0.6rem; border-radius: 6px; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.15s; }
-        .week-launch:hover { background: var(--primary-mid); }
         .tutorial-cta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--primary); color: #fff; border-radius: var(--radius); padding: 0.9rem 1.2rem; text-decoration: none; margin-bottom: 1.25rem; transition: background 0.15s; }
         .tutorial-cta:hover { background: var(--primary-mid); }
         .tutorial-cta strong { font-size: 0.95rem; font-weight: 700; }
@@ -495,9 +508,9 @@
         .day-time { font-family: var(--mono); font-size: 0.62rem; color: var(--accent); margin: 0.2rem 0 0.5rem; }
         .day-time.work { color: var(--text-tertiary); }
         .day h4 { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.3rem; line-height: 1.3; }
-        .day p { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45; }
+        .day p { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.45; }
         .day ul { list-style: none; padding: 0; margin: 0; }
-        .day li { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.45; padding-left: 0.7rem; position: relative; margin-bottom: 0.18rem; }
+        .day li { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.45; padding-left: 0.7rem; position: relative; margin-bottom: 0.18rem; }
         .day li::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 3px; height: 3px; border-radius: 50%; background: var(--accent-muted); }
 
         .week-sub { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-tertiary); margin: 0 0 0.6rem; }
@@ -515,6 +528,18 @@
         }
         .resource-list .tag.free { color: #1f7a42; border-color: #1f7a42; }
         .resource-list .desc { color: var(--text-tertiary); }
+        .do-now {
+            margin: 0.4rem 0 1.25rem; padding: 1rem 1.15rem;
+            border: 1px solid var(--accent-muted); border-radius: 9px;
+            background: var(--accent-light);
+        }
+        .do-now h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 0.35rem; }
+        .do-now ol { margin-left: 1.2rem; }
+        .do-now li { color: var(--text-secondary); font-size: 0.86rem; margin: 0.3rem 0; }
+        .status-snapshot { margin: 0 0 0.85rem; font-family: var(--mono); font-size: 0.72rem; color: var(--text-tertiary); }
+        .week6-details { margin: 1rem 0; border-top: 1px solid var(--border); padding-top: 0.75rem; }
+        .week6-details > summary { color: var(--primary); font-size: 0.78rem; font-weight: 700; cursor: pointer; }
+        .week6-details[open] > summary { margin-bottom: 0.75rem; }
 
         .codeline {
             font-family: var(--mono); font-size: 0.74rem;
@@ -551,6 +576,12 @@
         }
         .deliverable svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 0.15rem; }
         .deliverable strong { color: var(--primary); font-weight: 700; }
+        .deliverable.spaced { margin-bottom: 1.25rem; }
+        .deliverable.caution { border-left-color: #b9770e; }
+        .deliverable.caution svg { stroke: #8a5708; }
+        .deliverable.verified { border-left-color: #1f8b4c; }
+        .deliverable.blocked { border-left-color: #b42318; }
+        .deliverable.blocked svg { stroke: #b42318; }
 
         .skills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.9rem; }
         .skill-tag {
@@ -573,6 +604,9 @@
         }
         .project-band strong { color: var(--primary); }
         .project-band-links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 0.7rem; }
+        .project-band-links.roomy { margin-top: 0.9rem; }
+        .week-intro { margin: 0 0 0.7rem; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.55; }
+        .after-core-note { margin-top: 1rem; color: var(--text-secondary); font-size: 0.88rem; }
 
         /* ── Guest Speakers ── */
         .speakers-note {
@@ -610,6 +644,10 @@
         .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem; text-align: center; }
 
         /* ── Responsive ── */
+        @media (max-width: 1100px) {
+            .day-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
         @media (max-width: 900px) {
             .pillars-grid { grid-template-columns: 1fr; }
             .stats-row { grid-template-columns: repeat(2, 1fr); }
@@ -619,6 +657,10 @@
             .cadence-legend { grid-template-columns: repeat(2, 1fr); }
             .day-grid { grid-template-columns: repeat(2, 1fr); }
             .resource-list { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 820px) {
+            .nav-links { display: none; }
         }
 
         @media (max-width: 640px) {
@@ -641,6 +683,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <!-- Nav -->
 <nav>
     <div class="nav-inner">
@@ -652,7 +696,7 @@
                 <line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
                 <circle cx="24" cy="24" r="3" fill="#e0a106"/>
             </svg>
-            Talk Me Up
+            ES Internship
         </div>
         <ul class="nav-links">
             <li><a href="#project">Project</a></li>
@@ -661,9 +705,11 @@
             <li><a href="#tools">Tools</a></li>
             <li><a href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
+        <a class="nav-week-link" href="#week-7-overview">This week</a>
     </div>
 </nav>
 
+<main id="main-content">
 <!-- Hero -->
 <div class="hero">
     <svg class="hero-reticle" viewBox="0 0 200 200" fill="none" aria-hidden="true">
@@ -675,9 +721,9 @@
         <circle cx="172" cy="172" r="6" fill="#e0a106"/>
     </svg>
     <div class="hero-inner">
-        <div class="hero-label">Expired Solutions &middot; Summer 2026 Internship</div>
+        <div class="hero-label">ES &middot; Summer 2026 Internship</div>
         <h1>Scan one apple?<br>Scan the whole shelf.</h1>
-        <p>An <strong>8-week, AI-first internship</strong>. Spend two weeks getting fluent in Claude Code, Cursor, and Codex, then build and ship <strong>FreshLens</strong>: point a camera at a fridge or produce shelf and every item gets a live freshness score at once, on Expired Solutions&rsquo; real grocery-tech platform.</p>
+        <p>An <strong>8-week, AI-first internship</strong>. Spend two weeks getting fluent in Claude Code, Cursor, and Codex, then build toward <strong>FreshLens</strong>: a whole-scene target plus an evidence-backed, human-review-only claim prototype.</p>
         <div class="hero-metrics">
             <div class="hero-metric"><strong>8</strong><span>Weeks</span></div>
             <div class="hero-metric"><strong>3</strong><span>AI Coding Tools</span></div>
@@ -696,33 +742,33 @@
     <div class="container">
         <div class="section-header">
             <h2>The Project: FreshLens</h2>
-            <p>One AI feature, built for real and shipped to the Expired Solutions app.</p>
+            <p>One joined prototype, measured against explicit release gates.</p>
         </div>
 
         <p class="project-intro">
-            Today the app scans one item at a time. <strong>FreshLens</strong> is the 10&times; version: point your camera at a whole fridge, basket, or produce shelf and <em>every</em> item lights up at once with a live, color-coded freshness score. Then AI turns that into action: for shoppers, an &ldquo;eat me first&rdquo; ranking and a recipe to rescue what&rsquo;s about to turn; for store managers, an instant markdown worklist and projected shrink savings.
+            <strong>FreshLens</strong> is the target: point a camera at a fridge, basket, or produce shelf and score supported items in one scene. The repository currently proves a local human-review claim loop and fallback scanner behavior; representative detector, model, recipe, native, and production evidence remain blocked.
         </p>
 
         <div class="pillars-grid">
             <div class="pillar-card">
                 <div class="pillar-num">1</div>
                 <h3>Multi-Item Detection</h3>
-                <p>A pretrained object detector finds every produce item in the frame and draws a box around each one&mdash;turning a single-item scanner into a whole-scene scanner.</p>
+                <p>The interface can return item boxes, but a clean checkout may use one whole-image fallback region. Representative real-detector proof remains <strong>BLOCKED</strong>.</p>
             </div>
             <div class="pillar-card">
                 <div class="pillar-num">2</div>
                 <h3>Live Freshness Overlay</h3>
-                <p>Each detected item is scored 0&ndash;100 by the freshness model and shown with a color-coded overlay (green, amber, red) right on the camera view.</p>
+                <p>The canonical 0&ndash;100 advisory scale and overlay exist. The default is a disclosed placeholder; exact-hash model/data certification remains <strong>BLOCKED</strong>.</p>
             </div>
             <div class="pillar-card">
                 <div class="pillar-num">3</div>
                 <h3>Act On It</h3>
-                <p>Claude turns scores into action: an &ldquo;eat me first&rdquo; ranking and a recipe for shoppers, or a markdown worklist and shrink-savings estimate for store managers.</p>
+                <p>Store markdown output exists. Public shopper food guidance remains suppressed until approved content, trusted assessment authority, and release gates are verified.</p>
             </div>
         </div>
 
         <div class="project-cta">
-            <div class="tech-tags" style="justify-content: center;">
+            <div class="tech-tags centered">
                 <span class="tech-tag">Python</span>
                 <span class="tech-tag">FastAPI</span>
                 <span class="tech-tag">PyTorch</span>
@@ -734,7 +780,7 @@
                 View project details
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
             </a>
-            <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link" target="_blank" rel="noopener" style="color: var(--text-secondary);">
+            <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link secondary" target="_blank" rel="noopener">
                 Starter repository
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
             </a>
@@ -742,18 +788,18 @@
     </div>
 </div>
 
-<!-- Production Stats -->
+<!-- Current evidence snapshot -->
 <div class="section section-alt">
     <div class="container">
         <div class="section-header">
-            <h2>Built on Production Code</h2>
-            <p>Real infrastructure, not toy projects.</p>
+            <h2>Current Evidence Snapshot</h2>
+            <p>Probe-bound facts as of July 26, 2026; no production-readiness inference.</p>
         </div>
         <div class="stats-row">
-            <div class="stat-card"><div class="stat-value">214</div><div class="stat-label">API Endpoints</div></div>
-            <div class="stat-card"><div class="stat-value">99%+</div><div class="stat-label">ML Accuracy</div></div>
-            <div class="stat-card"><div class="stat-value">596K</div><div class="stat-label">Data Rows</div></div>
-            <div class="stat-card"><div class="stat-value">100+</div><div class="stat-label">Produce Items</div></div>
+            <div class="stat-card"><div class="stat-value">16/16</div><div class="stat-label">Offline Demo</div></div>
+            <div class="stat-card"><div class="stat-value">8/8</div><div class="stat-label">Historical Device Rows</div></div>
+            <div class="stat-card"><div class="stat-value">OFF</div><div class="stat-label">Auto Approval</div></div>
+            <div class="stat-card"><div class="stat-value">BLOCKED</div><div class="stat-label">Model + Data Release</div></div>
         </div>
     </div>
 </div>
@@ -763,7 +809,7 @@
     <div class="container">
         <div class="section-header">
             <h2>The 8-Week Arc</h2>
-            <p>Two weeks learning the tools, four weeks building the Expired Solutions project, two weeks shipping it.</p>
+            <p>Two weeks learning the tools, four weeks building the ES project, two weeks validating and handing it off.</p>
         </div>
         <div class="startdate-banner">
             <span class="startdate-pill">Cohort starts &middot; <span class="num">Jun 15</span></span>
@@ -778,13 +824,13 @@
             </div>
             <div class="phase-card">
                 <div class="phase-number">2</div>
-                <h3>Expired Solutions: Detect</h3>
+                <h3>ES: Detect</h3>
                 <div class="phase-weeks">Weeks 3&ndash;4</div>
                 <p>Onboard the FreshLens codebase, plan the build, and turn the single-item scanner into whole-scene detection.</p>
             </div>
             <div class="phase-card">
                 <div class="phase-number">3</div>
-                <h3>Expired Solutions: Evidence &amp; UX</h3>
+                <h3>ES: Evidence &amp; UX</h3>
                 <div class="phase-weeks">Weeks 5&ndash;6</div>
                 <p>Make claim evidence trustworthy&mdash;receipt, identity, fraud signals&mdash;then put the claim flow and review queue in the browser.</p>
             </div>
@@ -792,7 +838,7 @@
                 <div class="phase-number">4</div>
                 <h3>Ship &amp; Extend</h3>
                 <div class="phase-weeks">Weeks 7&ndash;8</div>
-                <p>Harden provenance, integrate and freeze the build, and present the finished feature on Demo Day.</p>
+                <p>Harden trust and integration seams, freeze one traceable candidate, and present exact results and remaining blocks on Demo Day.</p>
             </div>
         </div>
     </div>
@@ -803,7 +849,7 @@
     <div class="container">
         <div class="section-header">
             <h2>The 8-Week Schedule</h2>
-            <p>Five touchpoints a week. The first two weeks are mapped day-by-day; click any week to expand it.</p>
+            <p>Five touchpoints every week. Each week is mapped day-by-day; click any week to expand it.</p>
         </div>
 
         <!-- Weekly cadence -->
@@ -851,11 +897,10 @@
                 <summary>
                     <span class="week-num">W1</span>
                     <span class="week-head">
-                        <h3 class="week-title">Claude Code Foundations <span class="phase-tag">Foundations</span></h3>
+                        <span class="week-title">Claude Code Foundations <span class="phase-tag">Foundations</span></span>
                         <span class="week-obj">Learn Claude Code and ship a small solo project, built primarily with Claude Code.</span>
                     </span>
                     <span class="week-dates">Jun 15&ndash;19</span>
-                    <a href="w1.html" class="week-launch">Tutorial &#8599;</a>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
@@ -951,7 +996,7 @@ npm install -g @anthropic-ai/claude-code</code>
                 <summary>
                     <span class="week-num">W2</span>
                     <span class="week-head">
-                        <h3 class="week-title">Collaborative App Build <span class="phase-tag">Foundations</span></h3>
+                        <span class="week-title">Collaborative App Build <span class="phase-tag">Foundations</span></span>
                         <span class="week-obj">Build a small application as a team, adding Cursor and Codex to your toolkit and learning the team Git workflow.</span>
                     </span>
                     <span class="week-dates">Jun 22&ndash;26</span>
@@ -1013,7 +1058,7 @@ npm install -g @anthropic-ai/claude-code</code>
                     </div>
 
                     <p class="week-sub">Get started &mdash; do this on Monday</p>
-                    <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.55; margin:0 0 0.7rem;">
+                    <p class="week-intro">
                         This week the whole team builds <strong>FreshLens</strong> in one shared repo. It already runs out of the box &mdash; your job is to get it running, claim a slice, and ship your first pull request the AI-native way. Everything below is in the starter repo.
                     </p>
                     <ol class="do-steps">
@@ -1026,16 +1071,16 @@ cd es-intern-freshlens
                             <span class="codeline">uvicorn app:app --reload   <span class="c"># then open http://127.0.0.1:8000</span></span>
                             In Claude Code, run <code>/onboard</code> and read <code>GETTING_STARTED.md</code>. New to Claude Code? Read <code>docs/USING-CLAUDE-CODE.md</code> first.
                         </li>
-                        <li><strong>Claim a starter task.</strong> Pick one <em>good first issue</em> (one per slice: detect &middot; freshness &middot; act &middot; frontend &middot; report &middot; eval, plus a Week-7 provenance stretch), then claim it &mdash; this also creates your branch:
+                        <li><strong>Claim a starter task.</strong> Pick one <em>good first issue</em> (one per slice: detect &middot; freshness &middot; act &middot; frontend &middot; report &middot; eval, plus an optional future provenance-research reference), then claim it &mdash; this also creates your branch:
                             <span class="codeline">gh issue develop -c &lt;issue-number&gt;</span>
                         </li>
                         <li><strong>Build with AI, then ship.</strong> Work only in <em>your</em> files. Explore &rarr; Plan &rarr; Implement &rarr; run <code>/code-review</code> &rarr; open a pull request. CI (lint, tests, secret-scan) must pass and one teammate approves before it merges. Never push straight to <code>main</code>.</li>
                     </ol>
-                    <div class="deliverable" style="border-left-color:#b9770e; margin-top:1rem;">
+                    <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
                         <span><strong>3 non-negotiables:</strong> keep the API shape <code>{"status":"ok","data":&hellip;}</code> &middot; never commit secrets or a <code>.env</code> file &middot; stay in your lane and leave <code>pytest</code> green.</span>
                     </div>
-                    <div class="project-band-links" style="margin-top:0.9rem;">
+                    <div class="project-band-links roomy">
                         <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link" target="_blank" rel="noopener">Starter repo
                             <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
                         <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" class="card-link" target="_blank" rel="noopener">Getting started guide
@@ -1075,7 +1120,7 @@ cd es-intern-freshlens
 
             <!-- PROJECT BAND -->
             <div class="project-band">
-                <strong>Weeks 3&ndash;8 &mdash; the Expired Solutions project.</strong> The whole cohort now builds <strong>FreshLens</strong> in the starter repo, using everything from the first two weeks. Week 3 verifies the integrated codebase and sets the product direction; Weeks 4&ndash;7 ship working slices; Week 8 freezes and presents.
+                <strong>Weeks 3&ndash;8 &mdash; the ES project.</strong> The whole cohort now builds <strong>FreshLens</strong> in the starter repo, using everything from the first two weeks. Week 3 verifies the integrated codebase and sets the product direction; Weeks 4&ndash;7 build and test slices; Week 8 freezes and presents.
                 <span class="project-band-links">
                     <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link" target="_blank" rel="noopener">Starter repo
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
@@ -1091,7 +1136,7 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num is-project">W3</span>
                     <span class="week-head">
-                        <h3 class="week-title">Verify, Research &amp; Plan FreshLens <span class="phase-tag is-project">Expired Solutions</span></h3>
+                        <span class="week-title">Verify, Research &amp; Plan FreshLens <span class="phase-tag is-project">ES</span></span>
                         <span class="week-obj">Run the integrated repo, understand the product surface, and choose the six-week build direction.</span>
                     </span>
                     <span class="week-dates">Jun 29&ndash;Jul 3</span>
@@ -1153,7 +1198,7 @@ cd es-intern-freshlens
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">FreshLens &mdash; Getting Started</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/tree/main/docs" target="_blank" rel="noopener">FreshLens &mdash; Weekly build guides</a></li>
                         <li><a href="provenance.html">Return trust &mdash; provenance receipts</a></li>
-                        <li><a href="https://www.expiredsolutions.com/" target="_blank" rel="noopener">Expired Solutions &mdash; product context</a></li>
+                        <li><span>Private ES product context &mdash; use the approved internal source</span></li>
                         <li><a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">Claude Code &mdash; Best practices (explore/plan)</a><span class="tag free">Free</span></li>
                         <li><a href="freshlens.html">FreshLens &mdash; Project details</a></li>
                     </ul>
@@ -1177,7 +1222,7 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num is-project">W4</span>
                     <span class="week-head">
-                        <h3 class="week-title">Multi-Item Detection <span class="phase-tag is-project">Expired Solutions</span></h3>
+                        <span class="week-title">Multi-Item Detection <span class="phase-tag is-project">ES</span></span>
                         <span class="week-obj">Turn the single-item scanner into a whole-scene scanner: detect every produce item and box it.</span>
                     </span>
                     <span class="week-dates">Jul 6&ndash;10</span>
@@ -1198,7 +1243,7 @@ cd es-intern-freshlens
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> multi-item detection working&mdash;every produce item in a frame is found and boxed.</span>
+                        <span><strong>Target &mdash; currently BLOCKED:</strong> operational multi-item detection that finds and boxes every produce item in a frame. The shopper build currently has no bundled or served detector; one full-frame fallback does not satisfy this deliverable.</span>
                     </div>
                     <div class="skills">
                         <span class="skill-tag">Integrating an ML detector</span>
@@ -1213,7 +1258,7 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num is-project">W5</span>
                     <span class="week-head">
-                        <h3 class="week-title">Evidence Quality: Receipt, Identity, Fraud <span class="phase-tag is-project">Expired Solutions</span></h3>
+                        <span class="week-title">Evidence Quality: Receipt, Identity, Fraud <span class="phase-tag is-project">ES</span></span>
                         <span class="week-obj">Make the evidence the policy engine sees trustworthy: parse the receipt, verify the photo shows that item, and flag fraudulent photos.</span>
                     </span>
                     <span class="week-dates">Jul 13&ndash;17</span>
@@ -1248,92 +1293,145 @@ cd es-intern-freshlens
             </details>
 
             <!-- WEEK 6 -->
-            <details class="week" id="week-6-overview" open>
+            <details class="week" id="week-6-overview">
                 <summary>
                     <span class="week-num is-project">W6</span>
                     <span class="week-head">
-                        <h3 class="week-title">Shopper UX + Business Review <span class="phase-tag is-project">Project Build</span></h3>
+                        <span class="week-title">Shopper UX + Business Review <span class="phase-tag is-project">Project Build</span></span>
                         <span class="week-obj">Make the human-review claim loop real in the browser, add safe model insights, and join every owner&rsquo;s work into one verifiable golden path.</span>
                     </span>
                     <span class="week-dates">Jul 20&ndash;24</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
+                    <div class="do-now">
+                        <h4>Historical Week 6 instructions: do not use for closeout</h4>
+                        <ol>
+                            <li>The team used the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/START_HERE.md">audited Week 6 START_HERE</a> for that historical sprint.</li>
+                            <li>Work was tracked in the <a href="https://github.com/LawrenceHua/es-intern-freshlens/milestone/1">22-issue milestone</a>; current work belongs on #156&ndash;#164.</li>
+                            <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/126">#126</a> preserves the historical branch, sandbox, proxy, and device-access record.</li>
+                        </ol>
+                    </div>
                     <div class="day-grid">
                         <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Kickoff + safety gate</h4><p>Read <code>START_HERE.md</code> and <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/118">kickoff #118</a>. Calibration remains <strong>GATE: RE-SCOPE</strong>: human-review-only, with auto-approve sentinel <code>2.0</code>. Lezhi (<code>@LezhiFu</code>) coordinates Week 6; keep any access grants least-privilege and task-scoped.</p></div>
                         <div class="day"><div class="day-name">Tue</div><div class="day-time work">Build session</div><h4>Vertical slices</h4><p>Shopper/reviewer UX, advisory insights, recipe ML, receipt binding, physical-device study, reports, work sync, fixtures, evals, and joined tests all advance in parallel.</p></div>
                         <div class="day"><div class="day-name">Wed</div><div class="day-time">12:00 PM ET</div><h4>Contract freeze</h4><p>Freeze API shapes, selectors, fixture IDs, unavailable-signal behavior, and proxy capabilities. Every owner posts a consumer example, failing-path test, user impact, operational impact, and monitoring signal.</p></div>
-                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Integration day</div><h4>Join the loop</h4><p>Wire shopper &rarr; evidence &rarr; advisory model &rarr; human review &rarr; report &rarr; receipt + audit. Runtime and lint hardening are VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/117">PR #117</a>; finish the <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/81">#81</a> reproducible empirical report, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/85">#85</a>/<a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a>, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">OCR/#109</a>, vocabulary, and docs carryovers.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Golden-path + feature demos</h4><p>Show the two-browser claim path, recipe model, device findings, anchor/replay proof, weekly report, account report, receipt/audit verification, and exact offline suite evidence.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Integration day</div><h4>Join the loop</h4><p>Wire shopper &rarr; evidence &rarr; advisory model &rarr; assigned-store human review &rarr; atomic receipt binding/anchor &rarr; scoped report. Runtime and lint hardening are VERIFIED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/117">PR #117</a>; finish the <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/81">#81</a> reproducible empirical report, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/85">#85</a>/<a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a>, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">OCR/#109</a>, vocabulary, and docs carryovers.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Golden-path + feature demos</h4><p>Show the physical-camera/two-browser claim path, recipe model, device findings, atomic anchor/replay proof, weekly report, account report, receipt/audit verification, and exact offline suite evidence.</p></div>
                     </div>
-                    <div class="deliverable" style="border-left-color:#b9770e; margin-bottom:1.25rem;">
+                    <p class="status-snapshot"><strong>Status snapshot &mdash; July 23, 2026 at 23:47 UTC.</strong> PR heads, checks, reviews, access, and device evidence can change after this time.</p>
+                    <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
                         <span><strong>Restricted model surface:</strong> use a route only when <code>/capabilities</code> advertises it. The Week-6 set is <code>/score</code>, <code>/nutrition/{produce_type}</code>, <code>/model-info</code>, <code>/budget</code>, <code>/date-label/decode</code>, and <code>/markdown/suggest</code>. <code>/score</code> is stateful advisory access: shared counters/cache change and training persistence is <strong>INCONCLUSIVE</strong>. Training data, predictions, broad analysis, batches, and account inventory are not intern capabilities.</span>
                     </div>
-                    <div class="deliverable" style="margin-bottom:1.25rem;">
+                    <div class="deliverable spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Private product-source sandbox is ready:</strong> all eight interns have a pending <code>write</code> invitation to the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a>. Accept it, read <code>ACCESS.md</code>, and follow the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Week 6 access guide</a>. Work only on branches and PRs; protected <code>main</code> requires safety CI and code-owner review. Use synthetic fixtures only&mdash;never add secrets, customer receipts/photos/data, or deployment material. The canonical product repository remains out of scope. Live advisory access stays behind the <a href="https://freshlens-proxy.fly.dev" target="_blank" rel="noopener">intern proxy</a>, with individual keys delivered privately.</span>
+                        <span><strong>Private product-source sandbox is VERIFIED:</strong> all eight interns have accepted <code>write</code> access to the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a> (accepted GitHub access required). Read <code>ACCESS.md</code> and follow the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Week 6 access guide</a>. Work only on branches and PRs; protected <code>main</code> requires the <code>safety</code> check, one approval, and code-owner review. Use synthetic fixtures only&mdash;never add secrets, customer receipts/photos/data, or deployment material. The canonical product repository remains out of scope. Live advisory access stays behind the <a href="https://freshlens-proxy.fly.dev/health" target="_blank" rel="noopener">intern proxy health endpoint</a>, with individual keys delivered privately.</span>
                     </div>
-                    <p class="week-sub">Eight owners &mdash; substantial vertical slices</p>
+                    <div class="deliverable spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Week 5&rsquo;s code baseline is VERIFIED:</strong> PRs <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/91">#91</a>&ndash;<a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/103">#103</a> are merged with all four checks green, and the Week 5 audit baseline passed 915 tests with 20 skips. The empirical privacy-clean report remains honestly open on <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/81">#81</a>. Week 6 consumes the receipt, identity, fraud, redaction, evaluation, fixture, and wireframe contracts already built.</span>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Week 6 is closed for scheduling, not ready to release:</strong> 11 of 22 milestone issues are closed. <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/134">PR #134</a> is merged; the complete head of documentation <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/142">PR #142</a> is incorporated into merged PR #155. Every remaining issue must close with evidence, move into #156&ndash;#164, or remain <code>BLOCKED</code> with an owner and date.</span>
+                    </div>
+                    <div class="deliverable verified spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>The role and policy escalation fix is VERIFIED and MERGED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/131">PR #131</a>.</strong> Commit <code>d185c82</code> separates shopper, assigned-store reviewer, and policy-admin principals; derives authority from the bearer; enforces immutable $15 per rolling 30 days / $10 per claim ceilings; requires an expected revision; and rolls policy state back with a failed audit append. This closes the unsafe self-inflation path; the local #120 binding/finalization work is separately closed through PR #147.</span>
+                    </div>
+                    <div class="deliverable blocked spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>The local binding/finalization slice is VERIFIED through closed <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a> and merged PR #147.</strong> Durable multi-worker storage/outbox recovery, external trust, and issuance remain <strong>BLOCKED</strong>.</span>
+                    </div>
+                    <div class="deliverable verified spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>The browser shopper/reviewer UI is VERIFIED for its merged scope in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/137">PR #137</a>.</strong> Commit <code>9a23aa7</code> is on <code>main</code> with 4/4 green checks and the corrected role, revision, safe-DOM, returned-amount, responsive, and accessibility contracts. It is not the native iOS journey: Bill and Ziyun&rsquo;s physical runs found the receipt/claim/reviewer path absent.</span>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Native shopper app + CV release is BLOCKED:</strong> all eight device-result rows prove only named historical build <code>3.4.5 (2026072201)</code>, not current source. The distributed build lacks the joined claim-submission, status, and reviewer-decision states. Exact archive/source lineage and current model/detector evidence remain incomplete; the retired immediate-return flow must not be reconnected. Read the <a href="freshlens.html#shopper-cv-readiness">full evidence matrix</a>.</span>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>The claim-host contract is merged through <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/148">PR #148</a>.</strong> Schema and local compatibility evidence exist; a durable native/production host adapter and source-linked distribution remain <strong>BLOCKED</strong>.</span>
+                    </div>
+                    <p class="week-sub">Assigned Week 6 work</p>
                     <ul class="resource-list">
-                        <li><strong>Ziyun &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></strong> &mdash; accessible shopper wizard plus business review/config screens, including mobile, empty, loading, and error states.</li>
-                        <li><strong>Jinming &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a> + recipes</strong> &mdash; authenticated review/policy contract, idempotent audited reviewer actions, and primary recipe interface/evaluation ownership.</li>
-                        <li><strong>Lisa &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/108">#108</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a> + recipes</strong> &mdash; identity/nutrition explanations, primary recipe model ownership, and all four receipt-binding/duplicate-proof packages.</li>
-                        <li><strong>Lezhi &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a></strong> &mdash; receipt-image seam, date-label cross-check, optional OCR review, and normalization contract.</li>
-                        <li><strong>Mohan &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a> + recipe support</strong> &mdash; reproducible evidence fixtures, deterministic demo seeds, and recipe ML/corpus/evaluation support.</li>
-                        <li><strong>Bill &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/111">#111</a></strong> &mdash; capability client plus account-scoped claims report and model provenance.</li>
-                        <li><strong>Tony &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/112">#112</a></strong> &mdash; joined regressions, capability doctor, failing-path coverage, and real lint enforcement.</li>
-                        <li><strong>Yizhou &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a></strong> &mdash; reproducible evidence/UX evaluation and deterministic automatic weekly work-sync MVP.</li>
+                        <li><strong>Ziyun &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></strong> &mdash; own and harden the merged browser wizard/reviewer UI, finish physical failure-state evidence, connect the real receipt/claim host when available, and maintain the shopper transition map for #129/#116. Her honest physical-device <code>GAP</code> report is current integration evidence.</li>
+                        <li><strong>Jinming &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a> + recipes</strong> &mdash; maintain the merged three-role review/policy contract, integrate it into #129/#116 without weakening ceilings or rollback, share one console contract with Ziyun, and own the primary recipe interface/evaluation lane.</li>
+                        <li><strong>Lisa &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/108">#108</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a> + recipes</strong> &mdash; identity/nutrition explanations, primary recipe model ownership, and atomic cap/decision/audit/binding/anchor/payable finalization with failure injection. <strong>#129:</strong> identity, binding, and replay fields.</li>
+                        <li><strong>Lezhi &middot; Week 6 lead + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/114">#114</a></strong> &mdash; bounded receipt-image seam, date-label/OCR/normalization work, blocker routing, shared contract, device, and golden-path coordination. <strong>#129:</strong> receipt lifecycle and redaction.</li>
+                        <li><strong>Mohan &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a> + recipe support</strong> &mdash; privacy-safe deterministic fixtures, safe output-path/symlink tests, demo seeds, and recipe ML/corpus/evaluation support. <strong>#129:</strong> deterministic shared fixtures.</li>
+                        <li><strong>Bill &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/111">#111</a></strong> &mdash; fail-closed capability client and bounded account-scoped report with role isolation, formula safety, public audit fields, and token redaction. <strong>#129:</strong> envelopes, money, and report correlation.</li>
+                        <li><strong>Tony &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/112">#112</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120 verify</a></strong> &mdash; joined regression net, capability doctor, full role matrix, retry/concurrency, independent #120 failure proof, and real lint enforcement. <strong>#129:</strong> negative validator cases.</li>
+                        <li><strong>Yizhou &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a> + <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a></strong> &mdash; completeness scorecard that cannot false-green and deterministic/redacted work sync with a single-writer atomic scheduler. <strong>#129:</strong> versioning and observability.</li>
                     </ul>
-                    <p class="week-sub">Complete live issue set &mdash; owners integrate, not queue behind one another</p>
+                    <details class="week6-details">
+                    <summary>Complete live issue set &mdash; 22 issues</summary>
                     <ul class="resource-list">
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/86">#86</a></strong> &mdash; privacy-clean recipe corpus, safety schema, and held-out scenes (Lisa + Jinming; Mohan supports).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/87">#87</a></strong> &mdash; deterministic recipe retrieval model and stable offline interface (Lisa + Jinming; Mohan supports).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/88">#88</a></strong> &mdash; reproducible recipe evaluation, honest floors, and adversarial cases (Jinming + Lisa; Mohan supports).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/104">#104</a></strong> &mdash; capability-aware ES proxy client and setup doctor (Bill + Tony).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a></strong> &mdash; review queue listing and guarded policy configuration (Jinming).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a></strong> &mdash; mobile shopper claim wizard, evidence to result (Ziyun).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></strong> &mdash; internal review queue and human-review-only policy view (Jinming + Ziyun).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/105">#105</a></strong> &mdash; role-separated review queue and ceiling/revision-safe policy administration (Jinming).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/106">#106</a></strong> &mdash; four-screen idempotent mobile shopper wizard, evidence to returned result (Ziyun).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/107">#107</a></strong> &mdash; assigned-store review queue and separate policy-admin view (Jinming + Ziyun).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/108">#108</a></strong> &mdash; identity explanations and optional nutrition advisory (Lisa).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/109">#109</a></strong> &mdash; receipt-photo seam, date-label advisory, and OCR review (Lezhi).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a></strong> &mdash; deterministic fixture CLI and demo seeds (Mohan).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/110">#110</a></strong> &mdash; deterministic fixture CLI and demo seeds with safe output-path/symlink handling (Mohan).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/111">#111</a></strong> &mdash; account-scoped claims CSV/Markdown export (Bill).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/112">#112</a></strong> &mdash; joined offline claim/review/report/UI regressions (Tony).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a></strong> &mdash; reproducible Week 6 UX/API completeness scorecard (Yizhou).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/113">#113</a></strong> &mdash; reproducible Week 6 UX/API scorecard with role and hostile-DOM proof (Yizhou).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/114">#114</a></strong> &mdash; receipt/item alias normalization (Lisa + Lezhi + Mohan + Yizhou).</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/115">#115</a></strong> &mdash; required offline recipe ML baseline/evaluation (Lisa + Jinming primary; Mohan supports).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/116">#116</a></strong> &mdash; all-team golden-path runner, runbook, accessibility pass, and handoff.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/116">#116</a></strong> &mdash; all-team golden-path runner, finalization proof, runbook, accessibility pass, and handoff.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/118">#118</a></strong> &mdash; kickoff, baseline truth, coordinator, deadlines, and owner map.</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/119">#119</a></strong> &mdash; all-team physical-device TestFlight return-flow UX study; Lezhi (<code>@LezhiFu</code>) coordinates.</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a></strong> &mdash; receipt binding and duplicate-proof anchor verification (Lisa).</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a></strong> &mdash; automatic weekly work-sync MVP and one-page report (Yizhou).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a></strong> &mdash; atomic cap/decision/audit/receipt binding/anchor/payable finalization and duplicate proof (Lisa implements; Tony independently verifies failure injection).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a></strong> &mdash; automatic weekly work-sync MVP with single-writer atomic publication (Yizhou).</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/126">#126</a></strong> &mdash; all-team branch, sandbox, proxy, and device readiness evidence.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/129">#129</a></strong> &mdash; all-team host contract and compatibility proof across every Week 6 seam.</li>
                     </ul>
+                    </details>
                     <p class="week-sub">Required parallel feature tracks &mdash; due Friday at noon ET</p>
                     <ul class="resource-list">
                         <li><strong>Recipe ML:</strong> <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/86">#86 privacy-clean corpus/schema</a>, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/87">#87 deterministic model/interface</a>, <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/88">#88 evaluation</a>, and <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/115">#115 integration</a>. Lisa + Jinming are primary; Mohan supports. Ship example I/O, fixed offline eval, fallback, limitations, and demo.</li>
-                        <li><strong>Receipt/anchor proof:</strong> Lisa completes all four <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a> packages&mdash;canonical binding, atomic idempotency, integrity-aware verification, and exact/altered/distinct/concurrent replay tests.</li>
+                        <li><strong>Receipt/anchor proof:</strong> Lisa completes all four <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/120">#120</a> packages&mdash;canonical binding, atomic idempotency, integrity-aware verification, and exact/altered/distinct/concurrent replay tests&mdash;while Tony independently verifies each finalization failure point through #112.</li>
                         <li><strong>Automatic work sync:</strong> Yizhou&rsquo;s <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/121">#121</a> emits deterministic one-page Markdown and chart data from approved read-only sources, with visible partial-source status.</li>
                     </ul>
-                    <div class="deliverable" style="border-left-color:#b9770e; margin-bottom:1.25rem;">
+                    <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
-                        <span><strong>Physical-device truth boundary:</strong> #119 uses a private program-lead invite; never publish it. The July 8 notice verified beta <code>3.4.5 (2026070701)</code> for iOS 17+, but exact source commit/branch mapping is <strong>INCONCLUSIVE</strong>. Record the build actually installed and file <code>NOT_PRESENT</code>/<code>GAP</code> if the return flow is absent; a simulator or web demo cannot substitute for real-camera acceptance.</span>
+                        <span><strong>Historical physical-device truth boundary:</strong> #119 recorded 8/8 result rows for build <code>3.4.5 (2026072201)</code>. Tony&rsquo;s final row verified duplicate-safe inventory saving. The joined receipt/claim/reviewer journey remained <code>NOT_PRESENT</code>, archive-to-source lineage remained <code>INCONCLUSIVE</code>, and only 3/8 rows confirmed historical candidate <code>4fefc4a</code>. Those confirmations describe Week 6 only; current work starts from <code>b6f9665</code>. Do not substitute the web demo for native evidence.</span>
                     </div>
-                    <p class="week-sub">Resources</p>
+                    <details class="week6-details">
+                    <summary>Resources and audited reference documents</summary>
                     <ul class="resource-list">
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/118" target="_blank" rel="noopener">Kickoff #118 &mdash; read first</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-05-VERIFICATION.md" target="_blank" rel="noopener">Week 5 verification &mdash; merged runtime proof and explicit carryovers</a></li>
-                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/START_HERE.md" target="_blank" rel="noopener">START_HERE.md &mdash; Week 6 commands and owner map</a></li>
-                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06.md" target="_blank" rel="noopener">WEEK-06.md &mdash; the full mission</a></li>
-                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-ISSUES.md" target="_blank" rel="noopener">WEEK-06-ISSUES.md &mdash; complete assignments and dependencies</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/milestone/1" target="_blank" rel="noopener">Week 6 &mdash; Joined Claim Loop milestone &mdash; all 22 scoped issues</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/START_HERE.md" target="_blank" rel="noopener">Audited START_HERE.md &mdash; Week 6 commands and owner map</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/docs/WEEK-06.md" target="_blank" rel="noopener">Audited WEEK-06.md &mdash; the full mission</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/docs/WEEK-06-SECURITY-CONTRACT.md" target="_blank" rel="noopener">Week 6 security contract &mdash; role, cap, audit, and finalization boundaries</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/docs/WEEK-06-SPEC-AUDIT.md" target="_blank" rel="noopener">Week 6 spec/readiness audit &mdash; verified contracts and exact blockers</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/142" target="_blank" rel="noopener">PR #142 &mdash; complete audited Week 6 documentation stack</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/131" target="_blank" rel="noopener">PR #131 &mdash; merged, verified role-separated authorization and bounded policy stack</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/159" target="_blank" rel="noopener">Native seam closeout #159 &mdash; source linkage, states, and rendered accessibility evidence</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/docs/WEEK-06-ISSUES.md" target="_blank" rel="noopener">WEEK-06-ISSUES.md &mdash; complete assignments and dependencies</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-TESTFLIGHT.md" target="_blank" rel="noopener">WEEK-06-TESTFLIGHT.md &mdash; real-device setup, scenarios, and feedback template</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-WORK-SYNC.md" target="_blank" rel="noopener">WEEK-06-WORK-SYNC.md &mdash; Yizhou&rsquo;s MVP contract</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-EXTRA-WORK.md" target="_blank" rel="noopener">WEEK-06-EXTRA-WORK.md &mdash; quality improvements, model fallbacks, and portfolio work</a></li>
-                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-LEAD-CHECKLIST.md" target="_blank" rel="noopener">WEEK-06-LEAD-CHECKLIST.md &mdash; Lezhi&rsquo;s coordination checklist</a></li>
-                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">WEEK-06-PRODUCT-ACCESS.md &mdash; accept the sandbox invite and start safely</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/docs/WEEK-06-LEAD-CHECKLIST.md" target="_blank" rel="noopener">WEEK-06-LEAD-CHECKLIST.md &mdash; Lezhi&rsquo;s coordination checklist</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-06-PRODUCT-ACCESS.md" target="_blank" rel="noopener">Product access guide &mdash; enter the accepted sandbox safely</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">Private product sandbox &mdash; real guarded source for accepted interns</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/RECIPES-TRACK.md" target="_blank" rel="noopener">RECIPES-TRACK.md &mdash; required recipe model contract</a></li>
                         <li><a href="freshlens.html#week-6">FreshLens Week 6 &mdash; ownership, safe capabilities, shared tracks, and carryovers</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues" target="_blank" rel="noopener">Assigned GitHub issues &mdash; acceptance commands and coordination notes</a></li>
                     </ul>
+                    </details>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> one human-review golden path in the browser: shopper submits, evidence fails closed, reviewer decides, report exports, receipt verifies, and audit chain verifies&mdash;backed by deterministic offline tests.</span>
+                        <span><strong>Week 6 target, now verified only for the local prototype:</strong> one human-review path where a shopper submits, evidence fails closed, an assigned-store reviewer decides, local receipt binding/mock anchoring completes, and scoped reports verify. Durable/native/issuance gates remain <strong>BLOCKED</strong>.</span>
                     </div>
                     <div class="skills">
                         <span class="skill-tag">One-thing-per-page UX</span>
@@ -1346,44 +1444,88 @@ cd es-intern-freshlens
                         <span class="skill-tag">Deterministic ML evaluation</span>
                         <span class="skill-tag">Portfolio evidence</span>
                     </div>
-                    <p style="margin-top:1rem; color:var(--text-secondary); font-size:0.88rem;"><strong>After core acceptance:</strong> every intern ships one or two quality improvements and records one portfolio-safe artifact. Use the approved model available in your region: a strong reasoning model for planning/review, Codex for system implementation, and an accessible frontend-capable model when useful. No one is blocked solely because one vendor is unavailable; never move secrets or private data between tools.</p>
+                    <p class="after-core-note"><strong>After core acceptance:</strong> every intern ships one or two quality improvements and records one portfolio-safe artifact. Use the approved model available in your region: a strong reasoning model for planning/review, Codex for system implementation, and an accessible frontend-capable model when useful. No one is blocked solely because one vendor is unavailable; never move secrets or private data between tools.</p>
                 </div>
             </details>
 
             <!-- WEEK 7 -->
-            <details class="week">
+            <details class="week" id="week-7-overview" open>
                 <summary>
                     <span class="week-num is-ship">W7</span>
                     <span class="week-head">
-                        <h3 class="week-title">Provenance Hardening <span class="phase-tag">Ship &amp; Extend</span></h3>
-                        <span class="week-obj">Make the tamper-evident receipt story airtight: asymmetric signing, receipt verification, and the on-chain existence proof.</span>
+                        <span class="week-title">One honest, evidence-backed <code>rc1</code> <span class="phase-tag">Converge &amp; Prove</span></span>
+                        <span class="week-obj">Preserve the human-review core on one clean commit, prove its highest-risk trust and recovery boundaries, and name every unavailable dependency.</span>
                     </span>
                     <span class="week-dates">Jul 27&ndash;31</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
-                    <div class="day-grid">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Sprint plan</h4><p>Provenance pillar: signing, verification, anchoring.</p></div>
-                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Sign &amp; verify</h4><p>Upgrade receipts to asymmetric signing; verify end to end.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Crypto, receipts &amp; audit-chain help.</p></div>
-                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Anchor + harden</h4><p>Existence proof via <code>src/anchor.py</code>; edge cases and tests.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo</h4><p>Claim &rarr; signed receipt saved &rarr; receipt independently verified.</p></div>
+                    <div class="do-now">
+                        <h4>Monday first reviews Week 6, then starts Week 7</h4>
+                        <ol>
+                            <li><strong>Part 1 &mdash; Week 6 demo/review.</strong> At the Monday noon ET meeting, use a clean checkout of current <code>main</code> <code>b6f9665</code>, the protected squash merge of <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/155">PR #155</a>. Run <code>python scripts/demo_claim_loop.py --offline</code>, record the revision, and review the local core separately from native, rendered-browser, model/data, recipe, durability, issuance, and publication evidence.</li>
+                            <li><strong>Part 2 &mdash; Week 7 kickoff.</strong> Use the ordered <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/172">Monday review + kickoff packet</a>, then read the immutable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/b6f9665a29a966aa2c5dddea4b25e41f6c0a3c25/docs/PROGRAM-STATUS-2026-07-26.md">July 26 status</a>, proposed <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/167">Weeks 7&ndash;8 action plan</a>, and mixed-status <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/171"><code>rc0</code> evidence ledger</a>; then freeze the owner/dependency map.</li>
+                            <li><strong>Post the acknowledgement where the team can act on it.</strong> By Monday noon ET, each owner comments on their assigned issue #156&ndash;#163 with file scope, artifact, consumer, reviewer, command, dependency, and canonical status; Lezhi links all acknowledgements and blockers in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164">#164</a>. By Tuesday noon, open a scoped draft PR no larger than 300 changed lines with a negative test, or post an exact <strong>BLOCKED</strong> update.</li>
+                        </ol>
                     </div>
-                    <p class="week-sub">Resources</p>
+                    <p class="status-snapshot"><strong>Plan snapshot &mdash; July 27, 2026 at 03:20 UTC.</strong> PR #167 and draft PRs #168&ndash;#172 each have 5/5 successful checks and zero submitted reviews. The drafts hold the sub-300-line validator, mixed-status <code>rc0</code>, and Monday packet stack; each still needs its requested substantive human review. Issues #156&ndash;#164 remain open. Bill posted the first complete owner acknowledgement on <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/161">#161</a>; seven of eight owner lanes and the #164 rollup still have no acknowledgement comment. The plan remains <strong>INCONCLUSIVE</strong>.</p>
+                    <div class="deliverable spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Why this matters:</strong> Week 8 is the freeze, verification, rehearsal, and handoff week. Converging by Friday protects that time, tests the boundaries most likely to invalidate the demo, and makes a mixed-status manifest an honest success instead of hiding unavailable native, model, data, durability, issuance, or publication inputs.</span>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Priority contract:</strong> trust, authorization, caps, replay/tamper, binding, rendered recovery, privacy-safe operations, and the combined gate are must-win. Ed25519, native work, and model/data evaluation are conditional on their dependencies. The <code>rc0</code> artifact is <strong>CODE-SHIPPED-NOT-VERIFIED</strong> in #171 and validates locally; its overall status remains <strong>BLOCKED</strong>. It has no human review, and Bill&rsquo;s linked #161 acknowledgement does not prove the other seven owner lanes or the #164 rollup. Unproven capabilities keep an owner and next action.</span>
+                    </div>
+                    <div class="day-grid">
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">Review, then bootstrap</div><h4>Week 6 demo + <code>rc0</code> freeze</h4><p>First review the clean Week 6 baseline. Then validate <code>rc0</code> separately; pin file drivers, commands, artifacts, consumers, dependencies, result schema, failure vocabulary, and owner acknowledgements.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Draft review</div><h4>First artifacts</h4><p>Every intern opens a scoped draft PR or posts an exact <strong>BLOCKED</strong> update; paired reviews cover authority, replay, partial failure, privacy, UX, and model abstention.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Integration lab</div><h4>Integrate + render</h4><p>Enforce the contract-change cutoff, integrate eligible lanes, render desktop/mobile recovery states, and preserve exact native/source boundaries.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Red-team gate</div><h4>Attack, repair, evaluate</h4><p>Repair P0/P1 and false-green defects; run authorization, replay, concurrency, binding, redaction, recovery, and eligible model/data gates without weakening thresholds.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">Evidence demo</div><h4>Test C, then write <code>rc1</code></h4><p>Test one clean source commit C, generate and validate its manifest in a separate evidence worktree, and demo contributions, negative proofs, limitations, and next owners.</p></div>
+                    </div>
+                    <p class="status-snapshot"><strong>Local evidence snapshot &mdash; July 26, 2026 at 23:04 UTC.</strong> FreshLens <code>main</code> is <code>b6f9665</code>, whose tree matches the audited PR #155 head. All five checks succeeded. The equivalent audited tree recorded 2,075 passed / 21 skipped, 45/45 joined tests, 16/16 demo hops, and 56/56 structural checks. PR #155 had zero submitted reviews; that was a historical lead-authorized exception, not Week 7/8 precedent. This does not claim rendered product UX, native lineage, model promotion, deployment, or release.</p>
+                    <div class="deliverable verified spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>VERIFIED locally:</strong> golden path <strong>16/16</strong>, joined regressions <strong>45/45</strong>, and structural UI scorecard <strong>56/56</strong> with zero required failures. The full suite passes in the declared audit environment; exact command and count are in the July 26 status page. Structural output is not rendered or device proof.</span>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Independent gates remain:</strong> rendered UX is <strong>INCONCLUSIVE</strong>. The synthetic freshness check is only <strong>8/10 = 0.80</strong>, exactly at its floor; real-photo CV/OOD quality is not certified. Native/source-linked device integration, recipe serving (0 approved rows), authorized evidence data (0/60), durable multi-worker state, external trust, and money issuance remain <strong>BLOCKED</strong>. Auto approval stays off under <code>GATE: RE-SCOPE</code>.</span>
+                    </div>
+                    <p class="week-sub">Every intern owns a build, a break, a review, and a demo</p>
                     <ul class="resource-list">
-                        <li><a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener">Claude Code &mdash; Tests, refactors, PRs</a><span class="tag free">Free</span></li>
-                        <li><a href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener">Claude Code &mdash; Best practices</a><span class="tag free">Free</span></li>
-                        <li><a href="provenance.html">Provenance receipts &mdash; optional blockchain track</a></li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/156">Lezhi #156</a>:</strong> signature/key contract, <code>rc0</code>, freeze coordination, setup and blocker rollup; Ed25519 only if its dependency and compatibility contract are ready.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/157">Lisa #157</a>:</strong> signed decision binding, tamper/replay/retry/anchor proof, and recipe approval package.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/158">Jinming #158</a>:</strong> frozen host adapter, server-derived state/role/store mapping, integration sequence, and recipe interface.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/159">Ziyun #159</a>:</strong> rendered desktop/mobile accessibility and error recovery; native mapping only with exact repository, commit, seam, and access. Never reconnect the retired immediate-return flow.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/160">Tony #160</a>:</strong> privilege, replay, conflict, concurrency, partial-failure, restart, dependency, and test-validity attacks.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/161">Bill #161</a>:</strong> privacy-safe correlation, logs, audit/report lineage, metrics, recovery, and rollback runbook.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/162">Yizhou #162</a>:</strong> deterministic final gate orchestrator, work-sync closeout, and independent model/UX reruns.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/163">Mohan #163</a>:</strong> evaluator/data decision and exact-hash results when authorized inputs exist; otherwise a reproducible blocker and model/data boundary.</li>
+                    </ul>
+                    <p class="week-sub">Authoritative merged-baseline documents</p>
+                    <ul class="resource-list">
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">All-team closeout tracker &mdash; every owner lane and handoff gate</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/167" target="_blank" rel="noopener">Weeks 7&ndash;8 action-plan PR &mdash; mission, dependency order, daily gates, and handoffs</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/172" target="_blank" rel="noopener">Monday packet &mdash; ordered Week 6 review, Week 7 kickoff, recovery, and decision record</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/171" target="_blank" rel="noopener">Mixed-status <code>rc0</code> &mdash; exact source, evidence, owners, blocks, and next actions</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/b6f9665a29a966aa2c5dddea4b25e41f6c0a3c25/docs/PROGRAM-STATUS-2026-07-26.md" target="_blank" rel="noopener">July 26 status &mdash; immutable evidence snapshot and exact blockers</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/PROGRAM-CLOSEOUT-2026-08-07.md" target="_blank" rel="noopener">Program closeout plan &mdash; through August 7</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/RELEASE-MANIFEST-2026-08-07.md" target="_blank" rel="noopener">Release manifest contract &mdash; source, build, model, data, device, and publication identities</a></li>
+                        <li><a href="freshlens.html#final-convergence">Detailed convergence board &mdash; owner lanes and capability boundaries</a></li>
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> tamper-evident provenance, hardened&mdash;every adjudicated claim carries a signed receipt anyone can verify.</span>
+                        <span><strong>Deliverable:</strong> an evidence-backed <code>rc1</code> manifest. It is not automatically a production release, native release, model promotion, recipe release, external-trust service, or issuance system.</span>
                     </div>
                     <div class="skills">
                         <span class="skill-tag">Digital signatures</span>
-                        <span class="skill-tag">Audit chains</span>
-                        <span class="skill-tag">Testing</span>
-                        <span class="skill-tag">Code review with AI</span>
+                        <span class="skill-tag">Host contracts</span>
+                        <span class="skill-tag">Adversarial testing</span>
+                        <span class="skill-tag">Rendered accessibility</span>
+                        <span class="skill-tag">Model evaluation</span>
+                        <span class="skill-tag">Operations</span>
                     </div>
                 </div>
             </details>
@@ -1393,34 +1535,42 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num is-ship">W8</span>
                     <span class="week-head">
-                        <h3 class="week-title">Integration, Freeze &amp; Demo Day <span class="phase-tag">Demo Day</span></h3>
-                        <span class="week-obj">Merge everything into one working, testable feature; code freeze, record a demo, and present on Demo Day.</span>
+                        <span class="week-title">Integration, Freeze &amp; Demo Day <span class="phase-tag">Demo Day</span></span>
+                        <span class="week-obj">Freeze one traceable candidate, run the full quality matrix, record a reproducible demo, and hand off exact evidence and limitations on August 7.</span>
                     </span>
                     <span class="week-dates">Aug 3&ndash;7</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
                     <div class="day-grid">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Presentation plan</h4><p>Outline the story; assign demo segments.</p></div>
-                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Work session</div><h4>Code freeze</h4><p>Final fixes only; record the demo video.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Optional &middot; 12 PM ET</div><h4>Office hours</h4><p>Dry-run feedback &amp; polish.</p></div>
-                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Work session</div><h4>Rehearse</h4><p>Full run-through; tighten the narrative.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo Day</h4><p>Final presentations + program retrospective.</p></div>
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Feature freeze</h4><p>Reconcile exact commits, builds, contract, model and dataset hashes, pull requests, device evidence, and blockers. After noon, accept only release-critical fixes and evidence corrections.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Quality matrix</div><h4>Verify the frozen candidate</h4><p>Run core, security, reliability, rendered browser, native simulator, model/data, operations, clean-clone, and backup gates on the exact candidate.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Authorization gate</div><h4>Native beta + devices</h4><p>Only an authorized, clean, source-linked archive can enter the private tester group. Otherwise native status remains <strong>BLOCKED</strong>; older builds test only the screens they contain.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Evidence lock</div><h4>Record + rehearse</h4><p>Run the privacy-safe backup on a second environment, record the joined story and failure recovery, repair only P0/P1 defects, and freeze the release manifest.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo Day + handoff</h4><p>Each intern presents contribution, negative proof, limitation, and next owner. Deliver the manifest, runbook, recording, contribution ledger, and retrospective.</p></div>
                     </div>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
-                        <li><a href="freshlens.html">FreshLens &mdash; Project details</a></li>
-                        <li><a href="https://anthropic.skilljar.com" target="_blank" rel="noopener">Anthropic Academy &mdash; keep learning</a><span class="tag free">Free</span></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-08.md" target="_blank" rel="noopener">Week 8 &mdash; freeze, verify, demonstrate, and hand off</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md" target="_blank" rel="noopener">Final quality matrix</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/RELEASE-MANIFEST-2026-08-07.md" target="_blank" rel="noopener">Release-manifest evidence contract</a></li>
+                        <li><a href="freshlens.html#final-convergence">FreshLens convergence board</a></li>
                     </ul>
+                    <div class="deliverable caution spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Truth boundary:</strong> a human-approved amount is not a refund or payment. Auto approval remains off. Native, CV/OOD, recipe, durability, external trust, issuance, managed deployment, and website publication keep separate statuses until their own current gates pass.</span>
+                    </div>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> a final demo video + presentation on Demo Day (Fri Aug 7), plus a retro on building in teams with AI.</span>
+                        <span><strong>Deliverable:</strong> one traceable closeout candidate, full evidence matrix, reproducible backup, final demo, contribution ledger, runbook, and handoff with a named owner/action for every unfinished capability.</span>
                     </div>
                     <div class="skills">
+                        <span class="skill-tag">Release evidence</span>
+                        <span class="skill-tag">Clean-clone verification</span>
+                        <span class="skill-tag">Failure recovery</span>
                         <span class="skill-tag">Presenting technical work</span>
                         <span class="skill-tag">Demo storytelling</span>
                         <span class="skill-tag">Retrospectives</span>
-                        <span class="skill-tag">Reflection</span>
                     </div>
                 </div>
             </details>
@@ -1459,6 +1609,7 @@ cd es-intern-freshlens
         </div>
     </div>
 </div>
+</main>
 
 <!-- Footer -->
 <footer>
@@ -1471,7 +1622,7 @@ cd es-intern-freshlens
                 <line x1="24" y1="8" x2="19" y2="8" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
                 <circle cx="24" cy="24" r="3" fill="#e0a106"/>
             </svg>
-            Talk Me Up &middot; Expired Solutions Summer Internship 2026
+            ES Summer Internship 2026
         </div>
         <div class="footer-credits">
             <a href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">GitHub</a>
@@ -1481,7 +1632,7 @@ cd es-intern-freshlens
             <span>Co-Lead: Prof. JJ Xu</span>
         </div>
     </div>
-    <div class="footer-copy">&copy; 2026 Expired Solutions &middot; Talk Me Up</div>
+    <div class="footer-copy">&copy; 2026 ES Internship</div>
 </footer>
 
 </body>

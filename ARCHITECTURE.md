@@ -1,38 +1,73 @@
-# ARCHITECTURE
+# ES Internship Hub Architecture
 
-## What it is
-A static, two-page marketing/landing website for the "Talk Me Up" Summer 2026 internship program (run under the brand "Expired Solutions"), pitching a 10-week AI-first internship whose flagship project is **FreshLens** (a multi-item produce freshness-scanning feature). It is a website *about* the program — not the internship's application code.
+## Purpose
 
-## Stack
-- **Plain HTML + inline CSS.** No build step, no framework, no JavaScript logic (only static SVG icons inline in markup).
-- External fonts via Google Fonts (`Inter`).
-- No package manager, no `package.json`, no dependencies, no tests, no CI/deploy config in the repo.
+This repository is the static public-information hub for the eight-week ES Summer 2026 internship.
+It explains the schedule, current FreshLens goal, evidence boundaries, owner lanes, and reference
+material. The FreshLens application itself lives in a separate repository and is not vendored here.
 
-## How to run
-Open the files directly in a browser, or serve the directory statically:
+The hub is an operational program surface, not release proof. Time-bound issue, pull-request,
+device, model, deployment, and publication claims must remain labeled with their observed source
+and date.
+
+## Pages
+
+- **`index.html`** — program overview, eight-week schedule, current Week 7 goal, Monday sequence,
+  owner/issue map, evidence snapshot, and links to the detailed project board.
+- **`freshlens.html`** — FreshLens product framing, local claim-loop boundary, current Week 7/8
+  convergence plan, readiness matrix, owner lanes, and collapsed historical Week 6 record.
+- **`provenance.html`** — research reference for signed decision evidence. It explicitly separates
+  local binding/mock-anchor proof from blocked durability and external-trust work.
+- **`w1.html`** — beginner Week 1 tutorial with copy controls, persisted step progress, and an
+  optional timer.
+
+All pages use relative links for local navigation and link to exact GitHub issues, pull requests,
+commits, and documents when those identities matter.
+
+## Runtime and assets
+
+- Plain HTML with page-local CSS; there is no framework or build step.
+- `w1.html` contains small client-side JavaScript for copy buttons, local progress persistence, and
+  the optional timer. The other pages are static documents.
+- Fonts load from Google Fonts when network access is available; system fallbacks remain declared.
+- Social-preview PNGs, the SVG favicon, and the Apple touch icon are tracked in this repository.
+- There is no backend, model, API, credential, customer data, or application state in this repo.
+
+Serve the directory locally:
+
+```bash
+python3 -m http.server 8000
 ```
-open index.html                  # macOS, opens in default browser
-# or serve the folder:
-python3 -m http.server 8000      # then visit http://localhost:8000/
+
+Then open `http://127.0.0.1:8000/`.
+
+## Verification
+
+There is no repository-pinned package manifest. The current review workflow uses an ephemeral HTML
+validator plus browser inspection:
+
+```bash
+npx --yes html-validate index.html freshlens.html provenance.html w1.html
+python3 ~/.codex/skills/design-quality-gate/scripts/check-ai-tells.py \
+  index.html freshlens.html provenance.html w1.html
+git diff --check
 ```
-There is nothing to install or build.
 
-## Architecture
-Two self-contained pages; all styling lives in a `<style>` block inside each file (no shared/external CSS). Navigation between them is plain relative `<a href>` links.
+Also inspect all four pages in a real browser at desktop and mobile widths. Check skip links, main
+landmarks, focus visibility, disclosure targets, table overflow, broken assets, and horizontal
+clipping. Passing these local checks does not prove production publication; after an approved merge,
+verify the deployed revision and live URLs separately.
 
-- **`index.html`** — program overview / landing page. Sections: hero, the FreshLens project pitch (3 "pillars"), production-stats band, two-week onboarding, a 10-week timeline with start-date pills, weekly schedule, guest-speaker cards, and a tools/stack grid. Links out to `freshlens.html` and to external GitHub repos.
-- **`freshlens.html`** — deep-dive on the flagship project: the "leap" framing, how-it-works pillars, a shopper-flow strip, an ASCII architecture diagram (camera frame → object detector → per-item crop → freshness model → overlay → Claude action layer), and a Week 5–8 build plan. Links back to `index.html` and out to the starter repo.
+## Maintenance boundaries
 
-Data flow: none at runtime. These are fully static documents; the only network calls a browser makes are for the Google Fonts stylesheet/font files.
-
-## Key files
-- `index.html` — main landing page (~1065 lines; hero, timeline, schedule, tools).
-- `freshlens.html` — FreshLens project detail page (~295 lines; architecture diagram + 4-week build plan).
-- `ARCHITECTURE.md` — this file.
-
-## Notes / gotchas
-- **The repo is just these two HTML files.** No backend, ML model, or API actually lives here. The "214 API endpoints", "596K data rows", "99%+ ML accuracy", YOLO/PyTorch/FastAPI/Claude stack, and the FreshLens architecture diagram are *marketing copy describing the internship project*, not code present in this repository.
-- The actual starter/project code is referenced as an external repo: `github.com/LawrenceHua/es-intern-freshlens` (linked from both pages; not vendored here).
-- CSS is duplicated per page (each has its own `:root` token block and rules); a change to shared styling must be made in both files.
-- No favicon, no `.nojekyll`/`CNAME`/`vercel.json`/`netlify.toml` — deployment target is not defined in-repo; suitable for any static host (e.g. GitHub Pages, Netlify) as-is.
-- Project naming has churned over history (Expired Solutions → "Talk Me Up"; FreshProof → FreshLens), so older external references may use prior names.
+- CSS tokens and components are duplicated across page-local style blocks. Shared visual changes
+  must be checked on all affected pages.
+- `index.html` and `freshlens.html` intentionally repeat the current goal at different detail
+  levels. Keep the Monday order, deadlines, canonical status vocabulary, owner map, and source
+  revision consistent between them.
+- Historical Week 6 material is preserved inside labeled disclosures. Current Week 7/8 instructions
+  supersede it.
+- Never infer native, TestFlight, rendered-product, model/data, recipe, durability, issuance,
+  staging, or production readiness from a green static-site preview.
+- Deployment is repository-connected and configured outside this source tree. Preview success,
+  protected merge, production deployment, and post-deploy probes are separate gates.

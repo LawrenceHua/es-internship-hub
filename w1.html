@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 1 — Your First 15 Minutes with Claude Code · Talk Me Up</title>
-    <meta name="description" content="A hands-on, beginner-friendly 15-minute Claude Code tutorial for the Expired Solutions internship: setup, prompting, iteration, planning, and skills like /plan and /code-review.">
+    <title>Week 1 &mdash; Claude Code in 15 Minutes &middot; ES Internship</title>
+    <meta name="description" content="A hands-on, beginner-friendly 15-minute Claude Code tutorial for the ES internship: setup, prompting, iteration, planning, and skills like /plan and /code-review.">
     <meta name="theme-color" content="#1a3c34">
     <link rel="canonical" href="https://es-internship-hub.vercel.app/w1.html">
     <!-- Social preview (Open Graph + Twitter) -->
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Expired Solutions AI Internship">
+    <meta property="og:site_name" content="ES Internship 2026">
     <meta property="og:url" content="https://es-internship-hub.vercel.app/w1.html">
-    <meta property="og:title" content="Week 1 — Your First 15 Minutes with Claude Code">
+    <meta property="og:title" content="Week 1 &mdash; Your First 15 Minutes with Claude Code">
     <meta property="og:description" content="A hands-on, beginner-friendly 15-minute Claude Code tutorial: setup, prompting, iteration, planning, and skills like /plan and /code-review.">
     <meta property="og:image" content="https://es-internship-hub.vercel.app/og-w1.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Week 1 — your first 15 minutes with Claude Code">
+    <meta property="og:image:alt" content="Week 1 &mdash; your first 15 minutes with Claude Code">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Week 1 — Your First 15 Minutes with Claude Code">
+    <meta name="twitter:title" content="Week 1 &mdash; Your First 15 Minutes with Claude Code">
     <meta name="twitter:description" content="A hands-on, beginner-friendly 15-minute Claude Code tutorial: setup, prompting, iteration, planning, review.">
     <meta name="twitter:image" content="https://es-internship-hub.vercel.app/og-w1.png">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -51,6 +51,8 @@
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--surface); line-height: 1.6; -webkit-font-smoothing: antialiased; }
         a { color: var(--accent); }
         a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position: fixed; top: 0.5rem; left: 0.75rem; z-index: 1000; transform: translateY(-160%); background: var(--primary); color: #fff; padding: 0.55rem 0.85rem; border-radius: 6px; text-decoration: none; font-weight: 700; }
+        .skip-link:focus { transform: translateY(0); }
 
         .freshness-rule { height: 2px; border: none; border-radius: 2px; background: linear-gradient(90deg, var(--fresh) 0%, var(--caution) 58%, var(--urgent) 100%); }
 
@@ -96,8 +98,10 @@
 
         /* Progress */
         .progress { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.75rem; }
-        .progress-track { flex: 1; height: 7px; background: var(--border); border-radius: 999px; overflow: hidden; }
-        .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--fresh), var(--accent-muted)); border-radius: 999px; transition: width 0.3s ease; }
+        .progress-track { flex: 1; height: 7px; border: 0; border-radius: 999px; overflow: hidden; appearance: none; }
+        .progress-track::-webkit-progress-bar { background: var(--border); border-radius: 999px; }
+        .progress-track::-webkit-progress-value { background: linear-gradient(90deg, var(--fresh), var(--accent-muted)); border-radius: 999px; transition: width 0.3s ease; }
+        .progress-track::-moz-progress-bar { background: linear-gradient(90deg, var(--fresh), var(--accent-muted)); border-radius: 999px; }
         .progress-text { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--text-secondary); white-space: nowrap; }
         .timer-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.75rem; }
         .timer-btn { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: #fff; background: var(--accent); border: none; border-radius: 7px; padding: 0.35rem 0.75rem; cursor: pointer; }
@@ -176,6 +180,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <!-- Nav -->
 <nav>
     <div class="nav-inner">
@@ -187,12 +193,13 @@
                 <line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
                 <circle cx="24" cy="24" r="3" fill="#e0a106"/>
             </svg>
-            Talk Me Up
+            ES Internship
         </a>
         <a class="back-link" href="index.html#schedule">&larr; Back to schedule</a>
     </div>
 </nav>
 
+<main id="main-content">
 <!-- Hero -->
 <div class="hero">
     <svg class="hero-reticle" viewBox="0 0 200 200" fill="none" aria-hidden="true">
@@ -252,7 +259,7 @@ claude          <span class="c"># log in on first run, then type /help</span></p
         <p class="lead">Do these in order. Tick each one off as you go &mdash; your progress is saved on this device.</p>
 
         <div class="progress">
-            <div class="progress-track"><div class="progress-fill" id="pf"></div></div>
+            <progress class="progress-track" id="pf" max="7" value="0" aria-labelledby="pt">0 of 7 complete</progress>
             <span class="progress-text" id="pt">0 / 7 done</span>
         </div>
         <div class="timer-row">
@@ -303,7 +310,7 @@ claude          <span class="c"># log in on first run, then type /help</span></p
                 <p class="prompt-label">Paste this prompt</p>
                 <div class="copyable">
                     <button class="copy-btn" type="button">Copy</button>
-<pre class="prompt">I have a Python guessing game in @game.py. Right now play() asks for a guess only once and exits. Add a while loop so it keeps asking until the user guesses the secret number. Keep it under 30 lines and add one short comment per section.</pre>
+<pre class="prompt">I have a Python guessing-game scaffold in @game.py. Right now play() chooses a secret number but stops at the TODO. Implement the input-and-check loop so it keeps asking until the user guesses correctly. Keep the whole file under 30 lines and add one short comment per section.</pre>
                 </div>
                 <p>Claude will ask permission before it edits the file &mdash; <strong>read the diff and approve it.</strong> Then run it:</p>
                 <div class="copyable">
@@ -404,7 +411,7 @@ claude          <span class="c"># log in on first run, then type /help</span></p
         <p class="lead">A tiny CLI game &mdash; zero setup, runs with one command, short enough to read every line. Create <code class="kbd">game.py</code> with this scaffold (it&rsquo;s intentionally incomplete; you&rsquo;ll finish it in the steps):</p>
         <div class="copyable">
             <button class="copy-btn" type="button">Copy</button>
-<pre class="code"><span class="c"># game.py — starter scaffold for the Week 1 tutorial</span>
+<pre class="code"><span class="c"># game.py - starter scaffold for the Week 1 tutorial</span>
 import random
 
 def play():
@@ -515,6 +522,7 @@ play()</pre>
     </section>
 
 </div>
+</main>
 
 <!-- Footer -->
 <footer>
@@ -527,7 +535,7 @@ play()</pre>
                 <line x1="24" y1="8" x2="19" y2="8" stroke="#5ba88a" stroke-width="2.5" stroke-linecap="round"/>
                 <circle cx="24" cy="24" r="3" fill="#e0a106"/>
             </svg>
-            Talk Me Up &middot; Week 1
+            ES Internship &middot; Week 1
         </div>
         <a href="index.html#schedule">&larr; Back to schedule</a>
     </div>
@@ -590,7 +598,11 @@ play()</pre>
             step.classList.toggle("done", checked);
             if (checked) done++;
         });
-        if (fill) fill.style.width = total ? (done / total * 100) + "%" : "0%";
+        if (fill) {
+            fill.max = total;
+            fill.value = done;
+            fill.textContent = done + " of " + total + " complete";
+        }
         if (text) text.textContent = done + " / " + total + " done";
     }
 

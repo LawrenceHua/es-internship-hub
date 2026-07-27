@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Provenance Receipts — Talk Me Up Internship 2026</title>
-    <meta name="description" content="A return-trust receipt for produce: sign a scan into a tamper-evident evidence package, optionally anchor it on-chain, and verify it later at return time. An Expired Solutions internship initiative.">
+    <title>Provenance Receipts &mdash; ES Internship 2026</title>
+    <meta name="description" content="A research reference for signed, tamper-evident produce evidence. The local mock-anchor prototype is implemented; durable storage and external trust remain blocked.">
     <meta name="theme-color" content="#1a3c34">
     <link rel="canonical" href="https://es-internship-hub.vercel.app/provenance.html">
     <!-- Social preview (Open Graph + Twitter) -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Expired Solutions AI Internship">
+    <meta property="og:site_name" content="ES Internship 2026">
     <meta property="og:url" content="https://es-internship-hub.vercel.app/provenance.html">
-    <meta property="og:title" content="Provenance Receipts — Talk Me Up Internship 2026">
-    <meta property="og:description" content="Sign a produce scan into a tamper-evident evidence package, optionally anchor it on-chain, and verify it later at return time. An Expired Solutions internship initiative.">
+    <meta property="og:title" content="Provenance Receipts &mdash; ES Internship 2026">
+    <meta property="og:description" content="Research reference for signed produce evidence. Local mock-anchor proof exists; durable storage and external trust remain blocked.">
     <meta property="og:image" content="https://es-internship-hub.vercel.app/og-freshlens.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Provenance Receipts — prove what was sold, trustlessly">
+    <meta property="og:image:alt" content="Provenance Receipts &mdash; prove what was sold, trustlessly">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Provenance Receipts — Talk Me Up Internship 2026">
-    <meta name="twitter:description" content="Sign a produce scan into a tamper-evident evidence package, optionally anchor it on-chain, and verify it later at return time.">
+    <meta name="twitter:title" content="Provenance Receipts &mdash; ES Internship 2026">
+    <meta name="twitter:description" content="Research reference for signed produce evidence with explicit local-proof and external-trust boundaries.">
     <meta name="twitter:image" content="https://es-internship-hub.vercel.app/og-freshlens.png">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -30,7 +30,7 @@
         :root {
             --primary: #1a3c34;
             --primary-mid: #2a5a4a;
-            --accent: #2d6e55;          /* link/interactive text — AA on white */
+            --accent: #2d6e55;          /* link/interactive text, AA on white */
             --accent-light: #e8f5ef;
             --accent-muted: #5ba88a;
             --fresh: #2e9e5b;
@@ -58,6 +58,8 @@
         }
         a { color: var(--accent); }
         a:focus-visible, .back-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position: fixed; top: 0.5rem; left: 0.75rem; z-index: 1000; transform: translateY(-160%); background: var(--primary); color: #fff; padding: 0.55rem 0.85rem; border-radius: 6px; text-decoration: none; font-weight: 700; }
+        .skip-link:focus { transform: translateY(0); }
 
         .freshness-rule { height: 2px; border: none; border-radius: 2px; background: linear-gradient(90deg, var(--fresh) 0%, var(--caution) 58%, var(--urgent) 100%); }
 
@@ -119,6 +121,9 @@
             font-family: var(--mono); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.9rem;
         }
         .pillar p { font-size: 0.88rem; }
+        .pillars-spaced { margin-top: 1.25rem; }
+        .detail-note { margin-top: 1.25rem; font-size: 0.92rem; }
+        .architecture-note { margin-top: 1rem; font-size: 0.9rem; }
 
         .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.6rem; margin-top: 0.5rem; }
         .flow-step {
@@ -166,6 +171,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <nav>
     <div class="nav-inner">
         <div class="nav-brand">
@@ -176,12 +183,13 @@
                 <line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
                 <circle cx="24" cy="24" r="3" fill="#e0a106"/>
             </svg>
-            Talk Me Up
+            ES Internship
         </div>
         <a href="index.html" class="back-link">&larr; Back to program</a>
     </div>
 </nav>
 
+<main id="main-content">
 <div class="hero">
     <svg class="hero-reticle" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <path d="M8 24 A16 16 0 0 1 24 8" stroke="#5ba88a" stroke-width="1.4" stroke-linecap="round" fill="none"/>
@@ -190,13 +198,13 @@
         <circle cx="24" cy="24" r="2.6" fill="#e0a106"/>
     </svg>
     <div class="hero-inner">
-        <div class="hero-label">Initiative &middot; A FreshLens Week-7 track</div>
+        <div class="hero-label">Research reference &middot; Not an assigned Week 7 lane</div>
         <h1>Provenance Receipts</h1>
-        <p>Turn a produce scan into a <strong>signed, tamper-evident evidence receipt</strong>. A public blockchain can anchor its fingerprint, but the real product is the return decision: store, time, lot, photo, freshness score, account, and policy checked together.</p>
+        <p>The merged local prototype turns a claim decision into a <strong>signed, tamper-evident evidence receipt</strong> and verifies a mock anchor. Durable multi-worker storage, independent external trust, and money issuance remain <strong>BLOCKED</strong>; a public anchor is a future research option, not a Week 7 commitment.</p>
         <div class="hero-tags">
             <span class="hero-tag">SHA-256</span>
             <span class="hero-tag">Digital signatures</span>
-            <span class="hero-tag">Ethereum Sepolia</span>
+            <span class="hero-tag">External trust: BLOCKED</span>
             <span class="hero-tag">FastAPI</span>
             <span class="hero-tag">FSMA 204</span>
         </div>
@@ -208,13 +216,13 @@
 
     <section class="block">
         <h2>The pain point</h2>
-        <p class="lead">Expired Solutions already offers a <strong>no-questions-asked 24-hour refund</strong> on discounted perishables&mdash;a real trust advantage, and a real fraud surface.</p>
-        <p>With produce there is nothing tying a specific loose item to a specific purchase. A barcode says <em>what type</em> it is&mdash;not which store sold this unit, when, or in what condition. So a soggy item returned days later is a he-said-she-said; a receipt can be reused; and an item bought at one store can be &ldquo;returned&rdquo; at another. Returns and return fraud are expensive across retail, and perishables usually cannot be resold, so every disputed return is a write-off. We want the <strong>trust</strong> without the <strong>friction</strong>.</p>
+        <p class="lead">Perishable claims need a trustworthy evidence trail without treating a model score as a guarantee or a recorded approval as proof that money moved.</p>
+        <p>With loose produce, a barcode identifies the category, not the exact unit, store, time, or condition. Evidence can be reused or mismatched, and the physical item can be substituted. The product question is therefore not merely &ldquo;can we sign a hash?&rdquo; It is whether authorization, caps, duplicates, evidence binding, human review, recovery, and audit history remain coherent together.</p>
     </section>
 
     <section class="block">
         <h2>How it works</h2>
-        <p class="lead">The evidence system has four jobs. Hash and sign make the receipt tamper-evident. Anchor makes backdating harder. Verify turns the evidence into a return decision.</p>
+        <p class="lead">The local evidence system hashes, signs, binds, and verifies one decision artifact. Its mock anchor proves the local interface only; it does not provide independent external trust.</p>
         <div class="pillars">
             <div class="pillar">
                 <div class="num">1</div>
@@ -224,52 +232,52 @@
             <div class="pillar">
                 <div class="num">2</div>
                 <h3>Sign</h3>
-                <p>Sign the fingerprint so any later edit is detectable and the issuer is provable. HMAC today; an Ed25519 upgrade lets outside parties verify too.</p>
+                <p>Sign the fingerprint so later edits are detectable. HMAC is the current compatibility path; Ed25519 is conditional on a frozen key-identity, rotation, and dependency contract.</p>
             </div>
             <div class="pillar">
                 <div class="num">3</div>
                 <h3>Anchor</h3>
-                <p>Optionally write the 32-byte fingerprint to a smart contract on the Ethereum Sepolia testnet&mdash;a public, timestamped record nobody can quietly rewrite.</p>
+                <p>Verify the 32-byte fingerprint against the merged mock-anchor contract. Public anchoring requires durability, key management, authorization, independent verification, and a separate release decision.</p>
             </div>
         </div>
-        <div class="pillars" style="margin-top:1.25rem;">
+        <div class="pillars pillars-spaced">
             <div class="pillar">
                 <div class="num">4</div>
                 <h3>Decide</h3>
-                <p>At return time, re-hash the receipt, check the signature and anchor, then apply policy: return window, store, lot, account, photo match, and freshness delta.</p>
+                <p>At verification time, re-hash the artifact, check its signature and mock-anchor state, then apply bounded policy inputs before an assigned human reviewer records a decision.</p>
             </div>
         </div>
     </section>
 
     <section class="block">
-        <h2>The refund journey</h2>
+        <h2>The evidence journey</h2>
         <div class="flow">
-            <div class="flow-step"><strong>1 &middot; Scan</strong>Shopper scans the produce at pickup.</div>
+            <div class="flow-step"><strong>1 &middot; Submit</strong>Shopper submits item and purchase-receipt evidence.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>2 &middot; Sign</strong>FreshLens signs the scan into a receipt.</div>
+            <div class="flow-step"><strong>2 &middot; Check</strong>Cap and duplicate gates run before the advisory model.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>3 &middot; Anchor</strong>Its fingerprint is anchored, on-chain or in a server ledger.</div>
+            <div class="flow-step"><strong>3 &middot; Advise</strong>The model contributes a non-guaranteed condition signal.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>4 &middot; Present</strong>Days later, the shopper opens a return.</div>
+            <div class="flow-step"><strong>4 &middot; Decide</strong>An assigned reviewer records a bounded approval or decline.</div>
             <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step"><strong>5 &middot; Decide</strong>Verify evidence, then approve, review, or decline.</div>
+            <div class="flow-step"><strong>5 &middot; Bind</strong>The local prototype signs the decision and verifies its mock anchor; no issuance occurs.</div>
         </div>
-        <p style="margin-top:1.25rem; font-size:0.92rem;">A simple fraud attempt fails cleanly: edit the freshness score or swap the store on a saved receipt and the fingerprint no longer matches, so verification returns <code>digest_mismatch</code>. The harder problem is physical substitution: proving the returned item is the same item. That needs policy and extra signals, not just a chain transaction.</p>
+        <p class="detail-note">A simple tamper attempt fails cleanly: edit the freshness score or swap the store on a saved receipt and the fingerprint no longer matches, so verification returns <code>digest_mismatch</code>. The harder problem is physical substitution: proving the presented item is the same item. That needs policy and additional signals, not merely a signed hash.</p>
     </section>
 
     <section class="block">
         <h2>What it proves &mdash; and what it doesn&rsquo;t</h2>
         <div class="note">
-            <p><strong>It proves:</strong> this exact receipt existed at (or before) a point in time, and was issued by a holder of the signing key. Any tampering breaks verification.</p>
-            <p><strong>It does not prove</strong> that the photo is of the real item, or that the freshness score is correct&mdash;<em>garbage in, signed garbage out.</em> It only proves the receipt&rsquo;s existence, time, and issuer. With the starter&rsquo;s placeholder detector every item is a generic &ldquo;produce&rdquo;; real per-item provenance arrives once the detector and freshness model are wired (Weeks 4&ndash;5).</p>
-            <p><strong>The competitive product is the decision layer:</strong> require the original purchase receipt, store and lot match, return-window check, account risk, a return-time photo, and a freshness-delta comparison. Blockchain helps prevent silent edits and backdating; it does not replace store operations.</p>
-            <p><strong>On-chain is permanent:</strong> an anchored record cannot be deleted. That&rsquo;s exactly why we anchor only a 32-byte fingerprint&mdash;never the receipt contents or any personal data.</p>
+            <p><strong>It proves locally:</strong> the verifier can recompute the same decision-artifact digest, verify the current compatibility signature, match the mock-anchor intent, and reject a mutated artifact.</p>
+            <p><strong>It does not prove</strong> durable or independent existence, time, or issuer; physical-item authenticity; model correctness; current detector quality; external anchoring; or issuance. The mock anchor and process-local state cannot substitute for those gates.</p>
+            <p><strong>The competitive product is the decision layer:</strong> require the original purchase receipt, store and lot match, claim-window check, account risk, a current evidence photo, and a freshness-delta comparison. A future external anchor may make silent edits and backdating harder; it does not replace store operations or human authorization.</p>
+            <p><strong>External trust remains blocked:</strong> any future public anchor would require privacy review, durable state, key management, recovery, independent verification, and explicit release authority. No personal data may be published.</p>
         </div>
     </section>
 
     <section class="block">
         <h2>Architecture</h2>
-        <p class="lead">A small FastAPI feature that signs a scan and anchors its fingerprint. It runs offline out of the box with a local hash-chain; interns can wire the real testnet anchor in Week 7 after the evidence and policy path works.</p>
+        <p class="lead">The merged FastAPI prototype signs a decision artifact and verifies its fingerprint through a local mock anchor. The current closeout plan keeps durable storage and public anchoring blocked behind separate prerequisites and release authority.</p>
         <pre>scan a photo
    │
    ▼
@@ -281,18 +289,18 @@
    ▼
 [ 3. ANCHOR ] store the 32-byte digest
    │           CHAIN_BACKEND = mock     → local hash-chain file (offline default)
-   │                         = sepolia  → ReceiptRegistry contract on the testnet
+   │                         = external → BLOCKED pending durability + trust gates
    ▼
 [ 4. VERIFY ] re-hash the presented receipt ──► signature ok? + anchored?
    │
    ▼
-[ 5. DECIDE ] return window + store + lot + account + photo/freshness delta  ──►  APPROVE / REVIEW / DECLINE</pre>
-        <p style="margin-top:1rem; font-size:0.9rem;">A signed hash already delivers useful trust for a single store verifying its own receipts. The public anchor earns its place when an outside party, insurer, or second retailer must verify without trusting that store&rsquo;s server. The startup version should be lightweight: first signed evidence and a return decision API, then optional public anchoring.</p>
+[ 5. DECIDE ] claim window + store + lot + account + evidence signals  ──►  BOUNDED HUMAN DECISION (no issuance)</pre>
+        <p class="architecture-note">The local artifact is useful for binding and tamper checks in one process. It does not yet survive multi-worker restart, prove independent existence, or authorize issuance. Public anchoring becomes relevant only after durable state, key management, recovery, and an independently testable external-trust contract exist.</p>
     </section>
 
     <section class="block">
-        <h2>Beyond refunds</h2>
-        <p class="lead">The same signed, timestamped, lot-linked receipt unlocks more than returns.</p>
+        <h2>Beyond the current claim prototype</h2>
+        <p class="lead">A future durable, independently trusted, lot-linked receipt could support other operations. These are research directions, not current release claims.</p>
         <div class="pillars">
             <div class="pillar">
                 <h3>Recall management</h3>
@@ -307,8 +315,8 @@
                 <p>A signed markdown event (item, photo, manager, time) deters markdown fraud and feeds loss analysis.</p>
             </div>
             <div class="pillar">
-                <h3>Return risk scoring</h3>
-                <p>Repeated claims, stale receipts, mismatched stores, and impossible freshness deltas can route a refund to manual review instead of auto-approval.</p>
+                <h3>Claim risk signals</h3>
+                <p>Repeated claims, stale receipts, mismatched stores, and impossible freshness deltas can route evidence to assigned human review. Automatic approval and issuance remain disabled.</p>
             </div>
             <div class="pillar">
                 <h3>Insurance claims</h3>
@@ -326,10 +334,10 @@
     </section>
 
     <section class="block">
-        <h2>Build it (intern track)</h2>
-        <p class="lead">This is an optional Week-7 FreshLens extension: it ships <strong>runnable today</strong> with a local mock anchor and a green test suite. The best intern path is evidence first, policy second, Sepolia third. The blockchain demo is useful only if the return decision is already clear.</p>
+        <h2>How this reference fits the closeout</h2>
+        <p class="lead">This is not an assigned Week 7 feature lane. Use it to understand the merged local binding/mock-anchor boundary. Follow the proposed action plan for current work; external anchoring stays <strong>BLOCKED</strong> until its durability and trust prerequisites have their own evidence and release decision.</p>
         <div class="cta-row">
-            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-07-PROVENANCE.md" target="_blank" rel="noopener">Week-7 build guide &rarr;</a>
+            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/pull/167" target="_blank" rel="noopener">Proposed Week 7&ndash;8 plan &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/PROVENANCE-RECEIPT-PRD.md" target="_blank" rel="noopener">Read the spec (PRD)</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">Starter repository</a>
             <a class="btn btn-secondary" href="freshlens.html">&larr; FreshLens</a>
@@ -337,6 +345,7 @@
     </section>
 
 </div>
+</main>
 
 <footer>
     <div class="footer-inner">
@@ -348,11 +357,11 @@
                 <line x1="24" y1="8" x2="19" y2="8" stroke="#8fcfb0" stroke-width="2.5" stroke-linecap="round"/>
                 <circle cx="24" cy="24" r="3" fill="#e0a106"/>
             </svg>
-            Talk Me Up &mdash; Expired Solutions Summer Internship 2026
+            ES Internship 2026
         </div>
         <div>Lead: Lawrence Hua &middot; Co-Lead: Prof. JJ Xu</div>
     </div>
-    <div class="footer-copy">&copy; 2026 Expired Solutions &middot; Talk Me Up</div>
+    <div class="footer-copy">Program materials &middot; 2026</div>
 </footer>
 
 </body>
