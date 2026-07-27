@@ -214,7 +214,7 @@
         .status-label.shipped { color: #725000; background: #fff0bd; }
         .status-label.blocked { color: #8d2118; background: #ffe1df; }
         .status-label.inconclusive { color: #554b72; background: #ece8f7; }
-        .week6-details { margin-top: 1.25rem; border-top: 1px solid var(--border); padding-top: 0.9rem; }
+        .week6-details { margin-top: 1.25rem; border-top: 1px solid var(--border); padding-top: 0.9rem; scroll-margin-top: 76px; }
         .week6-details > summary { color: var(--primary); font-weight: 700; cursor: pointer; }
         .week6-details[open] > summary { margin-bottom: 0.8rem; }
 
@@ -263,7 +263,7 @@
             ES Internship
         </div>
         <div class="nav-actions">
-            <a href="#final-convergence" class="nav-week-link">Next up</a>
+            <a href="#final-convergence" class="nav-week-link">This week</a>
             <a href="index.html" class="back-link">&larr; Program</a>
         </div>
     </div>
@@ -432,11 +432,11 @@
         <h2>This week&rsquo;s goal &mdash; one honest, evidence-backed <code>rc1</code></h2>
         <p class="lead"><strong>Week 7 &middot; Jul 27&ndash;31.</strong> By Friday, cut an evidence-backed <code>rc1</code> manifest for one clean FreshLens commit that preserves the human-review core, proves the highest-risk trust, authorization, rendered-UX, and recovery boundaries, and carries every unavailable dependency forward with an exact owner and next action. <strong>Lezhi coordinates the closeout</strong>; every intern owns a bounded contribution or blocker, a negative test, a cross-review, and a demo segment. Track the joined program in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">all-team issue #164</a>.</p>
         <div class="do-now">
-            <h3>Start Monday from evidence, not assumptions</h3>
+            <h3>Monday has two ordered parts</h3>
             <ol>
-                <li>Start from current <code>main</code> <code>b6f9665</code>, the protected squash merge of <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/155" target="_blank" rel="noopener">PR #155</a>; record the source revision with every result.</li>
-                <li>Read the immutable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/b6f9665a29a966aa2c5dddea4b25e41f6c0a3c25/docs/PROGRAM-STATUS-2026-07-26.md" target="_blank" rel="noopener">July 26 status</a>, the proposed <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/167" target="_blank" rel="noopener">Weeks 7&ndash;8 action-plan PR</a>, and the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md" target="_blank" rel="noopener">quality gates</a>.</li>
-                <li>By Monday&rsquo;s checkpoint, post file scope, artifact, consumer, reviewer, command, dependency, and canonical status. By Tuesday noon, open a scoped draft PR of no more than 300 changed lines with a negative test, or post an exact <code>BLOCKED</code> update.</li>
+                <li><strong>Part 1 &mdash; review Week 6 before assigning new work.</strong> At the Monday noon ET meeting, run the offline demo from a clean checkout of current <code>main</code> <code>b6f9665</code>, the protected squash merge of <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/155" target="_blank" rel="noopener">PR #155</a>. Use <code>python scripts/demo_claim_loop.py --offline</code>, record the source revision, and keep native, rendered-browser, model/data, recipe, durability, issuance, and publication claims separate.</li>
+                <li><strong>Part 2 &mdash; start Week 7 from the reviewed truth.</strong> Read the immutable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/b6f9665a29a966aa2c5dddea4b25e41f6c0a3c25/docs/PROGRAM-STATUS-2026-07-26.md" target="_blank" rel="noopener">July 26 status</a>, the proposed <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/167" target="_blank" rel="noopener">Weeks 7&ndash;8 action-plan PR</a>, and the <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md" target="_blank" rel="noopener">quality gates</a>; then freeze the <code>rc0</code> owner/dependency map.</li>
+                <li><strong>Acknowledge the lane in GitHub.</strong> By the Monday noon ET checkpoint, each owner comments on their assigned issue <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/156" target="_blank" rel="noopener">#156</a>&ndash;<a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/163" target="_blank" rel="noopener">#163</a> with file scope, artifact, consumer, reviewer, command, dependency, and canonical status; Lezhi links the acknowledgements and blockers in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">#164</a>. By Tuesday noon, open a scoped draft PR of no more than 300 changed lines with a negative test, or post an exact <code>BLOCKED</code> update.</li>
             </ol>
         </div>
         <p class="status-snapshot"><strong>Plan snapshot &mdash; July 27, 2026 at 00:19 UTC.</strong> PR #167 is open and mergeable with 5/5 successful checks and zero submitted reviews. Issues #156&ndash;#164 are open and assigned, with zero acknowledgement comments. The plan remains <code>INCONCLUSIVE</code> pending substantive human review and owner acknowledgements.</p>
@@ -455,7 +455,7 @@
         <div class="status-callout"><strong><code>rc0</code> bootstrap is BLOCKED.</strong> Only the manifest template exists. Create and validate <code>rc0</code> in a separate evidence worktree, pin its source SHA and file drivers, then freeze dependency order before consuming lanes diverge.</div>
         <h2 class="section-heading">Monday through Friday gates</h2>
         <div class="ownership-grid">
-            <div class="owner-task"><h3>Monday <span>truth bootstrap + freeze</span></h3><p>Create and validate <code>rc0</code> separately. Pin file drivers, consumers, reviewers, commands, artifacts, dependencies, result schema, and failure vocabulary. An unresolved dependency blocks only its consuming lane.</p></div>
+            <div class="owner-task"><h3>Monday <span>review first, then freeze</span></h3><p>First demo and review the Week 6 baseline from clean <code>b6f9665</code>. Then create and validate <code>rc0</code> separately, pin file drivers, consumers, reviewers, commands, artifacts, dependencies, result schema, and failure vocabulary, and collect owner acknowledgements in #156&ndash;#164. An unresolved dependency blocks only its consuming lane.</p></div>
             <div class="owner-task"><h3>Tuesday <span>noon ET checkpoint</span></h3><p>Each lane opens a scoped draft PR no larger than 300 changed lines with a negative test, or posts a canonical blocker. Cross-review authority, replay, partial failure, privacy, recovery, and abstention.</p></div>
             <div class="owner-task"><h3>Wednesday <span>noon ET contract cutoff</span></h3><p>Integrate eligible lanes and render desktop/mobile recovery states. Historical installed behavior cannot prove current source; preserve exact browser, native, build, and device identities.</p></div>
             <div class="owner-task"><h3>Thursday <span>attack + repair</span></h3><p>Repair only P0/P1 and false-green defects. Run adversarial and eligible model/data gates without weakening nonzero thresholds or tuning them after observing results.</p></div>
@@ -480,7 +480,7 @@
                         <tr>
                             <td>Local claim core</td>
                             <td><span class="status-label verified">VERIFIED</span></td>
-                            <td>Human review, assigned-store authorization, $15 / 30-day and $10 / claim ceilings, revision-safe policy writes, signed decision binding, mock-anchor verification, retry protection, redaction, and account-scoped reporting are exercised together in the local candidate.</td>
+                            <td>Human review, assigned-store authorization, $15 per rolling 30 days and $10 per claim ceilings, revision-safe policy writes, signed decision binding, mock-anchor verification, retry protection, redaction, and account-scoped reporting are exercised together in the local candidate.</td>
                         </tr>
                         <tr>
                             <td>Rendered web UX</td>
@@ -552,8 +552,8 @@
     <section class="block" id="week-6">
         <h2>Week 6 closeout record &mdash; make the claim loop real</h2>
         <p class="lead"><strong>Jul 20&ndash;24 historical snapshot.</strong> This record preserves the owner map, issue links, and evidence known during Week 6. The current merged-baseline status above supersedes any older readiness count or blocker wording here. <strong>Lezhi (<code>@LezhiFu</code>) was the Week 6 coordination lead</strong>.</p>
-        <details class="week6-details">
-        <summary>Open the complete historical Week 6 record</summary>
+        <details class="week6-details" id="shopper-cv-readiness">
+        <summary>Open the complete historical Week 6 record, including the shopper/CV evidence matrix</summary>
         <div class="do-now">
             <h3>Historical Week 6 instructions: do not use for closeout</h3>
             <ol>
@@ -574,7 +574,7 @@
         <div class="status-callout verified"><strong>The claim-host contract is merged through <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/148" target="_blank" rel="noopener">PR #148</a>.</strong> Schema and local compatibility evidence exist; a durable native/production host adapter and source-linked distribution remain <strong>BLOCKED</strong>.</div>
         <div class="status-callout review"><strong>The separately active native repair tree is INCONCLUSIVE.</strong> It is still being edited and tested, has no reviewed published revision for this hub snapshot, has not been uploaded to TestFlight, and does not reconnect the receipt/claim journey. This page makes no green claim from that worktree.</div>
 
-        <div class="readiness-panel" id="shopper-cv-readiness">
+        <div class="readiness-panel">
             <h3>Shopper app + CV readiness &mdash; evidence snapshot</h3>
             <p>The current shopper build is useful for scanner, inventory, and recipe testing, but the joined Week 6 return loop and the CV release gates are not ready. Keep model output advisory and route every claim to a separately authorized human reviewer.</p>
             <section class="readiness-table-wrap" tabindex="0" aria-label="Scrollable shopper app and computer vision readiness table">

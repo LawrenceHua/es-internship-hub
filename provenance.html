@@ -58,6 +58,8 @@
         }
         a { color: var(--accent); }
         a:focus-visible, .back-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position: fixed; top: 0.5rem; left: 0.75rem; z-index: 1000; transform: translateY(-160%); background: var(--primary); color: #fff; padding: 0.55rem 0.85rem; border-radius: 6px; text-decoration: none; font-weight: 700; }
+        .skip-link:focus { transform: translateY(0); }
 
         .freshness-rule { height: 2px; border: none; border-radius: 2px; background: linear-gradient(90deg, var(--fresh) 0%, var(--caution) 58%, var(--urgent) 100%); }
 
@@ -119,6 +121,9 @@
             font-family: var(--mono); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.9rem;
         }
         .pillar p { font-size: 0.88rem; }
+        .pillars-spaced { margin-top: 1.25rem; }
+        .detail-note { margin-top: 1.25rem; font-size: 0.92rem; }
+        .architecture-note { margin-top: 1rem; font-size: 0.9rem; }
 
         .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.6rem; margin-top: 0.5rem; }
         .flow-step {
@@ -166,6 +171,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <nav>
     <div class="nav-inner">
         <div class="nav-brand">
@@ -182,6 +189,7 @@
     </div>
 </nav>
 
+<main id="main-content">
 <div class="hero">
     <svg class="hero-reticle" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <path d="M8 24 A16 16 0 0 1 24 8" stroke="#5ba88a" stroke-width="1.4" stroke-linecap="round" fill="none"/>
@@ -232,7 +240,7 @@
                 <p>Verify the 32-byte fingerprint against the merged mock-anchor contract. Public anchoring requires durability, key management, authorization, independent verification, and a separate release decision.</p>
             </div>
         </div>
-        <div class="pillars" style="margin-top:1.25rem;">
+        <div class="pillars pillars-spaced">
             <div class="pillar">
                 <div class="num">4</div>
                 <h3>Decide</h3>
@@ -254,7 +262,7 @@
             <div class="flow-arrow">&rarr;</div>
             <div class="flow-step"><strong>5 &middot; Bind</strong>The local prototype signs the decision and verifies its mock anchor; no issuance occurs.</div>
         </div>
-        <p style="margin-top:1.25rem; font-size:0.92rem;">A simple tamper attempt fails cleanly: edit the freshness score or swap the store on a saved receipt and the fingerprint no longer matches, so verification returns <code>digest_mismatch</code>. The harder problem is physical substitution: proving the presented item is the same item. That needs policy and additional signals, not merely a signed hash.</p>
+        <p class="detail-note">A simple tamper attempt fails cleanly: edit the freshness score or swap the store on a saved receipt and the fingerprint no longer matches, so verification returns <code>digest_mismatch</code>. The harder problem is physical substitution: proving the presented item is the same item. That needs policy and additional signals, not merely a signed hash.</p>
     </section>
 
     <section class="block">
@@ -287,7 +295,7 @@
    │
    ▼
 [ 5. DECIDE ] claim window + store + lot + account + evidence signals  ──►  BOUNDED HUMAN DECISION (no issuance)</pre>
-        <p style="margin-top:1rem; font-size:0.9rem;">The local artifact is useful for binding and tamper checks in one process. It does not yet survive multi-worker restart, prove independent existence, or authorize issuance. Public anchoring becomes relevant only after durable state, key management, recovery, and an independently testable external-trust contract exist.</p>
+        <p class="architecture-note">The local artifact is useful for binding and tamper checks in one process. It does not yet survive multi-worker restart, prove independent existence, or authorize issuance. Public anchoring becomes relevant only after durable state, key management, recovery, and an independently testable external-trust contract exist.</p>
     </section>
 
     <section class="block">
@@ -337,6 +345,7 @@
     </section>
 
 </div>
+</main>
 
 <footer>
     <div class="footer-inner">

@@ -487,8 +487,6 @@
         }
         .week[open] .week-chev { transform: rotate(180deg); }
 
-        .week-launch { font-family: var(--mono); font-size: 0.64rem; font-weight: 500; color: #fff; background: var(--accent); padding: 0.28rem 0.6rem; border-radius: 6px; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.15s; }
-        .week-launch:hover { background: var(--primary-mid); }
         .tutorial-cta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--primary); color: #fff; border-radius: var(--radius); padding: 0.9rem 1.2rem; text-decoration: none; margin-bottom: 1.25rem; transition: background 0.15s; }
         .tutorial-cta:hover { background: var(--primary-mid); }
         .tutorial-cta strong { font-size: 0.95rem; font-weight: 700; }
@@ -707,7 +705,7 @@
             <li><a href="#tools">Tools</a></li>
             <li><a href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
-        <a class="nav-week-link" href="#week-7-overview">Next up</a>
+        <a class="nav-week-link" href="#week-7-overview">This week</a>
     </div>
 </nav>
 
@@ -799,7 +797,7 @@
         </div>
         <div class="stats-row">
             <div class="stat-card"><div class="stat-value">16/16</div><div class="stat-label">Offline Demo</div></div>
-            <div class="stat-card"><div class="stat-value">8/8</div><div class="stat-label">Device Result Rows</div></div>
+            <div class="stat-card"><div class="stat-value">8/8</div><div class="stat-label">Historical Device Rows</div></div>
             <div class="stat-card"><div class="stat-value">OFF</div><div class="stat-label">Auto Approval</div></div>
             <div class="stat-card"><div class="stat-value">BLOCKED</div><div class="stat-label">Model + Data Release</div></div>
         </div>
@@ -851,7 +849,7 @@
     <div class="container">
         <div class="section-header">
             <h2>The 8-Week Schedule</h2>
-            <p>Five touchpoints a week. The first two weeks are mapped day-by-day; click any week to expand it.</p>
+            <p>Five touchpoints every week. Each week is mapped day-by-day; click any week to expand it.</p>
         </div>
 
         <!-- Weekly cadence -->
@@ -903,7 +901,6 @@
                         <span class="week-obj">Learn Claude Code and ship a small solo project, built primarily with Claude Code.</span>
                     </span>
                     <span class="week-dates">Jun 15&ndash;19</span>
-                    <a href="w1.html" class="week-launch">Tutorial &#8599;</a>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
@@ -1074,7 +1071,7 @@ cd es-intern-freshlens
                             <span class="codeline">uvicorn app:app --reload   <span class="c"># then open http://127.0.0.1:8000</span></span>
                             In Claude Code, run <code>/onboard</code> and read <code>GETTING_STARTED.md</code>. New to Claude Code? Read <code>docs/USING-CLAUDE-CODE.md</code> first.
                         </li>
-                        <li><strong>Claim a starter task.</strong> Pick one <em>good first issue</em> (one per slice: detect &middot; freshness &middot; act &middot; frontend &middot; report &middot; eval, plus a Week-7 provenance stretch), then claim it &mdash; this also creates your branch:
+                        <li><strong>Claim a starter task.</strong> Pick one <em>good first issue</em> (one per slice: detect &middot; freshness &middot; act &middot; frontend &middot; report &middot; eval, plus an optional future provenance-research reference), then claim it &mdash; this also creates your branch:
                             <span class="codeline">gh issue develop -c &lt;issue-number&gt;</span>
                         </li>
                         <li><strong>Build with AI, then ship.</strong> Work only in <em>your</em> files. Explore &rarr; Plan &rarr; Implement &rarr; run <code>/code-review</code> &rarr; open a pull request. CI (lint, tests, secret-scan) must pass and one teammate approves before it merges. Never push straight to <code>main</code>.</li>
@@ -1341,7 +1338,7 @@ cd es-intern-freshlens
                     </div>
                     <div class="deliverable verified spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>The role and policy escalation fix is VERIFIED and MERGED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/131">PR #131</a>.</strong> Commit <code>d185c82</code> separates shopper, assigned-store reviewer, and policy-admin principals; derives authority from the bearer; enforces immutable $15 monthly / $10 claim ceilings; requires an expected revision; and rolls policy state back with a failed audit append. This closes the unsafe self-inflation path; the local #120 binding/finalization work is separately closed through PR #147.</span>
+                        <span><strong>The role and policy escalation fix is VERIFIED and MERGED in <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/131">PR #131</a>.</strong> Commit <code>d185c82</code> separates shopper, assigned-store reviewer, and policy-admin principals; derives authority from the bearer; enforces immutable $15 per rolling 30 days / $10 per claim ceilings; requires an expected revision; and rolls policy state back with a failed audit append. This closes the unsafe self-inflation path; the local #120 binding/finalization work is separately closed through PR #147.</span>
                     </div>
                     <div class="deliverable blocked spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
@@ -1464,11 +1461,11 @@ cd es-intern-freshlens
                 </summary>
                 <div class="week-body">
                     <div class="do-now">
-                        <h4>Friday outcome: one traceable candidate</h4>
+                        <h4>Monday first reviews Week 6, then starts Week 7</h4>
                         <ol>
-                            <li>Start from current <code>main</code> <code>b6f9665</code>, the protected squash merge of <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/155">PR #155</a>; record the source revision with every result.</li>
-                            <li>Read the immutable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/b6f9665a29a966aa2c5dddea4b25e41f6c0a3c25/docs/PROGRAM-STATUS-2026-07-26.md">July 26 status</a>, proposed <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/167">Weeks 7&ndash;8 action plan</a>, and <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md">quality gates</a>.</li>
-                            <li>By Monday&rsquo;s checkpoint, post file scope, artifact, consumer, reviewer, command, dependency, and status. By Tuesday noon, open a scoped draft PR no larger than 300 changed lines with a negative test, or post an exact <strong>BLOCKED</strong> update.</li>
+                            <li><strong>Part 1 &mdash; Week 6 demo/review.</strong> At the Monday noon ET meeting, use a clean checkout of current <code>main</code> <code>b6f9665</code>, the protected squash merge of <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/155">PR #155</a>. Run <code>python scripts/demo_claim_loop.py --offline</code>, record the revision, and review the local core separately from native, rendered-browser, model/data, recipe, durability, issuance, and publication evidence.</li>
+                            <li><strong>Part 2 &mdash; Week 7 kickoff.</strong> Read the immutable <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/b6f9665a29a966aa2c5dddea4b25e41f6c0a3c25/docs/PROGRAM-STATUS-2026-07-26.md">July 26 status</a>, proposed <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/167">Weeks 7&ndash;8 action plan</a>, and <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md">quality gates</a>; then freeze the <code>rc0</code> owner/dependency map.</li>
+                            <li><strong>Post the acknowledgement where the team can act on it.</strong> By Monday noon ET, each owner comments on their assigned issue #156&ndash;#163 with file scope, artifact, consumer, reviewer, command, dependency, and canonical status; Lezhi links all acknowledgements and blockers in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164">#164</a>. By Tuesday noon, open a scoped draft PR no larger than 300 changed lines with a negative test, or post an exact <strong>BLOCKED</strong> update.</li>
                         </ol>
                     </div>
                     <p class="status-snapshot"><strong>Plan snapshot &mdash; July 27, 2026 at 00:19 UTC.</strong> PR #167 is open and mergeable with 5/5 successful checks and zero submitted reviews. Issues #156&ndash;#164 are open and assigned, with zero acknowledgement comments. The plan remains <strong>INCONCLUSIVE</strong> pending substantive human review and owner acknowledgements.</p>
@@ -1481,7 +1478,7 @@ cd es-intern-freshlens
                         <span><strong>Priority contract:</strong> trust, authorization, caps, replay/tamper, binding, rendered recovery, privacy-safe operations, and the combined gate are must-win. Ed25519, native work, and model/data evaluation are conditional on their dependencies. Only the manifest template exists, so <code>rc0</code> bootstrap is <strong>BLOCKED</strong> until it is separately created and validated. Unproven capabilities stay <strong>BLOCKED</strong> with an owner and next action.</span>
                     </div>
                     <div class="day-grid">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">Truth bootstrap</div><h4><code>rc0</code> + contract freeze</h4><p>Validate <code>rc0</code> separately; pin file drivers, commands, artifacts, consumers, dependencies, result schema, and failure vocabulary.</p></div>
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">Review, then bootstrap</div><h4>Week 6 demo + <code>rc0</code> freeze</h4><p>First review the clean Week 6 baseline. Then validate <code>rc0</code> separately; pin file drivers, commands, artifacts, consumers, dependencies, result schema, failure vocabulary, and owner acknowledgements.</p></div>
                         <div class="day"><div class="day-name">Tue</div><div class="day-time work">Draft review</div><h4>First artifacts</h4><p>Every intern opens a scoped draft PR or posts an exact <strong>BLOCKED</strong> update; paired reviews cover authority, replay, partial failure, privacy, UX, and model abstention.</p></div>
                         <div class="day"><div class="day-name">Wed</div><div class="day-time">Integration lab</div><h4>Integrate + render</h4><p>Enforce the contract-change cutoff, integrate eligible lanes, render desktop/mobile recovery states, and preserve exact native/source boundaries.</p></div>
                         <div class="day"><div class="day-name">Thu</div><div class="day-time work">Red-team gate</div><h4>Attack, repair, evaluate</h4><p>Repair P0/P1 and false-green defects; run authorization, replay, concurrency, binding, redaction, recovery, and eligible model/data gates without weakening thresholds.</p></div>
@@ -1501,7 +1498,7 @@ cd es-intern-freshlens
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/156">Lezhi #156</a>:</strong> signature/key contract, <code>rc0</code>, freeze coordination, setup and blocker rollup; Ed25519 only if its dependency and compatibility contract are ready.</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/157">Lisa #157</a>:</strong> signed decision binding, tamper/replay/retry/anchor proof, and recipe approval package.</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/158">Jinming #158</a>:</strong> frozen host adapter, server-derived state/role/store mapping, integration sequence, and recipe interface.</li>
-                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/159">Ziyun #159</a>:</strong> rendered desktop/mobile accessibility and error recovery; native mapping only with exact repository, commit, seam, and access.</li>
+                        <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/159">Ziyun #159</a>:</strong> rendered desktop/mobile accessibility and error recovery; native mapping only with exact repository, commit, seam, and access. Never reconnect the retired immediate-return flow.</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/160">Tony #160</a>:</strong> privilege, replay, conflict, concurrency, partial-failure, restart, dependency, and test-validity attacks.</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/161">Bill #161</a>:</strong> privacy-safe correlation, logs, audit/report lineage, metrics, recovery, and rollback runbook.</li>
                         <li><strong><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/162">Yizhou #162</a>:</strong> deterministic final gate orchestrator, work-sync closeout, and independent model/UX reruns.</li>
