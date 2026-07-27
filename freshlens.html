@@ -57,7 +57,7 @@
             -webkit-font-smoothing: antialiased;
         }
         a { color: var(--accent); }
-        a:focus-visible, .back-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+        a:focus-visible, .back-link:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
         .skip-link {
             position: fixed; top: 0.5rem; left: 0.5rem; z-index: 200;
             transform: translateY(-180%); padding: 0.6rem 0.9rem;
@@ -290,7 +290,7 @@
             <span class="hero-tag">Claude API</span>
             <span class="hero-tag">JavaScript</span>
         </div>
-        <hr class="freshness-rule hero-rule">
+        <hr class="freshness-rule hero-rule" aria-hidden="true">
     </div>
 </div>
 
@@ -440,7 +440,7 @@
                 <li><strong>Acknowledge the lane in GitHub.</strong> By the Monday noon ET checkpoint, each owner comments on their assigned issue <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/156" target="_blank" rel="noopener">#156</a>&ndash;<a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/163" target="_blank" rel="noopener">#163</a> with file scope, artifact, consumer, reviewer, command, dependency, and canonical status; Lezhi links the acknowledgements and blockers in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">#164</a>. By Tuesday noon, open a scoped draft PR of no more than 300 changed lines with a negative test, or post an exact <code>BLOCKED</code> update.</li>
             </ol>
         </div>
-        <p class="status-snapshot"><strong>Plan snapshot &mdash; July 27, 2026 at 03:20 UTC.</strong> PR #167 and draft PRs #168&ndash;#172 each have 5/5 successful checks and zero submitted reviews. The drafts hold the sub-300-line validator, mixed-status <code>rc0</code>, and Monday packet stack; each still needs its requested substantive human review. Issues #156&ndash;#164 remain open. Bill posted the first complete owner acknowledgement on <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/161" target="_blank" rel="noopener">#161</a>; seven of eight owner lanes and the #164 rollup still have no acknowledgement comment. The plan remains <code>INCONCLUSIVE</code>.</p>
+        <p class="status-snapshot"><strong>Plan snapshot &mdash; July 27, 2026 at 12:05 UTC.</strong> The Week 7 plan <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/167" target="_blank" rel="noopener">#167</a> is merged with approvals from Jinming and Ziyun, and draft #170 is approved by the same two reviewers. Russ posted Windows-verified PASS reviews on #168, #169, and #171; each pre-merge ask is applied on its branch with 5/5 checks green, awaiting his re-verify. #172 and Russ&rsquo;s Windows work-sync fix <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/173" target="_blank" rel="noopener">#173</a> still need review. Three of eight owner lanes are acknowledged &mdash; Bill <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/161" target="_blank" rel="noopener">#161</a>, Russ <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/162" target="_blank" rel="noopener">#162</a>, Ziyun <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/159" target="_blank" rel="noopener">#159</a> &mdash; while lanes #156&ndash;#158, #160, #163 and the #164 rollup linking remain open. The plan remains <code>INCONCLUSIVE</code> until every lane is acknowledged and the stack completes review. PR heads, checks, reviews, and acknowledgement counts can change after this time.</p>
         <h2 class="section-heading">Why this goal matters</h2>
         <div class="pillars">
             <div class="pillar"><div class="num">S</div><h3>For shoppers</h3><p>Make every outcome understandable, bounded, recoverable, and human-reviewed. Prove the evidence and decision path without implying a model guarantee or that money moved.</p></div>
@@ -453,7 +453,7 @@
             <div class="pillar"><div class="num">C</div><h3>Conditional</h3><p>Ed25519, native mapping, and CV/OOD/evidence/recipe evaluation proceed only when their contract, access, evaluator, and authorized exact-hash inputs are present. A missing dependency blocks only its consuming lane.</p></div>
             <div class="pillar"><div class="num">B</div><h3>Carry forward</h3><p>Keep native distribution, model promotion, general OOD/multi-item claims, recipe serving, empirical-photo claims, durability, external trust, managed integration, issuance, and unprobed publication <code>BLOCKED</code>.</p></div>
         </div>
-        <div class="status-callout"><strong><code>rc0</code> is CODE-SHIPPED-NOT-VERIFIED.</strong> Draft <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/171" target="_blank" rel="noopener">PR #171</a> binds clean source <code>b6f9665</code>, validates locally, and records only the deterministic core loop and frozen host contract as <code>VERIFIED</code>. Its overall status remains <code>BLOCKED</code>; manual security, rendered, native, data/model, durability, external trust, issuance, publication, human review, and owner acknowledgements are not complete.</div>
+        <div class="status-callout"><strong><code>rc0</code> is CODE-SHIPPED-NOT-VERIFIED.</strong> Draft <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/171" target="_blank" rel="noopener">PR #171</a> binds clean source <code>b6f9665</code>, validates locally, and records only the deterministic core loop and frozen host contract as <code>VERIFIED</code>. Its overall status remains <code>BLOCKED</code>; manual security, rendered, native, data/model, durability, external trust, issuance, human review, and owner acknowledgements are not complete. Hub publication itself completed on July 27 &mdash; this page is served from the merged, byte-verified revision.</div>
         <h2 class="section-heading">Monday through Friday gates</h2>
         <div class="ownership-grid">
             <div class="owner-task"><h3>Monday <span>review first, then freeze</span></h3><p>First demo and review the Week 6 baseline from clean <code>b6f9665</code>. Then create and validate <code>rc0</code> separately, pin file drivers, consumers, reviewers, commands, artifacts, dependencies, result schema, and failure vocabulary, and collect owner acknowledgements in #156&ndash;#164. An unresolved dependency blocks only its consuming lane.</p></div>
@@ -520,8 +520,8 @@
                         </tr>
                         <tr>
                             <td>Website publication</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>Hub PR #10 is preview-only. Production still serves the older Week 6 revision. Publication remains blocked pending an exact-head approval, protected merge, production deployment, and post-deploy live probes.</td>
+                            <td><span class="status-label verified">VERIFIED</span></td>
+                            <td>Hub <a href="https://github.com/LawrenceHua/es-internship-hub/pull/10" target="_blank" rel="noopener">PR #10</a> was approved on its exact head and merged as <code>f6f0f4e</code> on July 27; post-deploy probes confirmed all four production pages byte-identical to that revision at 11:50 UTC. This page is that deployment. Publication proves the hub is live, not any FreshLens app capability.</td>
                         </tr>
                     </tbody>
                 </table>
