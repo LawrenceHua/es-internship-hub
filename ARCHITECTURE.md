@@ -12,10 +12,11 @@ and date.
 
 ## Pages
 
-- **`index.html`** — program overview, eight-week schedule, current Week 7 goal, Monday sequence,
-  owner/issue map, evidence snapshot, and links to the detailed project board.
+- **`index.html`** — program overview, eight-week schedule, expanded Week 8 automation/app lab,
+  current truth gate, evidence snapshot, and collapsed historical week records.
 - **`freshlens.html`** — FreshLens product framing, local claim-loop boundary, current Week 7/8
-  convergence plan, readiness matrix, owner lanes, and collapsed historical Week 6 record.
+  truth, guarded agent factory, iPhone/model boundary, readiness matrix, owner lanes, and collapsed
+  historical Week 6 record.
 - **`provenance.html`** — research reference for signed decision evidence. It explicitly separates
   local binding/mock-anchor proof from blocked durability and external-trust work.
 - **`w1.html`** — beginner Week 1 tutorial with copy controls, persisted step progress, and an
@@ -63,11 +64,19 @@ verify the deployed revision and live URLs separately.
 - CSS tokens and components are duplicated across page-local style blocks. Shared visual changes
   must be checked on all affected pages.
 - `index.html` and `freshlens.html` intentionally repeat the current goal at different detail
-  levels. Keep the Monday order, deadlines, canonical status vocabulary, owner map, and source
-  revision consistent between them.
+  levels. Keep the Day 1 truth gate, Tuesday/Thursday team sessions, Friday handoff, canonical
+  status vocabulary, issue state, source revision, and automation authority boundaries consistent.
 - Historical Week 6 material is preserved inside labeled disclosures. Current Week 7/8 instructions
-  supersede it.
+  supersede it; Week 7 is also collapsed on the program overview once Week 8 begins.
+- **`scripts/verify_static_html.py`** — deterministic, network-free validation for required page
+  metadata, duplicate IDs, and local links. The agent-factory recipe invokes this checked-in file;
+  it does not execute inline interpreter code.
 - Never infer native, TestFlight, rendered-product, model/data, recipe, durability, issuance,
   staging, or production readiness from a green static-site preview.
+- Agents return bounded `ACTION`, exact `EVIDENCE`, and explicit `REFUSAL` outputs. They do not
+  silently mutate a PRD, promote a model, merge, deploy, publish, spend, or issue value.
+- Simulator evidence may cover install, launch, navigation, permissions, offline/retry messaging,
+  and retake states. Camera capture, hardware performance, thermals, archive lineage, and real-device
+  model behavior require separately identified physical-device evidence.
 - Deployment is repository-connected and configured outside this source tree. Preview success,
   protected merge, production deployment, and post-deploy probes are separate gates.

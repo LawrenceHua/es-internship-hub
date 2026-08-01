@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ES AI Internship 2026</title>
-    <meta name="description" content="An 8-week, AI-first summer internship building and validating FreshLens, a whole-scene produce and evidence-loop prototype.">
+    <meta name="description" content="Week 8 of the ES AI internship: reconcile FreshLens truth, build guarded automation, test the shopper app, and hand off evidence.">
     <meta name="theme-color" content="#1a3c34">
     <link rel="canonical" href="https://es-internship-hub.vercel.app/">
     <!-- Social preview (Open Graph + Twitter) -->
@@ -133,8 +133,28 @@
             font-size: 0.82rem; font-weight: 700; color: var(--accent);
             text-decoration: none; padding: 0.3rem 0.6rem;
             background: var(--accent-light); border-radius: 6px;
-            white-space: nowrap;
+            white-space: nowrap; min-height: 44px;
+            display: inline-flex; align-items: center;
         }
+
+        .current-strip { background: #11221d; color: #fff; border-top: 1px solid rgba(255,255,255,0.1); }
+        .current-strip-inner {
+            max-width: 1120px; margin: 0 auto; padding: 1rem 2rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+        }
+        .current-strip-label {
+            display: block; margin-bottom: 0.18rem; color: #a5d9c4;
+            font-family: var(--mono); font-size: 0.66rem; font-weight: 700;
+            letter-spacing: 0.06em; text-transform: uppercase;
+        }
+        .current-strip p { font-size: 0.88rem; line-height: 1.5; color: rgba(255,255,255,0.8); }
+        .current-strip strong { color: #fff; }
+        .current-strip a {
+            min-height: 44px; display: inline-flex; align-items: center; flex-shrink: 0;
+            color: #fff; font-size: 0.82rem; font-weight: 700; text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.35); border-radius: 7px; padding: 0.45rem 0.8rem;
+        }
+        .current-strip a:hover { border-color: #fff; }
 
         /* ── Hero ── */
         .hero {
@@ -310,7 +330,7 @@
             display: inline-flex; align-items: center; gap: 0.35rem;
             color: var(--accent); text-decoration: none;
             font-weight: 600; font-size: 0.85rem;
-            transition: gap 0.15s;
+            transition: gap 0.15s; min-height: 44px;
         }
         .card-link:hover { gap: 0.55rem; }
         .card-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
@@ -407,7 +427,11 @@
 
         .cadence-label { font-size: 0.82rem; color: var(--text-secondary); font-weight: 500; }
         .cadence-desc { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 0.3rem; line-height: 1.4; }
-        .cadence-link { display: inline-block; margin-top: 0.55rem; font-family: var(--mono); font-size: 0.62rem; font-weight: 500; color: var(--accent); text-decoration: none; }
+        .cadence-link {
+            display: inline-flex; align-items: center; min-height: 44px; margin-top: 0.35rem;
+            font-family: var(--mono); font-size: 0.62rem; font-weight: 500;
+            color: var(--accent); text-decoration: none;
+        }
         .cadence-link:hover { text-decoration: underline; }
         .cadence-link::after { content: ""; }
 
@@ -442,6 +466,7 @@
             display: flex;
             align-items: center;
             gap: 1.1rem;
+            min-height: 64px;
         }
         .week > summary::-webkit-details-marker { display: none; }
 
@@ -517,7 +542,10 @@
 
         .resource-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem 1.5rem; }
         .resource-list li { font-size: 0.82rem; line-height: 1.4; }
-        .resource-list a { color: var(--accent); text-decoration: none; font-weight: 500; }
+        .resource-list a {
+            color: var(--accent); text-decoration: none; font-weight: 500;
+            display: inline-flex; align-items: center; min-height: 44px; padding: 0.25rem 0;
+        }
         .resource-list a:hover { text-decoration: underline; }
         .resource-list .tag {
             font-family: var(--mono); font-size: 0.56rem; font-weight: 500;
@@ -538,7 +566,10 @@
         .do-now li { color: var(--text-secondary); font-size: 0.86rem; margin: 0.3rem 0; }
         .status-snapshot { margin: 0 0 0.85rem; font-family: var(--mono); font-size: 0.72rem; color: var(--text-tertiary); }
         .week6-details { margin: 1rem 0; border-top: 1px solid var(--border); padding-top: 0.75rem; }
-        .week6-details > summary { color: var(--primary); font-size: 0.78rem; font-weight: 700; cursor: pointer; }
+        .week6-details > summary {
+            color: var(--primary); font-size: 0.78rem; font-weight: 700; cursor: pointer;
+            min-height: 44px; display: flex; align-items: center;
+        }
         .week6-details[open] > summary { margin-bottom: 0.75rem; }
 
         .codeline {
@@ -678,6 +709,14 @@
             .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
             .footer-credits { justify-content: center; }
             .section { padding: 3.5rem 0; }
+            nav { padding: 0 1rem; }
+            .nav-inner { height: 64px; }
+            .current-strip-inner { padding: 1rem 1.25rem; align-items: flex-start; flex-direction: column; gap: 0.65rem; }
+            .current-strip a { width: 100%; justify-content: center; }
+            .container { padding: 0 1.25rem; }
+            .week > summary { padding: 1rem; gap: 0.8rem; }
+            .week-body { padding: 0.35rem 1rem 1rem; }
+            .week-dates { padding-left: 3.3rem; }
         }
     </style>
 </head>
@@ -705,7 +744,7 @@
             <li><a href="#tools">Tools</a></li>
             <li><a href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
-        <a class="nav-week-link" href="#week-7-overview">This week</a>
+        <a class="nav-week-link" href="#week-8-overview">Week 8</a>
     </div>
 </nav>
 
@@ -737,6 +776,13 @@
     </div>
 </div>
 
+<aside class="current-strip" aria-label="Current Week 8 status">
+    <div class="current-strip-inner">
+        <p><span class="current-strip-label">Week 8 &middot; starts BLOCKED</span><strong>Truth before automation:</strong> there is no valid <code>rc1</code> on the fetched refs. Day 1 reconciles the exact source, open work, app path, and evidence before any agent acts.</p>
+        <a href="#week-8-overview">Open the hands-on plan &darr;</a>
+    </div>
+</aside>
+
 <!-- Project -->
 <div class="section" id="project">
     <div class="container">
@@ -746,7 +792,7 @@
         </div>
 
         <p class="project-intro">
-            <strong>FreshLens</strong> is the target: point a camera at a fridge, basket, or produce shelf and score supported items in one scene. The repository currently proves a local human-review claim loop and fallback scanner behavior; representative detector, model, recipe, native, and production evidence remain blocked.
+            <strong>FreshLens</strong> is the target: point a camera at a fridge, basket, or produce shelf and score supported items in one scene. The repository proves a local human-review claim loop. The clean-install scanner path, representative detector/model quality, recipe serving, native lineage, and production evidence remain <strong>BLOCKED</strong> behind their own gates.
         </p>
 
         <div class="pillars-grid">
@@ -793,14 +839,15 @@
     <div class="container">
         <div class="section-header">
             <h2>Current Evidence Snapshot</h2>
-            <p>Probe-bound facts as of July 26, 2026; no production-readiness inference.</p>
+            <p>Repository and CI facts observed August 1, 2026; no app, device, model, or deployment inference.</p>
         </div>
         <div class="stats-row">
-            <div class="stat-card"><div class="stat-value">16/16</div><div class="stat-label">Offline Demo</div></div>
-            <div class="stat-card"><div class="stat-value">8/8</div><div class="stat-label">Historical Device Rows</div></div>
-            <div class="stat-card"><div class="stat-value">OFF</div><div class="stat-label">Auto Approval</div></div>
-            <div class="stat-card"><div class="stat-value">BLOCKED</div><div class="stat-label">Model + Data Release</div></div>
+            <div class="stat-card"><div class="stat-value">4dda9c4</div><div class="stat-label">FreshLens main</div></div>
+            <div class="stat-card"><div class="stat-value">6/6</div><div class="stat-label">GitHub checks</div></div>
+            <div class="stat-card"><div class="stat-value">2267</div><div class="stat-label">CI tests passed</div></div>
+            <div class="stat-card"><div class="stat-value">BLOCKED</div><div class="stat-label">Week 8 candidate</div></div>
         </div>
+        <p class="status-snapshot"><strong>Run 30627066742:</strong> 2,267 passed, 23 skipped, 1 warning, plus 56/56 structural checks. This is <strong>VERIFIED</strong> CI/source-harness evidence only. Seven of issues #156&ndash;#164 remain open (#158 and #162 are closed); all eight handles commented on #164, but its evidence rows remain incomplete. Eleven pull requests are open.</p>
     </div>
 </div>
 
@@ -838,7 +885,7 @@
                 <div class="phase-number">4</div>
                 <h3>Ship &amp; Extend</h3>
                 <div class="phase-weeks">Weeks 7&ndash;8</div>
-                <p>Harden trust and integration seams, freeze one traceable candidate, and present exact results and remaining blocks on Demo Day.</p>
+                <p>Converge the evidence, build guarded automation, exercise the shopper app, and hand off exact results and remaining blocks.</p>
             </div>
         </div>
     </div>
@@ -1120,7 +1167,7 @@ cd es-intern-freshlens
 
             <!-- PROJECT BAND -->
             <div class="project-band">
-                <strong>Weeks 3&ndash;8 &mdash; the ES project.</strong> The whole cohort now builds <strong>FreshLens</strong> in the starter repo, using everything from the first two weeks. Week 3 verifies the integrated codebase and sets the product direction; Weeks 4&ndash;7 build and test slices; Week 8 freezes and presents.
+                <strong>Weeks 3&ndash;8 &mdash; the ES project.</strong> The whole cohort builds <strong>FreshLens</strong> in the starter repo, using everything from the first two weeks. Week 3 verifies the integrated codebase and sets the product direction; Weeks 4&ndash;7 build and test slices; Week 8 reconciles truth, builds guarded automation, exercises the app, and hands off.
                 <span class="project-band-links">
                     <a href="https://github.com/LawrenceHua/es-intern-freshlens" class="card-link" target="_blank" rel="noopener">Starter repo
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg></a>
@@ -1449,11 +1496,11 @@ cd es-intern-freshlens
             </details>
 
             <!-- WEEK 7 -->
-            <details class="week" id="week-7-overview" open>
+            <details class="week" id="week-7-overview">
                 <summary>
                     <span class="week-num is-ship">W7</span>
                     <span class="week-head">
-                        <span class="week-title">One honest, evidence-backed <code>rc1</code> <span class="phase-tag">Converge &amp; Prove</span></span>
+                        <span class="week-title">Week 7 closeout record <span class="phase-tag">Historical</span></span>
                         <span class="week-obj">Preserve the human-review core on one clean commit, prove its highest-risk trust and recovery boundaries, and name every unavailable dependency.</span>
                     </span>
                     <span class="week-dates">Jul 27&ndash;31</span>
@@ -1531,46 +1578,76 @@ cd es-intern-freshlens
             </details>
 
             <!-- WEEK 8 -->
-            <details class="week">
+            <details class="week" id="week-8-overview" open>
                 <summary>
                     <span class="week-num is-ship">W8</span>
                     <span class="week-head">
-                        <span class="week-title">Integration, Freeze &amp; Demo Day <span class="phase-tag">Demo Day</span></span>
-                        <span class="week-obj">Freeze one traceable candidate, run the full quality matrix, record a reproducible demo, and hand off exact evidence and limitations on August 7.</span>
+                        <span class="week-title">Automation Factory + App Handoff <span class="phase-tag is-project">Current</span></span>
+                        <span class="week-obj">Reconcile the truth, build guarded agents with humans in control, exercise the real shopper app where safe, and hand off reproducible evidence.</span>
                     </span>
                     <span class="week-dates">Aug 3&ndash;7</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
-                    <div class="day-grid">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Feature freeze</h4><p>Reconcile exact commits, builds, contract, model and dataset hashes, pull requests, device evidence, and blockers. After noon, accept only release-critical fixes and evidence corrections.</p></div>
-                        <div class="day"><div class="day-name">Tue</div><div class="day-time work">Quality matrix</div><h4>Verify the frozen candidate</h4><p>Run core, security, reliability, rendered browser, native simulator, model/data, operations, clean-clone, and backup gates on the exact candidate.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Authorization gate</div><h4>Native beta + devices</h4><p>Only an authorized, clean, source-linked archive can enter the private tester group. Otherwise native status remains <strong>BLOCKED</strong>; older builds test only the screens they contain.</p></div>
-                        <div class="day"><div class="day-name">Thu</div><div class="day-time work">Evidence lock</div><h4>Record + rehearse</h4><p>Run the privacy-safe backup on a second environment, record the joined story and failure recovery, repair only P0/P1 defects, and freeze the release manifest.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Demo Day + handoff</h4><p>Each intern presents contribution, negative proof, limitation, and next owner. Deliver the manifest, runbook, recording, contribution ledger, and retrospective.</p></div>
+                    <div class="deliverable blocked spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Week 8 starts BLOCKED pending truth reconciliation.</strong> FreshLens <code>main</code> is <a href="https://github.com/LawrenceHua/es-intern-freshlens/commit/4dda9c42688819da8fd66e93c88b6ccbc658e05f" target="_blank" rel="noopener"><code>4dda9c4</code></a>. CI run <a href="https://github.com/LawrenceHua/es-intern-freshlens/actions/runs/30627066742" target="_blank" rel="noopener"><code>30627066742</code></a> has five successful jobs with 2,267 passed, 23 skipped, 1 warning, and 56/56 structural checks; separate work-sync run <a href="https://github.com/LawrenceHua/es-intern-freshlens/actions/runs/30644087642" target="_blank" rel="noopener"><code>30644087642</code></a> has one successful generate job at the same SHA. That proves only CI/source-harness behavior. No valid <code>rc1</code> was found on the fetched refs. Eleven PRs are open; PR #175 is conflicted, has changes requested, and references obsolete <code>rc0</code> evidence.</span>
                     </div>
-                    <p class="week-sub">Resources</p>
+                    <div class="do-now">
+                        <h4>Day 1 truth gate &mdash; nothing automates around a false baseline</h4>
+                        <ol>
+                            <li>Pin source, branch, open PRs, issue state, app build, model/data hashes, live dependencies, and the command or probe behind every claim.</li>
+                            <li>Reconcile #156&ndash;#164: #158 and #162 are closed; the other seven lanes remain open. All eight handles commented on #164, but incomplete evidence rows stay <strong>BLOCKED</strong> or <strong>INCONCLUSIVE</strong>.</li>
+                            <li>Publish one read-only truth ledger using only <strong>VERIFIED</strong>, <strong>CODE-SHIPPED-NOT-VERIFIED</strong>, <strong>BLOCKED</strong>, and <strong>INCONCLUSIVE</strong>. Assign an owner and next probe to every non-verified row.</li>
+                        </ol>
+                    </div>
+                    <div class="day-grid">
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">Truth lab</div><h4>Reconcile before building</h4><p>Run the Day 1 gate from a clean checkout. Reproduce one success and one failure, then freeze the ledger and bounded Week 8 lanes.</p></div>
+                        <div class="day"><div class="day-name">Tue</div><div class="day-time">Team session</div><h4>Build the agent factory</h4><p>Pair each intern with one guarded agent lane. Implement read-only discovery, bounded proposals, deterministic checks, and refusal paths; a human reviews every write.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">iPhone + model lab</div><h4>Build, install, scan, explain</h4><p>Build the real shopper app and exercise simulator-safe states. Keep camera, thermal, hardware, archive-lineage, and physical-device claims separate. Design for a quick on-device model and a slower, more accurate guarded path without promoting either.</p></div>
+                        <div class="day"><div class="day-name">Thu</div><div class="day-time">Team session</div><h4>Attack the closed loop</h4><p>Inject stale PRs, missing models, bad photos, offline service, replay, wrong authority, and partial writes. Repair false greens, lock the evidence, and rehearse the fallback.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">Demo + handoff</div><h4>One visual, one flow</h4><p>Give a concise 2&ndash;3 minute demo: action, evidence, refusal, limitation, and next owner. Deliver the runbook, ledger, automation contract, app instructions, and reproducible backup.</p></div>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Scanner lab boundary:</strong> source and live-registry inspection show that the 4.2 clean-install readiness path requires a complete four-artifact stack and that the live stack is incomplete, so the scanner path remains <strong>BLOCKED</strong>. This is not physical-iPhone proof. The simulator may verify install, launch, navigation, permissions, offline messaging, retry, and retake states; only an exact source-linked physical build can verify camera capture, hardware performance, thermals, and real-device model behavior.</span>
+                    </div>
+                    <p class="week-sub">Guarded automation factory &mdash; agents propose, deterministic gates verify, humans decide</p>
+                    <ul class="resource-list">
+                        <li><strong>Truth router:</strong> resolves the canonical PRD, business/model contract, source SHA, and status ledger; conflicting inputs produce a refusal, never a silent rewrite.</li>
+                        <li><strong>Shopper + iOS QA:</strong> builds test plans, simulator matrices, accessibility probes, and physical-device packets without substituting one surface for another.</li>
+                        <li><strong>Scanner + ML:</strong> inventories the quick/on-device and slower/accurate paths, dataset lineage, OOD/calibration gates, and model-card evidence. It cannot promote a model.</li>
+                        <li><strong>Data + XFS:</strong> validates consent, labels, splits, leakage, metrics, drift, and freshness-score contracts before any training or serving proposal.</li>
+                        <li><strong>Product + marketplace:</strong> maps shopper decisions, produce sorting, inventory, pricing, and merchant-to-shopper discovery into PRD proposals without mutating ground truth.</li>
+                        <li><strong>Adversarial verifier:</strong> starts default-REFUTED, reruns exact commands, checks evidence age/identity, and blocks deploy, publication, or promotion without the named human authority.</li>
+                    </ul>
+                    <div class="deliverable spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Every agent returns the same three-part contract:</strong> <code>ACTION</code> names the bounded next step and owner; <code>EVIDENCE</code> names the exact source, command, artifact, timestamp, and status; <code>REFUSAL</code> names the invariant, missing authority, or failed gate. Agents never silently mutate a PRD, auto-promote a model, merge, deploy, publish, or spend.</span>
+                    </div>
+                    <p class="week-sub">Week 8 working resources</p>
                     <ul class="resource-list">
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/WEEK-08.md" target="_blank" rel="noopener">Week 8 &mdash; freeze, verify, demonstrate, and hand off</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md" target="_blank" rel="noopener">Final quality matrix</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/RELEASE-MANIFEST-2026-08-07.md" target="_blank" rel="noopener">Release-manifest evidence contract</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">All-team evidence ledger #164</a></li>
                         <li><a href="freshlens.html#final-convergence">FreshLens convergence board</a></li>
                     </ul>
                     <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
-                        <span><strong>Truth boundary:</strong> a human-approved amount is not a refund or payment. Auto approval remains off. Native, CV/OOD, recipe, durability, external trust, issuance, managed deployment, and website publication keep separate statuses until their own current gates pass.</span>
+                        <span><strong>Human authority boundary:</strong> a human-approved amount is not a refund or payment. Auto approval remains off. No agent may change the canonical product contract, turn an advisory model into a guarantee, promote a model, merge code, deploy, publish, or issue value. Each surface keeps its own current evidence gate.</span>
                     </div>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> one traceable closeout candidate, full evidence matrix, reproducible backup, final demo, contribution ledger, runbook, and handoff with a named owner/action for every unfinished capability.</span>
+                        <span><strong>Friday handoff:</strong> a truth-reconciled candidate decision, agent contracts and refusal tests, iPhone/simulator evidence matrix, model/data ledger, 2&ndash;3 minute demos, reproducible backup, contribution ledger, runbook, and named owner/action for every unfinished capability.</span>
                     </div>
                     <div class="skills">
-                        <span class="skill-tag">Release evidence</span>
-                        <span class="skill-tag">Clean-clone verification</span>
-                        <span class="skill-tag">Failure recovery</span>
-                        <span class="skill-tag">Presenting technical work</span>
-                        <span class="skill-tag">Demo storytelling</span>
-                        <span class="skill-tag">Retrospectives</span>
+                        <span class="skill-tag">Agent contracts</span>
+                        <span class="skill-tag">Human-in-the-loop automation</span>
+                        <span class="skill-tag">iOS simulator testing</span>
+                        <span class="skill-tag">Physical-device evidence</span>
+                        <span class="skill-tag">ML release gates</span>
+                        <span class="skill-tag">Adversarial verification</span>
                     </div>
                 </div>
             </details>
