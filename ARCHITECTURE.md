@@ -12,11 +12,11 @@ and date.
 
 ## Pages
 
-- **`index.html`** — program overview, eight-week schedule, expanded Week 8 automation/app lab,
-  current truth gate, evidence snapshot, and collapsed historical week records.
+- **`index.html`** — program overview, eight-week schedule, action-first Week 8 app/automation
+  cards, a closed detailed-evidence disclosure, and collapsed historical week records.
 - **`freshlens.html`** — FreshLens product framing, local claim-loop boundary, current Week 7/8
-  truth, guarded agent factory, iPhone/model boundary, readiness matrix, owner lanes, and collapsed
-  historical Week 6 record.
+  truth, action-first install/lead/demo cards, guarded agent factory, iPhone/model boundary, a
+  disclosed readiness matrix, owner lanes, and collapsed historical Week 6 record.
 - **`provenance.html`** — research reference for signed decision evidence. It explicitly separates
   local binding/mock-anchor proof from blocked durability and external-trust work.
 - **`w1.html`** — beginner Week 1 tutorial with copy controls, persisted step progress, and an
@@ -48,15 +48,17 @@ There is no repository-pinned package manifest. The current review workflow uses
 validator plus browser inspection:
 
 ```bash
+python3 scripts/verify_static_html.py
+python3 scripts/verify_week8_contract.py --self-test
 npx --yes html-validate index.html freshlens.html provenance.html w1.html
-python3 ~/.codex/skills/design-quality-gate/scripts/check-ai-tells.py \
-  index.html freshlens.html provenance.html w1.html
 git diff --check
 ```
 
 Also inspect all four pages in a real browser at desktop and mobile widths. Check skip links, main
 landmarks, focus visibility, disclosure targets, table overflow, broken assets, and horizontal
-clipping. Passing these local checks does not prove production publication; after an approved merge,
+clipping. Run design-tell checks against rendered visible copy and screenshots, not raw URL/date
+attributes: immutable names such as `WEEK-08-...` resemble numbered UI labels to simple regex
+linters. Passing these local checks does not prove production publication; after an approved merge,
 verify the deployed revision and live URLs separately.
 
 ## Maintenance boundaries
@@ -69,8 +71,12 @@ verify the deployed revision and live URLs separately.
 - Historical Week 6 material is preserved inside labeled disclosures. Current Week 7/8 instructions
   supersede it; Week 7 is also collapsed on the program overview once Week 8 begins.
 - **`scripts/verify_static_html.py`** — deterministic, network-free validation for required page
-  metadata, duplicate IDs, and local links. The agent-factory recipe invokes this checked-in file;
-  it does not execute inline interpreter code.
+  metadata, duplicate IDs, local links/fragments, and the Week 8 contract. The agent-factory recipe
+  invokes this checked-in file; it does not execute inline interpreter code.
+- **`scripts/verify_week8_contract.py`** — binds both public Week 8 start layers to the immutable
+  curriculum commit and rejects app-status conflation, invented schedules/archive links, demo
+  drift, device-matrix conflation, public-factory assumptions, and forbidden Slack routing. Its
+  self-test mutates high-risk claims and proves the verifier fails closed.
 - Never infer native, TestFlight, rendered-product, model/data, recipe, durability, issuance,
   staging, or production readiness from a green static-site preview.
 - Agents return bounded `ACTION`, exact `EVIDENCE`, and explicit `REFUSAL` outputs. They do not

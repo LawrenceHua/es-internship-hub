@@ -7,6 +7,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from verify_week8_contract import verify as verify_week8_contract
+
 
 class PageAudit(HTMLParser):
     def __init__(self) -> None:
@@ -57,19 +59,27 @@ def verify(root: Path) -> int:
     for page, audit in parsed.items():
         for reference in audit.references:
             parts = urlsplit(reference)
-            if parts.scheme or reference.startswith(
-                ("#", "mailto:", "tel:", "data:")
-            ):
+            if parts.scheme or reference.startswith(("mailto:", "tel:", "data:")):
                 continue
-            target = page.parent / parts.path
+            target = page if not parts.path else page.parent / parts.path
             if parts.path.endswith("/"):
                 target /= "index.html"
             if not target.exists():
                 raise AssertionError(
                     f"missing local target from {page}: {reference}"
                 )
+            if parts.fragment and target.suffix == ".html":
+                target_audit = parsed.get(target)
+                if target_audit is None:
+                    target_audit = PageAudit()
+                    target_audit.feed(target.read_text(encoding="utf-8"))
+                if parts.fragment not in target_audit.ids:
+                    raise AssertionError(
+                        f"missing fragment target from {page}: {reference}"
+                    )
 
-    print(f"VERIFIED: {len(pages)} HTML pages; local targets resolve")
+    verify_week8_contract(root)
+    print(f"VERIFIED: {len(pages)} HTML pages; local targets and fragments resolve")
     return 0
 
 

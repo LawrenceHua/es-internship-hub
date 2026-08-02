@@ -520,6 +520,48 @@
 
         .week-body { padding: 0.4rem 1.4rem 1.4rem; }
 
+        .week8-quick-grid {
+            display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.8rem; margin: 0.4rem 0 1rem;
+        }
+        .week8-quick-card {
+            min-width: 0; padding: 1rem; background: var(--surface-alt);
+            border: 1px solid var(--border); border-radius: 10px;
+        }
+        .week8-quick-card .eyebrow {
+            display: block; margin-bottom: 0.35rem; color: var(--accent);
+            font-family: var(--mono); font-size: 0.64rem; font-weight: 700;
+            letter-spacing: 0.07em; text-transform: uppercase;
+        }
+        .week8-quick-card h4 { font-size: 0.92rem; line-height: 1.35; margin-bottom: 0.35rem; }
+        .week8-quick-card p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.5; }
+        .week8-quick-card a { color: var(--accent); font-weight: 700; text-underline-offset: 0.15em; }
+        .week8-status-line { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.65rem; }
+        .week8-status {
+            display: inline-flex; align-items: center; min-height: 28px; padding: 0.12rem 0.45rem;
+            border-radius: 999px; font-family: var(--mono); font-size: 0.66rem; font-weight: 700;
+        }
+        .week8-status.verified { color: #155b33; background: #dcf5e6; }
+        .week8-status.inconclusive { color: #684b00; background: #fff0bd; }
+        .week8-status.blocked { color: #8d2118; background: #ffe1df; }
+        .week8-guardrails { margin: 0.75rem 0 1rem; display: grid; gap: 0.55rem; }
+        .week8-guardrail {
+            padding: 0.75rem 0.9rem; border-left: 3px solid var(--accent-muted);
+            background: var(--accent-light); border-radius: 0 8px 8px 0;
+            color: var(--text-secondary); font-size: 0.82rem; line-height: 1.5;
+        }
+        .week8-guardrail strong { color: var(--text); }
+        .week8-audit-details {
+            margin-top: 1rem; border: 1px solid var(--border); border-radius: 10px;
+            background: var(--surface);
+        }
+        .week8-audit-details > summary {
+            min-height: 48px; padding: 0.75rem 0.95rem; cursor: pointer;
+            color: var(--primary); font-size: 0.82rem; font-weight: 700;
+        }
+        .week8-audit-details[open] > summary { border-bottom: 1px solid var(--border); }
+        .week8-audit-body { padding: 0 1rem 1rem; }
+
         .day-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.7rem; margin-bottom: 1.25rem; }
 
         .day {
@@ -717,6 +759,8 @@
             .week > summary { padding: 1rem; gap: 0.8rem; }
             .week-body { padding: 0.35rem 1rem 1rem; }
             .week-dates { padding-left: 3.3rem; }
+            .week8-quick-grid { grid-template-columns: 1fr; }
+            .week8-audit-body { padding: 0 0.8rem 0.8rem; }
         }
     </style>
 </head>
@@ -1538,7 +1582,7 @@ cd es-intern-freshlens
                     </div>
                     <div class="deliverable caution spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
-                        <span><strong>Independent gates remain:</strong> rendered UX is <strong>INCONCLUSIVE</strong>. The synthetic freshness check is only <strong>8/10 = 0.80</strong>, exactly at its floor; real-photo CV/OOD quality is not certified. Native/source-linked device integration, recipe serving (0 approved rows), authorized evidence data (0/60), durable multi-worker state, external trust, and money issuance remain <strong>BLOCKED</strong>. Auto approval stays off under <code>GATE: RE-SCOPE</code>.</span>
+                        <span><strong>Independent gates remain:</strong> rendered UX is <strong>INCONCLUSIVE</strong>. The synthetic freshness check is only <strong>8/10 = 0.80</strong>, exactly at its floor; real-photo CV/OOD quality is not certified. Native/source-linked device integration, recipe serving (zero approved rows), authorized evidence data (zero of 60), durable multi-worker state, external trust, and money issuance remain <strong>BLOCKED</strong>. Auto approval stays off under <code>GATE: RE-SCOPE</code>.</span>
                     </div>
                     <p class="week-sub">Every intern owns a build, a break, a review, and a demo</p>
                     <ul class="resource-list">
@@ -1589,6 +1633,41 @@ cd es-intern-freshlens
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
+                    <div class="week8-quick-grid">
+                        <article class="week8-quick-card">
+                            <span class="eyebrow">Start here</span>
+                            <h4>Use the immutable Monday manifest</h4>
+                            <p><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/9e22fba90a8a0f63ec53a404422edc8253e47edc/docs/WEEK-08-START-HERE-2026-08-03.md" target="_blank" rel="noopener">Open the exact-build and automation lab</a>. It pins the FreshLens source, stop gates, owner lanes, and evidence worksheet.</p>
+                        </article>
+                        <article class="week8-quick-card">
+                            <span class="eyebrow">Install and reproduce</span>
+                            <h4>Observe build <code>4.2.0 (2026072807)</code></h4>
+                            <p>Use the <a href="https://testflight.apple.com/join/74ZbJPm6" target="_blank" rel="noopener">TestFlight invitation route</a>. A tester&rsquo;s own acceptance/install remains a separate evidence row. The external What to Test wording is <code>BLOCKED</code> as current product truth. Expect the audited unavailable-scanner state and record it once.</p>
+                            <div class="week8-status-line">
+                                <span class="week8-status verified">Install availability · VERIFIED</span>
+                                <span class="week8-status inconclusive">Source lineage · INCONCLUSIVE</span>
+                                <span class="week8-status blocked">Scanner functionality · BLOCKED</span>
+                            </div>
+                        </article>
+                        <article class="week8-quick-card">
+                            <span class="eyebrow">Lead and sessions</span>
+                            <h4>Bill leads Week 8</h4>
+                            <p>Bill owns daily rollup and final handoff. Bill and Ziyun co-own Tuesday/Thursday records. Each session stays <code>BLOCKED_SCHEDULE</code> until its actual time and invitation are posted in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">#164</a>.</p>
+                        </article>
+                        <article class="week8-quick-card">
+                            <span class="eyebrow">Demo archive</span>
+                            <h4>One link, two to three minutes each</h4>
+                            <p>Bill and Ziyun consolidate Weeks 1–8. The demo archive URL is <code>BLOCKED</code> until the actual shareable link is posted in #164. Each intern shows one action, evidence, refusal, limitation, and next owner.</p>
+                        </article>
+                    </div>
+                    <div class="week8-guardrails">
+                        <p class="week8-guardrail"><strong>Participation is not release proof.</strong> All eight interns execute or pair for learning; the release matrix counts only direct runs on named authorized devices and required risk coverage.</p>
+                        <p class="week8-guardrail"><strong>Factory handoff is local, not public.</strong> The governed lab is at <code>docs/WEEK_08_AGENT_FACTORY_RUNBOOK.md</code> and <code>automation/expired_solutions_factory/</code> in the separate Expired Solutions repository. Intern use stays <code>BLOCKED</code> until an authorized snapshot includes reviewed v2 reducer, alert, and improvement fixtures.</p>
+                        <p class="week8-guardrail"><strong>Slack is fail-closed.</strong> Product, model, release, marketplace, and operations go only to Expired Solutions. Internship coordination may use Expired Solutions or TalkMeUp. AIVD is never permitted. This page does not authorize a send.</p>
+                    </div>
+                    <details class="week8-audit-details">
+                        <summary>Open detailed evidence, daily gates, agent contracts, and launch bridge</summary>
+                        <div class="week8-audit-body">
                     <div class="deliverable blocked spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
                         <span><strong>Week 8 starts BLOCKED pending truth reconciliation.</strong> FreshLens <code>main</code> is <a href="https://github.com/LawrenceHua/es-intern-freshlens/commit/4dda9c42688819da8fd66e93c88b6ccbc658e05f" target="_blank" rel="noopener"><code>4dda9c4</code></a>. CI run <a href="https://github.com/LawrenceHua/es-intern-freshlens/actions/runs/30627066742" target="_blank" rel="noopener"><code>30627066742</code></a> has five successful jobs with 2,267 passed, 23 skipped, 1 warning, and 56/56 structural checks; separate work-sync run <a href="https://github.com/LawrenceHua/es-intern-freshlens/actions/runs/30644087642" target="_blank" rel="noopener"><code>30644087642</code></a> has one successful generate job at the same SHA. That proves only CI/source-harness behavior. No valid <code>rc1</code> was found on the fetched refs. Eleven PRs are open; PR #175 is conflicted, has changes requested, and references obsolete <code>rc0</code> evidence.</span>
@@ -1636,7 +1715,8 @@ cd es-intern-freshlens
                     </div>
                     <p class="week-sub">Week 8 working resources</p>
                     <ul class="resource-list">
-                        <li><strong>Week 8 document:</strong> local candidate prepared; immutable GitHub link is <code>BLOCKED</code> until the FreshLens changes are committed and the cross-repository publication manifest is signed.</li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/9e22fba90a8a0f63ec53a404422edc8253e47edc/docs/WEEK-08.md" target="_blank" rel="noopener">Immutable Week 8 curriculum</a></li>
+                        <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/9e22fba90a8a0f63ec53a404422edc8253e47edc/docs/WEEK-08-START-HERE-2026-08-03.md" target="_blank" rel="noopener">Immutable Monday exact-build manifest</a></li>
                         <li><strong>Shopper Start Here:</strong> the release lead must publish one selected 40-character shopper SHA, version/build, model-manifest SHA, backend release ID, exact TestFlight identity, commands, expected counts, evidence location, and escalation owner before Monday&rsquo;s app lab. The cohort has sandbox access but currently has no canonical-shopper collaborator access, so the lead must either grant least-privilege read access to the selected ref or publish an immutable history-free sandbox snapshot with a signed canonical-SHA mapping. Until then this input is <code>BLOCKED</code>.</li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/4dda9c42688819da8fd66e93c88b6ccbc658e05f/docs/QUALITY-GATES.md" target="_blank" rel="noopener">Pinned predecessor quality matrix</a></li>
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/4dda9c42688819da8fd66e93c88b6ccbc658e05f/docs/RELEASE-MANIFEST-2026-08-07.md" target="_blank" rel="noopener">Pinned predecessor release-manifest contract</a></li>
@@ -1663,6 +1743,8 @@ cd es-intern-freshlens
                         <span class="skill-tag">ML release gates</span>
                         <span class="skill-tag">Adversarial verification</span>
                     </div>
+                        </div>
+                    </details>
                 </div>
             </details>
 

@@ -223,6 +223,47 @@
             min-height: 44px; display: flex; align-items: center;
         }
         .week6-details[open] > summary { margin-bottom: 0.8rem; }
+        .week8-quick-grid {
+            display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.8rem; margin: 0.5rem 0 1rem;
+        }
+        .week8-quick-card {
+            min-width: 0; padding: 1rem; background: var(--surface-alt);
+            border: 1px solid var(--border); border-radius: var(--radius);
+        }
+        .week8-quick-card .eyebrow {
+            display: block; margin-bottom: 0.35rem; color: var(--accent);
+            font-family: var(--mono); font-size: 0.64rem; font-weight: 700;
+            letter-spacing: 0.07em; text-transform: uppercase;
+        }
+        .week8-quick-card h3 { font-size: 0.94rem; line-height: 1.35; margin-bottom: 0.35rem; }
+        .week8-quick-card p { font-size: 0.84rem; line-height: 1.5; }
+        .week8-quick-card a { color: var(--accent); font-weight: 700; text-underline-offset: 0.15em; }
+        .week8-status-line { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.65rem; }
+        .week8-status {
+            display: inline-flex; align-items: center; min-height: 28px; padding: 0.12rem 0.45rem;
+            border-radius: 999px; font-family: var(--mono); font-size: 0.66rem; font-weight: 700;
+        }
+        .week8-status.verified { color: #155b33; background: #dcf5e6; }
+        .week8-status.inconclusive { color: #684b00; background: #fff0bd; }
+        .week8-status.blocked { color: #8d2118; background: #ffe1df; }
+        .week8-guardrails { margin: 0.75rem 0 1rem; display: grid; gap: 0.55rem; }
+        .week8-guardrail {
+            padding: 0.75rem 0.9rem; border-left: 3px solid var(--accent-muted);
+            background: var(--accent-light); border-radius: 0 var(--radius) var(--radius) 0;
+            color: var(--text-secondary); font-size: 0.84rem; line-height: 1.5;
+        }
+        .week8-guardrail strong { color: var(--text); }
+        .week8-audit-details {
+            margin-top: 1rem; border: 1px solid var(--border); border-radius: var(--radius);
+            background: var(--surface);
+        }
+        .week8-audit-details > summary {
+            min-height: 48px; padding: 0.8rem 1rem; cursor: pointer;
+            color: var(--primary); font-size: 0.84rem; font-weight: 700;
+        }
+        .week8-audit-details[open] > summary { border-bottom: 1px solid var(--border); }
+        .week8-audit-body { padding: 0 1rem 1rem; }
 
         .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
         .btn {
@@ -255,6 +296,8 @@
             .wrap { padding: 0 1.25rem; }
             .block { padding: 2.25rem 0; }
             .readiness-panel { padding: 1rem; }
+            .week8-quick-grid { grid-template-columns: 1fr; }
+            .week8-audit-body { padding: 0 0.8rem 0.8rem; }
         }
     </style>
 </head>
@@ -442,7 +485,42 @@
 
     <section class="block" id="final-convergence">
         <h2>Week 8 &mdash; automation factory + app handoff</h2>
-        <p class="lead"><strong>Aug 3&ndash;7.</strong> Week 8 starts <code>BLOCKED</code> pending truth reconciliation. The team will turn seven weeks of work into guarded automations, build and exercise the real shopper app where safe, make the scanner/model boundary visible, and hand off exact evidence plus named Aug 7&ndash;10 release owners. Every intern owns a bounded agent lane, a human review, an adversarial case, and one concise 2&ndash;3 minute demo built around one visual and one flow. Track the joined program in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">all-team issue #164</a>.</p>
+        <p class="lead"><strong>Aug 3&ndash;7.</strong> Start with the exact app/build boundary, perform one bounded action, preserve one refusal, and hand off one reproducible result. Detailed audit evidence and release gates stay available below without crowding the first task.</p>
+        <div class="week8-quick-grid">
+            <article class="week8-quick-card">
+                <span class="eyebrow">Start here</span>
+                <h3>Use the immutable Monday manifest</h3>
+                <p><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/9e22fba90a8a0f63ec53a404422edc8253e47edc/docs/WEEK-08-START-HERE-2026-08-03.md" target="_blank" rel="noopener">Open the exact-build and automation lab</a>. It pins the FreshLens source, stop gates, owner lanes, and evidence worksheet.</p>
+            </article>
+            <article class="week8-quick-card">
+                <span class="eyebrow">Install and reproduce</span>
+                <h3>Observe build <code>4.2.0 (2026072807)</code></h3>
+                <p>Use the <a href="https://testflight.apple.com/join/74ZbJPm6" target="_blank" rel="noopener">TestFlight invitation route</a>. A tester&rsquo;s own acceptance/install remains a separate evidence row. The external What to Test wording is <code>BLOCKED</code> as current product truth. Expect the audited unavailable-scanner state and record it once.</p>
+                <div class="week8-status-line">
+                    <span class="week8-status verified">Install availability · VERIFIED</span>
+                    <span class="week8-status inconclusive">Source lineage · INCONCLUSIVE</span>
+                    <span class="week8-status blocked">Scanner functionality · BLOCKED</span>
+                </div>
+            </article>
+            <article class="week8-quick-card">
+                <span class="eyebrow">Lead and sessions</span>
+                <h3>Bill leads Week 8</h3>
+                <p>Bill owns daily rollup and final handoff. Bill and Ziyun co-own Tuesday/Thursday records. Each session stays <code>BLOCKED_SCHEDULE</code> until its actual time and invitation are posted in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">#164</a>.</p>
+            </article>
+            <article class="week8-quick-card">
+                <span class="eyebrow">Demo archive</span>
+                <h3>One link, two to three minutes each</h3>
+                <p>Bill and Ziyun consolidate Weeks 1–8. The demo archive URL is <code>BLOCKED</code> until the actual shareable link is posted in #164. Each intern shows one action, evidence, refusal, limitation, and next owner.</p>
+            </article>
+        </div>
+        <div class="week8-guardrails">
+            <p class="week8-guardrail"><strong>Participation is not release proof.</strong> All eight interns execute or pair for learning; the release matrix counts only direct runs on named authorized devices and required risk coverage.</p>
+            <p class="week8-guardrail"><strong>Factory handoff is local, not public.</strong> The governed lab is at <code>docs/WEEK_08_AGENT_FACTORY_RUNBOOK.md</code> and <code>automation/expired_solutions_factory/</code> in the separate Expired Solutions repository. Intern use stays <code>BLOCKED</code> until an authorized snapshot includes reviewed v2 reducer, alert, and improvement fixtures.</p>
+            <p class="week8-guardrail"><strong>Slack is fail-closed.</strong> Product, model, release, marketplace, and operations go only to Expired Solutions. Internship coordination may use Expired Solutions or TalkMeUp. AIVD is never permitted. This page does not authorize a send.</p>
+        </div>
+        <details class="week8-audit-details">
+            <summary>Open detailed evidence, daily gates, agent contracts, and launch bridge</summary>
+            <div class="week8-audit-body">
         <div class="do-now">
             <h3>Day 1 truth gate &mdash; no automation before reconciliation</h3>
             <ol>
@@ -548,9 +626,9 @@
             <div class="owner-task"><h3>Lezhi <span>Truth router &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/156" target="_blank" rel="noopener">#156 open</a></span></h3><p>Build the read-only source/PR/issue/evidence router and blocker rollup. Conflicting identities or missing authority must return <code>REFUSAL</code>; Bill and Tony reproduce the result.</p></div>
             <div class="owner-task"><h3>Lisa <span>PRD + binding guardian &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/157" target="_blank" rel="noopener">#157 open</a></span></h3><p>Guard the canonical product/policy contract and immutable decision binding. Produce a reviewable proposal when requirements conflict; never mutate the PRD silently.</p></div>
             <div class="owner-task"><h3>Jinming <span>Host contract input &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/158" target="_blank" rel="noopener">#158 closed</a></span></h3><p>Turn the closed host-adapter work into a contract checker for state, role, store, retries, and error vocabulary. Show one accepted and one rejected integration example.</p></div>
-            <div class="owner-task"><h3>Ziyun <span>Shopper + iOS QA &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/159" target="_blank" rel="noopener">#159 open</a></span></h3><p>Build the browser/simulator/physical-device evidence matrix, accessibility and recovery probes, and app walkthrough. Never substitute simulator proof for camera or real-device model proof.</p></div>
+            <div class="owner-task"><h3>Ziyun <span>Shopper + iOS QA &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/159" target="_blank" rel="noopener">#159 open</a></span></h3><p>Build the browser/simulator/physical-device evidence matrix and co-own the actual Tuesday/Thursday records and one-link demo archive with Bill. Never substitute simulator proof for camera or real-device model proof.</p></div>
             <div class="owner-task"><h3>Tony <span>Adversarial verifier &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/160" target="_blank" rel="noopener">#160 open</a></span></h3><p>Start default-REFUTED and attack stale refs, authority escalation, replay, conflict, partial failure, restart, dependency loss, and false-green tests.</p></div>
-            <div class="owner-task"><h3>Bill <span>Operations agent &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/161" target="_blank" rel="noopener">#161 open</a></span></h3><p>Make evidence privacy-safe and reproducible through correlation, structured logs, report lineage, metrics, recovery, rollback, and explicit partial-source status.</p></div>
+            <div class="owner-task"><h3>Bill <span>Week 8 project leader &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/161" target="_blank" rel="noopener">#161 open</a></span></h3><p>Lead daily rollup and final handoff; coordinate actual session/archive records with Ziyun; and make operations evidence privacy-safe, reproducible, and recoverable.</p></div>
             <div class="owner-task"><h3>Yizhou <span>Gate orchestrator input &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/162" target="_blank" rel="noopener">#162 closed</a></span></h3><p>Package the closed scorecard work as the deterministic factory reducer. It may aggregate lane statuses but cannot upgrade them or infer cross-surface proof.</p></div>
             <div class="owner-task"><h3>Mohan <span>Scanner + ML/data agent &middot; <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/163" target="_blank" rel="noopener">#163 open</a></span></h3><p>Inventory quick/on-device and slower/accurate paths, authorized exact-hash data, OOD/calibration evidence, XFS metrics, and release floors. Missing inputs produce a reproducible blocker, never promotion.</p></div>
         </div>
@@ -562,6 +640,8 @@
             <div class="pillar"><div class="num">8/10</div><h3>Conditional storefront launch</h3><p>No agent can create a release decision. If Apple approves and every exact-build gate remains verified, manually release by Aug 9 noon to allow for Apple&rsquo;s stated propagation window, then verify the storefront and manual production probes on Aug 10.</p></div>
         </div>
         <p class="compact-copy"><strong>Stop rule:</strong> a capability is <code>VERIFIED</code> only with current evidence on its exact source, build, model, or dataset. Otherwise record <code>CODE-SHIPPED-NOT-VERIFIED</code>, <code>BLOCKED</code>, or <code>INCONCLUSIVE</code> with the owner, blocker, next action, and recovery path.</p>
+            </div>
+        </details>
     </section>
 
     <section class="block" id="week-6">
