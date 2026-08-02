@@ -525,7 +525,7 @@
             <h3>Day 1 truth gate &mdash; no automation before reconciliation</h3>
             <ol>
                 <li><strong>Pin the source.</strong> Start from FreshLens <code>main</code> <a href="https://github.com/LawrenceHua/es-intern-freshlens/commit/4dda9c42688819da8fd66e93c88b6ccbc658e05f" target="_blank" rel="noopener"><code>4dda9c4</code></a>. Record branch, worktree, build, model/data hashes, service state, and the command or probe behind each claim.</li>
-                <li><strong>Reconcile the work.</strong> #158 and #162 are closed; #156, #157, #159, #160, #161, #163, and #164 remain open. All eight handles commented on #164, but incomplete evidence rows remain <code>BLOCKED</code> or <code>INCONCLUSIVE</code>. Reconcile all 11 open PRs; do not treat conflicted PR #175 or its obsolete <code>rc0</code> reference as a candidate.</li>
+                <li><strong>Reconcile the work.</strong> #158 and #162 are closed; #156, #157, #159, #160, #161, #163, and #164 remain open. All eight handles commented on #164, but incomplete evidence rows remain <code>BLOCKED</code> or <code>INCONCLUSIVE</code>. Reconcile all 12 open PRs, as rechecked August 2, 2026; do not treat conflicted PR #175 or its obsolete <code>rc0</code> reference as a candidate.</li>
                 <li><strong>Freeze a truth ledger.</strong> No valid <code>rc1</code> was found on the fetched refs. Use only <code>VERIFIED</code>, <code>CODE-SHIPPED-NOT-VERIFIED</code>, <code>BLOCKED</code>, and <code>INCONCLUSIVE</code>; every non-verified row needs an owner, next probe, and refusal reason.</li>
             </ol>
         </div>
