@@ -8,7 +8,8 @@ import re
 from pathlib import Path
 
 
-FRESHLENS_CURRICULUM_SHA = "9e22fba90a8a0f63ec53a404422edc8253e47edc"
+FRESHLENS_CURRICULUM_SHA = "2fc3791d49d42a94ae26652b429e4c0bb4e76f00"
+FRESHLENS_DRAFT_PR_URL = "https://github.com/LawrenceHua/es-intern-freshlens/pull/204"
 MANIFEST_PATH = "docs/WEEK-08-START-HERE-2026-08-03.md"
 TESTFLIGHT_URL = "https://testflight.apple.com/join/74ZbJPm6"
 BUILD = "4.2.0 (2026072807)"
@@ -67,11 +68,13 @@ def contract_errors(pages: dict[str, str]) -> list[str]:
 
         required_quick = (
             TESTFLIGHT_URL,
+            FRESHLENS_DRAFT_PR_URL,
             BUILD,
             "Install availability · VERIFIED",
             "Source lineage · INCONCLUSIVE",
             "Scanner functionality · BLOCKED",
-            "external What to Test wording is <code>BLOCKED</code>",
+            "public beta description and build-specific What to Test copy were corrected",
+            "installed scanner path is still <code>BLOCKED</code>",
             "Bill leads Week 8",
             "Bill and Ziyun",
             "BLOCKED_SCHEDULE",
