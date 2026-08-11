@@ -1618,9 +1618,17 @@ cd es-intern-freshlens
                 </summary>
                 <div class="week-body">
                     <div class="day-grid day-grid-3">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Kickoff &amp; access setup</h4><p>Estate tour, access setup, and lane assignments. Kickoff does not depend on the Aug 10 App Store status &mdash; the audit targets repos and gates, not the store build.</p></div>
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Kickoff &amp; access setup</h4><p>Estate tour, full sandbox access issued (see below), and lane assignments. Kickoff does not depend on the Aug 10 App Store status &mdash; the audit targets repos and gates, not the store build.</p></div>
                         <div class="day"><div class="day-name">Wed</div><div class="day-time"><span class="opt">Optional</span> &middot; 12:00 PM ET</div><h4>Audit checkpoint</h4><p>Progress check on each lane's audit and on Yuepeng's estate-wide cost-telemetry harness (per-subscription/API spend baseline &mdash; no cutting before measuring).</p></div>
                         <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Expectation PRDs due</h4><p>Each lane posts its Expectation PRD &mdash; what "healthy" means, how it's measured, which gate proves it &mdash; plus Yuepeng's estate audit report with the cost baseline.</p></div>
+                    </div>
+                    <div class="deliverable verified spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span><strong>Extension access scope is FULL, in force at kickoff Mon Aug 10:</strong> all 8 extension interns get full <code>read/write</code> on the history-free <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">product sandbox</a> &mdash; not just the interns who already held it from Week 6 &mdash; plus full read on the <a href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">freshlens issue tracker</a> the four lanes below are anchored to. Every lane is open to any intern to claim; no lane sits behind a separate access request. Individual <a href="https://freshlens-proxy.fly.dev/health" target="_blank" rel="noopener">freshlens-proxy</a> keys go out to every active intern at kickoff, not on request. Rationale and options considered are in the sandbox repo's <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/blob/main/docs/decisions/ACCESS-SCOPE-W9-11.md" target="_blank" rel="noopener"><code>ACCESS-SCOPE-W9-11.md</code></a> decision record.</span>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                        <span><strong>Hard limits stay, unchanged by the access upgrade:</strong> full access means full access to the <strong>sandbox</strong> &mdash; the canonical product repository stays out of scope, and no production credentials, secrets, or deploy authority ever reach an intern. Protected <code>main</code> keeps its safety gate: the <code>safety</code> check, one approval, and code-owner review. Every grant auto-revokes <strong>2026-08-30</strong>, and the kill-switch can pull any or all access before then without warning.</span>
                     </div>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
@@ -1755,7 +1763,7 @@ cd es-intern-freshlens
                 <p>Capability registry at 3/19 VERIFIED: extend the closeout orchestrator and build the proposed codebase-digest evidence pack (Yizhou).</p>
             </div>
         </div>
-        <p class="lanes-note">Unpaid, self-directed, evidence-gated continuation of the internship &mdash; no compensation or certificate attaches to a lane. To claim a lane, message Lawrence in Slack by Wed Aug 12.</p>
+        <p class="lanes-note">Unpaid, self-directed, evidence-gated continuation of the internship &mdash; no compensation or certificate attaches to a lane. Every lane already carries full sandbox <code>read/write</code> and a live proxy key issued at kickoff (see <a href="#week-9-overview">Week 9</a>) &mdash; claiming a lane adds your name, not a new access request. To claim a lane, message Lawrence in Slack by Wed Aug 12.</p>
     </div>
 </div>
 
