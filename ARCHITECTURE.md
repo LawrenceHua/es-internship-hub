@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repository is the static public-information hub for the eight-week ES Summer 2026 internship.
+This repository is the static public-information hub for the eight-week core + three-week extension ES Summer 2026 internship.
 It explains the schedule, current FreshLens goal, evidence boundaries, owner lanes, and reference
 material. The FreshLens application itself lives in a separate repository and is not vendored here.
 
@@ -12,7 +12,7 @@ and date.
 
 ## Pages
 
-- **`index.html`** — program overview, eight-week schedule, current Week 7 goal, Monday sequence,
+- **`index.html`** — program overview, eight-week core + three-week extension schedule, current Week 7 goal, Monday sequence,
   owner/issue map, evidence snapshot, and links to the detailed project board.
 - **`freshlens.html`** — FreshLens product framing, local claim-loop boundary, current Week 7/8
   convergence plan, readiness matrix, owner lanes, and collapsed historical Week 6 record.
