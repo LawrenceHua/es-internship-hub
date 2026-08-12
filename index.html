@@ -1611,7 +1611,7 @@ cd es-intern-freshlens
                     <span class="week-num">W9</span>
                     <span class="week-head">
                         <span class="week-title">Audit &amp; Expectations <span class="phase-tag">Extension</span></span>
-                        <span class="week-obj">Audit every lane with agents, build the cost-telemetry harness, and write the per-lane Expectation PRD &mdash; findings only, no fixes yet.</span>
+                        <span class="week-obj">Audit every lane with agents and write the per-lane Expectation PRD &mdash; findings only, no fixes yet.</span>
                     </span>
                     <span class="week-dates">Aug 10&ndash;14</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
@@ -1619,8 +1619,8 @@ cd es-intern-freshlens
                 <div class="week-body">
                     <div class="day-grid day-grid-3">
                         <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Kickoff &amp; access setup</h4><p>Estate tour, full sandbox access issued (see below), and lane assignments. Kickoff does not depend on the Aug 10 App Store status &mdash; the audit targets repos and gates, not the store build.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time"><span class="opt">Optional</span> &middot; 12:00 PM ET</div><h4>Audit checkpoint</h4><p>Progress check on each lane's audit and on Yuepeng's estate-wide cost-telemetry harness (per-subscription/API spend baseline &mdash; no cutting before measuring).</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Expectation PRDs due</h4><p>Each lane posts its Expectation PRD &mdash; what "healthy" means, how it's measured, which gate proves it &mdash; plus Yuepeng's estate audit report with the cost baseline.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time"><span class="opt">Optional</span> &middot; 12:00 PM ET</div><h4>Audit checkpoint</h4><p>Progress check on each lane's audit.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Expectation PRDs due</h4><p>Each lane posts its Expectation PRD &mdash; what "healthy" means, how it's measured, which gate proves it.</p></div>
                     </div>
                     <div class="deliverable verified spaced">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -1638,7 +1638,7 @@ cd es-intern-freshlens
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> per-lane Expectation PRD &mdash; what "healthy" means, how it's measured, which gate proves it &mdash; written into a machine-readable registry (extending the <code>config/closeout_gate_registry_v1.json</code> pattern), plus Yuepeng's estate audit report with a cost baseline. Findings only; no fixes yet.</span>
+                        <span><strong>Deliverable:</strong> per-lane Expectation PRD &mdash; what "healthy" means, how it's measured, which gate proves it &mdash; written into a machine-readable registry (extending the <code>config/closeout_gate_registry_v1.json</code> pattern). Findings only; no fixes yet.</span>
                     </div>
                     <div class="skills">
                         <span class="skill-tag">Estate auditing</span>
@@ -1664,7 +1664,7 @@ cd es-intern-freshlens
                 <div class="week-body">
                     <div class="day-grid day-grid-3">
                         <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Build kickoff</h4><p>Each lane starts its maintainer agent: monitors its gate(s), opens a proposal PR when red, never merges itself. The kill-flag (<code>~/.openclaw/flags/STOP_ES.flag</code>) gets implemented as a real check in each agent's loop this week &mdash; today it's only prose. Umbrella skeleton (registry-read + dispatch stub) starts here.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Evidence bar &middot; 12:00 PM ET</div><h4>Running by Wednesday</h4><p>Every automation must be running unattended by today to clear the &ge;48h evidence bar before Friday. Yuepeng posts before/after cost-routing gate evidence; quality gates green is the hard constraint, the &ge;30% cut is the target, not the gate.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Evidence bar &middot; 12:00 PM ET</div><h4>Running by Wednesday</h4><p>Every automation must be running unattended by today to clear the &ge;48h evidence bar before Friday.</p></div>
                         <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>48h evidence check</h4><p>Each automation has run unattended for &ge;48h with evidence. Status in the four canonical buckets: VERIFIED / CODE-SHIPPED-NOT-VERIFIED / BLOCKED / INCONCLUSIVE.</p></div>
                     </div>
                     <p class="week-sub">Resources</p>
