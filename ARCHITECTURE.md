@@ -1,50 +1,45 @@
-# ES Internship Hub Architecture
+# Internship hub architecture
 
 ## Purpose
 
-This repository is the static public-information hub for the eight-week core + three-week extension ES Summer 2026 internship.
-It explains the schedule, current FreshLens goal, evidence boundaries, owner lanes, and reference
-material. The FreshLens application itself lives in a separate repository and is not vendored here.
+This static hub is the operating brief for the eight-intern refrigerator
+inventory pivot. It explains the Weeks 9–11 outcome, technical boundaries,
+owner lanes, source/access limits, acceptance evidence, and three-week cadence.
+It is not application source or release proof.
 
-The hub is an operational program surface, not release proof. Time-bound issue, pull-request,
-device, model, deployment, and publication claims must remain labeled with their observed source
-and date.
+## Current truth boundary
+
+- The intern product sandbox is an old, history-free snapshot and remains
+  `UNBOUND` until an owner maps it to an exact pivot candidate SHA.
+- All eight interns retain write access to the sandbox and hub for branches,
+  pull requests, and review.
+- Interns have no canonical product repository, production credential,
+  deployment, signing, TestFlight upload, App Store submission, customer data,
+  raw training corpus, or broad inbox authority.
+- Legacy scanner, claim, service-provider, and model code is historical
+  reference only. It does not define the pivot.
 
 ## Pages
 
-- **`index.html`** — program overview, eight-week core + three-week extension schedule, current Week 7 goal, Monday sequence,
-  owner/issue map, evidence snapshot, and links to the detailed project board.
-- **`freshlens.html`** — FreshLens product framing, local claim-loop boundary, current Week 7/8
-  convergence plan, readiness matrix, owner lanes, and collapsed historical Week 6 record.
-- **`provenance.html`** — research reference for signed decision evidence. It explicitly separates
-  local binding/mock-anchor proof from blocked durability and external-trust work.
-- **`w1.html`** — beginner Week 1 tutorial with copy controls, persisted step progress, and an
-  optional timer.
+- `index.html` — current outcome, three-week schedule, eight owner lanes, access
+  boundary, and evidence rules.
+- `freshlens.html` — detailed multi-capture, segmentation/tracking,
+  identity/OOD, condition eligibility, receipt reconciliation, product journey,
+  evaluation, privacy, and source-binding contract.
+- `provenance.html` — archived notice for the retired claim-era research page;
+  it redirects active work to the pivot brief.
+- `w1.html` — historical beginner tutorial, not a current assignment surface.
 
-All pages use relative links for local navigation and link to exact GitHub issues, pull requests,
-commits, and documents when those identities matter.
+## Runtime and verification
 
-## Runtime and assets
-
-- Plain HTML with page-local CSS; there is no framework or build step.
-- `w1.html` contains small client-side JavaScript for copy buttons, local progress persistence, and
-  the optional timer. The other pages are static documents.
-- Fonts load from Google Fonts when network access is available; system fallbacks remain declared.
-- Social-preview PNGs, the SVG favicon, and the Apple touch icon are tracked in this repository.
-- There is no backend, model, API, credential, customer data, or application state in this repo.
-
-Serve the directory locally:
+The hub is plain HTML with page-local CSS and no application backend. Serve it
+locally with:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open `http://127.0.0.1:8000/`.
-
-## Verification
-
-There is no repository-pinned package manifest. The current review workflow uses an ephemeral HTML
-validator plus browser inspection:
+Verify with:
 
 ```bash
 npx --yes html-validate index.html freshlens.html provenance.html w1.html
@@ -53,21 +48,16 @@ python3 ~/.codex/skills/design-quality-gate/scripts/check-ai-tells.py \
 git diff --check
 ```
 
-Also inspect all four pages in a real browser at desktop and mobile widths. Check skip links, main
-landmarks, focus visibility, disclosure targets, table overflow, broken assets, and horizontal
-clipping. Passing these local checks does not prove production publication; after an approved merge,
-verify the deployed revision and live URLs separately.
+Also inspect desktop and mobile widths for clipping, table overflow, keyboard
+focus, landmarks, link targets, and readable first-viewport hierarchy. Passing
+local checks does not prove publication or product readiness.
 
-## Maintenance boundaries
+## Maintenance rules
 
-- CSS tokens and components are duplicated across page-local style blocks. Shared visual changes
-  must be checked on all affected pages.
-- `index.html` and `freshlens.html` intentionally repeat the current goal at different detail
-  levels. Keep the Monday order, deadlines, canonical status vocabulary, owner map, and source
-  revision consistent between them.
-- Historical Week 6 material is preserved inside labeled disclosures. Current Week 7/8 instructions
-  supersede it.
-- Never infer native, TestFlight, rendered-product, model/data, recipe, durability, issuance,
-  staging, or production readiness from a green static-site preview.
-- Deployment is repository-connected and configured outside this source tree. Preview success,
-  protected merge, production deployment, and post-deploy probes are separate gates.
+- Keep `index.html`, `freshlens.html`, and the sandbox Weeks 9–11 plan aligned.
+- Do not replace `UNBOUND` with a candidate claim until the content-addressed
+  source-binding manifest is complete and independently verified.
+- Keep source, model/eval, iOS build, device, backend, deployment, TestFlight,
+  App Store, website publication, and production evidence separate.
+- Any contract, taxonomy, prompt, threshold, model, or candidate-SHA change
+  invalidates affected downstream evidence.
