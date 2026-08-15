@@ -690,7 +690,7 @@
             .nav-links { display: none; }
             .timeline-grid { grid-template-columns: 1fr; }
             .cadence-legend { grid-template-columns: 1fr; }
-            .day-grid { grid-template-columns: 1fr; }
+            .day-grid, .day-grid.day-grid-3 { grid-template-columns: 1fr; }
             .lanes-grid { grid-template-columns: 1fr; }
             .tools-grid { grid-template-columns: 1fr; }
             .week > summary { flex-wrap: wrap; }
@@ -812,7 +812,7 @@
 <div class="section section-alt" id="current-weekend">
     <div class="container">
         <div class="section-header">
-            <h2>Current Week 10/11 coordination &middot; Aug 14&ndash;15</h2>
+            <h2>Current Week 10/11 coordination &middot; Aug 14&ndash;16</h2>
             <p>Actionable sandbox status for the extension. The detailed Weeks 1&ndash;9 schedule below is historical context, not a current work queue.</p>
         </div>
 
@@ -822,17 +822,24 @@
         <div class="deliverable caution spaced">
             <span><strong>INCONCLUSIVE &mdash; individual proxy access:</strong> the proxy health response reports <code>interns: 8</code>, but individual key receipt and authenticated capability access still need explicit evidence. Do not infer either from the health count.</span>
         </div>
+        <div class="deliverable caution spaced">
+            <span><strong>Current documentation candidate &mdash; draft, not merged:</strong> the pinned FreshLens <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/626af3838604367e5a9b510f5796d1b27948b914/START_HERE.md" target="_blank" rel="noopener"><code>START_HERE.md</code></a> and <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/626af3838604367e5a9b510f5796d1b27948b914/README.md" target="_blank" rel="noopener"><code>README.md</code></a> are the immutable current-candidate docs in draft <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/249" target="_blank" rel="noopener">PR #249</a>. They are not on <code>main</code> and do not authorize work by themselves.</span>
+        </div>
         <div class="deliverable blocked spaced">
             <span><strong>BLOCKED &mdash; sandbox review work:</strong> <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/pull/9" target="_blank" rel="noopener">PR #9</a> is open with changes requested. The current claims-routing and ground-truth/data contracts are tracked in <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/14" target="_blank" rel="noopener">#14</a> and <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/15" target="_blank" rel="noopener">#15</a>; each requires its own artifact, reviewer, and evidence.</span>
         </div>
-        <div class="deliverable spaced">
-            <span><strong>CODE-SHIPPED-NOT-VERIFIED &mdash; reviewable branches:</strong> <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/pull/12" target="_blank" rel="noopener">PR #12</a> is approved, has a successful safety check, and remains unmerged. FreshLens <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248</a> has five successful checks but no submitted review; scoped local safety hardening is in progress. Neither state proves a runtime, device, model, deployment, or release surface.</span>
+        <div class="deliverable blocked spaced">
+            <span><strong>BLOCKED &mdash; no unattended Week 10 start:</strong> sandbox <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/pull/12" target="_blank" rel="noopener">PR #12</a> is approved with a successful safety check and remains unmerged. FreshLens <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248</a> has five successful checks and no submitted review, but its current head is not accepted as source-isolation or full-descendant-cleanup proof. Do not start an unattended run until a repaired exact PR #248 head independently verifies both controls <em>and</em> all 8/8 owners post <code>ACK</code> or <code>BLOCKED</code>. None of these states proves a runtime, device, model, deployment, or release surface.</span>
+        </div>
+        <div class="deliverable caution spaced">
+            <span><strong>Name/handle map (identity only, not acknowledgement):</strong> Lezhi/<code>@LezhiFu</code>; Ziyun/<code>@ZiyunGuo0614</code>; Jinming/<code>@JinmingCao0705</code>; Mohan/<code>@MohanLi</code>; Russ/<code>@RussCTGL</code>; Yuntong/<code>@YuntongP</code>; jz/<code>@jz7668-oss</code>; Bill/<code>@6088964333zyk-star</code>. Required PR #248 review pairs from <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/13" target="_blank" rel="noopener">issue #13</a>: Lezhi/Jinming &mdash; claims routing; Ziyun/Russ &mdash; dedup; Mohan/jz &mdash; ground truth; Yuntong/Bill &mdash; kill switch and process cleanup.</span>
         </div>
 
         <div class="project-cta">
             <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/13" class="card-link" target="_blank" rel="noopener">Open the all-eight owner map</a>
-            <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/START_HERE.md" class="card-link secondary" target="_blank" rel="noopener">Read current FreshLens START_HERE</a>
-            <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/README.md" class="card-link secondary" target="_blank" rel="noopener">Read the FreshLens README</a>
+            <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/249" class="card-link secondary" target="_blank" rel="noopener">Review draft FreshLens PR #249</a>
+            <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/626af3838604367e5a9b510f5796d1b27948b914/START_HERE.md" class="card-link secondary" target="_blank" rel="noopener">Read pinned candidate START_HERE</a>
+            <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/626af3838604367e5a9b510f5796d1b27948b914/README.md" class="card-link secondary" target="_blank" rel="noopener">Read pinned candidate README</a>
         </div>
     </div>
 </div>
@@ -842,7 +849,7 @@
     <div class="container">
         <div class="section-header">
             <h2>Historical Evidence Snapshot &middot; July 26</h2>
-            <p>Archived, probe-bound facts from the core program; they are not an Aug 14/15 readiness or production-release inference.</p>
+            <p>Archived, probe-bound facts from the core program; they are not an Aug 14&ndash;16 readiness or production-release inference.</p>
         </div>
         <div class="stats-row">
             <div class="stat-card"><div class="stat-value">16/16</div><div class="stat-label">Offline Demo</div></div>
@@ -1684,17 +1691,20 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num">W10</span>
                     <span class="week-head">
-                        <span class="week-title">Build the Maintainers <span class="phase-tag">Extension</span></span>
-                        <span class="week-obj">Ship one maintainer agent per lane &mdash; propose-only, kill-flag enforced &mdash; and start the umbrella skeleton.</span>
+                        <span class="week-title">Proposed Maintainer Build <span class="phase-tag">Extension</span></span>
+                        <span class="week-obj">A gated proposal for one maintainer agent per lane; no unattended start or evidence clock is authorized yet.</span>
                     </span>
                     <span class="week-dates">Aug 17&ndash;21</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
                     <div class="day-grid day-grid-3">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Build kickoff</h4><p>Each lane starts its maintainer agent: monitors its gate(s), opens a proposal PR when red, never merges itself. The kill-flag (<code>~/.openclaw/flags/STOP_ES.flag</code>) gets implemented as a real check in each agent's loop this week &mdash; today it's only prose. Umbrella skeleton (registry-read + dispatch stub) starts here.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Evidence bar &middot; 12:00 PM ET</div><h4>Running by Wednesday</h4><p>Every automation must be running unattended by today to clear the &ge;48h evidence bar before Friday.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>48h evidence check</h4><p>Each automation has run unattended for &ge;48h with evidence. Status in the four canonical buckets: VERIFIED / CODE-SHIPPED-NOT-VERIFIED / BLOCKED / INCONCLUSIVE.</p></div>
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">Proposed &middot; 12:00 PM ET</div><h4>Safety gate review</h4><p>No unattended maintainer run is authorized. A kill flag alone is not a sufficient safety boundary: the current <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248</a> head is <code>BLOCKED</code> pending repair and independent verification of source isolation and full descendant cleanup, plus 8/8 owner <code>ACK</code>/<code>BLOCKED</code> responses.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Proposed checkpoint &middot; 12:00 PM ET</div><h4>Start only after both gates</h4><p>The proposed bounded build and evidence clock may begin only if an exact repaired PR #248 head has independently passed both safety checks <em>and</em> every owner has posted <code>ACK</code> or <code>BLOCKED</code>. Otherwise this checkpoint remains blocked.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">Proposed &middot; 12:00 PM ET</div><h4>Report evidence actually earned</h4><p>Record VERIFIED / CODE-SHIPPED-NOT-VERIFIED / BLOCKED / INCONCLUSIVE from observed evidence. Claim &ge;48h only if a gate-cleared unattended run actually accumulated that duration; no duration is pre-credited.</p></div>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <span><strong>Issue #13 identity and review contract:</strong> Lezhi/<code>@LezhiFu</code> + Jinming/<code>@JinmingCao0705</code> review claims routing; Ziyun/<code>@ZiyunGuo0614</code> + Russ/<code>@RussCTGL</code> review dedup; Mohan/<code>@MohanLi</code> + jz/<code>@jz7668-oss</code> review ground truth; Yuntong/<code>@YuntongP</code> + Bill/<code>@6088964333zyk-star</code> review kill-switch and process cleanup. Listing a pair does not record an acknowledgement or completed review.</span>
                     </div>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
@@ -1703,14 +1713,14 @@ cd es-intern-freshlens
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> each automation running unattended by Wed Aug 19 and &ge;48h by Friday, with evidence; statuses recorded in the four canonical buckets (VERIFIED / CODE-SHIPPED-NOT-VERIFIED / BLOCKED / INCONCLUSIVE).</span>
+                        <span><strong>Proposed deliverable, gated:</strong> after both prerequisites clear, run each bounded automation long enough to collect truthful evidence and record its status in the four canonical buckets. Until then, the deliverable remains <code>BLOCKED</code>; there is no unattended-start or 48-hour claim.</span>
                     </div>
                     <div class="skills">
                         <span class="skill-tag">Maintainer agents</span>
                         <span class="skill-tag">Propose-and-approve automation</span>
                         <span class="skill-tag">Kill-flag safety</span>
                         <span class="skill-tag">Cost-aware model routing</span>
-                        <span class="skill-tag">Unattended evidence</span>
+                        <span class="skill-tag">Unattended evidence (gated)</span>
                     </div>
                 </div>
             </details>
