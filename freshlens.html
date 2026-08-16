@@ -263,7 +263,7 @@
             ES Internship
         </div>
         <div class="nav-actions">
-            <a href="#current-weekend" class="nav-week-link">This week</a>
+            <a href="index.html#start-here" class="nav-week-link">Start here</a>
             <a href="index.html" class="back-link">&larr; Program</a>
         </div>
     </div>
@@ -297,20 +297,22 @@
 <div class="wrap">
 
     <section class="block" id="current-weekend">
-        <h2>Current Week 10/11 coordination &middot; Aug 14&ndash;16</h2>
-        <p class="lead">Start with the pinned FreshLens <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/0b8d78f76a392f9ef39c77021da2b8f3587c1ccb/START_HERE.md" target="_blank" rel="noopener">START_HERE</a> and <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/0b8d78f76a392f9ef39c77021da2b8f3587c1ccb/README.md" target="_blank" rel="noopener">README</a> from draft <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/249" target="_blank" rel="noopener">PR #249</a>, then use the sandbox owner map for a bounded lane. These immutable docs are the current candidate, not merged <code>main</code> guidance. The Weeks 3&ndash;8 material below remains historical product and closeout evidence, not current work instructions.</p>
+        <h2>Week 10 starts on the hub, not here</h2>
+        <p class="lead">There is one canonical start page for Monday, Aug 17, and it lives on the program hub: <a href="index.html#start-here"><strong>Start here</strong></a>. It carries the 60-minute access checklist, the Monday 12:00 ET runbook, and the seat briefs. This page is FreshLens product context. If the two disagree, the hub wins.</p>
 
-        <div class="status-callout verified"><strong>VERIFIED:</strong> the <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/13" target="_blank" rel="noopener">all-eight owner map #13</a> is open, and the eight named intern accounts have GitHub write access to the history-free product sandbox. A mapped owner is not treated as acknowledged until that owner posts an explicit status.</div>
-        <div class="status-callout"><strong>INCONCLUSIVE:</strong> the proxy health endpoint reports <code>interns: 8</code>, but that count does not prove individual key receipt or authenticated capability access. Those must be evidenced separately.</div>
-        <div class="status-callout blocked"><strong>BLOCKED:</strong> sandbox <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/pull/9" target="_blank" rel="noopener">PR #9</a> is open with changes requested. The current claims-routing and ground-truth/data lanes are bounded by <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/14" target="_blank" rel="noopener">#14</a> and <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/15" target="_blank" rel="noopener">#15</a>; do not substitute a broad refactor for their stated evidence contracts.</div>
-        <div class="status-callout blocked"><strong>BLOCKED &mdash; no unattended Week 10 start:</strong> sandbox <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/pull/12" target="_blank" rel="noopener">PR #12</a> is approved with a successful safety check and is still unmerged. FreshLens <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248</a> exact head <code>41ef4b86e2379e444518<wbr>e043a9d99a4e55d3014e</code> has 5/5 successful exact-head source-CI checks, and an independent default-<code>REFUTED</code> acceptance audit found no P0&ndash;P2 issue in the accepted eight-path diff. It still has zero submitted human reviews and 0/8 explicit owner <code>ACK</code>/<code>BLOCKED</code> responses. Do not start an unattended run until the four named human review pairs submit exact-head evidence <em>and</em> all eight owners respond. Controls, CI, and independent acceptance do not establish image/dependency provisioning, detector evidence, runtime, 48-hour operation, model, device, deployment, or release; those surfaces remain <code>BLOCKED</code>.</div>
-        <div class="status-callout"><strong>Name/handle map (identity only, not acknowledgement):</strong> Lezhi/<code>@LezhiFu</code>; Ziyun/<code>@ZiyunGuo0614</code>; Jinming/<code>@JinmingCao0705</code>; Mohan/<code>@MohanLi</code>; Russ/<code>@RussCTGL</code>; Yuntong/<code>@YuntongP</code>; jz/<code>@jz7668-oss</code>; Bill/<code>@6088964333zyk-star</code>. Required PR #248 review pairs from <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/13" target="_blank" rel="noopener">issue #13</a>: Lezhi/Jinming &mdash; claims routing; Ziyun/Russ &mdash; dedup; Mohan/jz &mdash; ground truth; Yuntong/Bill &mdash; kill switch and process cleanup.</div>
+        <div class="status-callout verified"><strong>Week 10 cohort:</strong> Lezhi Fu (<code>@LezhiFu</code>) and Ziyun Guo (<code>@ZiyunGuo0614</code>). That is the whole active cohort. The eight-name lists further down this page are core-program history.</div>
+
+        <div class="status-callout blocked"><strong>Supervised runs only.</strong> <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248</a> at head <code>41ef4b86e2379e444518<wbr>e043a9d99a4e55d3014e</code> carries a posted review with five blocking items, including a pinned container image that lacks the repository's test dependencies, so <code>last_clean_verified</code> is never seeded and unattended repair returns <code>no_safe_repair_basis</code>. Run every lane with <code>--once</code>. Do not start an unattended loop and do not start a 48-hour clock.</div>
+
+        <div class="status-callout blocked"><strong>What is true about the product today.</strong> No ML model ships in the app. The scanner is compile-time off behind <code>#if DEBUG &amp;&amp; SCANNER_LAB</code>. The only shipping AI feature is fridge photo enumeration through a vision provider, which identifies items and does not score freshness. App Store submission is off until the scanner clears an in-store gold set. Interns build the maintenance automations, and interns do not touch production.</div>
+
+        <div class="status-callout"><strong>Kill switch.</strong> <code>touch ~/.openclaw/flags/STOP_ES.flag</code> halts every seat at once, checked at the top of every iteration and again before config load. It fails closed: a probe error is also a stop.</div>
 
         <div class="cta-row">
-            <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/13" target="_blank" rel="noopener">Open the current owner map &rarr;</a>
-            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/14" target="_blank" rel="noopener">Claims routing #14 &rarr;</a>
-            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-product-sandbox/issues/15" target="_blank" rel="noopener">Ground truth/data #15 &rarr;</a>
-            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/pull/249" target="_blank" rel="noopener">Review draft docs PR #249 &rarr;</a>
+            <a class="btn btn-primary" href="index.html#start-here">Open the Monday start page &rarr;</a>
+            <a class="btn btn-secondary" href="index.html#seats">Week 10 seats &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248, the agent framework &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-product-sandbox/blob/main/ACCESS.md" target="_blank" rel="noopener">Sandbox access contract &rarr;</a>
         </div>
     </section>
 
