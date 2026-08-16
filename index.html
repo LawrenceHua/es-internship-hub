@@ -303,6 +303,16 @@
             transition: border-color 0.2s ease;
         }
         .lane-card:hover { border-color: var(--border-hover); }
+
+        /* Week 10 seat cards: grid items must be allowed to shrink, otherwise a
+           long gate command sets the track width and the page scrolls sideways. */
+        #seats .lanes-grid { grid-template-columns: repeat(3, 1fr); align-items: start; }
+        #seats .lane-card { min-width: 0; }
+        #seats .lane-card p { min-width: 0; overflow-wrap: anywhere; font-size: 0.84rem; line-height: 1.55; margin-bottom: 0.55rem; color: var(--text-secondary); }
+        #seats .lane-card p:last-child { margin-bottom: 0; }
+        #seats .lane-card .codeline { white-space: pre-wrap; word-break: break-word; }
+        @media (max-width: 1024px) { #seats .lanes-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { #seats .lanes-grid { grid-template-columns: 1fr; } }
         .lane-card-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.6rem; }
         .lane-card h3 { font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; }
         .lane-card p { font-size: 0.85rem; line-height: 1.55; color: var(--text-secondary); }
