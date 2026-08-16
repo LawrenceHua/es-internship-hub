@@ -263,7 +263,7 @@
             ES Internship
         </div>
         <div class="nav-actions">
-            <a href="#final-convergence" class="nav-week-link">This week</a>
+            <a href="index.html#start-here" class="nav-week-link">Start here</a>
             <a href="index.html" class="back-link">&larr; Program</a>
         </div>
     </div>
@@ -278,7 +278,7 @@
         <circle cx="24" cy="24" r="2.6" fill="#e0a106"/>
     </svg>
     <div class="hero-inner">
-        <div class="hero-label">Flagship Project &middot; Weeks 3&ndash;8</div>
+        <div class="hero-label">Flagship Project &middot; Historical Core + Current Extension</div>
         <h1>FreshLens</h1>
         <p>The FreshLens target is simple: point your camera at a fridge, basket, or produce shelf and score every item in one scene. Then turn the advisory result into action: rescue what&rsquo;s turning, or mark it down before it&rsquo;s lost. The real YOLO/live-service path is not yet reproducible in a clean checkout.</p>
         <p class="hero-callout"><strong>This summer the team builds one feature on top: Snap-to-Claim</strong>&thinsp;&mdash;&thinsp;a capped, evidence-backed, human-review claim and recovery loop for perishables that arrive spoiled.</p>
@@ -295,6 +295,26 @@
 </div>
 
 <div class="wrap">
+
+    <section class="block" id="current-weekend">
+        <h2>Week 10 starts on the hub, not here</h2>
+        <p class="lead">There is one canonical start page for Monday, Aug 17, and it lives on the program hub: <a href="index.html#start-here"><strong>Start here</strong></a>. It carries the 60-minute access checklist, the Monday 12:00 ET runbook, and the seat briefs. This page is FreshLens product context. If the two disagree, the hub wins.</p>
+
+        <div class="status-callout verified"><strong>Week 10 cohort:</strong> Lezhi Fu (<code>@LezhiFu</code>) and Ziyun Guo (<code>@ZiyunGuo0614</code>). That is the whole active cohort. The eight-name lists further down this page are core-program history.</div>
+
+        <div class="status-callout blocked"><strong>Supervised runs only.</strong> <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248</a> at head <code>41ef4b86e2379e444518<wbr>e043a9d99a4e55d3014e</code> carries a posted review with five blocking items, including a pinned container image that lacks the repository's test dependencies, so <code>last_clean_verified</code> is never seeded and unattended repair returns <code>no_safe_repair_basis</code>. Run every lane with <code>--once</code>. Do not start an unattended loop and do not start a 48-hour clock.</div>
+
+        <div class="status-callout blocked"><strong>What is true about the product today.</strong> No ML model ships in the app. The scanner is compile-time off behind <code>#if DEBUG &amp;&amp; SCANNER_LAB</code>. The only shipping AI feature is fridge photo enumeration through a vision provider, which identifies items and does not score freshness. App Store submission is off until the scanner clears an in-store gold set. Interns build the maintenance automations, and interns do not touch production.</div>
+
+        <div class="status-callout"><strong>Kill switch.</strong> <code>touch ~/.openclaw/flags/STOP_ES.flag</code> halts every seat at once, checked at the top of every iteration and again before config load. It fails closed: a probe error is also a stop.</div>
+
+        <div class="cta-row">
+            <a class="btn btn-primary" href="index.html#start-here">Open the Monday start page &rarr;</a>
+            <a class="btn btn-secondary" href="index.html#seats">Week 10 seats &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248, the agent framework &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-product-sandbox/blob/main/ACCESS.md" target="_blank" rel="noopener">Sandbox access contract &rarr;</a>
+        </div>
+    </section>
 
     <section class="block">
         <h2>The leap</h2>
@@ -430,8 +450,8 @@
     </section>
 
     <section class="block" id="final-convergence">
-        <h2>This week&rsquo;s goal &mdash; one honest, evidence-backed <code>rc1</code></h2>
-        <p class="lead"><strong>Week 7 &middot; Jul 27&ndash;31.</strong> By Friday, cut an evidence-backed <code>rc1</code> manifest for one clean FreshLens commit that preserves the human-review core, proves the highest-risk trust, authorization, rendered-UX, and recovery boundaries, and carries every unavailable dependency forward with an exact owner and next action. <strong>Lezhi coordinates the closeout</strong>; every intern owns a bounded contribution or blocker, a negative test, a cross-review, and a demo segment. Track the joined program in <a href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">all-team issue #164</a>.</p>
+        <h2>Historical Week 7 closeout &mdash; one honest, evidence-backed <code>rc1</code></h2>
+        <p class="lead"><strong>Historical snapshot &middot; Week 7 &middot; Jul 27&ndash;31.</strong> This preserved closeout plan describes one evidence-backed <code>rc1</code> manifest for a clean FreshLens commit. It is retained as evidence context; use the current Week 10/11 section above for active coordination.</p>
         <div class="do-now">
             <h3>Monday has two ordered parts</h3>
             <ol>
@@ -737,8 +757,8 @@
     </section>
 
     <section class="block">
-        <h2>Get started</h2>
-        <p class="lead">For the closeout sprint, begin with the merged July 26 baseline and its status board. Reproduce the local gates before editing, keep real-model signals advisory, and never treat a browser demo, native archive, model file, or green pull request as proof of another surface.</p>
+        <h2>Historical setup references</h2>
+        <p class="lead">These closeout references are retained for traceability. For current work, begin with the pinned <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/0b8d78f76a392f9ef39c77021da2b8f3587c1ccb/START_HERE.md" target="_blank" rel="noopener">START_HERE</a> and <a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/0b8d78f76a392f9ef39c77021da2b8f3587c1ccb/README.md" target="_blank" rel="noopener">README</a> current candidate in draft <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/249" target="_blank" rel="noopener">PR #249</a>, plus the Week 10/11 owner map above. The pinned docs are not merged. Never treat a browser demo, native archive, model file, or green pull request as proof of another surface.</p>
         <div class="cta-row">
             <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/issues/164" target="_blank" rel="noopener">All-team closeout tracker #164 &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/pull/172" target="_blank" rel="noopener">Monday review + kickoff packet &rarr;</a>
@@ -754,7 +774,7 @@
             <div class="cta-row">
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md" target="_blank" rel="noopener">Quality gates &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/RELEASE-MANIFEST-2026-08-07.md" target="_blank" rel="noopener">Release manifest contract &rarr;</a>
-            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/START_HERE.md" target="_blank" rel="noopener">Current START_HERE &rarr;</a>
+            <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/0b8d78f76a392f9ef39c77021da2b8f3587c1ccb/START_HERE.md" target="_blank" rel="noopener">Pinned candidate START_HERE &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/docs/WEEK-06-ISSUES.md" target="_blank" rel="noopener">Complete issue map &rarr;</a>
             <a class="btn btn-primary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/GETTING_STARTED.md" target="_blank" rel="noopener">Read the Getting Started guide &rarr;</a>
             <a class="btn btn-secondary" href="https://github.com/LawrenceHua/es-intern-freshlens/blob/332b60f872778e40e4e20168180c11de4407e2a2/docs/WEEK-06.md" target="_blank" rel="noopener">Audited Week 6 mission &rarr;</a>

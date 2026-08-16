@@ -690,7 +690,7 @@
             .nav-links { display: none; }
             .timeline-grid { grid-template-columns: 1fr; }
             .cadence-legend { grid-template-columns: 1fr; }
-            .day-grid { grid-template-columns: 1fr; }
+            .day-grid, .day-grid.day-grid-3 { grid-template-columns: 1fr; }
             .lanes-grid { grid-template-columns: 1fr; }
             .tools-grid { grid-template-columns: 1fr; }
             .week > summary { flex-wrap: wrap; }
@@ -719,13 +719,15 @@
             ES Internship
         </div>
         <ul class="nav-links">
+            <li><a href="#start-here">Start here</a></li>
+            <li><a href="#seats">Seats</a></li>
             <li><a href="#project">Project</a></li>
             <li><a href="#timeline">Timeline</a></li>
             <li><a href="#schedule">Schedule</a></li>
             <li><a href="#tools">Tools</a></li>
             <li><a href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
-        <a class="nav-week-link" href="#week-9-overview">This week</a>
+        <a class="nav-week-link" href="#start-here">Start here</a>
     </div>
 </nav>
 
@@ -753,6 +755,223 @@
             <span>Fresh</span>
             <hr class="freshness-rule" aria-hidden="true">
             <span>Urgent</span>
+        </div>
+    </div>
+</div>
+
+<!-- Honesty banner -->
+<div class="section" id="honesty">
+    <div class="container">
+        <div class="section-header">
+            <h2>What is actually true today</h2>
+            <p>Read this before you write a line of code. Every line below is checked against the running system, not against a slide. Probed 2026-08-16.</p>
+        </div>
+
+        <div class="deliverable blocked spaced">
+            <span><strong>No ML model ships in the app.</strong> There is no <code>.mlmodel</code> bundled in the iOS app, and the production backend reports every ML flag false: <code>custom_model_available</code>, <code>ood_evaluator_loaded</code>, <code>yolo_loaded</code>, and <code>produce_crop_classifier_loaded</code> are all <code>false</code> on <code>/health</code> right now.</span>
+        </div>
+        <div class="deliverable blocked spaced">
+            <span><strong>The scanner is compile-time off.</strong> <code>AppConfiguration.swift</code> gates <code>scannerEnabled</code> behind <code>#if DEBUG &amp;&amp; SCANNER_LAB</code>, so a normal build cannot reach it. Any page, doc, or README that describes a working freshness scanner is describing a target, not a shipped feature.</span>
+        </div>
+        <div class="deliverable caution spaced">
+            <span><strong>The only shipping AI feature is fridge photo enumeration.</strong> <code>POST /api/v1/fridge/enumerate</code> sends the photo to a vision provider and gets back a list of items. It identifies what is in the fridge. It does not score freshness, and it has never been scored itself. Producing that first score is a Week 10 seat.</span>
+        </div>
+        <div class="deliverable blocked spaced">
+            <span><strong>App Store submission is OFF.</strong> It stays off until the scanner clears an in-store gold set. The gold gate fails 5 of its 6 floors today, so no candidate is promotable and nothing is submitted.</span>
+        </div>
+        <div class="deliverable verified spaced">
+            <span><strong>Interns build the maintenance automations. Interns do not touch production.</strong> Neither Week 10 intern has, or should get, write access to the product repository. Every seat is propose-only: it opens a pull request or writes a digest, and a human applies it. No seat merges, deploys, or holds a production credential.</span>
+        </div>
+    </div>
+</div>
+
+<!-- Start here: the one canonical Monday page -->
+<div class="section section-alt" id="start-here">
+    <span id="current-weekend" aria-hidden="true"></span>
+    <div class="container">
+        <div class="section-header">
+            <h2>Start here &middot; Monday, Aug 17</h2>
+            <p>This is the only start page for Week 10. Every other page on this site is context or archive. If two pages disagree, this one wins.</p>
+        </div>
+
+        <div class="deliverable verified spaced">
+            <span><strong>Week 10 cohort:</strong> Lezhi Fu (<code>@LezhiFu</code>) and Ziyun Guo (<code>@ZiyunGuo0614</code>). That is the whole active cohort. Earlier pages on this site list eight names from the core program; those are historical.</span>
+        </div>
+
+        <div class="do-now">
+            <h4>Your first 60 minutes: prove your access, do not assume it</h4>
+            <ol>
+                <li><strong>GitHub write on the three intern repos.</strong> You should be able to push a branch to <a href="https://github.com/LawrenceHua/es-internship-hub" target="_blank" rel="noopener">es-internship-hub</a>, <a href="https://github.com/LawrenceHua/es-intern-product-sandbox" target="_blank" rel="noopener">es-intern-product-sandbox</a> (private, authenticated access required), and <a href="https://github.com/LawrenceHua/es-intern-freshlens" target="_blank" rel="noopener">es-intern-freshlens</a>. Prove it, do not assume it:
+<code class="codeline">git ls-remote --heads https://github.com/LawrenceHua/es-intern-product-sandbox
+<span class="c"># if this asks for credentials or 404s, your access is not live. Say BLOCKED.</span></code></li>
+
+                <li><strong>Sandbox clone and its two checks.</strong> The sandbox is a full product snapshot. Treat every path as confidential and use synthetic data only:
+<code class="codeline">git clone --depth 1 https://github.com/LawrenceHua/es-intern-product-sandbox
+cd es-intern-product-sandbox
+python3 scripts/es_killflag.py                 <span class="c"># must print: clear</span>
+python3 scripts/verify_sandbox.py --changed-only --base "$(git merge-base origin/main HEAD)"</code>
+There is no <code>make test</code> in this repo. The <code>Makefile</code> is the ML data pipeline. The two commands above are the checks the onboarding doc actually requires before you push.</li>
+
+                <li><strong>FreshLens clone, virtual environment, tests.</strong>
+<code class="codeline">git clone https://github.com/LawrenceHua/es-intern-freshlens
+cd es-intern-freshlens
+python3 -m venv venv &amp;&amp; source venv/bin/activate   <span class="c"># Windows: py -m venv venv ; venv\Scripts\Activate.ps1</span>
+pip install -r requirements.txt
+pytest -q                                        <span class="c"># passes offline, no token, no key, no network</span></code></li>
+
+                <li><strong>Proxy key by direct message, then one smoke call.</strong> Your individual bearer key arrives by private DM only. It is never in a repository, never in an issue, never in a shared channel. All keys expire 2026-08-30.
+<code class="codeline">curl -s https://freshlens-proxy.fly.dev/health
+<span class="c"># {"status":"ok","service":"freshlens-proxy","interns":8}</span>
+curl -s -H "Authorization: Bearer $FRESHLENS_KEY" https://freshlens-proxy.fly.dev/capabilities</code>
+<code>/health</code> is the only unauthenticated route. Your authenticated calls reach the ES canary upstream by default, so a slow or failing first call is usually the canary waking up, not your key. Re-run once before you report a problem, and never paste a key into a message to prove it exists.</li>
+
+                <li><strong>Slack channels to join:</strong> <code>#es-daily</code>, <code>#es-incidents</code>, <code>#es-growth</code>, <code>#es-approvals</code>, <code>#expired-solutions</code>, <code>#ai-agent-mesh</code>. There is no dedicated intern channel. Post your standup, your blockers, and your evidence in <code>#es-daily</code>, and DM Lawrence for anything involving a key or a credential.</li>
+
+                <li><strong>Where work is tracked.</strong> No Jira board is linked from this hub. Week 10 work is tracked as GitHub issues and pull requests in the three intern repositories above. Your seat's output is a pull request or a digest, both of which live there.</li>
+            </ol>
+        </div>
+
+        <div class="section-header" style="margin-top:2.5rem;">
+            <h2>Monday 12:00 ET kickoff: supervised runs only</h2>
+            <p>The kickoff is a supervised <code>--once</code> run of the FreshLens maintainer agents. Nothing else. Unattended mode is not functional yet, and starting one is not authorized this week.</p>
+        </div>
+
+        <div class="deliverable blocked spaced">
+            <span><strong>BLOCKED, and this is the reason:</strong> <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248</a> at head <code>41ef4b86e2379e444518<wbr>e043a9d99a4e55d3014e</code> carries a posted review with five blocking items. Two of them matter for you directly: the pinned container image lacks the repository's test dependencies, so a contained gate cannot go green, <code>last_clean_verified</code> is never seeded, and unattended repair returns <code>no_safe_repair_basis</code> every time. Unattended mode is inert today. Supervised <code>--once</code> runs are fine and are exactly what Week 10 should use.</span>
+        </div>
+
+        <div class="do-now">
+            <h4>The five steps, in order</h4>
+            <ol>
+                <li><strong>Get the code, then activate the virtual environment.</strong> PR #248 is not merged, so the agents are not on <code>main</code>. Check the pull request branch out at its exact head:
+<code class="codeline">gh pr checkout 248 --repo LawrenceHua/es-intern-freshlens
+git rev-parse HEAD                               <span class="c"># expect 41ef4b86e2379e444518e043a9d99a4e55d3014e</span>
+source venv/bin/activate</code></li>
+
+                <li><strong>Run the one lane that is expected to pass.</strong>
+<code class="codeline">python scripts/maintainer_agents/claims_routing.py --once   <span class="c"># expect VERIFIED, exit 0</span></code>
+The other two lanes return <code>BLOCKED</code> and exit <code>1</code> by design. That is an honest outcome, not a failure to fix:
+<code class="codeline">python scripts/maintainer_agents/dedup_inventory.py --once     <span class="c"># expect BLOCKED, exit 1</span>
+python scripts/maintainer_agents/ground_truth_data.py --once   <span class="c"># expect BLOCKED, exit 1</span></code></li>
+
+                <li><strong>Read the evidence, do not trust the exit code alone.</strong> Each iteration prints one sorted JSON line with <code>lane</code>, <code>iteration_id</code>, <code>measurement_status</code>, <code>status</code>, <code>proposal</code>, <code>stop_reason</code>, <code>last_clean_verified_error</code>, <code>containment_status</code>, and <code>containment_error</code>. Then read the append-only record:
+<code class="codeline">artifacts/releases/maintainer-agents/runtime/&lt;lane&gt;/observations.jsonl</code></li>
+
+                <li><strong>Do the proposal drill once, supervised.</strong> Edit only tracked paths inside that lane's <code>proposal_paths</code>, leave the index and the untracked set clean, then:
+<code class="codeline">git diff --binary --no-ext-diff HEAD -- &lt;proposal paths&gt; | shasum -a 256
+python scripts/maintainer_agents/claims_routing.py --once --dirty-proof-sha256 &lt;digest&gt;</code>
+Inspect the proposal it writes, restore the source, and re-run the gate clean. The digest must match exactly, and this option is rejected in unattended operation.</li>
+
+                <li><strong>Never drop <code>--once</code>.</strong> Omitting it starts an unattended loop at the lane's cadence, which is the mode that is blocked. <code>--containerized</code>, <code>--interval-seconds</code>, <code>--dirty-proof-sha256</code>, and <code>--runtime-root</code> all raise <code>ValueError</code> unless <code>--once</code> is also set. Running <code>scripts/maintainer_agent.py</code> directly is refused on purpose.</li>
+            </ol>
+        </div>
+
+        <div class="deliverable caution spaced">
+            <span><strong>Kill switch, one command, stops every seat at once:</strong>
+<code class="codeline">touch ~/.openclaw/flags/STOP_ES.flag</code>
+It is checked at the top of every iteration and again before config load. Present means <code>stop_reason: "kill_switch_present"</code>, exit 0, and zero filesystem mutation. A probe error is also a stop, because the switch fails closed. Remove the file to resume.</span>
+        </div>
+
+        <div class="deliverable caution spaced">
+            <span><strong>Open items that are yours on Monday:</strong> sandbox <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/pull/12" target="_blank" rel="noopener">PR #12</a> (Lezhi) is approved and still unmerged; sandbox <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/pull/9" target="_blank" rel="noopener">PR #9</a> (Ziyun) has changes requested and needs a response. FreshLens <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/241" target="_blank" rel="noopener">PR #241</a> and <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/242" target="_blank" rel="noopener">PR #242</a> have been open since Aug 7 with no review. Clear these before you start a new lane.</span>
+        </div>
+
+        <div class="deliverable caution spaced">
+            <span><strong>Known discrepancy, and it is a real seat milestone:</strong> the proxy reports <code>interns: 8</code> while <code>ACCESS.md</code> states 7 keys issued for the cohort. Reconciling that count is part of the S1 milestone, and the extra seat is an access-control question for Lawrence, not something an intern resolves alone.</span>
+        </div>
+
+        <div class="project-cta">
+            <a href="#seats" class="card-link">See your seats</a>
+            <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" class="card-link secondary" target="_blank" rel="noopener">PR #248, the agent framework</a>
+            <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/blob/main/ACCESS.md" class="card-link secondary" target="_blank" rel="noopener">Sandbox access contract</a>
+            <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/blob/main/docs/MAINTAINER-SEATS-W10.md" class="card-link secondary" target="_blank" rel="noopener">Seat briefs in markdown</a>
+        </div>
+    </div>
+</div>
+
+<!-- Week 10 seats -->
+<div class="section" id="seats">
+    <div class="container">
+        <div class="section-header">
+            <h2>Week 10 seats</h2>
+            <p>A maintainer seat is a named, propose-only agent that owns one subsystem's health. It runs a gate, records an observation, and when the gate is red it opens a pull request or writes a digest. It never merges, never deploys, and never touches a production credential. Two seats each, plus one stretch seat that opens only if both primaries are green by Wednesday.</p>
+        </div>
+
+        <h3 style="margin:0 0 1rem;">Lezhi Fu &middot; <code>@LezhiFu</code></h3>
+        <div class="lanes-grid">
+            <div class="lane-card">
+                <div class="lane-card-head"><h3>S2 <code>shelf-life-truth-keeper</code></h3><span class="skill-tag">Lezhi</span></div>
+                <p><strong>Subsystem.</strong> <code>backend/server/utils/shelf_life_windows.py</code>, the deterministic resolver.</p>
+                <p><strong>Gate and pass criterion.</strong> Execute <code>days_for_confirmed_item</code> over a committed regression corpus. Every non-food and non-perishable entry MUST return <code>None</code>: dry ice, bay leaf, beet root, energy drink, bud light, olive oil. Any entry returning a numeric window is a fabrication and fails the gate.</p>
+                <p><strong>Cadence.</strong> 3600 seconds.</p>
+                <p><strong>Propose-only action.</strong> Open a PR adding the failing item to the corpus with the correct expectation, plus the resolver change. Never edit the corpus to match the resolver.</p>
+                <p><strong>Evidence contract.</strong> The item name, the returned value, and the resolver source line. <code>VERIFIED</code> when the whole corpus passes at a named sha. <code>BLOCKED</code> when the corpus itself has an unreviewed entry.</p>
+                <p><strong>First-week milestone.</strong> Grow the corpus from the 6 known fabrications to at least 40 entries spanning spices, alcohol, shelf-stable oils, non-food, and true perishables. Then run the corpus against the deployed revision and against PR #49's tip, and publish the diff.</p>
+                <p><strong><code>health_observable</code>.</strong> <code>true</code>.</p>
+            </div>
+            <div class="lane-card">
+                <div class="lane-card-head"><h3>S7 <code>asc-listing-truth-keeper</code></h3><span class="skill-tag">Lezhi</span></div>
+                <p><strong>Subsystem.</strong> App Store Connect listing, presubmit gate, launch blockers.</p>
+                <p><strong>Gate and pass criterion.</strong> <code>python3 ios_apps/fastlane/asc/asc_presubmit_check.py 4.3.4 &lt;build&gt;</code> exits 0 with zero warnings, and <code>asc_listing.py</code> shows zero banned terms. Banned vocabulary today: any scanner claim, any freshness-percentage claim, any paid-tier or enterprise-pricing claim, and the flagged word <code>recognize</code>.</p>
+                <p><strong>Cadence.</strong> 86400 seconds.</p>
+                <p><strong>Propose-only action.</strong> Open a PR against <code>docs/appstore/*.md</code> when the gate reports drift. Never run <code>asc_push_listing.py --apply</code>. That writes text a reviewer reads, and it is Lawrence's action alone.</p>
+                <p><strong>Evidence contract.</strong> The gate's full verdict block including the standing precondition list it always prints, plus the live character counts from <code>asc_state.py</code>. A doc edit is never evidence of ASC state.</p>
+                <p><strong>First-week milestone.</strong> Clear the review-notes drift, live 3995 versus docs 3998 characters, and the <code>recognize</code> warning to a clean exit 0. Then write the list of the four things this gate cannot check: App Privacy labels, demo login, account deletion, and the content-rights declaration.</p>
+                <p><strong><code>health_observable</code>.</strong> <code>true</code>.</p>
+            </div>
+            <div class="lane-card">
+                <div class="lane-card-head"><h3>S8 <code>website-truth-auditor</code></h3><span class="skill-tag">Lezhi stretch</span></div>
+                <p><strong>Subsystem.</strong> The public marketing site and its claims.</p>
+                <p><strong>Gate and pass criterion.</strong> <code>npm test</code> in the web truth worktree exits 0, all 18 files, with <code>tests/product-truth.test.js</code> as the claims gate and its default-REFUTED closed registry. A live fetch of the site root and <code>/pricing</code> must contain none of: an unqualified freshness-accuracy percentage, a scanner-availability claim, an enterprise price presented as a service-level commitment, or a Nearby Deals promise.</p>
+                <p><strong>Cadence.</strong> 21600 seconds.</p>
+                <p><strong>Propose-only action.</strong> Open a PR against the copy and the <code>published-copy-registry.json</code> claim bundle together. Post a digest when live copy and repository copy disagree.</p>
+                <p><strong>Evidence contract.</strong> Test output, the fetched HTML excerpt with the offending string, and the registry claim id. <code>testClosedCopyRegistryDefaultRefutesEveryNewPublicString</code> means any new public string is REFUTED until reviewed. Honour that default.</p>
+                <p><strong>First-week milestone.</strong> Prove the live site matches the reviewed commit by fetch, hash, and compare. Then close the two known stale claims: the <code>$299/$249</code> enterprise pricing at <code>public/pricing.html:384</code>, and the Nearby Deals disclaimer for a feature that returns <code>[]</code>.</p>
+                <p><strong><code>health_observable</code>.</strong> <code>true</code>.</p>
+            </div>
+        </div>
+
+        <h3 style="margin:2.5rem 0 1rem;">Ziyun Guo &middot; <code>@ZiyunGuo0614</code></h3>
+        <div class="lanes-grid">
+            <div class="lane-card">
+                <div class="lane-card-head"><h3>S1 <code>backend-health-warden</code></h3><span class="skill-tag">Ziyun</span></div>
+                <p><strong>Subsystem.</strong> Production API, canary, the FreshLens proxy, and the database.</p>
+                <p><strong>Gate and pass criterion.</strong> <code>curl -sf https://api.expiredsolutions.com/health</code> returns <code>status=="healthy"</code> and <code>deployment_provenance.ready==true</code>; <code>/health/shopper-ready</code> returns 200; <code>curl -sf https://expired-api-canary.fly.dev/health</code> returns 200 with a read timeout of at least 150s to clear the 120s cold-start grace; <code>curl -sf https://freshlens-proxy.fly.dev/health</code> returns <code>status=="ok"</code> and an <code>interns</code> count equal to the count in <code>ACCESS.md</code>.</p>
+                <p><strong>Cadence.</strong> 1800 seconds.</p>
+                <p><strong>Propose-only action.</strong> On a red, post a digest naming the app, the failing endpoint, the observed body, and the release sha. On a fingerprint-versus-reality disagreement, open a PR against the fingerprint's timeout constant.</p>
+                <p><strong>Evidence contract.</strong> The raw response body and HTTP code for every endpoint, plus the machine state from the platform CLI. <code>VERIFIED</code> only when every endpoint answered in this iteration. A timeout is <code>INCONCLUSIVE</code>, never <code>BLOCKED</code> and never a failure.</p>
+                <p><strong>First-week milestone.</strong> Prove by two consecutive clean iterations that the canary check no longer flips false purely on cold start, and land the timeout PR. Reconcile the <code>interns: 8</code> versus 7-issued discrepancy.</p>
+                <p><strong><code>health_observable</code>.</strong> <code>true</code>.</p>
+            </div>
+            <div class="lane-card">
+                <div class="lane-card-head"><h3>S3 <code>fridge-enumeration-evaluator</code></h3><span class="skill-tag">Ziyun</span></div>
+                <p><strong>Subsystem.</strong> <code>POST /api/v1/fridge/enumerate</code>, the only shipping AI feature.</p>
+                <p><strong>Gate and pass criterion.</strong> The scorer exits 0 and the item-level F1 clears a floor the seat must first establish and get Lawrence to approve:<code class="codeline">python3 score.py --corpus corpus.json --ground-truth ground_truth.json \
+  --predictions predictions.json --synonyms synonyms.json --json &lt;out&gt;</code>There is no floor today, because this lane has never been scored.</p>
+                <p><strong>Cadence.</strong> 86400 seconds.</p>
+                <p><strong>Propose-only action.</strong> Publish a scorecard digest per run. Open a PR when a prompt or route change moves the score by more than the agreed noise band.</p>
+                <p><strong>Evidence contract.</strong> The full <code>--json</code> output, the corpus sha, the model id, and the per-set breakdown. Missing ground truth is <code>BLOCKED</code>, never an assumed pass.</p>
+                <p><strong>First-week milestone.</strong> Complete the partial ground truth into a full <code>ground_truth.json</code> over the 50 originals, produce the first score this product has ever had for its only shipping AI feature, and propose the floor.</p>
+                <p><strong><code>health_observable</code>.</strong> Starts <code>false</code> with <code>blocked_reason: "No ground_truth.json exists; the lane has never been scored."</code> and flips to <code>true</code> on the milestone.</p>
+            </div>
+            <div class="lane-card">
+                <div class="lane-card-head"><h3>S9 <code>docs-freshness-registrar</code></h3><span class="skill-tag">Ziyun stretch</span></div>
+                <p><strong>Subsystem.</strong> This hub, the sandbox onboarding docs, and the repository architecture docs.</p>
+                <p><strong>Gate and pass criterion.</strong> Zero occurrences of a departed intern's handle in the sandbox <code>docs/ONBOARDING-W9-11.md</code>; <code>ACCESS-SCOPE-W9-11.md</code> carries a signature block; the live hub HTML hash equals the hash of <code>main</code>; <code>ARCHITECTURE.md</code> does not assert Azure hosting; <code>README.md</code> carries no unqualified accuracy percentage.</p>
+                <p><strong>Cadence.</strong> 86400 seconds.</p>
+                <p><strong>Propose-only action.</strong> Open one PR per stale document, with the correction and a one-line provenance note.</p>
+                <p><strong>Evidence contract.</strong> File path, line number, the stale string quoted, and the correcting source. A doc is stale on evidence, never on vibe.</p>
+                <p><strong>First-week milestone.</strong> Land the architecture doc's hosting correction, and confirm the departed intern is gone from the Track A assignment. Then move the feedback-digest log out of <code>/tmp</code>.</p>
+                <p><strong><code>health_observable</code>.</strong> <code>true</code>.</p>
+            </div>
+        </div>
+
+        <div class="deliverable spaced" style="margin-top:2rem;">
+            <span><strong>Not your seats, and that is deliberate.</strong> The gold-set steward, the nightly device pilot, the iOS suite runner, and the CI runner medic stay with Lawrence: they need in-store capture authorization, paid provider capacity, the privileged signing boundary, or the ability to restart estate services. The estate cost observer is agent-owned and needs an approved spend ceiling first.</span>
+        </div>
+
+        <div class="deliverable caution spaced">
+            <span><strong>The rule to read twice.</strong> A seat's job is to make the truth cheap to see. A green that was produced by widening a threshold, by skipping a test, by editing a corpus to match the code, or by a probe that could not fail is worse than a red, because a red gets fixed and a false green gets trusted. If the gate cannot reach <code>VERIFIED</code>, set <code>health_observable: false</code>, write the <code>blocked_reason</code>, and say so. Two of the three lanes already shipped in PR #248 do exactly that. That is the standard, not the exception.</span>
         </div>
     </div>
 </div>
@@ -812,8 +1031,8 @@
 <div class="section section-alt">
     <div class="container">
         <div class="section-header">
-            <h2>Current Evidence Snapshot</h2>
-            <p>Probe-bound facts as of July 26, 2026; no production-readiness inference.</p>
+            <h2>Historical Evidence Snapshot &middot; July 26</h2>
+            <p>Archived, probe-bound facts from the core program; they are not an Aug 14&ndash;16 readiness or production-release inference.</p>
         </div>
         <div class="stats-row">
             <div class="stat-card"><div class="stat-value">16/16</div><div class="stat-label">Offline Demo</div></div>
@@ -1606,11 +1825,11 @@ cd es-intern-freshlens
             </details>
 
             <!-- WEEK 9 -->
-            <details class="week" id="week-9-overview" open>
+            <details class="week" id="week-9-overview">
                 <summary>
                     <span class="week-num">W9</span>
                     <span class="week-head">
-                        <span class="week-title">Audit &amp; Expectations <span class="phase-tag">Extension</span></span>
+                        <span class="week-title">Historical W9: Audit &amp; Expectations <span class="phase-tag">Extension</span></span>
                         <span class="week-obj">Audit every lane with agents and write the per-lane Expectation PRD &mdash; findings only, no fixes yet.</span>
                     </span>
                     <span class="week-dates">Aug 10&ndash;14</span>
@@ -1655,33 +1874,37 @@ cd es-intern-freshlens
                 <summary>
                     <span class="week-num">W10</span>
                     <span class="week-head">
-                        <span class="week-title">Build the Maintainers <span class="phase-tag">Extension</span></span>
-                        <span class="week-obj">Ship one maintainer agent per lane &mdash; propose-only, kill-flag enforced &mdash; and start the umbrella skeleton.</span>
+                        <span class="week-title">Maintainer Seats, Supervised <span class="phase-tag">Extension</span></span>
+                        <span class="week-obj">Two maintainer seats each, run supervised with <code>--once</code>. Unattended mode stays blocked until PR #248 is repaired and re-reviewed.</span>
                     </span>
                     <span class="week-dates">Aug 17&ndash;21</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
                     <div class="day-grid day-grid-3">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Build kickoff</h4><p>Each lane starts its maintainer agent: monitors its gate(s), opens a proposal PR when red, never merges itself. The kill-flag (<code>~/.openclaw/flags/STOP_ES.flag</code>) gets implemented as a real check in each agent's loop this week &mdash; today it's only prose. Umbrella skeleton (registry-read + dispatch stub) starts here.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Evidence bar &middot; 12:00 PM ET</div><h4>Running by Wednesday</h4><p>Every automation must be running unattended by today to clear the &ge;48h evidence bar before Friday.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>48h evidence check</h4><p>Each automation has run unattended for &ge;48h with evidence. Status in the four canonical buckets: VERIFIED / CODE-SHIPPED-NOT-VERIFIED / BLOCKED / INCONCLUSIVE.</p></div>
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Supervised <code>--once</code> kickoff</h4><p>Follow <a href="#start-here">Start here</a> step by step. Check out <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248</a> at head <code>41ef4b86e2379e444518<wbr>e043a9d99a4e55d3014e</code>, then run each lane with <code>--once</code>. Expect <code>claims_routing</code> VERIFIED exit 0, and <code>dedup_inventory</code> plus <code>ground_truth_data</code> BLOCKED exit 1 by design. No unattended run, and no 48-hour clock starts.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Checkpoint &middot; 12:00 PM ET</div><h4>Two seats green, or say why not</h4><p>Each intern shows one clean supervised iteration per primary seat, with the JSON line and the <code>observations.jsonl</code> entry that proves it. A stretch seat opens only when both primaries are green. Unattended mode stays closed until the five blocking items on PR #248 are repaired at that exact head and re-reviewed.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Report evidence actually earned</h4><p>Record VERIFIED / CODE-SHIPPED-NOT-VERIFIED / BLOCKED / INCONCLUSIVE from observed evidence, plus your seat's first-week milestone. Claim no duration that a run did not actually accumulate.</p></div>
+                    </div>
+                    <div class="deliverable caution spaced">
+                        <span><strong>Seat assignment, Week 10:</strong> Lezhi (<code>@LezhiFu</code>) holds S2 <code>shelf-life-truth-keeper</code> and S7 <code>asc-listing-truth-keeper</code>, with S8 <code>website-truth-auditor</code> as a stretch. Ziyun (<code>@ZiyunGuo0614</code>) holds S1 <code>backend-health-warden</code> and S3 <code>fridge-enumeration-evaluator</code>, with S9 <code>docs-freshness-registrar</code> as a stretch. Full gate command, cadence, evidence contract, and milestone for each seat are in <a href="#seats">Week 10 seats</a>.</span>
                     </div>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md" target="_blank" rel="noopener">Quality gates &amp; the four canonical evidence buckets</a></li>
-                        <li><a href="#extension-lanes">Open lanes &mdash; claim a subsystem before building its maintainer agent</a></li>
+                        <li><a href="#start-here">Start here, the canonical Monday page</a></li>
+                        <li><a href="#seats">Week 10 seats, gate command and evidence contract for each</a></li>
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> each automation running unattended by Wed Aug 19 and &ge;48h by Friday, with evidence; statuses recorded in the four canonical buckets (VERIFIED / CODE-SHIPPED-NOT-VERIFIED / BLOCKED / INCONCLUSIVE).</span>
+                        <span><strong>Deliverable:</strong> one supervised clean iteration per primary seat, with the per-iteration JSON line and the matching <code>observations.jsonl</code> entry, plus progress on that seat's first-week milestone. Unattended operation and any 48-hour claim remain <code>BLOCKED</code>.</span>
                     </div>
                     <div class="skills">
                         <span class="skill-tag">Maintainer agents</span>
                         <span class="skill-tag">Propose-and-approve automation</span>
                         <span class="skill-tag">Kill-flag safety</span>
                         <span class="skill-tag">Cost-aware model routing</span>
-                        <span class="skill-tag">Unattended evidence</span>
+                        <span class="skill-tag">Unattended evidence (gated)</span>
                     </div>
                 </div>
             </details>
