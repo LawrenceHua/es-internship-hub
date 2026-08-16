@@ -827,7 +827,8 @@ There is no <code>make test</code> in this repo. The <code>Makefile</code> is th
 cd es-intern-freshlens
 python3 -m venv venv &amp;&amp; source venv/bin/activate   <span class="c"># Windows: py -m venv venv ; venv\Scripts\Activate.ps1</span>
 pip install -r requirements.txt
-pytest -q                                        <span class="c"># passes offline, no token, no key, no network</span></code></li>
+pytest -q                                        <span class="c"># 2621 passed, 22 skipped, offline, no token or key</span></code>
+Clone into a subdirectory, not straight into your home folder. Two fixture-safety tests assert on the parent of the repository, so a clone at <code>~/es-intern-freshlens</code> makes them fail on a message about your home directory. Verified today: same commit, cloned one level deeper, 2621 passed and 22 skipped.</li>
 
                 <li><strong>Proxy key by direct message, then one smoke call.</strong> Your individual bearer key arrives by private DM only. It is never in a repository, never in an issue, never in a shared channel. All keys expire 2026-08-30.
 <code class="codeline">curl -s https://freshlens-proxy.fly.dev/health
@@ -894,7 +895,7 @@ It is checked at the top of every iteration and again before config load. Presen
             <a href="#seats" class="card-link">See your seats</a>
             <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" class="card-link secondary" target="_blank" rel="noopener">PR #248, the agent framework</a>
             <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/blob/main/ACCESS.md" class="card-link secondary" target="_blank" rel="noopener">Sandbox access contract</a>
-            <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/blob/main/docs/MAINTAINER-SEATS-W10.md" class="card-link secondary" target="_blank" rel="noopener">Seat briefs in markdown</a>
+            <a href="https://github.com/LawrenceHua/es-intern-product-sandbox/pull/16" class="card-link secondary" target="_blank" rel="noopener">Seat briefs in markdown, PR pending merge</a>
         </div>
     </div>
 </div>
