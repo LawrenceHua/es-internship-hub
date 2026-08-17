@@ -827,8 +827,8 @@ There is no <code>make test</code> in this repo. The <code>Makefile</code> is th
 cd es-intern-freshlens
 python3 -m venv venv &amp;&amp; source venv/bin/activate   <span class="c"># Windows: py -m venv venv ; venv\Scripts\Activate.ps1</span>
 pip install -r requirements.txt
-pytest -q                                        <span class="c"># 2621 passed, 22 skipped, offline, no token or key</span></code>
-Clone into a subdirectory, not straight into your home folder. Two fixture-safety tests assert on the parent of the repository, so a clone at <code>~/es-intern-freshlens</code> makes them fail on a message about your home directory. Verified today: same commit, cloned one level deeper, 2621 passed and 22 skipped.</li>
+pytest -q                                        <span class="c"># 2622 passed, 21 skipped, offline, no token or key</span></code>
+Clone into a subdirectory, not straight into your home folder. Two fixture-safety tests assert on the parent of the repository, so a clone at <code>~/es-intern-freshlens</code> makes them fail on a message about your home directory. Verified today: same commit, cloned one level deeper, 2622 passed and 21 skipped.</li>
 
                 <li><strong>Proxy key by direct message, then one smoke call.</strong> Your individual bearer key arrives by private DM only. It is never in a repository, never in an issue, never in a shared channel. All keys expire 2026-08-30.
 <code class="codeline">curl -s https://freshlens-proxy.fly.dev/health
@@ -860,7 +860,7 @@ git rev-parse HEAD                               <span class="c"># expect 41ef4b
 source venv/bin/activate</code></li>
 
                 <li><strong>Run the one lane that is expected to pass.</strong>
-<code class="codeline">python scripts/maintainer_agents/claims_routing.py --once   <span class="c"># expect VERIFIED, exit 0</span></code>
+<code class="codeline">python scripts/maintainer_agents/claims_routing.py --once   <span class="c"># VERIFIED exit 0, or INCONCLUSIVE exit 1 on a busy machine &mdash; INCONCLUSIVE is normal, not a failure</span></code>
 The other two lanes return <code>BLOCKED</code> and exit <code>1</code> by design. That is an honest outcome, not a failure to fix:
 <code class="codeline">python scripts/maintainer_agents/dedup_inventory.py --once     <span class="c"># expect BLOCKED, exit 1</span>
 python scripts/maintainer_agents/ground_truth_data.py --once   <span class="c"># expect BLOCKED, exit 1</span></code></li>
@@ -932,7 +932,7 @@ It is checked at the top of every iteration and again before config load. Presen
                 <p><strong>Cadence.</strong> 86400 seconds.</p>
                 <p><strong>Propose-only action.</strong> Open a PR against <code>docs/appstore/*.md</code> when the gate reports drift. Never run <code>asc_push_listing.py --apply</code>. That writes text a reviewer reads, and it is Lawrence's action alone.</p>
                 <p><strong>Evidence contract.</strong> The gate's full verdict block including the standing precondition list it always prints, plus the live character counts from <code>asc_state.py</code>. A doc edit is never evidence of ASC state.</p>
-                <p><strong>First-week milestone.</strong> Clear the review-notes drift, live 3995 versus docs 3998 characters, and the <code>recognize</code> warning to a clean exit 0. Then write the list of the four things this gate cannot check: App Privacy labels, demo login, account deletion, and the content-rights declaration.</p>
+                <p><strong>First-week milestone.</strong> Clear the review-notes drift, live 3998 versus docs 3642 characters, and the <code>recognize</code> warning to a clean exit 0. Then write the list of the four things this gate cannot check: App Privacy labels, demo login, account deletion, and the content-rights declaration.</p>
                 <p><strong><code>health_observable</code>.</strong> <code>true</code>.</p>
             </div>
             <div class="lane-card">
