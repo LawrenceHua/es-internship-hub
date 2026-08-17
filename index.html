@@ -304,7 +304,7 @@
         }
         .lane-card:hover { border-color: var(--border-hover); }
 
-        /* Week 10 seat cards: grid items must be allowed to shrink, otherwise a
+        /* Week 12 seat cards: grid items must be allowed to shrink, otherwise a
            long gate command sets the track width and the page scrolls sideways. */
         #seats .lanes-grid { grid-template-columns: repeat(3, 1fr); align-items: start; }
         #seats .lane-card { min-width: 0; }
@@ -784,13 +784,13 @@
             <span><strong>The scanner is compile-time off.</strong> <code>AppConfiguration.swift</code> gates <code>scannerEnabled</code> behind <code>#if DEBUG &amp;&amp; SCANNER_LAB</code>, so a normal build cannot reach it. Any page, doc, or README that describes a working freshness scanner is describing a target, not a shipped feature.</span>
         </div>
         <div class="deliverable caution spaced">
-            <span><strong>The only shipping AI feature is fridge photo enumeration.</strong> <code>POST /api/v1/fridge/enumerate</code> sends the photo to a vision provider and gets back a list of items. It identifies what is in the fridge. It does not score freshness, and it has never been scored itself. Producing that first score is a Week 10 seat.</span>
+            <span><strong>The only shipping AI feature is fridge photo enumeration.</strong> <code>POST /api/v1/fridge/enumerate</code> sends the photo to a vision provider and gets back a list of items. It identifies what is in the fridge. It does not score freshness, and it has never been scored itself. Producing that first score is a Week 12 seat.</span>
         </div>
         <div class="deliverable blocked spaced">
             <span><strong>App Store submission is OFF.</strong> It stays off until the scanner clears an in-store gold set. The gold gate fails 5 of its 6 floors today, so no candidate is promotable and nothing is submitted.</span>
         </div>
         <div class="deliverable verified spaced">
-            <span><strong>Interns build the maintenance automations. Interns do not touch production.</strong> Neither Week 10 intern has, or should get, write access to the product repository. Every seat is propose-only: it opens a pull request or writes a digest, and a human applies it. No seat merges, deploys, or holds a production credential.</span>
+            <span><strong>Interns build the maintenance automations. Interns do not touch production.</strong> Neither Week 12 intern has, or should get, write access to the product repository. Every seat is propose-only: it opens a pull request or writes a digest, and a human applies it. No seat merges, deploys, or holds a production credential.</span>
         </div>
     </div>
 </div>
@@ -801,11 +801,11 @@
     <div class="container">
         <div class="section-header">
             <h2>Start here &middot; Monday, Aug 17</h2>
-            <p>This is the only start page for Week 10. Every other page on this site is context or archive. If two pages disagree, this one wins.</p>
+            <p>This is the only start page for Week 12. Every other page on this site is context or archive. If two pages disagree, this one wins.</p>
         </div>
 
         <div class="deliverable verified spaced">
-            <span><strong>Week 10 cohort:</strong> Lezhi Fu (<code>@LezhiFu</code>) and Ziyun Guo (<code>@ZiyunGuo0614</code>). That is the whole active cohort. Earlier pages on this site list eight names from the core program; those are historical.</span>
+            <span><strong>Week 12 cohort:</strong> Lezhi Fu (<code>@LezhiFu</code>) and Ziyun Guo (<code>@ZiyunGuo0614</code>). That is the whole active cohort. Earlier pages on this site list eight names from the core program; those are historical.</span>
         </div>
 
         <div class="do-now">
@@ -838,7 +838,7 @@ curl -s -H "Authorization: Bearer $FRESHLENS_KEY" https://freshlens-proxy.fly.de
 
                 <li><strong>Slack channels to join:</strong> <code>#es-daily</code>, <code>#es-incidents</code>, <code>#es-growth</code>, <code>#es-approvals</code>, <code>#expired-solutions</code>, <code>#ai-agent-mesh</code>. There is no dedicated intern channel. Post your standup, your blockers, and your evidence in <code>#es-daily</code>, and DM Lawrence for anything involving a key or a credential.</li>
 
-                <li><strong>Where work is tracked.</strong> No Jira board is linked from this hub. Week 10 work is tracked as GitHub issues and pull requests in the three intern repositories above. Your seat's output is a pull request or a digest, both of which live there.</li>
+                <li><strong>Where work is tracked.</strong> No Jira board is linked from this hub. Week 12 work is tracked as GitHub issues and pull requests in the three intern repositories above. Your seat's output is a pull request or a digest, both of which live there.</li>
             </ol>
         </div>
 
@@ -848,7 +848,7 @@ curl -s -H "Authorization: Bearer $FRESHLENS_KEY" https://freshlens-proxy.fly.de
         </div>
 
         <div class="deliverable blocked spaced">
-            <span><strong>BLOCKED, and this is the reason:</strong> <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248</a> at head <code>41ef4b86e2379e444518<wbr>e043a9d99a4e55d3014e</code> carries a posted review with five blocking items. Two of them matter for you directly: the pinned container image lacks the repository's test dependencies, so a contained gate cannot go green, <code>last_clean_verified</code> is never seeded, and unattended repair returns <code>no_safe_repair_basis</code> every time. Unattended mode is inert today. Supervised <code>--once</code> runs are fine and are exactly what Week 10 should use.</span>
+            <span><strong>BLOCKED, and this is the reason:</strong> <a href="https://github.com/LawrenceHua/es-intern-freshlens/pull/248" target="_blank" rel="noopener">PR #248</a> at head <code>41ef4b86e2379e444518<wbr>e043a9d99a4e55d3014e</code> carries a posted review with five blocking items. Two of them matter for you directly: the pinned container image lacks the repository's test dependencies, so a contained gate cannot go green, <code>last_clean_verified</code> is never seeded, and unattended repair returns <code>no_safe_repair_basis</code> every time. Unattended mode is inert today. Supervised <code>--once</code> runs are fine and are exactly what Week 12 should use.</span>
         </div>
 
         <div class="do-now">
@@ -900,12 +900,17 @@ It is checked at the top of every iteration and again before config load. Presen
     </div>
 </div>
 
-<!-- Week 10 seats -->
+<!-- Week 12 seats -->
 <div class="section" id="seats">
     <div class="container">
         <div class="section-header">
-            <h2>Week 10 seats</h2>
+            <h2>Week 12 seats</h2>
             <p>A maintainer seat is a named, propose-only agent that owns one subsystem's health. It runs a gate, records an observation, and when the gate is red it opens a pull request or writes a digest. It never merges, never deploys, and never touches a production credential. Two seats each, plus one stretch seat that opens only if both primaries are green by Wednesday.</p>
+        </div>
+
+        <div class="deliverable verified spaced">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span><strong>Lane claims, granted in Slack Monday Aug 17.</strong> Both interns claimed their pre-pivot lane from the <a href="#extension-lanes">open-lanes</a> list, and both claims were granted. The lanes do not become extra work &mdash; each one folds into the seats below. <strong>Verification layer &rarr; Lezhi.</strong> The truth-keeper trio <em>is</em> the verification layer after the pivot: S2, S7 and S8. The capability-registry and evidence-pack specifics fold into the S8 and S2 milestones rather than standing as their own deliverable. <strong>Dedup &amp; inventory &rarr; Ziyun.</strong> The photos-on-manually-entered-items half is already <strong>SHIPPED</strong> in build <code>2026081401</code>; the remaining duplicate-receipt records sharing one dedup key is the named first pull-request target under her portfolio, riding with S1, alongside S3 and S9. The other two lanes, claims routing and ground truth &amp; data, stay in the backlog unclaimed &mdash; they are not seats and nobody is accountable for them this week.</span>
         </div>
 
         <h3 style="margin:0 0 1rem;">Lezhi Fu &middot; <code>@LezhiFu</code></h3>
@@ -1095,8 +1100,8 @@ It is checked at the top of every iteration and again before config load. Presen
             <div class="phase-card phase-ext">
                 <div class="phase-number">5</div>
                 <h3>Automation Extension</h3>
-                <div class="phase-weeks">Weeks 9&ndash;11 &middot; Aug 10&ndash;28</div>
-                <p>Weeks 9&ndash;11 &middot; Automation Extension &mdash; audit, expectations, maintainer agents, one umbrella.</p>
+                <div class="phase-weeks">Weeks 11&ndash;13 &middot; Aug 10&ndash;28</div>
+                <p>Weeks 11&ndash;13 &middot; Automation Extension &mdash; audit and expectations, the maintainer-seat assignment, then observability of what those agents actually do.</p>
             </div>
         </div>
     </div>
@@ -1835,12 +1840,12 @@ cd es-intern-freshlens
                 </div>
             </details>
 
-            <!-- WEEK 9 -->
-            <details class="week" id="week-9-overview">
+            <!-- WEEK 11 -->
+            <details class="week" id="week-11-overview">
                 <summary>
-                    <span class="week-num">W9</span>
+                    <span class="week-num">W11</span>
                     <span class="week-head">
-                        <span class="week-title">Historical W9: Audit &amp; Expectations <span class="phase-tag">Extension</span></span>
+                        <span class="week-title">Historical W11: Audit &amp; Expectations <span class="phase-tag">Extension</span></span>
                         <span class="week-obj">Audit every lane with agents and write the per-lane Expectation PRD &mdash; findings only, no fixes yet.</span>
                     </span>
                     <span class="week-dates">Aug 10&ndash;14</span>
@@ -1880,13 +1885,13 @@ cd es-intern-freshlens
                 </div>
             </details>
 
-            <!-- WEEK 10 -->
-            <details class="week" id="week-10-overview">
+            <!-- WEEK 12 -->
+            <details class="week" id="week-12-overview">
                 <summary>
-                    <span class="week-num">W10</span>
+                    <span class="week-num">W12</span>
                     <span class="week-head">
-                        <span class="week-title">Maintainer Seats, Supervised <span class="phase-tag">Extension</span></span>
-                        <span class="week-obj">Two maintainer seats each, run supervised with <code>--once</code>. Unattended mode stays blocked until PR #248 is repaired and re-reviewed.</span>
+                        <span class="week-title">Assignment Week &mdash; Maintainer Seats, Supervised <span class="phase-tag">Extension</span></span>
+                        <span class="week-obj">This is the week the assignment goes out: two maintainer seats each for the two interns continuing with the extra work, run supervised with <code>--once</code>. Unattended mode stays blocked until PR #248 is repaired and re-reviewed.</span>
                     </span>
                     <span class="week-dates">Aug 17&ndash;21</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
@@ -1898,13 +1903,13 @@ cd es-intern-freshlens
                         <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Report evidence actually earned</h4><p>Record VERIFIED / CODE-SHIPPED-NOT-VERIFIED / BLOCKED / INCONCLUSIVE from observed evidence, plus your seat's first-week milestone. Claim no duration that a run did not actually accumulate.</p></div>
                     </div>
                     <div class="deliverable caution spaced">
-                        <span><strong>Seat assignment, Week 10:</strong> Lezhi (<code>@LezhiFu</code>) holds S2 <code>shelf-life-truth-keeper</code> and S7 <code>asc-listing-truth-keeper</code>, with S8 <code>website-truth-auditor</code> as a stretch. Ziyun (<code>@ZiyunGuo0614</code>) holds S1 <code>backend-health-warden</code> and S3 <code>fridge-enumeration-evaluator</code>, with S9 <code>docs-freshness-registrar</code> as a stretch. Full gate command, cadence, evidence contract, and milestone for each seat are in <a href="#seats">Week 10 seats</a>.</span>
+                        <span><strong>Seat assignment, Week 12:</strong> Lezhi (<code>@LezhiFu</code>) holds S2 <code>shelf-life-truth-keeper</code> and S7 <code>asc-listing-truth-keeper</code>, with S8 <code>website-truth-auditor</code> as a stretch. Ziyun (<code>@ZiyunGuo0614</code>) holds S1 <code>backend-health-warden</code> and S3 <code>fridge-enumeration-evaluator</code>, with S9 <code>docs-freshness-registrar</code> as a stretch. Full gate command, cadence, evidence contract, and milestone for each seat are in <a href="#seats">Week 12 seats</a>.</span>
                     </div>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md" target="_blank" rel="noopener">Quality gates &amp; the four canonical evidence buckets</a></li>
                         <li><a href="#start-here">Start here, the canonical Monday page</a></li>
-                        <li><a href="#seats">Week 10 seats, gate command and evidence contract for each</a></li>
+                        <li><a href="#seats">Week 12 seats, gate command and evidence contract for each</a></li>
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -1920,36 +1925,38 @@ cd es-intern-freshlens
                 </div>
             </details>
 
-            <!-- WEEK 11 -->
-            <details class="week" id="week-11-overview">
+            <!-- WEEK 13 -->
+            <details class="week" id="week-13-overview">
                 <summary>
-                    <span class="week-num">W11</span>
+                    <span class="week-num">W13</span>
                     <span class="week-head">
-                        <span class="week-title">Umbrella Integration &amp; Final Demo <span class="phase-tag">Extension</span></span>
-                        <span class="week-obj">Integrate the MVP umbrella and run one hands-free demo: regression in, fix PR out, gate green, digest reported.</span>
+                        <span class="week-title">Observability &amp; Final Demo <span class="phase-tag">Extension</span></span>
+                        <span class="week-obj">Make the Week 12 automations observable &mdash; a dashboard, telemetry, and a receipt per run for every maintainer seat &mdash; then prove it with one hands-free demo: regression in, fix PR out, gate green, digest reported.</span>
                     </span>
                     <span class="week-dates">Aug 24&ndash;28</span>
                     <svg class="week-chev" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </summary>
                 <div class="week-body">
                     <div class="day-grid day-grid-3">
-                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Umbrella integration</h4><p>Wire registry &rarr; dispatch &rarr; evidence aggregation &rarr; daily Slack digest (MVP scope only). Digest posting via the @Expired Slack agent goes live once its launchd plist is loaded &mdash; a Lawrence-gated step, probed with <code>launchctl print</code> and a test post.</p></div>
-                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Dry run &middot; 12:00 PM ET</div><h4>Rehearse the hands-free loop</h4><p>Rehearse: inject a regression, confirm a monitor catches it, confirm the maintainer agent proposes a fix PR. Feedback-loop ingestion (app feedback/market research &rarr; proposed tasks) stays a stretch goal, not demo-gating.</p></div>
-                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Final Demo + handoff</h4><p>One hands-free run: inject a regression &rarr; monitor catches it &rarr; agent proposes fix PR &rarr; gate green &rarr; digest reports it. Handoff doc and LinkedIn wrap-up close the extension.</p></div>
+                        <div class="day"><div class="day-name">Mon</div><div class="day-time">12:00 PM ET</div><h4>Make each seat observable</h4><p>For every seat you were assigned in Week 12, stand up the three observability surfaces: a <strong>dashboard</strong> row showing last run, last verdict, and staleness; <strong>telemetry</strong> appended to <code>observations.jsonl</code> on every run, red or green; and a <strong>receipt</strong> per run &mdash; the command, the exit code, and the artifact a reader can re-check. Supporting content: the umbrella wiring those surfaces feed (registry &rarr; dispatch &rarr; evidence aggregation &rarr; daily Slack digest, MVP scope only). Digest posting via the @Expired Slack agent goes live once its launchd plist is loaded &mdash; a Lawrence-gated step, probed with <code>launchctl print</code> and a test post.</p></div>
+                        <div class="day"><div class="day-name">Wed</div><div class="day-time">Dry run &middot; 12:00 PM ET</div><h4>Prove the surfaces do not lie</h4><p>Rehearse: inject a regression, confirm a monitor catches it, confirm the maintainer agent proposes a fix PR &mdash; and confirm the dashboard, the telemetry line, and the receipt all report that same red, at the same time, without being told. A surface that stays green through an injected regression is the bug. Feedback-loop ingestion (app feedback/market research &rarr; proposed tasks) stays a stretch goal, not demo-gating.</p></div>
+                        <div class="day"><div class="day-name">Fri</div><div class="day-time">12:00 PM ET</div><h4>Final Demo + handoff</h4><p>One hands-free run, watched through your own instruments: inject a regression &rarr; monitor catches it &rarr; agent proposes fix PR &rarr; gate green &rarr; digest reports it, with the dashboard and the run receipt shown alongside. Handoff doc and LinkedIn wrap-up close the extension.</p></div>
                     </div>
                     <p class="week-sub">Resources</p>
                     <ul class="resource-list">
                         <li><a href="https://github.com/LawrenceHua/es-intern-freshlens/blob/main/docs/QUALITY-GATES.md" target="_blank" rel="noopener">Quality gates &amp; the four canonical evidence buckets</a></li>
+                        <li><a href="#week-12-overview">Week 12 seats &mdash; the automations Week 13 has to make observable</a></li>
                         <li><a href="freshlens.html#week-8-automation">Per-intern automation parts &mdash; continuity from Week 8</a></li>
                     </ul>
                     <div class="deliverable">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span><strong>Deliverable:</strong> the MVP umbrella live (registry &rarr; dispatch &rarr; evidence aggregation &rarr; daily Slack digest) and one hands-free demo run Friday Aug 28, plus a handoff doc.</span>
+                        <span><strong>Deliverable:</strong> observability for every seat assigned in Week 12 &mdash; dashboard row, <code>observations.jsonl</code> telemetry, and a re-checkable receipt per run &mdash; carried by the MVP umbrella (registry &rarr; dispatch &rarr; evidence aggregation &rarr; daily Slack digest), plus one hands-free demo run Friday Aug 28 and a handoff doc.</span>
                     </div>
                     <div class="skills">
-                        <span class="skill-tag">System integration</span>
+                        <span class="skill-tag">Observability</span>
+                        <span class="skill-tag">Telemetry &amp; receipts</span>
+                        <span class="skill-tag">Dashboards</span>
                         <span class="skill-tag">Slack automation</span>
-                        <span class="skill-tag">Hands-free demos</span>
                         <span class="skill-tag">Regression injection</span>
                         <span class="skill-tag">Program handoff</span>
                     </div>
@@ -1965,7 +1972,7 @@ cd es-intern-freshlens
     <div class="container">
         <div class="section-header">
             <h2>Extension &mdash; Open Lanes</h2>
-            <p>Four lanes from the real Week 8 backlog, open for the Aug 10&ndash;28 automation extension.</p>
+            <p>Four lanes from the real Week 8 backlog, opened for the Aug 10&ndash;28 automation extension. Two are claimed and folded into the <a href="#seats">Week 12 seats</a>; two remain unclaimed backlog.</p>
         </div>
         <div class="lanes-grid">
             <div class="lane-card">
@@ -1978,7 +1985,7 @@ cd es-intern-freshlens
             <div class="lane-card">
                 <div class="lane-card-head">
                     <h3>Dedup &amp; inventory</h3>
-                    <span style="font-family: var(--mono); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent-muted); border-radius: 5px; padding: 0.15rem 0.5rem;">Open</span>
+                    <span style="font-family: var(--mono); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent-muted); border-radius: 5px; padding: 0.15rem 0.5rem;">Claimed &middot; Ziyun</span>
                 </div>
                 <p>Duplicate-receipt records sharing one dedup key (Ziyun's bug), plus photos on manually-entered items (Tony's ask).</p>
             </div>
@@ -1992,12 +1999,12 @@ cd es-intern-freshlens
             <div class="lane-card">
                 <div class="lane-card-head">
                     <h3>Verification layer</h3>
-                    <span style="font-family: var(--mono); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent-muted); border-radius: 5px; padding: 0.15rem 0.5rem;">Open</span>
+                    <span style="font-family: var(--mono); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent-muted); border-radius: 5px; padding: 0.15rem 0.5rem;">Claimed &middot; Lezhi</span>
                 </div>
                 <p>Capability registry at 3/19 VERIFIED: extend the closeout orchestrator and build the proposed codebase-digest evidence pack (Yizhou).</p>
             </div>
         </div>
-        <p class="lanes-note">Unpaid, self-directed, evidence-gated continuation of the internship &mdash; no compensation or certificate attaches to a lane. Every lane already carries full sandbox <code>read/write</code> and a live proxy key issued at kickoff (see <a href="#week-9-overview">Week 9</a>) &mdash; claiming a lane adds your name, not a new access request. To claim a lane, message Lawrence in Slack by Wed Aug 12.</p>
+        <p class="lanes-note">Unpaid, self-directed, evidence-gated continuation of the internship &mdash; no compensation or certificate attaches to a lane. Every lane already carries full sandbox <code>read/write</code> and a live proxy key issued at kickoff (see <a href="#week-11-overview">Week 11</a>) &mdash; claiming a lane adds your name, not a new access request. Claims closed Monday Aug 17: the verification layer went to Lezhi and dedup &amp; inventory to Ziyun, both folded into their seats. Claims routing and ground truth &amp; data are unclaimed backlog with no owner.</p>
     </div>
 </div>
 
