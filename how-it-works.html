@@ -102,6 +102,19 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 .bot .pill.run{background:#f2c94c22;color:#f2c94c}
 .mini{font-family:var(--mono);font-size:11.5px;color:#9ecbb2;margin-top:10px;line-height:1.9}
 
+/* automation matrix */
+.matrix{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.mrow{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.mrow .mic{font-size:19px;width:26px;text-align:center;flex:0 0 auto}
+.mrow .mname{font-weight:700;font-size:14px;flex:1 1 150px;min-width:130px}
+.mrow .mchips{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 100%}
+.mrow .mcheck{color:var(--muted);font-size:12px;font-family:var(--mono);flex:1 1 100%;padding-left:38px}
+.chip{font-family:var(--mono);font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.chip.auto{background:var(--leaf-soft);color:var(--primary-mid)}
+.chip.human{background:var(--line);color:var(--muted)}
+.chip.approved{background:var(--sky-soft);color:var(--sky)}
+.chip.dev{background:var(--amber-soft);color:var(--amber)}
+
 .foot{background:var(--primary);color:#9ecbb2;text-align:center;padding:26px 0;margin-top:64px;font-size:13.5px}
 .foot b{color:#fff}
 </style>
@@ -231,21 +244,54 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
   <h2>The automations in between</h2>
   <p class="lead">Nobody has to remember to check anything. Each robot has one job, a trigger, and a place it reports to.</p>
   <div class="bots">
-    <div class="bot"><div class="ic">🚀</div><h3>Release robot</h3><p>Ships new backend versions without a human typing deploy commands.</p>
+    <div class="bot"><div class="ic">🚀</div><h3>Release robot</h3><p>A human approves and starts every deploy — the robot builds it, rehearses it on the twin, and undoes any failure automatically.</p>
       <div class="io"><span class="pill run">trigger: one approval</span></div>
       <div class="mini">build once → rehearse on the twin →<br>same build to production →<br>any failure = automatic undo</div></div>
-    <div class="bot"><div class="ic">🛡️</div><h3>Gatekeeper</h3><p>Blocks any code change that fails a test. No exceptions.</p>
-      <div class="io"><span class="pill in">in: every change</span><span class="pill out">out: green or blocked</span><span class="pill run">trigger: each push</span></div></div>
+    <div class="bot"><div class="ic">🛡️</div><h3>Gatekeeper</h3><p>Blocks any pull request that fails a test — unit suites, release contracts. No exceptions.</p>
+      <div class="io"><span class="pill in">in: every push/PR</span><span class="pill out">out: green or blocked</span><span class="pill run">trigger: each push/PR</span></div></div>
     <div class="bot"><div class="ic">🍎</div><h3>Store watcher</h3><p>Watches the App Store review status so nobody refreshes a dashboard.</p>
       <div class="io"><span class="pill out">out: chat alert</span><span class="pill run">trigger: every 30 min</span></div></div>
-    <div class="bot"><div class="ic">🩺</div><h3>Health watcher</h3><p>Probes the live system and pages a human when something real changes — including when another robot goes quiet.</p>
-      <div class="io"><span class="pill out">out: page a human</span><span class="pill run">trigger: every 30 min</span></div></div>
+    <div class="bot"><div class="ic">🩺</div><h3>Health watcher</h3><p>Runs 7 real checks every 30 minutes — production health, the canary twin, App Store watcher freshness, backups, domain status — and pages a human when something changes.</p>
+      <div class="io"><span class="pill out">out: page a human</span><span class="pill run">trigger: every 30 min</span></div>
+      <div class="mini">coming next → a robot that watches the robots</div></div>
   </div>
   <div class="rule">🧍 <b>What stays human, on purpose:</b> approving a release, publishing anything public, and the App Store launch button. The robots do everything up to the decision — the decision stays with a person.</div>
 </div>
 
+<div class="sec" id="matrix">
+  <span class="secnum">07 · AUTOMATION AT A GLANCE</span>
+  <h2>Which flows are automated?</h2>
+  <p class="lead">Same honesty rule, in one place: what runs itself, what a person still signs off on, and how we check it.</p>
+  <div class="matrix">
+    <div class="mrow"><span class="mic">📷</span><span class="mname">Fridge scan</span>
+      <span class="mchips"><span class="chip auto">automated</span></span>
+      <span class="mcheck">how we check: dates come from the shelf-life table, not a guess</span></div>
+    <div class="mrow"><span class="mic">🎭</span><span class="mname">Backend release verification</span>
+      <span class="mchips"><span class="chip auto">automated</span></span>
+      <span class="mcheck">how we check: must pass on the canary twin first</span></div>
+    <div class="mrow"><span class="mic">🚀</span><span class="mname">Production deploy</span>
+      <span class="mchips"><span class="chip approved">human-approved</span><span class="chip auto">machine-verified</span></span>
+      <span class="mcheck">how we check: auto-rollback if anything looks wrong</span></div>
+    <div class="mrow"><span class="mic">🍎</span><span class="mname">App Store submission</span>
+      <span class="mchips"><span class="chip human">human</span></span>
+      <span class="mcheck">how we check: a person reviews, then clicks submit</span></div>
+    <div class="mrow"><span class="mic">🔬</span><span class="mname">Model retraining</span>
+      <span class="mchips"><span class="chip human">human-run today</span><span class="chip dev">automation in development</span></span>
+      <span class="mcheck">how we check: same safety tests as any model, before it ships</span></div>
+    <div class="mrow"><span class="mic">🖼️</span><span class="mname">Screenshot / listing updates</span>
+      <span class="mchips"><span class="chip human">human</span><span class="chip auto">auto-verified</span></span>
+      <span class="mcheck">how we check: automated compare before it publishes</span></div>
+    <div class="mrow"><span class="mic">📣</span><span class="mname">Marketing posts</span>
+      <span class="mchips"><span class="chip approved">human-approved queue</span><span class="chip dev">in development</span></span>
+      <span class="mcheck">how we check: queued for a human OK before it goes out</span></div>
+    <div class="mrow"><span class="mic">🩺</span><span class="mname">Health monitoring</span>
+      <span class="mchips"><span class="chip auto">automated alerts</span><span class="chip dev">self-healing: in development</span></span>
+      <span class="mcheck">how we check: 7-check fingerprint, every 30 minutes</span></div>
+  </div>
+</div>
+
 <div class="sec" id="value">
-  <span class="secnum">07 · WHY THIS EXISTS</span>
+  <span class="secnum">08 · WHY THIS EXISTS</span>
   <h2>The wedge: most value per perishable</h2>
   <p class="lead">The app is step one of a bigger bet — getting the most value out of food that expires. Three pillars, labeled honestly by what ships today vs what's next.</p>
   <div class="cards">
