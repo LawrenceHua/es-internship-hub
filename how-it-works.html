@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Xpired Works</title>
+<meta name="description" content="From a photo of your fridge to 'use the spinach by Thursday' — the Xpired system explained visually: front end, back end, AI, data, and the robots that keep it running.">
+<meta name="theme-color" content="#1a3c34">
+<link rel="canonical" href="https://es-internship-hub.vercel.app/how-it-works.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ES AI Internship">
+<meta property="og:title" content="How Xpired Works">
+<meta property="og:description" content="Follow one fridge photo through the whole system — apps, API, AI, data, and the release robots.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#1a3c34; --primary-mid:#2a5a4a; --leaf:#3d8b6a; --leaf-soft:#e8f3ee;
+  --ink:#17241f; --muted:#5c6f66; --line:#dfe8e2; --bg:#f7faf8; --card:#ffffff;
+  --amber:#b07a1f; --amber-soft:#faf1dd; --sky:#2f6b9e; --sky-soft:#e7f0f8;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+a{color:var(--primary-mid)}
+
+/* header */
+.top{background:var(--primary);color:#eef6f1;padding:10px 0}
+.top .wrap{display:flex;align-items:center;gap:14px;justify-content:space-between}
+.top a{color:#cfe4d8;text-decoration:none;font-size:14px;font-weight:600}
+.brand{font-weight:800;letter-spacing:-.01em}
+
+.hero{background:linear-gradient(180deg,var(--primary) 0%,var(--primary-mid) 100%);color:#fff;padding:64px 0 84px;text-align:center}
+h1{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}
+.hero p{color:#d7e8de;max-width:52ch;margin:0 auto;font-size:18px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#9ecbb2;display:block;margin-bottom:14px}
+
+h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margin:0 0 6px}
+.sec{padding:58px 0 8px}
+.lead{color:var(--muted);max-width:58ch;margin:0 0 24px}
+.secnum{font-family:var(--mono);color:var(--leaf);font-size:13px;font-weight:700;letter-spacing:.14em}
+
+/* journey flow */
+.flow{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 18px 22px;margin:-46px 0 0;box-shadow:0 10px 30px rgba(26,60,52,.10);position:relative;overflow-x:auto}
+.flowrow{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;min-width:720px;position:relative}
+.stop{flex:1;text-align:center;position:relative;z-index:1}
+.stop .ic{width:64px;height:64px;border-radius:50%;background:var(--leaf-soft);border:2px solid var(--leaf);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 8px;transition:transform .25s}
+.stop:hover .ic{transform:scale(1.12)}
+.stop b{display:block;font-size:14px}
+.stop small{color:var(--muted);font-size:12px;display:block;max-width:15ch;margin:2px auto 0}
+.rail{position:absolute;top:32px;left:7%;right:7%;height:2px;background:var(--line);z-index:0}
+.dot{position:absolute;top:28px;left:7%;width:10px;height:10px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);z-index:2;animation:travel 8s ease-in-out infinite}
+@keyframes travel{0%{left:7%}18%{left:26%}36%{left:45%}58%{left:64%}80%{left:86%}100%{left:86%;opacity:0}}
+@media (prefers-reduced-motion: reduce){.dot{animation:none;display:none}.stop:hover .ic{transform:none}}
+
+/* layer cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px;margin:20px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+.card.on{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.card{opacity:1;transform:none;transition:none}}
+.card .ic{font-size:30px}
+.card h3{margin:8px 0 4px;font-size:17px;font-weight:700}
+.card p{margin:0 0 10px;color:var(--muted);font-size:14px}
+.io{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-family:var(--mono);font-size:11px;font-weight:500;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.in{background:var(--sky-soft);color:var(--sky)}
+.out{background:var(--leaf-soft);color:var(--primary-mid)}
+.run{background:var(--amber-soft);color:var(--amber)}
+
+.rule{border-left:4px solid var(--leaf);background:var(--card);border-radius:0 12px 12px 0;padding:14px 18px;margin:18px 0;font-size:15px}
+.rule b{color:var(--primary)}
+
+/* BPMN */
+.bpmn{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px;margin:20px 0;overflow-x:auto}
+.bp{display:grid;grid-template-columns:110px repeat(6,1fr);min-width:860px}
+.bp .lane{grid-column:1;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;color:#fff;background:var(--primary-mid);border-radius:8px;margin:4px 6px 4px 0;padding:6px;text-transform:uppercase;writing-mode:horizontal-tb;text-align:center}
+.bp .row{display:contents}
+.bp .cell{border-bottom:1px dashed var(--line);min-height:78px;display:flex;align-items:center;justify-content:center;padding:8px 4px;position:relative}
+.bp .row:last-child .cell,.bp .row:last-child .lane{border-bottom:none}
+.task{background:var(--leaf-soft);border:1.5px solid var(--leaf);border-radius:10px;padding:8px 10px;font-size:12.5px;font-weight:600;text-align:center;max-width:150px}
+.event{width:34px;height:34px;border-radius:50%;border:2.5px solid var(--primary);display:flex;align-items:center;justify-content:center;font-size:15px;background:#fff}
+.event.end{border-width:4px}
+.gate{width:44px;height:44px;background:var(--amber-soft);border:1.5px solid var(--amber);transform:rotate(45deg);display:flex;align-items:center;justify-content:center}
+.gate span{transform:rotate(-45deg);font-size:16px}
+.glabel{position:absolute;bottom:4px;font-family:var(--mono);font-size:10px;color:var(--muted);width:100%;text-align:center}
+.arrow{color:var(--muted);font-size:18px}
+
+/* robots */
+.bots{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px;margin:20px 0}
+.bot{background:var(--primary);color:#e7f2ea;border-radius:14px;padding:18px;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+.bot.on{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.bot{opacity:1;transform:none;transition:none}}
+.bot .ic{font-size:28px}
+.bot h3{margin:8px 0 4px;font-size:16.5px;color:#fff}
+.bot p{margin:0 0 10px;color:#b9d4c4;font-size:13.5px}
+.bot .pill.in{background:rgba(255,255,255,.14);color:#cfe4d8}
+.bot .pill.out{background:rgba(255,255,255,.14);color:#cfe4d8}
+.bot .pill.run{background:#f2c94c22;color:#f2c94c}
+.mini{font-family:var(--mono);font-size:11.5px;color:#9ecbb2;margin-top:10px;line-height:1.9}
+
+.foot{background:var(--primary);color:#9ecbb2;text-align:center;padding:26px 0;margin-top:64px;font-size:13.5px}
+.foot b{color:#fff}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <span class="brand">🥬 Xpired</span>
+  <nav><a href="index.html">← Internship Hub</a></nav>
+</div></div>
+
+<div class="hero"><div class="wrap">
+  <span class="kicker">System map · classroom edition</span>
+  <h1>How Xpired Works</h1>
+  <p>Follow one photo of your fridge all the way to "use the spinach by Thursday" — and meet the robots that keep the whole thing running.</p>
+</div></div>
+
+<div class="wrap">
+
+<div class="flow" aria-label="The journey of one fridge photo">
+  <div class="flowrow">
+    <div class="rail"></div><div class="dot"></div>
+    <div class="stop"><div class="ic">📱</div><b>You snap</b><small>one fridge photo</small></div>
+    <div class="stop"><div class="ic">☁️</div><b>API receives</b><small>checks who you are</small></div>
+    <div class="stop"><div class="ic">🧠</div><b>AI identifies</b><small>names each food — that's all</small></div>
+    <div class="stop"><div class="ic">📚</div><b>Table answers</b><small>curated shelf-life data</small></div>
+    <div class="stop"><div class="ic">✅</div><b>You decide</b><small>"use by Thursday"</small></div>
+  </div>
+</div>
+
+<div class="sec" id="frontend">
+  <span class="secnum">01 · FRONT END</span>
+  <h2>Two apps people touch</h2>
+  <p class="lead">Native iPhone apps. They take photos and show answers — no AI runs on the phone.</p>
+  <div class="cards">
+    <div class="card"><div class="ic">🛒</div><h3>Xpired for Shoppers</h3><p>Your fridge, tracked. Photo in, dates out.</p>
+      <div class="io"><span class="pill in">in: camera</span><span class="pill out">out: what to use, when</span><span class="pill run">runs: on your phone</span></div></div>
+    <div class="card"><div class="ic">🏪</div><h3>Xpired for Merchants</h3><p>Same idea for store shelves and markdowns.</p>
+      <div class="io"><span class="pill in">in: shelf photos</span><span class="pill out">out: markdown candidates</span><span class="pill run">runs: on your phone</span></div></div>
+  </div>
+</div>
+
+<div class="sec" id="backend">
+  <span class="secnum">02 · BACK END</span>
+  <h2>One API, plus its stunt double</h2>
+  <p class="lead">A Python (FastAPI) server in the cloud answers every app request. Next to it lives an identical twin used to rehearse releases safely.</p>
+  <div class="cards">
+    <div class="card"><div class="ic">☁️</div><h3>Production API</h3><p>Auth, rate limits, budgets, and every answer the apps show.</p>
+      <div class="io"><span class="pill in">in: app requests</span><span class="pill out">out: JSON answers</span><span class="pill run">runs: 24/7</span></div></div>
+    <div class="card"><div class="ic">🎭</div><h3>Canary twin</h3><p>Every new release must prove itself here first. Sleeps when unused.</p>
+      <div class="io"><span class="pill in">in: candidate builds</span><span class="pill out">out: pass / fail</span><span class="pill run">runs: on release days</span></div></div>
+  </div>
+</div>
+
+<div class="sec" id="ai">
+  <span class="secnum">03 · AI</span>
+  <h2>The AI names your food. It never guesses freshness.</h2>
+  <p class="lead">Today a vision model identifies what's in the photo — identification only. Freshness comes from data, not from a guess.</p>
+  <div class="cards">
+    <div class="card"><div class="ic">🧠</div><h3>Vision AI</h3><p>Looks at the photo, returns food names. Third-party today; in-house models are being evaluated to take the lead, with the third party as backup.</p>
+      <div class="io"><span class="pill in">in: photo</span><span class="pill out">out: "milk, lettuce, eggs"</span><span class="pill run">runs: per scan</span></div></div>
+    <div class="card"><div class="ic">🔬</div><h3>The evidence gate</h3><p>An in-house model ships only after passing hard safety tests — like almost never calling spoiled food fresh.</p>
+      <div class="io"><span class="pill in">in: candidate model</span><span class="pill out">out: ship / not yet</span><span class="pill run">runs: before any launch</span></div></div>
+  </div>
+  <div class="rule">🤝 <b>The honesty rule:</b> if we can't back an answer with data, the app says <b>"we don't know"</b> instead of making something up. That rule costs us features — and it's why you can trust the ones we keep.</div>
+</div>
+
+<div class="sec" id="data">
+  <span class="secnum">04 · DATA</span>
+  <h2>Where everything lives</h2>
+  <div class="cards">
+    <div class="card"><div class="ic">🗄️</div><h3>Database</h3><p>MongoDB — accounts, pantry items, scan history.</p>
+      <div class="io"><span class="pill in">in: every change</span><span class="pill out">out: your pantry</span></div></div>
+    <div class="card"><div class="ic">🖼️</div><h3>Image storage</h3><p>Tigris object storage — the photos themselves.</p>
+      <div class="io"><span class="pill in">in: photos</span><span class="pill out">out: secure links</span></div></div>
+    <div class="card"><div class="ic">📚</div><h3>Shelf-life table</h3><p>Curated food-storage data — the source of every date.</p>
+      <div class="io"><span class="pill in">in: a food name</span><span class="pill out">out: a date, or "not covered"</span></div></div>
+  </div>
+</div>
+
+<div class="sec" id="bpmn">
+  <span class="secnum">05 · THE FLOW, FORMALLY</span>
+  <h2>One scan as a BPMN diagram</h2>
+  <p class="lead">Same journey, drawn the way process engineers draw it — five lanes, one decision diamond.</p>
+  <div class="bpmn"><div class="bp">
+    <div class="row">
+      <div class="lane">User</div>
+      <div class="cell"><div class="event" title="start">📷</div></div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"><div class="event end" title="end">✅</div></div>
+    </div>
+    <div class="row">
+      <div class="lane">App</div>
+      <div class="cell"><div class="task">Send photo</div></div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"><div class="task">Show dates + "unknowns"</div></div>
+      <div class="cell"><span class="arrow">↗</span></div>
+    </div>
+    <div class="row">
+      <div class="lane">Backend</div>
+      <div class="cell"><span class="arrow">↘</span></div>
+      <div class="cell"><div class="task">Auth + budget check</div></div>
+      <div class="cell"></div>
+      <div class="cell"><div class="gate"><span>❓</span></div><div class="glabel">covered by table?</div></div>
+      <div class="cell"><span class="arrow">↖</span></div>
+      <div class="cell"></div>
+    </div>
+    <div class="row">
+      <div class="lane">AI</div>
+      <div class="cell"></div>
+      <div class="cell"><span class="arrow">↘</span></div>
+      <div class="cell"><div class="task">Identify foods (names only)</div></div>
+      <div class="cell"><span class="arrow">↗</span></div>
+      <div class="cell"></div><div class="cell"></div>
+    </div>
+    <div class="row">
+      <div class="lane">Data</div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"><div class="task">Yes → date · No → say "unknown"</div></div>
+      <div class="cell"></div><div class="cell"></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="sec" id="robots">
+  <span class="secnum">06 · THE ROBOTS</span>
+  <h2>The automations in between</h2>
+  <p class="lead">Nobody has to remember to check anything. Each robot has one job, a trigger, and a place it reports to.</p>
+  <div class="bots">
+    <div class="bot"><div class="ic">🚀</div><h3>Release robot</h3><p>Ships new backend versions without a human typing deploy commands.</p>
+      <div class="io"><span class="pill run">trigger: one approval</span></div>
+      <div class="mini">build once → rehearse on the twin →<br>same build to production →<br>any failure = automatic undo</div></div>
+    <div class="bot"><div class="ic">🛡️</div><h3>Gatekeeper</h3><p>Blocks any code change that fails a test. No exceptions.</p>
+      <div class="io"><span class="pill in">in: every change</span><span class="pill out">out: green or blocked</span><span class="pill run">trigger: each push</span></div></div>
+    <div class="bot"><div class="ic">🍎</div><h3>Store watcher</h3><p>Watches the App Store review status so nobody refreshes a dashboard.</p>
+      <div class="io"><span class="pill out">out: chat alert</span><span class="pill run">trigger: every 30 min</span></div></div>
+    <div class="bot"><div class="ic">🩺</div><h3>Health watcher</h3><p>Probes the live system and pages a human when something real changes — including when another robot goes quiet.</p>
+      <div class="io"><span class="pill out">out: page a human</span><span class="pill run">trigger: every 30 min</span></div></div>
+  </div>
+  <div class="rule">🧍 <b>What stays human, on purpose:</b> approving a release, publishing anything public, and the App Store launch button. The robots do everything up to the decision — the decision stays with a person.</div>
+</div>
+
+</div>
+
+<div class="foot"><div class="wrap"><b>Xpired</b> · truth-first by design — when we don't know, we say so.</div></div>
+
+<script>
+(function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.card,.bot').forEach(function(el){el.classList.add('on')});
+    return;
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.card,.bot').forEach(function(el,i){
+    el.style.transitionDelay = (i%4)*70+'ms';
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
