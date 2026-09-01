@@ -6,7 +6,7 @@
     "to": "2026-09-01"
   },
   "verdict_key": {
-    "VERIFIED": "re-run by a second reviewer and reproduced",
+    "VERIFIED": "checked a second time, by a different reviewer, by the planner re-running the implementer's own command, or by an automated gate, and the same result came back",
     "CODE-SHIPPED-NOT-VERIFIED": "the change exists but its proof has not been re-run",
     "BLOCKED": "cannot proceed until a named human action happens",
     "INCONCLUSIVE": "the evidence available cannot decide it",
@@ -56,7 +56,7 @@
     {
       "id": "L05",
       "lane": "Recommendation model training",
-      "deliverable": "This week's preparation work for the app's next scheduled recommendation-model training run is fully checked and passing.",
+      "deliverable": "This week's preparation work for the app's next scheduled recommendation-model training run is written and passing its own tests, but the safety check that refuses a starved training class still sits in a separate change that has not been reviewed or merged.",
       "verdict": "CODE-SHIPPED-NOT-VERIFIED",
       "evidence": "A second, independent check with a different model family found a gap: the training script itself still finishes normally when one label class has too few examples to learn from. The separate coverage checker does refuse that case, but the refusal is not yet wired into the trainer, so it must be connected and re-proven before this work can be called verified.",
       "verified_by": "second reviewer",
@@ -88,7 +88,7 @@
       "lane": "Behind-the-scenes reliability",
       "deliverable": "The app's self-healing safety net, the system that automatically tries to fix a stuck internal helper before waking a person up, was put through a full week of deliberate breakage drills to prove it actually works and not just that it looks armed.",
       "verdict": "VERIFIED",
-      "evidence": "Ten separate proof drills ran this week, and two pre-existing test failures found at the very start were both explained as stale checks rather than real problems and were corrected. Across everything exercised, only one genuine, non-simulated automatic fix has ever fired in this system's whole history, and it fired successfully this week, which is also the first time it had ever been possible for it to fire at all.",
+      "evidence": "A week of deliberate breakage exercises was run and written up. Two test failures found at the very start were both explained as out-of-date checks rather than real problems, and were corrected. In this system's whole history only one automatic repair has ever fired for real rather than inside a drill. It fired this week, which was also the first time it had ever been possible for it to fire at all.",
       "verified_by": "second reviewer",
       "date": "2026-09-01",
       "links": []
@@ -108,7 +108,7 @@
       "lane": "Server reliability and security",
       "deliverable": "Work to reconcile the two versions of the server's code that had drifted apart, so future deployments are unambiguous, is written and passing every automated check, but has not yet been re-confirmed by a second, independent pass.",
       "verdict": "CODE-SHIPPED-NOT-VERIFIED",
-      "evidence": "All of the automated release checks for this merge came back green, but it still needs an independent re-run of those same checks before it counts as confirmed, and none of it has been deployed to the live server yet.",
+      "evidence": "Most of the automated release checks for this merge are green, but one of the three is failing right now on exactly the version of the code being proposed. That check has to go green, and then be re-run independently, before this counts as confirmed. None of it has been deployed to the live server yet.",
       "verified_by": "planner",
       "date": "2026-09-01",
       "links": []
@@ -148,7 +148,7 @@
       "lane": "App Store visuals",
       "deliverable": "The six new preview screenshots were captured off a slightly different version of the code than the one that just fixed this week's most important wording bug, so as they stand they would ship an already-outdated screen.",
       "verdict": "BLOCKED",
-      "evidence": "The branch used to capture the images does not yet include this week's fix that stops a saved item from claiming how many days of life it has left. Before these images can be used, that fix needs to be combined into the same branch and the screenshots need to be recaptured against the result.",
+      "evidence": "The fix that stops a saved item from claiming how many days of life it has left has since been combined into the same branch, so that half is done. What is still outstanding is recapturing the six images against the combined result, because the pictures on file were taken from the earlier version of the code.",
       "verified_by": "planner",
       "date": "2026-09-01",
       "links": []
@@ -308,7 +308,7 @@
       "lane": "Shopper experience polish",
       "deliverable": "A saved fridge item used to say how many days of life it had left, based on food the app was never actually able to check, and it now correctly says only what its planning estimate is.",
       "verdict": "VERIFIED",
-      "evidence": "The old wording implied the app measured how fresh a specific item really was, which nothing in that feature does. The fix was proven by reverting it and watching three specific tests fail with the exact old wording quoted back, then confirming a full run of 1,835 tests passes with zero failures, five more than the count before this fix, exactly matching the size of the new safeguard added.",
+      "evidence": "The old wording implied the app measured how fresh a specific item really was, which nothing in that feature does. The fix was proven by reverting it and watching three specific tests fail with the exact old wording quoted back, then confirming a full run of the interface test suite, 1,818 tests, passes with zero failures. The five new tests written to guard this exact wording are part of that run.",
       "verified_by": "second reviewer",
       "date": "2026-09-01",
       "links": []
@@ -328,7 +328,7 @@
       "lane": "Behind-the-scenes reliability",
       "deliverable": "The condition that was supposed to trigger an automatic repair could never actually happen under real conditions, because of how the trigger was written; this was found and fixed this week.",
       "verdict": "VERIFIED",
-      "evidence": "The repair used to fire only on a fresh change in status, but the one problem it most needed to fix had been stuck in the same bad status for weeks, so the trigger never saw a change to react to. After the fix, that same real, long-stuck problem was automatically and successfully repaired for the first time, confirmed by a repair record that had never held a value before.",
+      "evidence": "The repair used to fire only when a status freshly changed, but the one problem it most needed to fix had been stuck in the same bad status for weeks, so the trigger never saw a change to react to. After the fix, the automatic repair finally fired on that real, long-stuck problem for the first time, confirmed by a repair record that had never held a value before. The underlying problem is still open, so this proves the repair now reaches real conditions, not that the condition is resolved.",
       "verified_by": "second reviewer",
       "date": "2026-09-01",
       "links": []
@@ -396,9 +396,9 @@
     {
       "id": "L39",
       "lane": "App Store submission",
-      "deliverable": "A required setup step in the App Store management console, making the app available for purchase in any region at all, has not been completed yet.",
+      "deliverable": "A required setup step in the App Store management console, making the app available for download in any region at all, was completed today.",
       "verdict": "VERIFIED",
-      "evidence": "Done today: the app is now set as available in all 175 App Store regions, confirmed by reading the setting back through Apple's developer interface rather than trusting the click.",
+      "evidence": "The app is now set as available in all 175 App Store regions, confirmed by reading the setting back through Apple's developer interface rather than trusting the click. Only someone with owner access to that console can re-check this one.",
       "verified_by": "planner",
       "date": "2026-09-01",
       "links": []
@@ -428,7 +428,7 @@
       "lane": "Server reliability and security",
       "deliverable": "Two old internal log files must be scrubbed of sensitive material before that folder can be connected to shared source control.",
       "verdict": "BLOCKED",
-      "evidence": "The scrub and a storage rule that prevents a repeat are prerequisites; until then that folder stays local.",
+      "evidence": "Both files have now been cleaned of the sensitive material, and a storage rule has been added so the same kind of file cannot be committed again. This row moves off blocked once someone confirms the folder is ready to connect to shared source control.",
       "verified_by": "planner",
       "date": "2026-09-01",
       "links": []
@@ -500,6 +500,16 @@
       "verdict": "INCONCLUSIVE",
       "evidence": "Work started today: a private home for the cloud copies exists and the first jobs are being ported. No uptime is claimed until the cloud copies have run for a full seven days, and the number is never back-filled.",
       "verified_by": "planner",
+      "date": "2026-09-01",
+      "links": []
+    },
+    {
+      "id": "L50",
+      "lane": "App Store submission",
+      "deliverable": "The store listing text and one of the submitted screenshots still describe the saved item screen as counting down how many days of life food has left, which the app no longer says.",
+      "verdict": "BLOCKED",
+      "evidence": "The app itself was fixed this week, but the listing wording, the stored screenshot, and the automated check that pins that wording were deliberately left alone. Changing the words without recapturing the picture would make the listing wrong about the very image a reviewer opens. All three have to move together in one change before the next submission, and no current test fails to warn anyone about the gap.",
+      "verified_by": "adversarial verifier",
       "date": "2026-09-01",
       "links": []
     }
