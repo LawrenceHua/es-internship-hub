@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How Xpired Works</title>
-<meta name="description" content="From a photo of your fridge to 'use the spinach by Thursday' — the Xpired system explained visually: front end, back end, AI, data, and the robots that keep it running.">
+<meta name="description" content="From a photo of your fridge to 'use the spinach by Thursday': the Xpired system explained visually through the front end, back end, AI, data, and the robots that keep it running.">
 <meta name="theme-color" content="#1a3c34">
 <link rel="canonical" href="https://es-internship-hub.vercel.app/how-it-works.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ES AI Internship">
 <meta property="og:title" content="How Xpired Works">
-<meta property="og:description" content="Follow one fridge photo through the whole system — apps, API, AI, data, and the release robots.">
+<meta property="og:description" content="Follow one fridge photo through the whole system: apps, API, AI, data, and the release robots.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -129,26 +129,26 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 <div class="hero"><div class="wrap">
   <span class="kicker">System map · classroom edition</span>
   <h1>How Xpired Works</h1>
-  <p>Follow one photo of your fridge all the way to "use the spinach by Thursday" — and meet the robots that keep the whole thing running.</p>
+  <p>Follow one photo of your fridge all the way to "use the spinach by Thursday," and meet the robots that keep the whole thing running.</p>
 </div></div>
 
 <div class="wrap">
 
-<div class="flow" aria-label="The journey of one fridge photo">
+<div class="flow" role="group" aria-label="The journey of one fridge photo">
   <div class="flowrow">
     <div class="rail"></div><div class="dot"></div>
     <div class="stop"><div class="ic">📱</div><b>You snap</b><small>one fridge photo</small></div>
     <div class="stop"><div class="ic">☁️</div><b>API receives</b><small>checks who you are</small></div>
-    <div class="stop"><div class="ic">🧠</div><b>AI identifies</b><small>names each food — that's all</small></div>
+    <div class="stop"><div class="ic">🧠</div><b>AI identifies</b><small>names each food, and that's all</small></div>
     <div class="stop"><div class="ic">📚</div><b>Table answers</b><small>curated shelf-life data</small></div>
     <div class="stop"><div class="ic">✅</div><b>You decide</b><small>"use by Thursday"</small></div>
   </div>
 </div>
 
 <div class="sec" id="frontend">
-  <span class="secnum">01 · FRONT END</span>
+  <span class="secnum">FRONT END</span>
   <h2>Two apps people touch</h2>
-  <p class="lead">Native iPhone apps. They take photos and show answers — no AI runs on the phone.</p>
+  <p class="lead">Native iPhone apps. They take photos and show answers; no AI runs on the phone.</p>
   <div class="cards">
     <div class="card"><div class="ic">🛒</div><h3>Xpired for Shoppers</h3><p>Your fridge, tracked. Photo in, dates out.</p>
       <div class="io"><span class="pill in">in: camera</span><span class="pill out">out: what to use, when</span><span class="pill run">runs: on your phone</span></div></div>
@@ -158,7 +158,7 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 </div>
 
 <div class="sec" id="backend">
-  <span class="secnum">02 · BACK END</span>
+  <span class="secnum">BACK END</span>
   <h2>One API, plus its stunt double</h2>
   <p class="lead">A Python (FastAPI) server in the cloud answers every app request. Next to it lives an identical twin used to rehearse releases safely.</p>
   <div class="cards">
@@ -170,35 +170,35 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 </div>
 
 <div class="sec" id="ai">
-  <span class="secnum">03 · AI</span>
+  <span class="secnum">AI</span>
   <h2>The AI names your food. It never guesses freshness.</h2>
-  <p class="lead">Today a vision model identifies what's in the photo — identification only. Freshness comes from data, not from a guess.</p>
+  <p class="lead">Today a vision model identifies what's in the photo, and identification is all it does. Freshness comes from data, not from a guess.</p>
   <div class="cards">
     <div class="card"><div class="ic">🧠</div><h3>Vision AI</h3><p>Looks at the photo, returns food names. Third-party today; in-house models are being evaluated to take the lead, with the third party as backup.</p>
       <div class="io"><span class="pill in">in: photo</span><span class="pill out">out: "milk, lettuce, eggs"</span><span class="pill run">runs: per scan</span></div></div>
-    <div class="card"><div class="ic">🔬</div><h3>The evidence gate</h3><p>Before any in-house model ships, it must pass hard safety gates — including almost never calling spoiled food fresh. None has cleared the bar yet; until one does, identification runs on a third-party model and nothing judges freshness.</p>
+    <div class="card"><div class="ic">🔬</div><h3>The evidence gate</h3><p>Before any in-house model ships, it must pass hard safety gates, including almost never calling spoiled food fresh. None has cleared the bar yet; until one does, identification runs on a third-party model and nothing judges freshness.</p>
       <div class="io"><span class="pill in">in: candidate model</span><span class="pill out">out: ship / not yet</span><span class="pill run">runs: before any launch</span></div></div>
   </div>
-  <div class="rule">🤝 <b>The honesty rule:</b> if we can't back an answer with data, the app says <b>"we don't know"</b> instead of making something up. That rule costs us features — and it's why you can trust the ones we keep.</div>
+  <div class="rule">🤝 <b>The honesty rule:</b> if we can't back an answer with data, the app says <b>"we don't know"</b> instead of making something up. That rule costs us features, and it's why you can trust the ones we keep.</div>
 </div>
 
 <div class="sec" id="data">
-  <span class="secnum">04 · DATA</span>
+  <span class="secnum">DATA</span>
   <h2>Where everything lives</h2>
   <div class="cards">
-    <div class="card"><div class="ic">🗄️</div><h3>Database</h3><p>MongoDB — accounts, pantry items, scan history.</p>
+    <div class="card"><div class="ic">🗄️</div><h3>Database</h3><p>MongoDB stores accounts, pantry items, and scan history.</p>
       <div class="io"><span class="pill in">in: every change</span><span class="pill out">out: your pantry</span></div></div>
-    <div class="card"><div class="ic">🖼️</div><h3>Image storage</h3><p>Tigris object storage — the photos themselves.</p>
+    <div class="card"><div class="ic">🖼️</div><h3>Image storage</h3><p>Tigris object storage holds the photos themselves.</p>
       <div class="io"><span class="pill in">in: photos</span><span class="pill out">out: secure links</span></div></div>
-    <div class="card"><div class="ic">📚</div><h3>Shelf-life table</h3><p>Curated food-storage data — the source of every date.</p>
+    <div class="card"><div class="ic">📚</div><h3>Shelf-life table</h3><p>Curated food-storage data is the source of every date.</p>
       <div class="io"><span class="pill in">in: a food name</span><span class="pill out">out: a date, or "not covered"</span></div></div>
   </div>
 </div>
 
 <div class="sec" id="bpmn">
-  <span class="secnum">05 · THE FLOW, FORMALLY</span>
+  <span class="secnum">THE FLOW, FORMALLY</span>
   <h2>One scan as a BPMN diagram</h2>
-  <p class="lead">Same journey, drawn the way process engineers draw it — five lanes, one decision diamond.</p>
+  <p class="lead">The same journey, drawn the way process engineers draw it: five lanes, one decision diamond.</p>
   <div class="bpmn"><div class="bp">
     <div class="row">
       <div class="lane">User</div>
@@ -240,26 +240,26 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 </div>
 
 <div class="sec" id="robots">
-  <span class="secnum">06 · THE ROBOTS</span>
+  <span class="secnum">THE ROBOTS</span>
   <h2>The automations in between</h2>
   <p class="lead">Nobody has to remember to check anything. Each robot has one job, a trigger, and a place it reports to.</p>
   <div class="bots">
-    <div class="bot"><div class="ic">🚀</div><h3>Release robot</h3><p>A human approves and starts every deploy — the robot builds it, rehearses it on the twin, and undoes any failure automatically.</p>
+    <div class="bot"><div class="ic">🚀</div><h3>Release robot</h3><p>A human approves and starts every deploy. The robot builds it, rehearses it on the twin, and undoes any failure automatically.</p>
       <div class="io"><span class="pill run">trigger: one approval</span></div>
       <div class="mini">build once → rehearse on the twin →<br>same build to production →<br>any failure = automatic undo</div></div>
-    <div class="bot"><div class="ic">🛡️</div><h3>Gatekeeper</h3><p>Blocks any pull request that fails a test — unit suites, release contracts. No exceptions.</p>
+    <div class="bot"><div class="ic">🛡️</div><h3>Gatekeeper</h3><p>Blocks any pull request that fails a test, including unit suites and release contracts. No exceptions.</p>
       <div class="io"><span class="pill in">in: every push/PR</span><span class="pill out">out: green or blocked</span><span class="pill run">trigger: each push/PR</span></div></div>
     <div class="bot"><div class="ic">🍎</div><h3>Store watcher</h3><p>Watches the App Store review status so nobody refreshes a dashboard.</p>
       <div class="io"><span class="pill out">out: chat alert</span><span class="pill run">trigger: every 30 min</span></div></div>
-    <div class="bot"><div class="ic">🩺</div><h3>Health watcher</h3><p>Runs 7 real checks every 30 minutes — production health, the canary twin, App Store watcher freshness, backups, domain status — and pages a human when something changes.</p>
+    <div class="bot"><div class="ic">🩺</div><h3>Health watcher</h3><p>Runs 7 real checks every 30 minutes: production health, the canary twin, App Store watcher freshness, backups, and domain status. It pages a human when something changes.</p>
       <div class="io"><span class="pill out">out: page a human</span><span class="pill run">trigger: every 30 min</span></div>
       <div class="mini">coming next → a robot that watches the robots</div></div>
   </div>
-  <div class="rule">🧍 <b>What stays human, on purpose:</b> approving a release, publishing anything public, and the App Store launch button. The robots do everything up to the decision — the decision stays with a person.</div>
+  <div class="rule">🧍 <b>What stays human, on purpose:</b> approving a release, publishing anything public, and the App Store launch button. The robots do everything up to the decision; the decision stays with a person.</div>
 </div>
 
 <div class="sec" id="matrix">
-  <span class="secnum">07 · AUTOMATION AT A GLANCE</span>
+  <span class="secnum">AUTOMATION AT A GLANCE</span>
   <h2>Which flows are automated?</h2>
   <p class="lead">Same honesty rule, in one place: what runs itself, what a person still signs off on, and how we check it.</p>
   <div class="matrix">
@@ -291,23 +291,23 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 </div>
 
 <div class="sec" id="value">
-  <span class="secnum">08 · WHY THIS EXISTS</span>
+  <span class="secnum">WHY THIS EXISTS</span>
   <h2>The wedge: most value per perishable</h2>
-  <p class="lead">The app is step one of a bigger bet — getting the most value out of food that expires. Three pillars, labeled honestly by what ships today vs what's next.</p>
+  <p class="lead">The app is step one of a bigger bet: getting the most value out of food that expires. Three pillars, labeled honestly by what ships today vs what's next.</p>
   <div class="cards">
     <div class="card"><div class="ic">⏳</div><h3>Shelf-life budget</h3><p>How long everything you own will realistically last.</p>
       <div class="io"><span class="pill out">shipping now</span></div></div>
     <div class="card"><div class="ic">🛍️</div><h3>Buying behavior</h3><p>When to buy, how much, and what actually gets used.</p>
       <div class="io"><span class="pill run">in development</span></div></div>
-    <div class="card"><div class="ic">💰</div><h3>Money saved</h3><p>Waste you didn't create — counted, not estimated into existence.</p>
+    <div class="card"><div class="ic">💰</div><h3>Money saved</h3><p>Waste you didn't create, counted instead of estimated into existence.</p>
       <div class="io"><span class="pill run">in development</span></div></div>
   </div>
-  <div class="rule">🧱 <b>What compounds:</b> the curated shelf-life table, a rights-clean labeled photo corpus, and a release pipeline that refuses to ship an unsafe model. The moat is data and trust — not any single feature.</div>
+  <div class="rule">🧱 <b>What compounds:</b> the curated shelf-life table, a rights-clean labeled photo corpus, and a release pipeline that refuses to ship an unsafe model. The moat is data and trust, not any single feature.</div>
 </div>
 
 </div>
 
-<div class="foot"><div class="wrap"><b>Xpired</b> · truth-first by design — when we don't know, we say so.</div></div>
+<div class="foot"><div class="wrap"><b>Xpired</b> · truth-first by design. When we don't know, we say so.</div></div>
 
 <script>
 (function(){
