@@ -1,0 +1,20 @@
+{
+  "schema_version": "xpired-uptime-v1",
+  "generated_at": "2026\u002d09\u002d01T21:00:00Z",
+  "window_days": 7,
+  "status": "not_started",
+  "counted": [],
+  "worst_lane_uptime_7d": null,
+  "mean_uptime_7d": null,
+  "not_counted": {
+    "existing_moved": 5,
+    "new_checks": 2,
+    "mac_bound": 31,
+    "categories": [
+      "Apple toolchain builds and device tests",
+      "studio-machine hardware checks",
+      "the human release keystroke"
+    ]
+  },
+  "note": "Cloud lanes are being built; the seven-day window starts when they go live and is never back-filled."
+}
