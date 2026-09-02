@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Ledger</title>
+    <meta name="description" content="A plain-language record of what the Xpired program checked this week and what each result means.">
+    <meta name="theme-color" content="#1a3c34">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3c34;
+            --primary-mid: #2a5a4a;
+            --accent: #2d6e55;
+            --accent-light: #e8f5ef;
+            --accent-muted: #5ba88a;
+            --fresh: #2e9e5b;
+            --caution: #e0a106;
+            --urgent: #d23b3b;
+            --surface: #ffffff;
+            --surface-alt: #f6f8f7;
+            --surface-elevated: #ffffff;
+            --border: #e2e5ea;
+            --border-hover: #c8cdd4;
+            --text: #1a1d23;
+            --text-secondary: #5a6170;
+            --text-tertiary: #6b7585;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+            --radius: 10px;
+            --radius-lg: 16px;
+            --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--surface);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--accent); }
+        a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+        .skip-link {
+            position: fixed; top: 0.5rem; left: 0.5rem; z-index: 200;
+            transform: translateY(-180%); padding: 0.6rem 0.9rem;
+            background: var(--primary); color: #fff; border-radius: 6px;
+            font-weight: 700; text-decoration: none;
+        }
+        .skip-link:focus { transform: translateY(0); }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 1120px; height: 56px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        }
+        .nav-brand {
+            display: flex; align-items: center; gap: 0.55rem;
+            font-weight: 700; font-size: 0.95rem; color: var(--primary);
+            letter-spacing: -0.01em; text-decoration: none; white-space: nowrap;
+        }
+        .brand-mark { width: 22px; height: 22px; flex-shrink: 0; display: block; }
+        .nav-actions { display: flex; align-items: center; gap: 1rem; }
+        .nav-actions a { font-size: 0.86rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+
+        .hero {
+            margin-top: 56px; padding: 5.5rem 2rem 4rem;
+            background: linear-gradient(150deg, var(--primary) 0%, var(--primary-mid) 100%);
+            color: #fff;
+        }
+        .hero-inner { width: min(920px, 100%); margin: 0 auto; }
+        .hero h1 { font-size: clamp(2.25rem, 8vw, 4.4rem); line-height: 1.03; letter-spacing: -0.045em; }
+        .hero p { max-width: 690px; margin-top: 1.3rem; color: rgba(255,255,255,0.82); font-size: 1.08rem; }
+        .freshness-rule { height: 3px; border: 0; background: linear-gradient(90deg, var(--fresh), var(--caution), var(--urgent)); }
+
+        main { width: min(920px, calc(100% - 2.5rem)); margin: 0 auto; }
+        section { padding: 4rem 0 0; }
+        h2 { color: var(--primary); font-size: clamp(1.65rem, 4vw, 2.25rem); letter-spacing: -0.025em; }
+        .section-lead { max-width: 690px; margin-top: 0.55rem; color: var(--text-secondary); }
+        .loading, .load-error { margin-top: 1.25rem; color: var(--text-secondary); }
+        .load-error { border-left: 3px solid var(--urgent); padding-left: 0.8rem; }
+
+        .verdict-guide {
+            margin-top: 1.5rem; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.7rem;
+        }
+        .verdict-guide div { border-top: 1px solid var(--border); padding-top: 0.65rem; }
+        .verdict-guide dt { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; color: var(--primary); overflow-wrap: anywhere; }
+        .verdict-guide dd { margin-top: 0.2rem; color: var(--text-secondary); font-size: 0.84rem; }
+
+        .scroll-region { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+        /* One column per verdict in the legend, whatever that count becomes. */
+        .summary-strip {
+            min-width: max-content; margin-top: 1.75rem; display: grid;
+            grid-auto-flow: column; grid-auto-columns: minmax(125px, 1fr); gap: 0.65rem;
+        }
+        .summary-item { border: 1px solid var(--border); border-radius: var(--radius); padding: 0.85rem; background: var(--surface-alt); }
+        .summary-count { display: block; color: var(--primary); font-size: 1.55rem; font-weight: 800; line-height: 1; }
+        .summary-label { display: block; margin-top: 0.45rem; font-family: var(--mono); font-size: 0.68rem; color: var(--text-secondary); overflow-wrap: anywhere; }
+
+        .ledger-groups { display: grid; gap: 3rem; margin-top: 3rem; }
+        .lane-group { min-width: 0; }
+        .lane-group h3 { color: var(--primary); font-size: 1.22rem; letter-spacing: -0.015em; }
+        .lane-count { margin-left: 0.45rem; color: var(--text-tertiary); font-family: var(--mono); font-size: 0.72rem; font-weight: 500; }
+
+        .deliverable {
+            display: flex; gap: 0.7rem; align-items: flex-start;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 1.2rem;
+            font-size: 0.86rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .deliverable svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 0.15rem; }
+        .deliverable strong { color: var(--primary); font-weight: 700; }
+        .deliverable.spaced { margin-bottom: 1.25rem; }
+        .deliverable.caution { border-left-color: #b9770e; }
+        .deliverable.caution svg { stroke: #8a5708; }
+        .deliverable.verified { border-left-color: #1f8b4c; }
+        .deliverable.blocked { border-left-color: #b42318; }
+        .deliverable.blocked svg { stroke: #b42318; }
+        .deliverable.reported { border-left-color: #8b93a1; }
+        .deliverable-body { min-width: 0; width: 100%; }
+        .card-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.55rem; }
+        .entry-id { font-family: var(--mono); font-size: 0.72rem; color: var(--text-tertiary); }
+        .verdict-chip {
+            display: inline-flex; max-width: 100%; padding: 0.22rem 0.55rem;
+            border-radius: 999px; font-family: var(--mono); font-size: 0.66rem;
+            font-weight: 700; background: #fff; border: 1px solid var(--border);
+            overflow-wrap: anywhere;
+        }
+        .verdict-chip.verified { color: #176c3b; border-color: #91c9a7; }
+        .verdict-chip.blocked { color: #8d1b13; border-color: #e1a29d; }
+        .verdict-chip.caution { color: #80510a; border-color: #d7b16c; }
+        .verdict-chip.reported { color: #4c535f; border-color: #b6bcc6; }
+        .deliverable-text { margin-top: 0.75rem; color: var(--text); font-size: 0.96rem; font-weight: 650; }
+        .evidence-text { margin-top: 0.55rem; }
+        .entry-links { margin-top: 0.75rem; padding-left: 1.1rem; display: grid; gap: 0.3rem; font-size: 0.88rem; }
+        .entry-links li { padding-left: 0.15rem; }
+        .no-links { margin-top: 0.75rem; font-family: var(--mono); font-size: 0.7rem; color: var(--text-tertiary); }
+        .link-host { font-family: var(--mono); font-size: 0.68rem; color: var(--text-tertiary); overflow-wrap: anywhere; }
+        .entry-meta { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; font-family: var(--mono); font-size: 0.7rem; color: var(--text-tertiary); }
+
+        .uptime-panel {
+            margin-top: 1.6rem; border: 1px solid var(--border); border-radius: var(--radius-lg);
+            padding: clamp(1.1rem, 4vw, 2rem); background: var(--surface-alt); box-shadow: var(--shadow-sm);
+        }
+        .uptime-panel h3 { color: var(--primary); font-size: 1.3rem; }
+        .snapshot-asof { margin-top: 0.25rem; color: var(--text-tertiary); font-family: var(--mono); font-size: 0.72rem; }
+        .denominator { margin-top: 1rem; max-width: 760px; color: var(--text-secondary); }
+        .uptime-metrics { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+        .uptime-metric { min-width: 150px; flex: 1; border-top: 1px solid var(--border); padding-top: 0.7rem; }
+        .uptime-metric span { display: block; color: var(--text-tertiary); font-size: 0.76rem; }
+        .uptime-metric strong { color: var(--primary); font-size: 1.05rem; }
+        .uptime-table { width: 100%; min-width: 650px; margin-top: 1.25rem; border-collapse: collapse; background: var(--surface); }
+        .uptime-table th, .uptime-table td { padding: 0.7rem; border-bottom: 1px solid var(--border); text-align: left; font-size: 0.78rem; }
+        .uptime-table th { color: var(--primary); font-family: var(--mono); font-size: 0.68rem; }
+        .empty-counted { margin-top: 1.2rem; color: var(--text-secondary); font-size: 0.9rem; }
+
+        noscript p { margin-top: 1.2rem; padding: 0.9rem; background: var(--surface-alt); border-left: 3px solid var(--caution); }
+        footer { margin-top: 5rem; padding: 2.2rem 1.25rem; background: var(--primary); color: rgba(255,255,255,0.7); text-align: center; font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 1.25rem; }
+            .hero { padding: 4.5rem 1.25rem 3rem; }
+            main { width: min(100% - 2rem, 920px); }
+            section { padding-top: 3rem; }
+        }
+        @media (max-width: 375px) {
+            .nav-brand span { display: none; }
+            .nav-actions { gap: 0.65rem; }
+            .nav-actions a { font-size: 0.76rem; }
+            .hero { padding-top: 3.8rem; }
+            .deliverable { padding: 0.75rem; }
+        }
+        @media (max-width: 320px) {
+            nav { padding: 0 0.8rem; }
+            main { width: min(100% - 1.4rem, 920px); }
+            .nav-actions { gap: 0.45rem; }
+            .nav-actions a { font-size: 0.7rem; }
+            .entry-meta { display: grid; }
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<nav>
+    <div class="nav-inner">
+        <a class="nav-brand" href="index.html">
+            <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="6" fill="#1a3c34"/>
+                <path d="M8 24 A16 16 0 0 1 24 8" stroke="#3d8b6e" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="8" y1="24" x2="8" y2="19" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="3" fill="#e0a106"/>
+            </svg>
+            <span>ES Internship</span>
+        </a>
+        <div class="nav-actions">
+            <a href="index.html">Program</a>
+            <a href="how-it-works.html">How it works</a>
+        </div>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-inner">
+        <h1>Program Ledger</h1>
+        <p>A ledger is a record of work and the evidence behind it. The verdict guide below explains each result in the source data. Every row names how it was checked.</p>
+    </div>
+</header>
+<hr class="freshness-rule">
+
+<main id="main-content">
+    <section aria-labelledby="verdict-heading">
+        <h2 id="verdict-heading">This week at a glance</h2>
+        <p class="section-lead">The totals and definitions come directly from the ledger file.</p>
+        <p class="snapshot-asof"><span id="ledger-validated">Checking the ledger stamp.</span> <a href="scripts/validate-ledger.js">Read the script</a> &middot; <a href="ledger.json">read the data</a></p>
+        <dl class="verdict-guide" id="verdict-guide"></dl>
+        <div class="scroll-region" tabindex="0" aria-label="Verdict totals">
+            <div class="summary-strip" id="summary-strip"></div>
+        </div>
+    </section>
+
+    <section aria-labelledby="entries-heading">
+        <h2 id="entries-heading">Checked work</h2>
+        <p class="section-lead">Rows are grouped by the part of the program they describe. Each row lists the public links you can open to check it yourself. Most of this week's work sits inside the canonical product repository, which stays out of scope for the internship, so there is nothing public to open for those rows and they say <strong>REPORTED</strong> rather than VERIFIED. The &ldquo;Checked by&rdquo; line still names who checked each one.</p>
+        <p class="loading" id="ledger-state" role="status" aria-live="polite">Loading the ledger.</p>
+        <div class="ledger-groups" id="ledger-groups"></div>
+        <noscript><p>The ledger needs JavaScript; you can read the plain <a href="ledger.json">ledger data here</a>.</p></noscript>
+    </section>
+
+    <section id="uptime" aria-labelledby="uptime-section-heading">
+        <h2 id="uptime-section-heading">Cloud uptime snapshot</h2>
+        <p class="section-lead">This panel begins measuring only after the cloud checks are live.</p>
+        <div class="uptime-panel" aria-live="polite">
+            <h3 id="uptime-headline">Measurement has not started</h3>
+            <p class="snapshot-asof" id="uptime-asof">Loading the snapshot.</p>
+            <p class="denominator" id="uptime-denominator">Reading the denominator from the snapshot.</p>
+            <p class="denominator" id="uptime-note"></p>
+            <div class="uptime-metrics" id="uptime-metrics"></div>
+            <div id="uptime-counted"></div>
+        </div>
+    </section>
+</main>
+
+<footer>Evidence first. A result changes only when its check changes.</footer>
+
+<script>
+(() => {
+    'use strict';
+
+    const FETCH_TIMEOUT_MS = 3000;
+    const UPTIME_SLUG = /^xpired-[a-z0-9-]+$/;
+
+    const fetchJson = async (url) => {
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+        try {
+            const response = await fetch(url, { signal: controller.signal, credentials: 'same-origin' });
+            if (!response.ok) throw new Error('Request failed');
+            return await response.json();
+        } finally {
+            window.clearTimeout(timer);
+        }
+    };
+
+    const setText = (element, value) => {
+        element.textContent = String(value);
+        return element;
+    };
+
+    const formatDate = (value) => {
+        const parsed = new Date(value);
+        if (Number.isNaN(parsed.getTime())) return 'date unavailable';
+        return new Intl.DateTimeFormat('en-US', {
+            year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC'
+        }).format(parsed);
+    };
+
+    const verdictClass = (verdict) => {
+        if (verdict === 'VERIFIED') return 'verified';
+        if (verdict === 'BLOCKED') return 'blocked';
+        if (verdict === 'REPORTED') return 'reported';
+        return 'caution';
+    };
+
+    // Links come from ledger.json, so only https is ever turned into an anchor.
+    const isSafeLink = (url) => {
+        if (typeof url !== 'string') return false;
+        try {
+            return new URL(url, window.location.href).protocol === 'https:';
+        } catch (error) {
+            return false;
+        }
+    };
+
+    const renderEntryLinks = (links) => {
+        const usable = Array.isArray(links)
+            ? links.filter((link) => link && isSafeLink(link.url) && typeof link.label === 'string' && link.label.trim())
+            : [];
+
+        if (usable.length === 0) {
+            const none = setText(document.createElement('p'), 'No public artefact linked.');
+            none.className = 'no-links';
+            return none;
+        }
+
+        const list = document.createElement('ul');
+        list.className = 'entry-links';
+        usable.forEach((link) => {
+            const item = document.createElement('li');
+            const anchor = setText(document.createElement('a'), link.label);
+            anchor.href = link.url;
+            anchor.target = '_blank';
+            anchor.rel = 'noopener';
+            anchor.title = link.url;
+            const host = setText(document.createElement('span'), ` ${new URL(link.url).hostname} — opens in a new tab`);
+            host.className = 'link-host';
+            item.append(anchor, host);
+            list.append(item);
+        });
+        return list;
+    };
+
+    /**
+     * The ledger is hand-written, so the only honest freshness claim is the one
+     * scripts/validate-ledger.js leaves behind when it passes. It also pins a
+     * hash of the entries, so an edited file with an untouched stamp fails the
+     * script rather than quietly keeping this line.
+     */
+    const renderValidationStamp = (validated) => {
+        const target = document.getElementById('ledger-validated');
+        if (!validated || typeof validated !== 'object' || typeof validated.script !== 'string' || typeof validated.at !== 'string') {
+            setText(target, 'This ledger carries no validation stamp.');
+            return;
+        }
+        setText(target, `Checked by ${validated.script} on ${formatDate(validated.at)}. Run it yourself from the repository root.`);
+    };
+
+    const renderLedger = (data) => {
+        if (!data || typeof data.verdict_key !== 'object' || !Array.isArray(data.entries)) {
+            throw new Error('Ledger data is incomplete');
+        }
+
+        renderValidationStamp(data.validated);
+
+        const verdictGuide = document.getElementById('verdict-guide');
+        const summaryStrip = document.getElementById('summary-strip');
+        const groupsRoot = document.getElementById('ledger-groups');
+        const verdicts = Object.keys(data.verdict_key);
+
+        verdicts.forEach((verdict) => {
+            const guideItem = document.createElement('div');
+            const term = setText(document.createElement('dt'), verdict);
+            const description = setText(document.createElement('dd'), data.verdict_key[verdict]);
+            guideItem.append(term, description);
+            verdictGuide.append(guideItem);
+
+            const summaryItem = document.createElement('div');
+            summaryItem.className = 'summary-item';
+            const count = data.entries.filter((entry) => entry.verdict === verdict).length;
+            const countNode = setText(document.createElement('span'), count);
+            countNode.className = 'summary-count';
+            const labelNode = setText(document.createElement('span'), verdict);
+            labelNode.className = 'summary-label';
+            summaryItem.append(countNode, labelNode);
+            summaryStrip.append(summaryItem);
+        });
+
+        const groups = new Map();
+        data.entries.forEach((entry) => {
+            if (!groups.has(entry.lane)) groups.set(entry.lane, []);
+            groups.get(entry.lane).push(entry);
+        });
+
+        groups.forEach((entries, lane) => {
+            const section = document.createElement('section');
+            section.className = 'lane-group';
+            const heading = setText(document.createElement('h3'), lane);
+            const count = setText(document.createElement('span'), `${entries.length} rows`);
+            count.className = 'lane-count';
+            heading.append(count);
+            section.append(heading);
+
+            entries.forEach((entry) => {
+                const resultClass = verdictClass(entry.verdict);
+                const card = document.createElement('article');
+                card.className = `deliverable ${resultClass}`;
+
+                const body = document.createElement('div');
+                body.className = 'deliverable-body';
+                const head = document.createElement('div');
+                head.className = 'card-head';
+                const id = setText(document.createElement('span'), entry.id);
+                id.className = 'entry-id';
+                const chip = setText(document.createElement('span'), entry.verdict);
+                chip.className = `verdict-chip ${resultClass}`;
+                head.append(id, chip);
+
+                const deliverable = setText(document.createElement('p'), entry.deliverable);
+                deliverable.className = 'deliverable-text';
+                const evidence = setText(document.createElement('p'), entry.evidence);
+                evidence.className = 'evidence-text';
+
+                const meta = document.createElement('p');
+                meta.className = 'entry-meta';
+                const reviewer = setText(document.createElement('span'), `Checked by: ${entry.verified_by}`);
+                const date = setText(document.createElement('span'), `Date: ${formatDate(entry.date)}`);
+                meta.append(reviewer, date);
+
+                body.append(head, deliverable, evidence, renderEntryLinks(entry.links), meta);
+                card.append(body);
+                section.append(card);
+            });
+
+            groupsRoot.append(section);
+        });
+
+        const state = document.getElementById('ledger-state');
+        state.remove();
+    };
+
+    const sanitizeCounted = (items) => {
+        if (!Array.isArray(items)) return [];
+        return items.reduce((clean, item) => {
+            if (!item || typeof item.slug !== 'string' || !UPTIME_SLUG.test(item.slug)) return clean;
+            const row = { slug: item.slug };
+            if (typeof item.uptime_7d === 'number') row.uptime_7d = item.uptime_7d;
+            if (Number.isInteger(item.n_pings)) row.n_pings = item.n_pings;
+            if (typeof item.last_ping_age_s === 'number') row.last_ping_age_s = item.last_ping_age_s;
+            if (typeof item.verdict === 'string') row.verdict = item.verdict;
+            clean.push(row);
+            return clean;
+        }, []);
+    };
+
+    const sanitizeNotCounted = (value) => {
+        const clean = {};
+        if (!value || typeof value !== 'object') return clean;
+        if (Number.isInteger(value.existing_moved)) clean.existing_moved = value.existing_moved;
+        if (Number.isInteger(value.new_checks)) clean.new_checks = value.new_checks;
+        if (Number.isInteger(value.mac_bound)) clean.mac_bound = value.mac_bound;
+        return clean;
+    };
+
+    const sanitizeUptime = (raw) => {
+        const clean = {};
+        if (!raw || typeof raw !== 'object') return clean;
+        if (typeof raw.generated_at === 'string') clean.generated_at = raw.generated_at;
+        if (Number.isInteger(raw.window_days)) clean.window_days = raw.window_days;
+        if (typeof raw.status === 'string') clean.status = raw.status;
+        if (Array.isArray(raw.counted)) clean.counted = sanitizeCounted(raw.counted);
+        if (typeof raw.worst_lane_uptime_7d === 'number' || raw.worst_lane_uptime_7d === null) clean.worst_lane_uptime_7d = raw.worst_lane_uptime_7d;
+        if (typeof raw.mean_uptime_7d === 'number' || raw.mean_uptime_7d === null) clean.mean_uptime_7d = raw.mean_uptime_7d;
+        if (raw.not_counted && typeof raw.not_counted === 'object') clean.not_counted = sanitizeNotCounted(raw.not_counted);
+        if (typeof raw.note === 'string') clean.note = raw.note;
+        return clean;
+    };
+
+    const formatPercent = (value) => typeof value === 'number' ? `${value.toFixed(2)}%` : 'not measured';
+
+    /**
+     * These counts used to be typed twice, once in uptime.json and once as prose
+     * in this file, which is one place too many for a number to go stale.
+     * uptime.json is now the only source and the sentence is built from it.
+     */
+    const denominatorSentence = (notCounted) => {
+        const moved = notCounted.existing_moved;
+        const fresh = notCounted.new_checks;
+        const macBound = notCounted.mac_bound;
+        if (![moved, fresh, macBound].every(Number.isInteger)) {
+            return 'The counted and not-counted totals are missing from the snapshot.';
+        }
+        const total = moved + macBound;
+        return `${moved} of the ${total} Xpired scheduled lanes that used to run only on the studio machine now run in the cloud and are measured here, plus ${fresh} new cloud checks; the other ${macBound} need the Apple toolchain or that machine's hardware and are not counted.`;
+    };
+
+    const renderUptime = (data, snapshotDate) => {
+        const headline = document.getElementById('uptime-headline');
+        const asof = document.getElementById('uptime-asof');
+        const metrics = document.getElementById('uptime-metrics');
+        const countedRoot = document.getElementById('uptime-counted');
+
+        setText(headline, data.status === 'not_started' ? 'Measurement has not started' : 'Cloud uptime measurement');
+        setText(asof, `as of ${formatDate(snapshotDate)}`);
+        setText(document.getElementById('uptime-denominator'), denominatorSentence(data.not_counted || {}));
+        setText(document.getElementById('uptime-note'), typeof data.note === 'string' ? data.note : '');
+
+        const metricData = [
+            ['Window', Number.isInteger(data.window_days) ? `${data.window_days} days` : 'not measured'],
+            ['Worst lane', formatPercent(data.worst_lane_uptime_7d)],
+            ['Mean uptime', formatPercent(data.mean_uptime_7d)]
+        ];
+        metricData.forEach(([label, value]) => {
+            const metric = document.createElement('div');
+            metric.className = 'uptime-metric';
+            metric.append(setText(document.createElement('span'), label), setText(document.createElement('strong'), value));
+            metrics.append(metric);
+        });
+
+        const counted = Array.isArray(data.counted) ? data.counted : [];
+        if (counted.length === 0) {
+            const empty = setText(document.createElement('p'), 'No cloud checks are counted yet.');
+            empty.className = 'empty-counted';
+            countedRoot.append(empty);
+            return;
+        }
+
+        const region = document.createElement('div');
+        region.className = 'scroll-region';
+        region.tabIndex = 0;
+        region.setAttribute('aria-label', 'Measured cloud lanes');
+        const table = document.createElement('table');
+        table.className = 'uptime-table';
+        const head = document.createElement('thead');
+        const headRow = document.createElement('tr');
+        ['Lane', 'Uptime', 'Pings', 'Last ping age', 'Verdict'].forEach((label) => {
+            headRow.append(setText(document.createElement('th'), label));
+        });
+        head.append(headRow);
+        const body = document.createElement('tbody');
+        counted.forEach((row) => {
+            const line = document.createElement('tr');
+            [
+                row.slug,
+                formatPercent(row.uptime_7d),
+                Number.isInteger(row.n_pings) ? row.n_pings : 'unknown',
+                typeof row.last_ping_age_s === 'number' ? `${row.last_ping_age_s} s` : 'unknown',
+                typeof row.verdict === 'string' ? row.verdict : 'unknown'
+            ].forEach((value) => line.append(setText(document.createElement('td'), value)));
+            body.append(line);
+        });
+        table.append(head, body);
+        region.append(table);
+        countedRoot.append(region);
+    };
+
+    const loadUptime = async () => {
+        const snapshot = sanitizeUptime(await fetchJson('uptime.json'));
+        renderUptime(snapshot, snapshot.generated_at);
+    };
+
+    fetchJson('ledger.json')
+        .then(renderLedger)
+        .catch(() => {
+            const state = document.getElementById('ledger-state');
+            state.className = 'load-error';
+            setText(state, 'The ledger could not be loaded. Open the plain ledger data link below.');
+        });
+
+    loadUptime().catch(() => {
+        setText(document.getElementById('uptime-headline'), 'The uptime snapshot could not be loaded');
+        setText(document.getElementById('uptime-asof'), 'Snapshot unavailable');
+        setText(document.getElementById('uptime-denominator'), 'The counted and not-counted totals come from that snapshot, so they are unavailable too.');
+        setText(document.getElementById('uptime-note'), '');
+    });
+})();
+</script>
+</body>
+</html>
