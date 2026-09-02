@@ -131,6 +131,7 @@
         .deliverable.verified { border-left-color: #1f8b4c; }
         .deliverable.blocked { border-left-color: #b42318; }
         .deliverable.blocked svg { stroke: #b42318; }
+        .deliverable.reported { border-left-color: #8b93a1; }
         .deliverable-body { min-width: 0; width: 100%; }
         .card-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.55rem; }
         .entry-id { font-family: var(--mono); font-size: 0.72rem; color: var(--text-tertiary); }
@@ -143,8 +144,13 @@
         .verdict-chip.verified { color: #176c3b; border-color: #91c9a7; }
         .verdict-chip.blocked { color: #8d1b13; border-color: #e1a29d; }
         .verdict-chip.caution { color: #80510a; border-color: #d7b16c; }
+        .verdict-chip.reported { color: #4c535f; border-color: #b6bcc6; }
         .deliverable-text { margin-top: 0.75rem; color: var(--text); font-size: 0.96rem; font-weight: 650; }
         .evidence-text { margin-top: 0.55rem; }
+        .entry-links { margin-top: 0.75rem; padding-left: 1.1rem; display: grid; gap: 0.3rem; font-size: 0.88rem; }
+        .entry-links li { padding-left: 0.15rem; }
+        .no-links { margin-top: 0.75rem; font-family: var(--mono); font-size: 0.7rem; color: var(--text-tertiary); }
+        .link-host { font-family: var(--mono); font-size: 0.68rem; color: var(--text-tertiary); overflow-wrap: anywhere; }
         .entry-meta { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; font-family: var(--mono); font-size: 0.7rem; color: var(--text-tertiary); }
 
         .uptime-panel {
@@ -222,6 +228,7 @@
     <section aria-labelledby="verdict-heading">
         <h2 id="verdict-heading">This week at a glance</h2>
         <p class="section-lead">The totals and definitions come directly from the ledger file.</p>
+        <p class="snapshot-asof"><span id="ledger-validated">Checking the ledger stamp.</span> <a href="scripts/validate-ledger.js">Read the script</a> &middot; <a href="ledger.json">read the data</a></p>
         <dl class="verdict-guide" id="verdict-guide"></dl>
         <div class="scroll-region" tabindex="0" aria-label="Verdict totals">
             <div class="summary-strip" id="summary-strip"></div>
@@ -230,7 +237,7 @@
 
     <section aria-labelledby="entries-heading">
         <h2 id="entries-heading">Checked work</h2>
-        <p class="section-lead">Rows are grouped by the part of the program they describe.</p>
+        <p class="section-lead">Rows are grouped by the part of the program they describe. Each row lists the public links you can open to check it yourself. Most of this week's work sits inside the canonical product repository, which stays out of scope for the internship, so there is nothing public to open for those rows and they say <strong>REPORTED</strong> rather than VERIFIED. The &ldquo;Checked by&rdquo; line still names who checked each one.</p>
         <p class="loading" id="ledger-state" role="status" aria-live="polite">Loading the ledger.</p>
         <div class="ledger-groups" id="ledger-groups"></div>
         <noscript><p>The ledger needs JavaScript; you can read the plain <a href="ledger.json">ledger data here</a>.</p></noscript>
@@ -242,7 +249,8 @@
         <div class="uptime-panel" aria-live="polite">
             <h3 id="uptime-headline">Measurement has not started</h3>
             <p class="snapshot-asof" id="uptime-asof">Loading the snapshot.</p>
-            <p class="denominator">5 of the 36 Xpired scheduled lanes that used to run only on the studio machine now run in the cloud and are measured here, plus 2 new cloud checks; the other 31 need the Apple toolchain or that machine's hardware and are not counted.</p>
+            <p class="denominator" id="uptime-denominator">Reading the denominator from the snapshot.</p>
+            <p class="denominator" id="uptime-note"></p>
             <div class="uptime-metrics" id="uptime-metrics"></div>
             <div id="uptime-counted"></div>
         </div>
@@ -256,8 +264,6 @@
     'use strict';
 
     const FETCH_TIMEOUT_MS = 3000;
-    const UPTIME_LIVE_URL = null;
-    // When set, this overlays live JSON client-side with a 3 s timeout and falls back to the snapshot text "as of <snapshot date from JSON>".
     const UPTIME_SLUG = /^xpired-[a-z0-9-]+$/;
 
     const fetchJson = async (url) => {
@@ -288,13 +294,69 @@
     const verdictClass = (verdict) => {
         if (verdict === 'VERIFIED') return 'verified';
         if (verdict === 'BLOCKED') return 'blocked';
+        if (verdict === 'REPORTED') return 'reported';
         return 'caution';
+    };
+
+    // Links come from ledger.json, so only https is ever turned into an anchor.
+    const isSafeLink = (url) => {
+        if (typeof url !== 'string') return false;
+        try {
+            return new URL(url, window.location.href).protocol === 'https:';
+        } catch (error) {
+            return false;
+        }
+    };
+
+    const renderEntryLinks = (links) => {
+        const usable = Array.isArray(links)
+            ? links.filter((link) => link && isSafeLink(link.url) && typeof link.label === 'string' && link.label.trim())
+            : [];
+
+        if (usable.length === 0) {
+            const none = setText(document.createElement('p'), 'No public artefact linked.');
+            none.className = 'no-links';
+            return none;
+        }
+
+        const list = document.createElement('ul');
+        list.className = 'entry-links';
+        usable.forEach((link) => {
+            const item = document.createElement('li');
+            const anchor = setText(document.createElement('a'), link.label);
+            anchor.href = link.url;
+            anchor.target = '_blank';
+            anchor.rel = 'noopener';
+            anchor.title = link.url;
+            const host = setText(document.createElement('span'), ` ${new URL(link.url).hostname} — opens in a new tab`);
+            host.className = 'link-host';
+            item.append(anchor, host);
+            list.append(item);
+        });
+        return list;
+    };
+
+    /**
+     * The ledger is hand-written, so the only honest freshness claim is the one
+     * scripts/validate-ledger.js leaves behind when it passes. It also pins a
+     * hash of the entries, so an edited file with an untouched stamp fails the
+     * script rather than quietly keeping this line.
+     */
+    const renderValidationStamp = (validated) => {
+        const target = document.getElementById('ledger-validated');
+        if (!validated || typeof validated !== 'object' || typeof validated.script !== 'string' || typeof validated.at !== 'string') {
+            setText(target, 'This ledger carries no validation stamp.');
+            return;
+        }
+        setText(target, `Checked by ${validated.script} on ${formatDate(validated.at)}. Run it yourself from the repository root.`);
     };
 
     const renderLedger = (data) => {
         if (!data || typeof data.verdict_key !== 'object' || !Array.isArray(data.entries)) {
             throw new Error('Ledger data is incomplete');
         }
+
+        renderValidationStamp(data.validated);
 
         const verdictGuide = document.getElementById('verdict-guide');
         const summaryStrip = document.getElementById('summary-strip');
@@ -360,7 +422,7 @@
                 const date = setText(document.createElement('span'), `Date: ${formatDate(entry.date)}`);
                 meta.append(reviewer, date);
 
-                body.append(head, deliverable, evidence, meta);
+                body.append(head, deliverable, evidence, renderEntryLinks(entry.links), meta);
                 card.append(body);
                 section.append(card);
             });
@@ -405,25 +467,38 @@
         if (typeof raw.worst_lane_uptime_7d === 'number' || raw.worst_lane_uptime_7d === null) clean.worst_lane_uptime_7d = raw.worst_lane_uptime_7d;
         if (typeof raw.mean_uptime_7d === 'number' || raw.mean_uptime_7d === null) clean.mean_uptime_7d = raw.mean_uptime_7d;
         if (raw.not_counted && typeof raw.not_counted === 'object') clean.not_counted = sanitizeNotCounted(raw.not_counted);
+        if (typeof raw.note === 'string') clean.note = raw.note;
         return clean;
     };
 
-    const overlayUptime = (snapshot, live) => ({
-        ...snapshot,
-        ...live,
-        not_counted: { ...(snapshot.not_counted || {}), ...(live.not_counted || {}) }
-    });
-
     const formatPercent = (value) => typeof value === 'number' ? `${value.toFixed(2)}%` : 'not measured';
 
-    const renderUptime = (data, snapshotDate, usingLive) => {
+    /**
+     * These counts used to be typed twice, once in uptime.json and once as prose
+     * in this file, which is one place too many for a number to go stale.
+     * uptime.json is now the only source and the sentence is built from it.
+     */
+    const denominatorSentence = (notCounted) => {
+        const moved = notCounted.existing_moved;
+        const fresh = notCounted.new_checks;
+        const macBound = notCounted.mac_bound;
+        if (![moved, fresh, macBound].every(Number.isInteger)) {
+            return 'The counted and not-counted totals are missing from the snapshot.';
+        }
+        const total = moved + macBound;
+        return `${moved} of the ${total} Xpired scheduled lanes that used to run only on the studio machine now run in the cloud and are measured here, plus ${fresh} new cloud checks; the other ${macBound} need the Apple toolchain or that machine's hardware and are not counted.`;
+    };
+
+    const renderUptime = (data, snapshotDate) => {
         const headline = document.getElementById('uptime-headline');
         const asof = document.getElementById('uptime-asof');
         const metrics = document.getElementById('uptime-metrics');
         const countedRoot = document.getElementById('uptime-counted');
 
         setText(headline, data.status === 'not_started' ? 'Measurement has not started' : 'Cloud uptime measurement');
-        setText(asof, usingLive ? 'Live measurement loaded' : `as of ${formatDate(snapshotDate)}`);
+        setText(asof, `as of ${formatDate(snapshotDate)}`);
+        setText(document.getElementById('uptime-denominator'), denominatorSentence(data.not_counted || {}));
+        setText(document.getElementById('uptime-note'), typeof data.note === 'string' ? data.note : '');
 
         const metricData = [
             ['Window', Number.isInteger(data.window_days) ? `${data.window_days} days` : 'not measured'],
@@ -475,22 +550,8 @@
     };
 
     const loadUptime = async () => {
-        const rawSnapshot = await fetchJson('uptime.json');
-        const snapshot = sanitizeUptime(rawSnapshot);
-        let data = snapshot;
-        let usingLive = false;
-
-        if (UPTIME_LIVE_URL) {
-            try {
-                const live = sanitizeUptime(await fetchJson(UPTIME_LIVE_URL));
-                data = overlayUptime(snapshot, live);
-                usingLive = true;
-            } catch (error) {
-                data = snapshot;
-            }
-        }
-
-        renderUptime(data, snapshot.generated_at, usingLive);
+        const snapshot = sanitizeUptime(await fetchJson('uptime.json'));
+        renderUptime(snapshot, snapshot.generated_at);
     };
 
     fetchJson('ledger.json')
@@ -504,6 +565,8 @@
     loadUptime().catch(() => {
         setText(document.getElementById('uptime-headline'), 'The uptime snapshot could not be loaded');
         setText(document.getElementById('uptime-asof'), 'Snapshot unavailable');
+        setText(document.getElementById('uptime-denominator'), 'The counted and not-counted totals come from that snapshot, so they are unavailable too.');
+        setText(document.getElementById('uptime-note'), '');
     });
 })();
 </script>
