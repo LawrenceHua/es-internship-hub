@@ -98,9 +98,10 @@
         .verdict-guide dd { margin-top: 0.2rem; color: var(--text-secondary); font-size: 0.84rem; }
 
         .scroll-region { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+        /* One column per verdict in the legend, whatever that count becomes. */
         .summary-strip {
-            min-width: 720px; margin-top: 1.75rem; display: grid;
-            grid-template-columns: repeat(5, minmax(125px, 1fr)); gap: 0.65rem;
+            min-width: max-content; margin-top: 1.75rem; display: grid;
+            grid-auto-flow: column; grid-auto-columns: minmax(125px, 1fr); gap: 0.65rem;
         }
         .summary-item { border: 1px solid var(--border); border-radius: var(--radius); padding: 0.85rem; background: var(--surface-alt); }
         .summary-count { display: block; color: var(--primary); font-size: 1.55rem; font-weight: 800; line-height: 1; }
