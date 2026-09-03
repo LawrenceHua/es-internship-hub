@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ground Truths | Xpired Classroom</title>
+    <meta name="description" content="Fifteen ranked ground truths that show how Xpired turns claims into facts a student can re-check.">
+    <meta name="theme-color" content="#1a3c34">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3c34;
+            --primary-mid: #2a5a4a;
+            --accent: #2d6e55;
+            --accent-light: #e8f5ef;
+            --accent-muted: #5ba88a;
+            --fresh: #2e9e5b;
+            --caution: #e0a106;
+            --urgent: #d23b3b;
+            --surface: #ffffff;
+            --surface-alt: #f6f8f7;
+            --border: #e2e5ea;
+            --text: #1a1d23;
+            --text-secondary: #5a6170;
+            --text-tertiary: #6b7585;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 8px 28px rgba(26,60,52,0.08);
+            --radius: 10px;
+            --radius-lg: 16px;
+            --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0; color: var(--text); background: var(--surface-alt);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.62; -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--accent); }
+        a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+        code { font-family: var(--mono); font-size: 0.88em; overflow-wrap: anywhere; }
+        .skip-link {
+            position: fixed; top: 0.5rem; left: 0.5rem; z-index: 200;
+            transform: translateY(-180%); padding: 0.6rem 0.9rem;
+            background: var(--primary); color: #fff; border-radius: 6px;
+            font-weight: 700; text-decoration: none;
+        }
+        .skip-link:focus { transform: translateY(0); }
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+        }
+
+        nav {
+            position: fixed; inset: 0 0 auto; z-index: 100;
+            background: rgba(255,255,255,0.94); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 1040px; height: 56px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        }
+        .nav-brand {
+            display: flex; align-items: center; gap: 0.55rem; color: var(--primary);
+            font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em;
+            text-decoration: none; white-space: nowrap;
+        }
+        .brand-mark { width: 22px; height: 22px; flex: 0 0 auto; display: block; }
+        .nav-actions { display: flex; align-items: center; gap: 1rem; }
+        .nav-actions a { font-size: 0.84rem; font-weight: 650; text-decoration: none; white-space: nowrap; }
+
+        .hero {
+            margin-top: 56px; padding: 5.5rem 2rem 4.2rem;
+            background: linear-gradient(145deg, var(--primary), var(--primary-mid)); color: #fff;
+        }
+        .hero-inner, main { width: min(960px, calc(100% - 2.5rem)); margin: 0 auto; }
+        .eyebrow {
+            display: block; margin-bottom: 1rem; color: #9ecbb2; font-family: var(--mono);
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+        }
+        h1 { max-width: 800px; margin: 0; font-size: clamp(2.35rem, 7vw, 4.7rem); line-height: 1.02; letter-spacing: -0.045em; }
+        .hero p { max-width: 720px; margin: 1.35rem 0 0; color: rgba(255,255,255,0.84); font-size: 1.08rem; }
+        .hero strong { color: #fff; }
+        .freshness-rule { height: 3px; border: 0; margin: 0; background: linear-gradient(90deg, var(--fresh), var(--caution), var(--urgent)); }
+
+        .label-guide {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem;
+            margin: -1.8rem 0 0; position: relative; z-index: 2;
+        }
+        .label-card {
+            background: var(--surface); border: 1px solid var(--border); border-top-width: 4px;
+            border-radius: var(--radius); padding: 1rem 1.05rem; box-shadow: var(--shadow-sm);
+        }
+        .label-card.verified { border-top-color: var(--fresh); }
+        .label-card.inferred { border-top-color: var(--caution); }
+        .label-card.reported { border-top-color: #8b93a1; }
+        .label-card p { margin: 0.45rem 0 0; color: var(--text-secondary); font-size: 0.82rem; line-height: 1.45; }
+        .chip {
+            display: inline-flex; max-width: 100%; padding: 0.22rem 0.58rem;
+            border: 1px solid var(--border); border-radius: 999px; background: #fff;
+            font-family: var(--mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.03em;
+        }
+        .chip.verified { color: #176c3b; border-color: #91c9a7; }
+        .chip.inferred { color: #80510a; border-color: #d7b16c; }
+        .chip.reported { color: #4c535f; border-color: #b6bcc6; }
+
+        .intro { padding: 4.2rem 0 1rem; }
+        .intro figure { margin: 0; }
+        .intro h2 { margin: 0; color: var(--primary); font-size: clamp(1.65rem, 4vw, 2.35rem); letter-spacing: -0.025em; }
+        .intro > p { max-width: 710px; margin: 0.7rem 0 0; color: var(--text-secondary); }
+        .truth-flow {
+            display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0;
+            margin-top: 1.8rem; border: 1px solid var(--border); border-radius: var(--radius-lg);
+            overflow: hidden; background: var(--surface); box-shadow: var(--shadow-sm);
+        }
+        .flow-step { min-width: 0; padding: 1rem 0.8rem; text-align: center; position: relative; }
+        .flow-step + .flow-step { border-left: 1px solid var(--border); }
+        .flow-step + .flow-step::before {
+            content: ''; position: absolute; left: -5px; top: calc(50% - 5px);
+            width: 9px; height: 9px; border-top: 2px solid var(--accent-muted);
+            border-right: 2px solid var(--accent-muted); transform: rotate(45deg); background: var(--surface);
+        }
+        .flow-step span { display: block; color: var(--text-tertiary); font-family: var(--mono); font-size: 0.65rem; }
+        .flow-step strong { display: block; margin-top: 0.25rem; color: var(--primary); font-size: 0.84rem; }
+        figcaption { margin-top: 0.65rem; color: var(--text-tertiary); font-size: 0.78rem; }
+
+        .catalogue { display: grid; gap: 1.15rem; padding: 2.5rem 0 1rem; }
+        .truth-card {
+            display: grid; grid-template-columns: 82px minmax(0, 1fr);
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm); overflow: hidden; scroll-margin-top: 74px;
+        }
+        .rank {
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            padding: 1.55rem 0.75rem; background: var(--primary); color: #fff;
+        }
+        .rank small { font-family: var(--mono); color: #9ecbb2; font-size: 0.62rem; letter-spacing: 0.12em; }
+        .rank strong { margin-top: 0.1rem; font-size: 2rem; line-height: 1; letter-spacing: -0.05em; }
+        .truth-body { min-width: 0; padding: 1.45rem 1.55rem 1.55rem; }
+        .truth-head { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; flex-wrap: wrap; }
+        .truth-head h2 { margin: 0; color: var(--primary); font-size: 1.34rem; letter-spacing: -0.02em; }
+        .measure { margin: 0.8rem 0 0; color: var(--text-secondary); }
+        .field-label {
+            display: block; margin-bottom: 0.3rem; color: var(--text-tertiary);
+            font-family: var(--mono); font-size: 0.67rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+        }
+        blockquote {
+            margin: 1rem 0 0; padding: 0.85rem 1rem; background: var(--surface-alt);
+            border-left: 3px solid var(--accent-muted); border-radius: 0 8px 8px 0;
+        }
+        blockquote p { margin: 0; color: var(--primary); font-weight: 650; }
+        blockquote cite { display: block; margin-top: 0.45rem; color: var(--text-tertiary); font-style: normal; font-size: 0.82rem; }
+        blockquote.quote-src pre {
+            margin: 0; padding: 0 0 0.15rem; font-family: var(--mono); font-size: 0.78rem; line-height: 1.5;
+            white-space: pre; overflow-x: auto; color: var(--primary); font-weight: 600;
+        }
+        .story-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem; margin-top: 1rem; }
+        .story-grid p { margin: 0; color: var(--text-secondary); font-size: 0.91rem; }
+        .student-reuse {
+            margin: 1rem 0 0; padding: 0.8rem 1rem; border-radius: 8px;
+            background: var(--accent-light); color: var(--primary); font-weight: 700;
+        }
+        .student-reuse .field-label { color: var(--accent); }
+
+        .next {
+            margin: 3.5rem 0 0; padding: 1.7rem; border-radius: var(--radius-lg);
+            background: var(--primary); color: #fff;
+        }
+        .next h2 { margin: 0; font-size: 1.45rem; }
+        .next p { margin: 0.55rem 0 0; color: #cfe4d8; }
+        .next-links { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1rem; }
+        .next a { padding: 0.55rem 0.8rem; border: 1px solid rgba(255,255,255,0.3); border-radius: 7px; color: #fff; font-weight: 700; text-decoration: none; }
+
+        .series {
+            margin: 3rem 0 0; padding: 1.3rem 1.4rem; border: 1px solid var(--border);
+            border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-sm);
+        }
+        .series-title {
+            margin: 0 0 0.7rem; color: var(--text-tertiary);
+            font-family: var(--mono); font-size: 0.67rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+        }
+        .series-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.3rem; }
+        .series-list a {
+            display: block; padding: 0.45rem 0.7rem; border-radius: 7px;
+            text-decoration: none; font-weight: 650; font-size: 0.92rem; color: var(--text-secondary);
+        }
+        .series-list a:hover { background: var(--accent-light); color: var(--primary); }
+        .series-list a[aria-current="page"] { background: var(--accent-light); color: var(--primary); }
+
+        footer { margin-top: 4.5rem; padding: 2rem; background: var(--primary); color: #9ecbb2; text-align: center; font-size: 0.83rem; }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --surface: #171c1a;
+                --surface-alt: #101514;
+                --border: #2c3531;
+                --text: #e8ecea;
+                --text-secondary: #b8c2bd;
+                --text-tertiary: #93a09a;
+                --accent-light: #152420;
+            }
+            body { background: var(--surface-alt); }
+            nav { background: rgba(16, 21, 20, 0.94); }
+            .chip { background: #1d2421; }
+            .intro h2, .truth-head h2, .flow-step strong, blockquote p,
+            blockquote.quote-src pre, .student-reuse { color: #cfe4d8; }
+            .series-list a:hover, .series-list a[aria-current="page"] { color: #cfe4d8; }
+        }
+
+        @media (max-width: 680px) {
+            nav { padding: 0 0.9rem; }
+            .nav-actions { gap: 0.6rem; }
+            .nav-actions a { font-size: 0.74rem; }
+            .nav-actions a:first-child { display: none; }
+            .hero { padding: 4.3rem 1.25rem 3.5rem; }
+            .hero-inner, main { width: min(100% - 1.5rem, 960px); }
+            .label-guide { grid-template-columns: 1fr; margin-top: -1rem; }
+            .intro { padding-top: 3rem; }
+            .truth-flow { grid-template-columns: 1fr; }
+            .flow-step + .flow-step { border-left: 0; border-top: 1px solid var(--border); }
+            .flow-step + .flow-step::before { display: none; }
+            .truth-card { grid-template-columns: 54px minmax(0, 1fr); }
+            .rank { padding: 1.35rem 0.45rem; }
+            .rank strong { font-size: 1.45rem; }
+            .truth-body { padding: 1.2rem 1rem 1.3rem; }
+            .story-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to ground truths</a>
+<nav aria-label="Primary navigation">
+    <div class="nav-inner">
+        <a class="nav-brand" href="index.html">
+            <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M16 1v7M16 24v7M1 16h7M24 16h7" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="16" cy="16" r="1.5" fill="currentColor"/>
+            </svg>
+            <span>ES AI Internship</span>
+        </a>
+        <div class="nav-actions">
+            <a href="lesson-plan.html">Lesson plan</a>
+            <a href="index.html">Back to hub</a>
+        </div>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-inner">
+        <span class="eyebrow">Ground-truth catalogue</span>
+        <h1>Fifteen facts the system measures for itself.</h1>
+        <p>A ground truth is <strong>a fact the automation refuses to take on faith and instead measures</strong>. The card number is its ranking for student reuse, with the most portable idea first.</p>
+    </div>
+</header>
+<hr class="freshness-rule">
+
+<main id="main">
+    <section class="label-guide" aria-labelledby="label-heading">
+        <h2 id="label-heading" class="sr-only">How to read the labels</h2>
+        <div class="label-card verified"><span class="chip verified">VERIFIED</span><p>Read in the cited file, commit, receipt, or workflow.</p></div>
+        <div class="label-card inferred"><span class="chip inferred">INFERRED</span><p>A synthesis drawn from evidence, not a directly stored fact.</p></div>
+        <div class="label-card reported"><span class="chip reported">REPORTED</span><p>Stated in a lane report, without a public artifact to inspect here.</p></div>
+    </section>
+
+    <section class="intro" aria-labelledby="intro-title">
+        <h2 id="intro-title">How each fact becomes a guardrail</h2>
+        <p>Read each card from measurement to evidence, then from the incident that shaped it to the failure it prevents. The final line turns that mechanism into a small project you can reuse.</p>
+        <figure>
+            <div class="truth-flow" role="img" aria-label="A five-step flow from measurement to student reuse">
+                <div class="flow-step"><span>01</span><strong>Measure</strong></div>
+                <div class="flow-step"><span>02</span><strong>Cite the artifact</strong></div>
+                <div class="flow-step"><span>03</span><strong>Name the incident</strong></div>
+                <div class="flow-step"><span>04</span><strong>Block the failure</strong></div>
+                <div class="flow-step"><span>05</span><strong>Reuse the idea</strong></div>
+            </div>
+            <figcaption>Notice that a claim becomes useful only after it points to evidence and names the failure it blocks.</figcaption>
+        </figure>
+    </section>
+
+    <section class="catalogue" aria-label="Ranked ground truths">
+        <article class="truth-card" id="gt1">
+            <div class="rank"><small>RANK</small><strong>01</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Read back every write</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>After an external change, the system reads the server again and compares the stored result.</p>
+                <blockquote class="quote-src"><pre>    dry_run_requires_write = not args.apply and selection.writes_planned &gt; 0
+    print(
+        json.dumps(
+            {
+                "status": "BLOCKED" if dry_run_requires_write else "VERIFIED",
+                "mode": "apply" if args.apply else "dry-run",
+                "marketing_version": selection.marketing_version,
+                "build_number": selection.build_number,
+                "writes_planned": selection.writes_planned,
+                "submitted": False,
+            },
+            sort_keys=True,
+        )
+    )</pre><cite><code>ios_apps/fastlane/asc/asc_reconcile.py</code> &mdash; the JSON summary the runner prints after reconciling, quoted from source</cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>On August 8, 2026, local notes said the store listing was fixed while the live record still described a feature the build did not ship. Private product repository commit <code>eb555954</code> recorded the correction and probe.</p><p><span class="field-label">What it makes impossible</span>Assuming that a successful write means the intended value is actually live.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Treat the second API call as the test. Re-fetch what you changed and compare every field that matters.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt2">
+            <div class="rank"><small>RANK</small><strong>02</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Probe the outside world</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>The live store record through signed read-only requests, rather than through local documentation.</p>
+                <blockquote><p>&ldquo;Nothing here mutates ASC &mdash; the version PATCH and build attach are deliberately separate actions, because reading the state and changing it should never be one keystroke apart.&rdquo;</p><cite><code>ios_apps/fastlane/asc/asc_state.py</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>The August 8, 2026 listing drift showed that a local file could be tidy while the outside system stayed wrong. Private product repository commit <code>eb555954</code> kept the live probe beside the repair.</p><p><span class="field-label">What it makes impossible</span>Documentation quietly becoming the source of a false operational claim.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Before building on &ldquo;we already have this,&rdquo; write the smallest script that asks the live system.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt3">
+            <div class="rank"><small>RANK</small><strong>03</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Refuse the wrong build at the parser</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>Whether the requested build is the one reviewed candidate, before any network call can begin.</p>
+                <blockquote><p>&ldquo;Bump this in the same commit that moves the release to a new build; R6's pin-uniqueness sweep checks this constant against every other pin in the repo.&rdquo;</p><cite><code>ios_apps/fastlane/asc/asc_presubmit_check.py</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>Release discipline tightened after the August listing incidents. On August 30, 2026, private product repository commit <code>a57b9bf5</code> hardened the 4.3.4 submission path around one reviewed candidate.</p><p><span class="field-label">What it makes impossible</span>Uploading or checking a different binary because someone mistyped a build number.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Put the only allowed release value in code and reject every other value before work starts.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt4">
+            <div class="rank"><small>RANK</small><strong>04</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Derive test counts from collection</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>The exact tests the runner collects, their reviewed floor, passed count, and skip count.</p>
+                <blockquote><p>&ldquo;Every gated inventory below is DERIVED, never typed. Each file's expected count comes from a <code>--collect-only</code> pass over the exact selection the suite executes, so adding a test to a gated file can no longer red this job on a stale literal; the historical literal survives as <code>&lt;label&gt;_floor</code>, which still fails closed on shrinkage.&rdquo;</p><cite><code>.github/workflows/release-contracts.yml</code> &mdash; the derived-count gate (B15, commit <code>b0cdd703</code>), quoted from source</cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>Hand-typed totals became stale when tests were added and could stay green when tests disappeared. Private product repository commit <code>b0cdd703</code> replaced them with counts derived from pytest collection on September 1, 2026.</p><p><span class="field-label">What it makes impossible</span>A deleted test passing because the expected total was never measured.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Ask the test tool what it found, then fail if that real count drops below the reviewed floor.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt5">
+            <div class="rank"><small>RANK</small><strong>05</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Make the gate prove it found work</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>The workflow must discover at least 99 gated files before it may report success, matching the floor recorded in the workflow itself.</p>
+                <blockquote><p>&ldquo;The first cut of this step used <code>(^|[[:space:]])</code> as a leading anchor and extracted ZERO paths under the grep on the runner host, which without the floor would have been a green step that checked nothing.&rdquo;</p><cite><code>.github/workflows/release-contracts.yml</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>On August 18, 2026, a first-cut pattern extracted zero paths on the runner host. Private product repository commit <code>94c4305b</code> recorded the near-miss and added the presence floor.</p><p><span class="field-label">What it makes impossible</span>A green checkmark from a checker that silently inspected nothing.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Give every checker a heartbeat assertion: it must prove that it discovered real work.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt6">
+            <div class="rank"><small>RANK</small><strong>06</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Hash source identity into the artifact</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>The release commit and source manifest that the built container claims to contain.</p>
+                <blockquote><p>&ldquo;ARG RELEASE_GIT_SHA=unbound&rdquo;</p><cite><code>backend/Dockerfile</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>Scanner release hardening needed a running artifact to identify its own source. Private product repository commit <code>424ff232</code> added the source-bound core release lane on August 10, 2026.</p><p><span class="field-label">What it makes impossible</span>A deployment claiming to represent a commit when its bytes cannot prove that identity.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Stamp <code>git rev-parse HEAD</code> into every artifact you ship.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt7">
+            <div class="rank"><small>RANK</small><strong>07</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Let the runner write the receipt</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>Whether the release gate created a new, private, durable receipt instead of accepting one from the claimant.</p>
+                <blockquote><p>&ldquo;Every release mutation remains BLOCKED even if copied to the fixed install path.&rdquo;</p><cite><code>tools/shopper-release-runner/runner.c</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>The release boundary needed success evidence that a worker could not mint for itself. Private product repository commit <code>835b85ed</code> added the fail-closed runner, authored August 21, 2026 (the committer date is August 22, 2026).</p><p><span class="field-label">What it makes impossible</span>The process asking for approval also manufacturing its own proof of success.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Make the verifier, not the claimant, create the final receipt.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt8">
+            <div class="rank"><small>RANK</small><strong>08</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Read consent back before data moves</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>Whether the server confirms the current opt-in and still grants live consent at the moment of a training write.</p>
+                <blockquote><p>&ldquo;A stored <code>user_consented_upload</code> bit is only historical evidence that a copy was permitted at capture time; it is not authority to adjudicate or export after the shopper withdraws consent.&rdquo;</p><cite><code>backend/server/services/training_consent.py</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>A cached preference could echo an old opt-in and resurrect withdrawn consent across devices. Private product repository commit <code>3be85e17</code> closed that path on September 1, 2026.</p><p><span class="field-label">What it makes impossible</span>Using data after the person withdrew permission.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Treat &ldquo;yes&rdquo; as perishable. Re-check permission at the exact moment you use the data.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt9">
+            <div class="rank"><small>RANK</small><strong>09</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Bind every product claim to source</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>Whether the source anchors behind each store claim still exist and still support the words.</p>
+                <blockquote class="quote-src"><pre>- Do not report freshness, condition, ripeness, expiration dates, prices, brands as separate items, or positions/coordinates.</pre><cite><code>backend/server/routes/fridge.py</code> &mdash; the OFF-prompt line, quoted in full</cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>A 395-line rewrite left claim citations pointing at unrelated code. Private product repository commit <code>d06cb00e</code> created the rewrite on August 20, 2026, and the ledger test records that citation-rot incident.</p><p><span class="field-label">What it makes impossible</span>A public claim surviving after the proof beneath it has moved or disappeared.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Commit each claim beside a pointer to the exact test or source line that supports it.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt10">
+            <div class="rank"><small>RANK</small><strong>10</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Make publication fail closed</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>The published file hashes, source-tree digest, approved copy registry, expiry dates, and forbidden claim patterns.</p>
+                <blockquote><p>&ldquo;There is deliberately no auto-approve/update mode.&rdquo;</p><cite><code>verify-publication.js</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>The August 2, 2026 public-claim audit followed August overclaim incidents. Related private product repository commit <code>eb555954</code> recorded the live listing mismatch on August 8, 2026.</p><p><span class="field-label">What it makes impossible</span>A redesign quietly bringing back a public claim that evidence already refuted.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Default every new public claim to refused until its evidence is deliberately admitted.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt11">
+            <div class="rank"><small>RANK</small><strong>11</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Make feature flags fail closed</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>Only the literal string <code>true</code> enables irreversible automation, while unreachable remains unknown rather than off.</p>
+                <blockquote><p>&ldquo;A timeout is never a pass and never &lsquo;the flag is off.&rsquo;&rdquo;</p><cite><code>backend/server/tests/test_fridge_condition_health_stage.py</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>A runtime setting could contradict the store promise without a source change. Private product repository commit <code>c0908ee3</code> closed a fail-open scanner mount on August 17, 2026.</p><p><span class="field-label">What it makes impossible</span>A typo, alternate truthy value, or unreachable service silently turning a risky lane on.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Default to off, accept one exact enabling value, and keep &ldquo;unreachable&rdquo; separate from &ldquo;disabled.&rdquo;</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt12">
+            <div class="rank"><small>RANK</small><strong>12</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Promote the digest you verified</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>The immutable canary image digest, the production digest after deployment, and the prior rollback artifact.</p>
+                <blockquote class="quote-src"><pre># before heavy CI or any Fly authentication. Production promotes the exact
+# registry digest proven on canary; it never rebuilds source.</pre><cite><code>.github/workflows/fly-deploy.yml</code> header comment &mdash; the digest pin itself lives at lines 477-485</cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>Release hardening needed canary proof to follow the same bytes into production. Private product repository commit <code>8eb44a5f</code> pinned the candidate digest on August 2, 2026.</p><p><span class="field-label">What it makes impossible</span>&ldquo;Worked in canary&rdquo; referring to different bytes from the ones promoted.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Promote an immutable artifact, not a source branch, and save the rollback identity first.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt13">
+            <div class="rank"><small>RANK</small><strong>13</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Refuse starved training classes</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>Every model head has supervised rows, and every evaluation class has at least 40 examples per split.</p>
+                <blockquote><p>&ldquo;Training is refused rather than completing with a head that received no gradient.&rdquo;</p><cite><code>scripts/train_capture_multitask_b4.py</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>Commit <code>9b259f7c</code> records the defective run dated August 11, 2026: 170,817 rows silently resolved to a sentinel and the quality head took no gradient for eight healthy-looking epochs, while all 1,072 &ldquo;degraded&rdquo; records sat in train so validation and test could not see them. Commit <code>d22d2436</code> on September 1, 2026 added the degraded-class refusal and pinned its floor in a test; the trainer now refuses to complete with a head that received no gradient.</p><p><span class="field-label">What it makes impossible</span>A model checkpoint advertising a skill that it never practiced or evaluated.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Count examples per class and split before you calculate accuracy.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt14">
+            <div class="rank"><small>RANK</small><strong>14</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Bind screenshots to source</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>The source commit, source manifest, executable hash, and individual image hashes behind store screenshots.</p>
+                <blockquote><p>&ldquo;&quot;schema_version&quot;: 2&rdquo;</p><cite><code>ios_apps/fastlane/screenshots/shopper/capture-receipt.json</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>A stale set showed a dormant login screen, and a later check found listing bytes that differed from the contract. Private product repository commit <code>e990c33f</code> bound the 4.3.4 recapture on August 30, 2026.</p><p><span class="field-label">What it makes impossible</span>Publishing store art that nobody can trace to a source revision.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Write a receipt beside generated media with hashes for the source, tool, and every output.</p>
+            </div>
+        </article>
+
+        <article class="truth-card" id="gt15">
+            <div class="rank"><small>RANK</small><strong>15</strong></div>
+            <div class="truth-body">
+                <div class="truth-head"><h2>Say what a receipt cannot prove</h2><span class="chip verified">VERIFIED</span></div>
+                <p class="measure"><span class="field-label">What it measures</span>The exact provenance binding a receipt claims, plus the binding it explicitly does not claim.</p>
+                <blockquote><p>&ldquo;A file cannot truthfully contain the hash of a future commit that contains that file.&rdquo;</p><cite><code>.design-factory/evidence/inventory-selection/inventory-selection-repair-receipt.json</code></cite></blockquote>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>Evidence hardening exposed a circular promise: a receipt cannot contain the future hash of the commit that will contain it. Private product repository commit <code>d42baaf7</code> recorded the honest boundary on August 15, 2026.</p><p><span class="field-label">What it makes impossible</span>Fabricated provenance or a historical result quietly being relabeled as current.</p></div>
+                <p class="student-reuse"><span class="field-label">Student reuse</span>Add a &ldquo;not checked&rdquo; field to every report. It is often the most trustworthy line.</p>
+            </div>
+        </article>
+    </section>
+
+    <section class="next" aria-labelledby="next-title">
+        <h2 id="next-title">Turn the catalogue into practice</h2>
+        <p>Start with one 20-minute exercise, or see which automated checks keep these truths current.</p>
+        <div class="next-links"><a href="lesson-plan.html">Open the lesson plan</a><a href="automation.html">See the automation inventory</a></div>
+    </section>
+
+    <nav class="series" aria-label="Classroom reading order">
+        <p class="series-title">Classroom series &mdash; read in this order</p>
+        <ol class="series-list">
+            <li><a href="day-of-a-change.html">1. A day of a change</a></li>
+            <li><a href="automation.html">2. The automation inventory</a></li>
+            <li><a href="ml-loop.html">3. The ML loop today</a></li>
+            <li><a href="ground-truths.html" aria-current="page">4. Ground truths</a></li>
+            <li><a href="lesson-plan.html">5. Lesson plan</a></li>
+        </ol>
+    </nav>
+</main>
+
+<footer>Xpired classroom material. Facts stay useful when a reader can re-check them.</footer>
+</body>
+</html>
