@@ -1,0 +1,63 @@
+flowchart TB
+  subgraph SHOPPER["What a shopper touches"]
+    direction TB
+    A1[iPhone app: add groceries by hand or from fridge photos]
+    A2[Each item gets a planning date from typical storage guidance]
+    A3[Recipe ideas from what is on the list]
+    A1 --> A2 --> A3
+  end
+
+  subgraph BACKEND["Server side, always on"]
+    direction TB
+    B1[API service in the cloud, two machines, plus a separate canary copy]
+    B2[(Database)]
+    B3[Vision provider names the items in a fridge photo, nothing is stored there]
+    B1 --> B2
+    B1 --> B3
+  end
+
+  subgraph LEARN["Learning loop, consent gated"]
+    direction TB
+    L1[Shopper turns photo training on, with a dated notice]
+    L2[Only consented photos become training data]
+    L3[Retraining job builds a candidate model and writes a verdict]
+    L4[A person promotes a model only when the evidence checks pass]
+    L1 --> L2 --> L3 --> L4
+  end
+
+  subgraph SHIP["How code gets to shoppers"]
+    direction TB
+    S1[Pull request]
+    S2[Gates on the studio Mac: Xcode tests, screenshot frames, store readback]
+    S3[Gates on GitHub: server tests, claim ledger, consent fence]
+    S4[Release branch]
+    S5[Canary first, then production, with a receipt of what was deployed]
+    S6[[Team lead submits the app version to Apple]]
+    S1 --> S2 --> S4
+    S1 --> S3 --> S4
+    S4 --> S5
+    S4 --> S6
+  end
+
+  subgraph WATCH["Robots that watch the robots"]
+    direction TB
+    W1[Cloud watcher service, two regions: App Review state, health, uptime, gate canary, deploy drift, nightly smoke]
+    W2[(Dead man service: pages a person if a watcher goes quiet)]
+    W3[Team chat gets one line on change, never a flood]
+    W1 --> W2
+    W1 --> W3
+  end
+
+  subgraph SHOW["Showing the work"]
+    direction TB
+    H1[Internship hub: how it works, program ledger with a verdict per deliverable]
+  end
+
+  SHOPPER --> BACKEND
+  BACKEND --> LEARN
+  SHIP --> BACKEND
+  SHIP --> SHOPPER
+  WATCH -. watches .-> BACKEND
+  WATCH -. watches .-> SHIP
+  WATCH -. uptime numbers .-> SHOW
+  SHIP -. verdicts .-> SHOW

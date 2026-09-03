@@ -1,0 +1,27 @@
+flowchart LR
+  subgraph T0[First: make the dashboards tell the truth]
+    H0[Fix the health check that was crying wolf, and the alert that could not send]
+  end
+  subgraph T1[Track 1: monitors that run when the studio machine is off]
+    O1[Move the watcher code to its own private repo] --> O2[Run it in the cloud in two regions, with a dead-man service watching it]
+    O2 --> O3[Prove what is deployed matches what was reviewed]
+    O2 --> S1([Three-day side-by-side soak: cloud and studio must agree])
+    O3 --> S1
+    S1 --> C1[Retire the studio copies, one at a time, nothing deleted]
+    C1 --> W7([Seven full days measured before any uptime number is published])
+  end
+  subgraph T2[Track 2: the next app version]
+    B1[Give shoppers a working way to turn photo training back on] --> P1[Re-shoot the six App Store screenshots on the fixed code]
+    P1 --> P2[Update the store description and the claims check]
+    P2 --> G1[One script that checks every submission gate]
+    G1 --> OWN1{{Team lead: store setup clicks, merges, one server release}}
+    OWN1 --> SUB[[Team lead submits the new version]]
+  end
+  subgraph T3[Track 3: showing the work]
+    U1[Fix the how-it-works page lint] --> U2[Program ledger page: every deliverable with a verdict]
+    U2 --> OWN2{{Team lead reviews and merges}}
+  end
+  H0 --> O1
+  H0 --> B1
+  H0 --> U1
+  W7 -. uptime numbers .-> U2

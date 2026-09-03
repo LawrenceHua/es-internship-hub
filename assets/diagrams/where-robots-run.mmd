@@ -1,0 +1,21 @@
+flowchart LR
+  subgraph CLOUD["Cloud service, two regions. Built this week; switches on when the team lead adds the keys"]
+    direction TB
+    C1[App Store watcher]
+    C2[health watcher]
+    C3[uptime check]
+    C4[gate canary]
+    C5[deploy drift]
+    C6[nightly smoke]
+  end
+  DM[(dead man service watches all six once it is switched on)]
+  CLOUD --> DM
+
+  subgraph STUDIO["Studio Mac"]
+    direction TB
+    S1[Xcode builds and tests]
+    S2[device farm]
+    S3[the human release keystroke]
+  end
+  NOTE[/not counted in the uptime number/]
+  STUDIO --> NOTE
