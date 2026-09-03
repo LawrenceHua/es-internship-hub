@@ -302,7 +302,7 @@
             },
             sort_keys=True,
         )
-    )</pre><cite><code>ios_apps/fastlane/asc/asc_reconcile.py</code> &mdash; the JSON summary the runner prints after reconciling, quoted from source</cite></blockquote>
+    )</pre><cite><code>ios_apps/fastlane/asc/asc_reconcile.py</code>: the JSON summary the runner prints after reconciling, quoted from source</cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>On August 8, 2026, local notes said the store listing was fixed while the live record still described a feature the build did not ship. Private product repository commit <code>eb555954</code> recorded the correction and probe.</p><p><span class="field-label">What it makes impossible</span>Assuming that a successful write means the intended value is actually live.</p></div>
                 <p class="student-reuse"><span class="field-label">Student reuse</span>Treat the second API call as the test. Re-fetch what you changed and compare every field that matters.</p>
             </div>
@@ -335,7 +335,7 @@
             <div class="truth-body">
                 <div class="truth-head"><h2>Derive test counts from collection</h2><span class="chip verified">VERIFIED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The exact tests the runner collects, their reviewed floor, passed count, and skip count.</p>
-                <blockquote><p>&ldquo;Every gated inventory below is DERIVED, never typed. Each file's expected count comes from a <code>--collect-only</code> pass over the exact selection the suite executes, so adding a test to a gated file can no longer red this job on a stale literal; the historical literal survives as <code>&lt;label&gt;_floor</code>, which still fails closed on shrinkage.&rdquo;</p><cite><code>.github/workflows/release-contracts.yml</code> &mdash; the derived-count gate (B15, commit <code>b0cdd703</code>), quoted from source</cite></blockquote>
+                <blockquote><p>&ldquo;Every gated inventory below is DERIVED, never typed. Each file's expected count comes from a <code>--collect-only</code> pass over the exact selection the suite executes, so adding a test to a gated file can no longer red this job on a stale literal; the historical literal survives as <code>&lt;label&gt;_floor</code>, which still fails closed on shrinkage.&rdquo;</p><cite><code>.github/workflows/release-contracts.yml</code>: the derived-count gate (B15, commit <code>b0cdd703</code>), quoted from source</cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>Hand-typed totals became stale when tests were added and could stay green when tests disappeared. Private product repository commit <code>b0cdd703</code> replaced them with counts derived from pytest collection on September 1, 2026.</p><p><span class="field-label">What it makes impossible</span>A deleted test passing because the expected total was never measured.</p></div>
                 <p class="student-reuse"><span class="field-label">Student reuse</span>Ask the test tool what it found, then fail if that real count drops below the reviewed floor.</p>
             </div>
@@ -390,7 +390,7 @@
             <div class="truth-body">
                 <div class="truth-head"><h2>Bind every product claim to source</h2><span class="chip verified">VERIFIED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>Whether the source anchors behind each store claim still exist and still support the words.</p>
-                <blockquote class="quote-src"><pre>- Do not report freshness, condition, ripeness, expiration dates, prices, brands as separate items, or positions/coordinates.</pre><cite><code>backend/server/routes/fridge.py</code> &mdash; the OFF-prompt line, quoted in full</cite></blockquote>
+                <blockquote class="quote-src"><pre>- Do not report freshness, condition, ripeness, expiration dates, prices, brands as separate items, or positions/coordinates.</pre><cite><code>backend/server/routes/fridge.py</code>: the OFF-prompt line, quoted in full</cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>A 395-line rewrite left claim citations pointing at unrelated code. Private product repository commit <code>d06cb00e</code> created the rewrite on August 20, 2026, and the ledger test records that citation-rot incident.</p><p><span class="field-label">What it makes impossible</span>A public claim surviving after the proof beneath it has moved or disappeared.</p></div>
                 <p class="student-reuse"><span class="field-label">Student reuse</span>Commit each claim beside a pointer to the exact test or source line that supports it.</p>
             </div>
@@ -424,7 +424,7 @@
                 <div class="truth-head"><h2>Promote the digest you verified</h2><span class="chip verified">VERIFIED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The immutable canary image digest, the production digest after deployment, and the prior rollback artifact.</p>
                 <blockquote class="quote-src"><pre># before heavy CI or any Fly authentication. Production promotes the exact
-# registry digest proven on canary; it never rebuilds source.</pre><cite><code>.github/workflows/fly-deploy.yml</code> header comment &mdash; the digest pin itself lives at lines 477-485</cite></blockquote>
+# registry digest proven on canary; it never rebuilds source.</pre><cite><code>.github/workflows/fly-deploy.yml</code> header comment: the digest pin itself lives at lines 477-485</cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>Release hardening needed canary proof to follow the same bytes into production. Private product repository commit <code>8eb44a5f</code> pinned the candidate digest on August 2, 2026.</p><p><span class="field-label">What it makes impossible</span>&ldquo;Worked in canary&rdquo; referring to different bytes from the ones promoted.</p></div>
                 <p class="student-reuse"><span class="field-label">Student reuse</span>Promote an immutable artifact, not a source branch, and save the rollback identity first.</p>
             </div>
@@ -471,7 +471,7 @@
     </section>
 
     <nav class="series" aria-label="Classroom reading order">
-        <p class="series-title">Classroom series &mdash; read in this order</p>
+        <p class="series-title">Classroom series: read in this order</p>
         <ol class="series-list">
             <li><a href="day-of-a-change.html">1. A day of a change</a></li>
             <li><a href="automation.html">2. The automation inventory</a></li>
