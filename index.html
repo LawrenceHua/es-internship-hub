@@ -103,6 +103,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 1rem;
             height: 56px;
         }
 
@@ -118,7 +119,7 @@
 
         .brand-mark { width: 22px; height: 22px; flex-shrink: 0; display: block; }
 
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links { display: flex; gap: 0.875rem; list-style: none; }
 
         .nav-links a {
             font-size: 0.85rem;
@@ -126,6 +127,7 @@
             color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.15s;
+            white-space: nowrap;
         }
 
         .nav-links a:hover { color: var(--accent); }
@@ -307,14 +309,25 @@
         /* Week 12 seat cards: grid items must be allowed to shrink, otherwise a
            long gate command sets the track width and the page scrolls sideways. */
         #seats .lanes-grid { grid-template-columns: repeat(3, 1fr); align-items: start; }
+        #for-classrooms .lanes-grid { grid-template-columns: repeat(3, 1fr); align-items: start; }
         #seats .lane-card { min-width: 0; }
         #seats .lane-card p { min-width: 0; overflow-wrap: anywhere; font-size: 0.84rem; line-height: 1.55; margin-bottom: 0.55rem; color: var(--text-secondary); }
         #seats .lane-card p:last-child { margin-bottom: 0; }
         #seats .lane-card .codeline { white-space: pre-wrap; word-break: break-word; }
         @media (max-width: 1024px) { #seats .lanes-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 1024px) { #for-classrooms .lanes-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 640px) { #seats .lanes-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { #for-classrooms .lanes-grid { grid-template-columns: 1fr; } }
         .lane-card-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.6rem; }
         .lane-card h3 { font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; }
+        #for-classrooms .classroom-rank {
+            flex-shrink: 0;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: var(--text-tertiary);
+        }
         .lane-card p { font-size: 0.85rem; line-height: 1.55; color: var(--text-secondary); }
         .lanes-note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 1.25rem; }
 
@@ -672,6 +685,10 @@
         .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem; text-align: center; }
 
         /* ── Responsive ── */
+        @media (max-width: 1184px) {
+            .nav-links { gap: 0.5rem; }
+        }
+
         @media (max-width: 1100px) {
             .day-grid { grid-template-columns: repeat(3, 1fr); }
         }
@@ -2054,6 +2071,7 @@ cd es-intern-freshlens
             <div class="lane-card">
                 <div class="lane-card-head">
                     <h3>A day of a change</h3>
+                    <span class="classroom-rank">1 of 5</span>
                 </div>
                 <p>One change is followed from the moment someone asks for it to the moment it is live.</p>
                 <div class="project-band-links">
@@ -2065,6 +2083,7 @@ cd es-intern-freshlens
             <div class="lane-card">
                 <div class="lane-card-head">
                     <h3>The automation inventory</h3>
+                    <span class="classroom-rank">2 of 5</span>
                 </div>
                 <p>What runs without a human, what it is allowed to do, and what stops it.</p>
                 <div class="project-band-links">
@@ -2076,6 +2095,7 @@ cd es-intern-freshlens
             <div class="lane-card">
                 <div class="lane-card-head">
                     <h3>The ML loop today</h3>
+                    <span class="classroom-rank">3 of 5</span>
                 </div>
                 <p>How the model learns from what people correct, and where that loop is still open.</p>
                 <div class="project-band-links">
@@ -2087,6 +2107,7 @@ cd es-intern-freshlens
             <div class="lane-card">
                 <div class="lane-card-head">
                     <h3>Ground truths</h3>
+                    <span class="classroom-rank">4 of 5</span>
                 </div>
                 <p>The ten claims the system will not let anyone contradict, and how each one was formed.</p>
                 <div class="project-band-links">
@@ -2098,6 +2119,7 @@ cd es-intern-freshlens
             <div class="lane-card">
                 <div class="lane-card-head">
                     <h3>Lesson plan</h3>
+                    <span class="classroom-rank">5 of 5</span>
                 </div>
                 <p>The class session itself: the order, the discussion beats, and what students take away.</p>
                 <div class="project-band-links">
