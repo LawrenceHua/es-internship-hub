@@ -250,7 +250,7 @@
                 <path d="M16 1v7M16 24v7M1 16h7M24 16h7" stroke="currentColor" stroke-width="1.5"/>
                 <circle cx="16" cy="16" r="1.5" fill="currentColor"/>
             </svg>
-            <span>ES AI Internship</span>
+            <span>Xpired</span>
         </a>
         <div class="nav-actions">
             <a href="ground-truths.html">Ground truths</a>
@@ -334,7 +334,7 @@
             <div class="exercise-body">
                 <div class="exercise-head"><h3>Gate on counts, not vibes</h3><span class="chip verified">VERIFIED</span></div>
                 <p class="principle"><span class="field-label">Principle</span>A checker that can silently find nothing is worse than no checker.</p>
-                <div class="example"><p><span class="field-label">Xpired example</span><code>.github/workflows/release-contracts.yml</code> derives test totals from collection and keeps a 99-file presence floor. The file records the bad pattern that found zero paths and could have produced a green check.</p></div>
+                <div class="example"><p><span class="field-label">Xpired example</span><code>.github/workflows/release-contracts.yml</code> derives test totals from collection and refuses success below its recorded <code>MINIMUM_GATED_FILES</code> floor, which rises as tests are added. The file records the bad pattern that found zero paths and could have produced a green check.</p></div>
                 <div class="exercise"><p><span class="field-label">20-minute exercise</span>Add a workflow step that counts the test files in your repo and fails below today’s number. Delete one test file on a practice branch and confirm that the workflow refuses the change.</p></div>
                 <div class="ground-link"><span>First ground truth to build</span><a href="ground-truths.html#gt4">GT4: Derive test counts from collection</a></div>
             </div>

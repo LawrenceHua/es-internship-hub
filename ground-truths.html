@@ -242,7 +242,7 @@
                 <path d="M16 1v7M16 24v7M1 16h7M24 16h7" stroke="currentColor" stroke-width="1.5"/>
                 <circle cx="16" cy="16" r="1.5" fill="currentColor"/>
             </svg>
-            <span>ES AI Internship</span>
+            <span>Xpired</span>
         </a>
         <div class="nav-actions">
             <a href="lesson-plan.html">Lesson plan</a>
@@ -345,7 +345,7 @@
             <div class="rank"><small>RANK</small><strong>05</strong></div>
             <div class="truth-body">
                 <div class="truth-head"><h2>Make the gate prove it found work</h2><span class="chip verified">VERIFIED</span></div>
-                <p class="measure"><span class="field-label">What it measures</span>The workflow must discover at least 99 gated files before it may report success, matching the floor recorded in the workflow itself.</p>
+                <p class="measure"><span class="field-label">What it measures</span>The workflow must discover at least the <code>MINIMUM_GATED_FILES</code> floor recorded in the workflow itself before it may report success; the floor rises as tests are added, so the page must derive it rather than hand-type it.</p>
                 <blockquote><p>&ldquo;The first cut of this step used <code>(^|[[:space:]])</code> as a leading anchor and extracted ZERO paths under the grep on the runner host, which without the floor would have been a green step that checked nothing.&rdquo;</p><cite><code>.github/workflows/release-contracts.yml</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>On August 18, 2026, a first-cut pattern extracted zero paths on the runner host. Private product repository commit <code>94c4305b</code> recorded the near-miss and added the presence floor.</p><p><span class="field-label">What it makes impossible</span>A green checkmark from a checker that silently inspected nothing.</p></div>
                 <p class="student-reuse"><span class="field-label">Student reuse</span>Give every checker a heartbeat assertion: it must prove that it discovered real work.</p>
@@ -411,7 +411,7 @@
             <div class="rank"><small>RANK</small><strong>11</strong></div>
             <div class="truth-body">
                 <div class="truth-head"><h2>Make feature flags fail closed</h2><span class="chip verified">VERIFIED</span></div>
-                <p class="measure"><span class="field-label">What it measures</span>Only the literal string <code>true</code> enables irreversible automation, while unreachable remains unknown rather than off.</p>
+                <p class="measure"><span class="field-label">What it measures</span>A value must spell <code>true</code> in any case to enable irreversible automation; nothing else counts, while unreachable remains unknown rather than off.</p>
                 <blockquote><p>&ldquo;A timeout is never a pass and never &lsquo;the flag is off.&rsquo;&rdquo;</p><cite><code>backend/server/tests/test_fridge_condition_health_stage.py</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>A runtime setting could contradict the store promise without a source change. Private product repository commit <code>c0908ee3</code> closed a fail-open scanner mount on August 17, 2026.</p><p><span class="field-label">What it makes impossible</span>A typo, alternate truthy value, or unreachable service silently turning a risky lane on.</p></div>
                 <p class="student-reuse"><span class="field-label">Student reuse</span>Default to off, accept one exact enabling value, and keep &ldquo;unreachable&rdquo; separate from &ldquo;disabled.&rdquo;</p>
