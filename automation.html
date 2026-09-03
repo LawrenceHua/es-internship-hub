@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automation Inventory | Xpired</title>
+<meta name="description" content="A classroom inventory of Xpired automations, their limits, and their evidence labels.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#1a3c34;--primary-mid:#2a5a4a;--leaf:#3d8b6a;--leaf-soft:#e8f3ee;--ink:#17241f;--muted:#5c6f66;--line:#dfe8e2;--bg:#f7faf8;--card:#ffffff;--amber:#b07a1f;--amber-soft:#faf1dd;--sky:#2f6b9e;--sky-soft:#e7f0f8;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
+a{color:var(--primary-mid);font-weight:700}
+.skip{position:fixed;z-index:5;left:8px;top:8px;transform:translateY(-160%);padding:8px 12px;background:var(--primary);color:#fff;border-radius:7px}
+.skip:focus{transform:translateY(0)}
+a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:3px}
+.nav{height:56px;position:fixed;z-index:3;inset:0 0 auto;background:#fffefdf2;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.navin,.wrap{max-width:1120px;margin:auto;padding:0 20px}
+.navin{height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:8px;color:var(--primary);text-decoration:none;font-weight:800}
+.mark{width:25px;height:25px}
+.back{font-size:14px;color:var(--muted);text-decoration:none}
+.hero{margin-top:56px;padding:70px 20px 62px;background:linear-gradient(130deg,var(--primary),var(--primary-mid));color:#fff}
+.heroin{max-width:900px;margin:auto}
+.eyebrow,.chip{font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.eyebrow{color:#b8ddc8}
+.hero h1{font-size:clamp(36px,7vw,61px);line-height:1;letter-spacing:-.045em;margin:12px 0}
+.hero p{max-width:62ch;font-size:18px;color:#d9ebe0}
+.section{padding:52px 0 0}
+.section h2{font-size:clamp(25px,4vw,34px);line-height:1.12;letter-spacing:-.025em;margin:9px 0}
+.lead{max-width:70ch;color:var(--muted)}
+.chip{display:inline-block;padding:4px 9px;border-radius:999px;white-space:nowrap}
+.verified{background:var(--sky-soft);color:var(--sky)}
+.inferred{background:var(--amber-soft);color:var(--amber)}
+.live{background:var(--leaf-soft);color:var(--primary-mid)}
+.dark{background:#f1eafa;color:#654280}
+.flagged{background:var(--amber-soft);color:var(--amber);border:1px dashed var(--amber)}
+.planned{background:var(--amber-soft);color:var(--amber)}
+.retired{background:#e8edeb;color:var(--muted)}
+.callout{margin:20px 0;border-left:5px solid var(--amber);background:var(--amber-soft);border-radius:0 13px 13px 0;padding:18px}
+.callout p{margin:6px 0 0}
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:13px;margin:22px 0 0}
+table{border-collapse:collapse;width:100%;min-width:800px;font-size:14px}
+caption{text-align:left;font-size:17px;font-weight:800;padding:18px 18px 6px}
+th,td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:#f1f6f3;font:700 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700}
+td code,code{font:500 .88em var(--mono);color:var(--primary-mid);overflow-wrap:anywhere}
+.caption{color:var(--muted);font-size:14px;margin:12px 0}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin:36px 0 60px}
+.button{padding:11px 14px;background:var(--leaf-soft);border-radius:8px;text-decoration:none}
+.series{margin:36px 0 0;padding:18px 20px;border:1px solid var(--line);border-radius:13px;background:var(--card)}
+.series-title{margin:0 0 10px;font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.series-list{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.series-list a{display:block;padding:7px 11px;border-radius:8px;text-decoration:none;font-weight:650;color:var(--muted)}
+.series-list a:hover{background:var(--leaf-soft);color:var(--primary-mid)}
+.series-list a[aria-current="page"]{background:var(--leaf-soft);color:var(--primary-mid)}
+.foot{margin-top:58px;padding:25px 20px;text-align:center;background:var(--primary);color:#cfe4d8;font-size:14px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-color-scheme: dark){
+:root{--ink:#e6ece9;--muted:#a9b7b0;--line:#2b3530;--bg:#0f1413;--card:#171e1b;--leaf-soft:#152420;--amber-soft:#26200f;--sky-soft:#0f1d27}
+body{background:var(--bg);color:var(--ink)}
+.nav{background:rgba(15,20,19,.92)}
+a,.brand,code,.series-list a:hover,.series-list a[aria-current="page"]{color:#9fd0b8}
+.back{color:var(--muted)}
+th{background:#1c2521}
+.tablewrap,.series,.callout{border-color:var(--line)}
+.chip.flagged{border-color:var(--amber)}
+}
+@media(max-width:620px){
+.navin,.wrap{padding:0 16px}
+.hero{padding:55px 16px}
+.tablewrap{overflow-x:visible;margin-left:0;margin-right:0}
+table{min-width:0;display:block;font-size:13px}
+caption{display:block}
+thead{display:none}
+tbody{display:block}
+tr{display:block;border-bottom:1px solid var(--line);padding:10px 0}
+tbody tr:last-child{border-bottom:0}
+td{display:block;border-bottom:0;padding:6px 14px}
+td::before{content:attr(data-label);display:block;font:700 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+td:first-child{font-size:14px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Page navigation"><div class="navin"><a class="brand" href="index.html"><svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#1a3c34"/><path d="M8 24 A16 16 0 0 1 24 8" stroke="#3d8b6e" stroke-width="2.5" stroke-linecap="round" fill="none"/><line x1="8" y1="24" x2="8" y2="19" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="#e0a106"/></svg>Xpired</a><a class="back" href="how-it-works.html#robots">Back to the robots</a></div></nav>
+<main id="main"><header class="hero"><div class="heroin"><span class="eyebrow">Classroom system map</span><h1>The automation inventory</h1><p>Every automation has a job, a boundary, and a status. The boundary matters just as much as the job.</p></div></header><div class="wrap">
+<section class="section"><span class="chip verified">VERIFIED</span><span class="chip inferred">INFERRED</span><span class="chip flagged">FLAG-GATED</span><h2>How to read this inventory</h2><p class="lead">Automation names and statuses are read from cited records. The classroom explanation of each boundary is a synthesis. A live row means the capability is active as described in its evidence, not that it can make every decision by itself. FLAG-GATED means the code is present but its current runtime state needs a flag readback.</p></section>
+<section class="section"><span class="chip verified">VERIFIED</span><h2>GitHub workflows</h2><p class="lead">These files live in <code>.github/workflows/</code>. A manual workflow is live tooling, not an automatic release.</p><div class="tablewrap"><table><caption>Workflow boundaries</caption><thead><tr><th>Automation</th><th>What it does</th><th>Must never do</th><th>Status</th></tr></thead><tbody>
+<tr><td data-label="Automation"><code>release-contracts.yml</code></td><td data-label="What it does">Runs pinned contract suites, derives gated counts from <code>pytest --collect-only</code>, and fails closed if a gated file is missing.</td><td data-label="Must never do">Pass with a deleted suite or a count typed by hand.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>asc-gate-tests.yml</code></td><td data-label="What it does">Byte-compiles external-review gate tools, runs the discrimination suite, and checks that a screenshot receipt revision is an ancestor of the current revision.</td><td data-label="Must never do">Touch the live external-review service.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>shopper-tests.yml</code></td><td data-label="What it does">Verifies exact build and simulator versions, runs unit and UI tests, and uploads sealed evidence manifests.</td><td data-label="Must never do">Run on an unverified toolchain.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>shopper-release.yml</code></td><td data-label="What it does">On manual dispatch from protected <code>main</code>, uploads or distributes the pinned build through root-owned gated lanes.</td><td data-label="Must never do">Run from another ref or touch another build.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>fly-deploy.yml</code></td><td data-label="What it does">Builds once, checks a canary with a signed probe, promotes that same digest, and rolls back on failure.</td><td data-label="Must never do">Rebuild between canary and production.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>data-quality-gates.yml</code></td><td data-label="What it does">Materializes canonical training data with a root-owned helper on an isolated runner, then runs its gate tests.</td><td data-label="Must never do">Run outside the protected ref.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation">Four disabled legacy workflow files</td><td data-label="What it does">Preserve former deploy pipelines as <code>.disabled</code> tombstones.</td><td data-label="Must never do">Run at all.</td><td data-label="Status"><span class="chip dark">DARK</span></td></tr>
+</tbody></table></div><p class="caption">Notice that the workflows produce check results and receipts while a human still decides when a manual release begins.</p></section>
+<section class="section"><span class="chip verified">VERIFIED</span><h2>Backend schedulers</h2><p class="lead">These are in-process capabilities. Flag names identify the capability without exposing values.</p><aside class="callout"><strong>One deliberately narrow predicate controls the three ML schedulers.</strong><p><code>scheduler_flag_enabled()</code> enables them only when a value spells <code>true</code> in any case; nothing else counts. The other two schedulers spell the same rule themselves. Every flag defaults off, and nothing in the repository turns one on.</p></aside><div class="tablewrap"><table><caption>Flag-gated work</caption><thead><tr><th>Scheduler</th><th>Flag</th><th>Purpose</th><th>Must never do</th><th>Status</th></tr></thead><tbody>
+<tr><td data-label="Scheduler"><code>ml_improvement_scheduler.py</code></td><td data-label="Flag"><code>ML_IMPROVEMENT_SCHEDULER_ENABLED</code></td><td data-label="Purpose">Export consented, adjudicated corrections to training storage each day.</td><td data-label="Must never do">Export corrections without consent and adjudication.</td><td data-label="Status"><span class="chip dark">DARK</span></td></tr>
+<tr><td data-label="Scheduler"><code>continuous_labeling_scheduler.py</code></td><td data-label="Flag"><code>AUTO_LABELING_SCHEDULER_ENABLED</code></td><td data-label="Purpose">Label the review queue at a capped cadence.</td><td data-label="Must never do">Put machine labels into the supervised training set.</td><td data-label="Status"><span class="chip dark">DARK</span></td></tr>
+<tr><td data-label="Scheduler"><code>retrain_scheduler.py</code></td><td data-label="Flag"><code>RETRAIN_SCHEDULER_ENABLED</code></td><td data-label="Purpose">Start a one-shot trainer that writes non-served candidates.</td><td data-label="Must never do">Serve a candidate automatically.</td><td data-label="Status"><span class="chip dark">DARK</span></td></tr>
+<tr><td data-label="Scheduler"><code>recipe_reminder_dispatcher.py</code></td><td data-label="Flag"><code>RECIPE_REMINDER_EMAIL_SCHEDULER_ENABLED</code></td><td data-label="Purpose">Send owner-bound, custom-date reminder emails.</td><td data-label="Must never do">Assume current runtime from source alone. Read <code>/health/reminder-scheduler</code> for the reminder runtime.</td><td data-label="Status"><span class="chip flagged">FLAG-GATED</span></td></tr>
+<tr><td data-label="Scheduler"><code>feedback_digest_service.py</code></td><td data-label="Flag"><code>FEEDBACK_DIGEST_SCHEDULER_ENABLED</code></td><td data-label="Purpose">Prepare a scheduled digest of feedback.</td><td data-label="Must never do">Assume current runtime from source alone.</td><td data-label="Status"><span class="chip flagged">FLAG-GATED</span></td></tr>
+</tbody></table></div><p class="caption">DARK means built but not running in this release. FLAG-GATED means the code ships in the deployment and its current state requires runtime readback; the three ML schedulers share one predicate, while the other two spell the same rule themselves. With every flag defaulting off, reminder scheduling's live state is a runtime readback at <code>/health/reminder-scheduler</code>; feedback digest requires its own runtime readback, not an assumption from source.</p></section>
+<section class="section"><span class="chip verified">VERIFIED</span><h2>Watchers on the owner's Macs</h2><p class="lead">These small jobs measure state and leave a record. They are watchers, not permission slips to change the thing being watched.</p><div class="tablewrap"><table><caption>Small jobs that measure state</caption><thead><tr><th>Automation</th><th>What it does</th><th>Must never do</th><th>Status</th></tr></thead><tbody>
+<tr><td data-label="Automation"><code>es_asc_verdict_watch.py</code></td><td data-label="What it does">Reads the external review verdict on an interval and writes <code>state/es-asc-verdict-latest.json</code>.</td><td data-label="Must never do">Replace a live readback with a local document.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>es_health_fingerprint.py</code></td><td data-label="What it does">Makes five bounded GET requests and alerts only on a state change.</td><td data-label="Must never do">Alert on an unmeasured claim.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>es_kpi_watch.py</code></td><td data-label="What it does">Checks semantic probe assertions instead of treating a bare HTTP success as proof.</td><td data-label="Must never do">Treat a bare HTTP success as proof.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>es_ops_supervisor.py</code></td><td data-label="What it does">Checks watcher heartbeats and performs bounded heals with an audit record.</td><td data-label="Must never do">Heal silently without an audit trail.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>automation_healthcheck.py</code></td><td data-label="What it does">Checks launchd exit codes and scheduled-job state with flap-damped alerts.</td><td data-label="Must never do">Turn a flapping job into noise.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation">Nightly real-device matrix</td><td data-label="What it does">Runs the newest candidate on physical devices and writes a summary record.</td><td data-label="Must never do">Substitute an emulator result.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>xpired-release-desk.html</code></td><td data-label="What it does">Provides planner-refreshed review hours, pull request states, and an owner click list.</td><td data-label="Must never do">Present its status page as independent release proof.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Automation"><code>es_smoke_watch.py</code></td><td data-label="What it does">This is a deliberately dormant production POST probe.</td><td data-label="Must never do">POST to production as monitoring.</td><td data-label="Status"><span class="chip dark">DARK</span></td></tr>
+<tr><td data-label="Automation"><code>model-improve</code></td><td data-label="What it does">This was a nightly self-improvement daemon that fired into a deleted script.</td><td data-label="Must never do">Run a deleted script.</td><td data-label="Status"><span class="chip retired">RETIRED</span></td></tr>
+<tr><td data-label="Automation">Agent council group chat</td><td data-label="What it does">This was a recurring summary of known facts.</td><td data-label="Must never do">Restate facts as a substitute for measurement.</td><td data-label="Status"><span class="chip dark">DARK</span></td></tr>
+<tr><td data-label="Automation">One-shot intern-post fallback</td><td data-label="What it does">Posted diagrams once and wrote <code>state/b11-posted.json</code>.</td><td data-label="Must never do">Repeat after its one successful run.</td><td data-label="Status"><span class="chip retired">RETIRED</span></td></tr>
+</tbody></table></div><p class="caption">Notice that each watcher reports a narrow observation, which makes it easier to see when evidence is old or incomplete.</p></section>
+<section class="section"><span class="chip verified">VERIFIED</span><h2>Agent lane types</h2><p class="lead">The system separates the people and agents who build, measure, challenge, and plan.</p><div class="tablewrap"><table><caption>Distinct jobs, distinct boundaries</caption><thead><tr><th>Lane</th><th>Purpose</th><th>Must never do</th><th>Status</th></tr></thead><tbody>
+<tr><td data-label="Lane">Build lanes</td><td data-label="Purpose">Implement, test, and report one bounded brief.</td><td data-label="Must never do">Grade their own work as final.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Lane">Hostile review lanes</td><td data-label="Purpose">Try to refute claims from fresh context before merge.</td><td data-label="Must never do">Reuse the builder’s conclusion as evidence.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Lane">Truth-probe lanes</td><td data-label="Purpose">Measure a claim against the live system before another lane relies on it.</td><td data-label="Must never do">Build on a claim without measuring it.</td><td data-label="Status"><span class="chip live">LIVE</span></td></tr>
+<tr><td data-label="Lane">Design and judge lanes</td><td data-label="Purpose">Research, design, and shape education work.</td><td data-label="Must never do">Present a planned page as built.</td><td data-label="Status"><span class="chip live">LIVE</span> <span class="chip planned">PLANNED</span></td></tr>
+<tr><td data-label="Lane">Push-notification build lanes</td><td data-label="Purpose">These lanes cover former client and server notification work.</td><td data-label="Must never do">Proceed without the required credentials.</td><td data-label="Status"><span class="chip dark">DARK</span></td></tr>
+</tbody></table></div><p class="caption">Notice that making, measuring, and challenging a claim are separate jobs rather than one agent agreeing with itself.</p><div class="links"><a class="button" href="ground-truths.html">See the ground truths</a><a class="button" href="ledger.html">See this week's real run</a></div></section>
+<nav class="series" aria-label="Classroom reading order">
+<p class="series-title">Classroom series: read in this order</p>
+<ol class="series-list">
+<li><a href="day-of-a-change.html">1. A day of a change</a></li>
+<li><a href="automation.html" aria-current="page">2. The automation inventory</a></li>
+<li><a href="ml-loop.html">3. The ML loop today</a></li>
+<li><a href="ground-truths.html">4. Ground truths</a></li>
+<li><a href="lesson-plan.html">5. Lesson plan</a></li>
+</ol>
+</nav>
+</div></main><footer class="foot">Xpired classroom notes, with evidence labels kept visible.</footer></body></html>
