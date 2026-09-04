@@ -31,9 +31,10 @@ command line, or a classroom footer has drifted from it.
 | 9 | `ml-loop.html` | Classroom series 3 | The ML loop today | The five-stage ML pipeline and its consent boundaries. |
 | 10 | `ground-truths.html` | Classroom series 4 | Ground truths | Fifteen ranked ground truths with evidence labels. |
 | 11 | `lesson-plan.html` | Classroom series 5 | Lesson plan | Six lessons plus one stretch exercise a student can run on a free account. |
-| 12 | `diagrams.html` | Classroom series 6 | The system in pictures | The rendered system diagrams and the presentation track. |
+| 12 | `diagrams.html` | Classroom series 6 | The system in pictures | The rendered system diagrams with their sources, plus the backup deep-dives for the 9/10 presentation. |
+| 13 | `presentation.html` | Classroom series 7 | The 9/10 presentation | The deck for the September 10 class talk: the end-to-end loop diagram, seven stations from marketing to ops monitoring with what fires, what each must never do, and where the evidence lands, closing on the four decisions that stay human. |
 
-The site is 12 HTML pages. This table is generated: add or remove a page in `pages.json` and
+The site is 13 HTML pages. This table is generated: add or remove a page in `pages.json` and
 re-run `node scripts/render-pages.js --write`. The classroom series is read in the order above,
 and every one of its pages carries a footer listing all of them.
 
@@ -140,16 +141,18 @@ node scripts/validate-ledger.js --site
 node scripts/render-pages.js --check
 npx --yes html-validate index.html freshlens.html provenance.html w1.html \
   ledger.html how-it-works.html day-of-a-change.html automation.html \
-  ml-loop.html ground-truths.html lesson-plan.html diagrams.html
+  ml-loop.html ground-truths.html lesson-plan.html diagrams.html \
+  presentation.html
 python3 ~/.codex/skills/design-quality-gate/scripts/check-ai-tells.py \
   index.html freshlens.html provenance.html w1.html \
   ledger.html how-it-works.html day-of-a-change.html automation.html \
-  ml-loop.html ground-truths.html lesson-plan.html diagrams.html
+  ml-loop.html ground-truths.html lesson-plan.html diagrams.html \
+  presentation.html
 bash scripts/check-mermaid.sh
 git diff --check
 ```
 
-Every one of the 12 pages is named on both command lines, and both lists are generated from
+Every one of the 13 pages is named on both command lines, and both lists are generated from
 `pages.json`. A validator pointed at a subset reports a clean result for pages it never opened,
 which is the same failure the hub teaches against.
 

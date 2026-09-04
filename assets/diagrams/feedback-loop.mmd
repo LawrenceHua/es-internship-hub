@@ -1,0 +1,11 @@
+flowchart LR
+  A["Shopper feedback + scan corrections<br/>land in the app"] --> DB[("Production DB")]
+  DB --> DIG["feedback_digest.py<br/>launchd daily 09:15"]
+  DIG --> SLK["#es-daily<br/>unreviewed queue"]
+  SLK --> BRF["Owner brief<br/>es-ops/briefs"]
+  BRF --> PR["Pull request"]
+  PR --> CI{{"release-contracts +<br/>asc-gate-tests gates"}}
+  CI --> RLS["Release<br/>owner-dispatched"]
+  RLS --> APP["App update reaches shoppers"]
+  APP --> A
+  DB -. "corrections feed the ML loop,<br/>flag-only per 2026-09-03 decision" .-> MLX["ML training data"]

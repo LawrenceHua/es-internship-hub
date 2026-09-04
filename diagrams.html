@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>System Diagrams | Xpired</title>
-<meta name="description" content="The Xpired system diagrams posted to the intern channel, kept with their sources, plus the draft track for the 9/10 presentation.">
+<meta name="description" content="The Xpired system diagrams posted to the intern channel, kept with their sources, plus the deck and backup deep-dives for the 9/10 presentation.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,9 +101,9 @@ p a,li a,td a,dd a,strong a,span a{padding-block:.25rem}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <nav class="nav" aria-label="Page navigation"><div class="navin"><a class="brand" href="index.html"><svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#1a3c34"/><path d="M8 24 A16 16 0 0 1 24 8" stroke="#3d8b6e" stroke-width="2.5" stroke-linecap="round" fill="none"/><line x1="8" y1="24" x2="8" y2="19" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="#e0a106"/></svg>Xpired</a><a class="back" href="how-it-works.html">Back to how it works</a></div></nav>
-<main id="main"><header class="hero"><div class="heroin"><span class="eyebrow">Classroom system map</span><h1>The system in pictures</h1><p>The diagrams posted to the intern channel on 2026-09-02, kept here with their sources, plus the draft running order for the 9/10 presentation.</p></div></header><div class="wrap">
+<main id="main"><header class="hero"><div class="heroin"><span class="eyebrow">Classroom system map</span><h1>The system in pictures</h1><p>The diagrams posted to the intern channel on 2026-09-02, kept here with their sources, plus the deck and backup deep-dives for the 9/10 presentation.</p></div></header><div class="wrap">
 
-<section class="section"><span class="chip verified">VERIFIED</span><span class="chip planned">PLANNED</span><h2>How to read this page</h2><p class="lead">Each picture was reviewed against the system it describes before it was posted. A VERIFIED chip means the picture matched the shipped system on 2026-09-02, the day it was posted to the intern channel, backed by a public link a reader can open and check; the caption says so in the past tense on purpose, because the system keeps moving. PLANNED marks the presentation section: a draft running order, not a finished deck. Every picture also ships its Mermaid source so anyone can re-render or fix it instead of redrawing from a screenshot.</p></section>
+<section class="section"><span class="chip verified">VERIFIED</span><span class="chip live">LIVE</span><h2>How to read this page</h2><p class="lead">Each picture was reviewed against the system it describes before it was posted. A VERIFIED chip means the picture matched the shipped system on 2026-09-02, the day it was posted to the intern channel, backed by a public link a reader can open and check; the caption says so in the past tense on purpose, because the system keeps moving. LIVE marks the presentation section: the deck is built and ships its own sources like every other picture here. Every picture also ships its Mermaid source so anyone can re-render or fix it instead of redrawing from a screenshot.</p></section>
 
 <section class="section" id="posted"><span class="chip reported">REPORTED</span><h2>The three posted diagrams</h2><p class="lead">Posted to the 2026 intern channel on 2026-09-02 with the walkthrough text quoted under each picture.</p>
 
@@ -252,31 +252,25 @@ flowchart LR
 </figure>
 </section>
 
-<section class="section" id="presentation"><span class="chip planned">PLANNED</span><h2>The 9/10 presentation</h2><p class="lead">A draft running order for the September 10 talk, built entirely from pictures and pages that already exist and have been checked. The talk's title, length, and audience are the team lead's open decisions; this section grows as those firm up. Nothing here invents a claim: each step names where its picture comes from.</p>
+<section class="section" id="presentation"><span class="chip live">LIVE</span><h2>The 9/10 presentation</h2><p class="lead">The deck now exists as its own page: <a href="presentation.html">The 9/10 presentation</a> opens on the end-to-end loop, walks seven stations from marketing to ops monitoring, and closes on the four decisions that stay with the owner. The three diagrams posted on 2026-09-02 remain below as backup deep-dives if the room wants to go somewhere specific.</p>
 
 <ol class="track">
-<li><b>Open on the system map</b><span>One picture of the whole machine: what a shopper touches, the server side, the consent-gated learning loop, and how code reaches shoppers. Five boxes, one minute each. Source: diagram 1 above.</span></li>
-<li><b>Who watches the robots</b><span>The reliability story: six cloud watchers, a dead-man service that pages a person when one goes quiet, and the honest boundary that studio-Mac steps never count in the uptime number. Source: diagram 2 above.</span></li>
-<li><b>How a week of work is sequenced</b><span>Three lanes in parallel, with the team lead's decisions drawn as diamonds - the shape of the program, not just its output. Source: diagram 3 above.</span></li>
-<li><b>Deep-dive backup: a day of a change</b><span>If the room wants detail, walk one change from branch to merged release. Source: <a href="day-of-a-change.html">A day of a change</a>.</span></li>
-<li><b>Deep-dive backup: the automation inventory</b><span>Every automation with its job, its boundary, and its status chip. Source: <a href="automation.html">The automation inventory</a>.</span></li>
-<li><b>Deep-dive backup: the ML loop</b><span>How a consented photo becomes training data and why a person, not a schedule, promotes a model. Source: <a href="ml-loop.html">The ML loop today</a>.</span></li>
+<li><b>The deck</b><span>One page that tells the whole story in talk order: the loop diagram, then seven stations, each with what fires, what it must never do, and where the evidence lands. Source: <a href="presentation.html">The 9/10 presentation</a>.</span></li>
+<li><b>Backup deep-dive: the system map</b><span>One picture of the whole machine: what a shopper touches, the server side, the consent-gated learning loop, and how code reaches shoppers. Five boxes, one minute each. Source: diagram 1 above.</span></li>
+<li><b>Backup deep-dive: who watches the robots</b><span>The reliability story: six cloud watchers, a dead-man service that pages a person when one goes quiet, and the honest boundary that studio-Mac steps never count in the uptime number. Source: diagram 2 above.</span></li>
+<li><b>Backup deep-dive: how a week of work is sequenced</b><span>Three lanes in parallel, with the team lead's decisions drawn as diamonds - the shape of the program, not just its output. Source: diagram 3 above.</span></li>
+<li><b>Backup deep-dive: a day of a change</b><span>If the room wants detail, walk one change from branch to merged release. Source: <a href="day-of-a-change.html">A day of a change</a>.</span></li>
+<li><b>Backup deep-dive: the automation inventory</b><span>Every automation with its job, its boundary, and its status chip. Source: <a href="automation.html">The automation inventory</a>.</span></li>
+<li><b>Backup deep-dive: the ML loop</b><span>How a consented photo becomes training data and why a person, not a schedule, promotes a model. Source: <a href="ml-loop.html">The ML loop today</a>.</span></li>
 <li><b>Close on the ground truths</b><span>What the program promises, and the evidence each promise stands on. Source: <a href="ground-truths.html">Ground truths</a>.</span></li>
 </ol>
 
-<div class="callout"><b>Still open for the team lead</b><p>Talk title, talk length, audience, and whether a live demo joins the slides. The recipe-capability picture also changes when 4.3.6 ships (fridge-confirmed rows join recipes under typical guidance), so any screenshot for this deck should be captured after that release, not before.</p></div>
+<div class="callout"><b>Still open for the team lead</b><p>Talk length, audience, and whether a live demo joins the slides. The recipe-capability picture also changes when 4.3.6 ships (fridge-confirmed rows join recipes under typical guidance), so any screenshot for this deck should be captured after that release, not before.</p></div>
 </section>
 
 <nav class="series" aria-label="Classroom reading order">
 <p class="series-title">Classroom series: read in this order</p>
-<ol class="series-list">
-<li><a href="day-of-a-change.html">1. A day of a change</a></li>
-<li><a href="automation.html">2. The automation inventory</a></li>
-<li><a href="ml-loop.html">3. The ML loop today</a></li>
-<li><a href="ground-truths.html">4. Ground truths</a></li>
-<li><a href="lesson-plan.html">5. Lesson plan</a></li>
-<li><a href="diagrams.html" aria-current="page">6. The system in pictures</a></li>
-</ol>
+<ol class="series-list"><li><a href="day-of-a-change.html">1. A day of a change</a></li><li><a href="automation.html">2. The automation inventory</a></li><li><a href="ml-loop.html">3. The ML loop today</a></li><li><a href="ground-truths.html">4. Ground truths</a></li><li><a href="lesson-plan.html">5. Lesson plan</a></li><li><a href="diagrams.html" aria-current="page">6. The system in pictures</a></li><li><a href="presentation.html">7. The 9/10 presentation</a></li></ol>
 </nav>
 
 </div></main><footer class="foot">Xpired classroom notes, with evidence labels kept visible.</footer></body></html>
