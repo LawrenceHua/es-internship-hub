@@ -1,0 +1,103 @@
+{
+  "schema_version": "xpired-hub-denylist-v1",
+  "note": "Denied personal names and out-of-scope terms, stored as salted digests. The digests exist so this file can live in a public repository without republishing the very names and terms the rule keeps off the site. The salt is published beside them: this is obfuscation against casual reading, grep and search indexing, not a secret store. Ids are deliberately opaque and must never contain a denied token, or this file would fail its own check. Add a term with scripts/README-denylist.md.",
+  "salt": "xpired-hub-denylist-v1",
+  "terms_expected": 14,
+  "selftest": {
+    "id": "selftest-canary",
+    "kind": "canary",
+    "sha256": "90a33a6b709108c5d6d391ce2fb0fbda32db2793f834a48f2811589e3e6220ae",
+    "compact_len": 21,
+    "compact_h32": "2ae4cae6"
+  },
+  "terms": [
+    {
+      "id": "cohort-name-01",
+      "kind": "name",
+      "sha256": "878ebacaa9b2114b80c8af54e798530216ed94d9f9d80d8858d9e05515aad265",
+      "compact_len": 5,
+      "compact_h32": "47c961a0"
+    },
+    {
+      "id": "cohort-name-02",
+      "kind": "name",
+      "sha256": "2b57ea157760370cada41a6d77aa7f944be321a6bb95f4423f6f7197fb37ded4",
+      "compact_len": 5,
+      "compact_h32": "48c8e7a3"
+    },
+    {
+      "id": "cohort-name-03",
+      "kind": "name",
+      "sha256": "4943944e2ac2f1d9454a88b806999ab55531047cec40e1c39a5365a289da8125"
+    },
+    {
+      "id": "cohort-name-04",
+      "kind": "name",
+      "sha256": "b721b3dfd89408f3f8c1578a6272b95f71036072090a86fd712855411061f930",
+      "compact_len": 7,
+      "compact_h32": "ce321910"
+    },
+    {
+      "id": "cohort-name-05",
+      "kind": "name",
+      "sha256": "58470d94e17a6ea8c13a949350b5ba7e9665ae66f1eb272ac39b6c37bceac796",
+      "compact_len": 5,
+      "compact_h32": "47e0a877"
+    },
+    {
+      "id": "cohort-name-06",
+      "kind": "name",
+      "sha256": "1195b245a9a3c6b3116f18c486e782f487be5e097b8773cd6eabf4aacba030cd",
+      "compact_len": 6,
+      "compact_h32": "5f91090c"
+    },
+    {
+      "id": "cohort-name-07",
+      "kind": "name",
+      "sha256": "d7fdaeb04246446ddc28f3f212363cd90e9e5fe0be214ce9bc3123161b442d35"
+    },
+    {
+      "id": "cohort-name-08",
+      "kind": "name",
+      "sha256": "6dea7138d4d5987b3a4cfd4dc7c09e3f687b7d01d9166c35c7e1efbea132b7ac"
+    },
+    {
+      "id": "cohort-name-09",
+      "kind": "name",
+      "sha256": "7b439adbe2b6850b0faafff562b004e1fd102032703ae30bd2141f289a5cbd7d"
+    },
+    {
+      "id": "cohort-name-10",
+      "kind": "name",
+      "sha256": "de8cdb8b55ccd816e92de74896262590d7ddc13b59f5d937bbe078f0b27fea57",
+      "compact_len": 4,
+      "compact_h32": "28f592a5"
+    },
+    {
+      "id": "employer-brand-01",
+      "kind": "term",
+      "sha256": "620fee7aae1e7a36cc505a45a32c4a4cadc3589a4bd9fa42fd013690b8e0e33f",
+      "compact_len": 7,
+      "compact_h32": "313af625"
+    },
+    {
+      "id": "employer-brand-02",
+      "kind": "term",
+      "sha256": "d0ec22e22180698b6d9c3ea68f834006543812dc58dcb08363cb5eb700221aac",
+      "compact_len": 4,
+      "compact_h32": "28f09ea8"
+    },
+    {
+      "id": "employer-brand-03",
+      "kind": "term",
+      "sha256": "f05e6795bec99146363464140fabefb6878961e0ea28d33a73ef523c3fcfe2d5",
+      "compact_len": 16,
+      "compact_h32": "fe53c2e3"
+    },
+    {
+      "id": "out-of-scope-01",
+      "kind": "term",
+      "sha256": "6a9be168b5afb0ede8c611a2328a2a79ba7051db0f2aeefba84e6f79968704c3"
+    }
+  ]
+}

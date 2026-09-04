@@ -1,0 +1,94 @@
+{
+  "schema_version": "xpired-hub-pages-v1",
+  "note": "The single source for which pages exist. ARCHITECTURE.md's page table and its html-validate command line are generated from this file, and the classroom-series footers are checked against it. Change this file first: scripts/render-pages.js --write regenerates the document, scripts/render-pages.js --check fails when the document or a footer has drifted, and scripts/validate-ledger.js --site fails when this list and `ls *.html` disagree.",
+  "series_titles": {
+    "program": "Program surface",
+    "classroom": "Classroom series"
+  },
+  "pages": [
+    {
+      "file": "index.html",
+      "title": "Program overview",
+      "series": "program",
+      "series_order": 1,
+      "summary": "Program overview, eight-week core plus three-week extension schedule, the Monday sequence, owner/issue map, evidence snapshot, and links to the detailed project board. Preserved as a dated snapshot of the Week 12 start page; see the historical note on the page itself."
+    },
+    {
+      "file": "freshlens.html",
+      "title": "FreshLens",
+      "series": "program",
+      "series_order": 2,
+      "summary": "FreshLens product framing, local claim-loop boundary, convergence plan, readiness matrix, owner lanes, and a collapsed historical Week 7 record fenced as history."
+    },
+    {
+      "file": "provenance.html",
+      "title": "Provenance receipts",
+      "series": "program",
+      "series_order": 3,
+      "summary": "Research reference for signed decision evidence. It explicitly separates local binding and mock-anchor proof from blocked durability and external-trust work."
+    },
+    {
+      "file": "w1.html",
+      "title": "Week 1 tutorial",
+      "series": "program",
+      "series_order": 4,
+      "summary": "Beginner Week 1 tutorial with copy controls, persisted step progress, and an optional timer."
+    },
+    {
+      "file": "ledger.html",
+      "title": "Program Ledger",
+      "series": "program",
+      "series_order": 5,
+      "summary": "The Program Ledger reader. It fetches ledger.json and uptime.json at runtime and renders them; it hardcodes no row, no total, and no date."
+    },
+    {
+      "file": "how-it-works.html",
+      "title": "How Xpired works",
+      "series": "program",
+      "series_order": 6,
+      "summary": "The system map in plain language: apps, the AI boundary, storage, and the release and watcher robots."
+    },
+    {
+      "file": "day-of-a-change.html",
+      "title": "A day of a change",
+      "series": "classroom",
+      "series_order": 1,
+      "summary": "Eleven stations from brief to post-deploy record."
+    },
+    {
+      "file": "automation.html",
+      "title": "The automation inventory",
+      "series": "classroom",
+      "series_order": 2,
+      "summary": "The inventory of workflows, backend schedulers, watchers, and agent lanes, each with a status label and a \"must never do\" boundary."
+    },
+    {
+      "file": "ml-loop.html",
+      "title": "The ML loop today",
+      "series": "classroom",
+      "series_order": 3,
+      "summary": "The five-stage ML pipeline and its consent boundaries."
+    },
+    {
+      "file": "ground-truths.html",
+      "title": "Ground truths",
+      "series": "classroom",
+      "series_order": 4,
+      "summary": "Fifteen ranked ground truths with evidence labels."
+    },
+    {
+      "file": "lesson-plan.html",
+      "title": "Lesson plan",
+      "series": "classroom",
+      "series_order": 5,
+      "summary": "Six lessons plus one stretch exercise a student can run on a free account."
+    },
+    {
+      "file": "diagrams.html",
+      "title": "The system in pictures",
+      "series": "classroom",
+      "series_order": 6,
+      "summary": "The rendered system diagrams and the presentation track."
+    }
+  ]
+}

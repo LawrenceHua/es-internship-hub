@@ -12,35 +12,32 @@ and date.
 
 ## Pages
 
-The site is twelve HTML pages. Any change to that list must be made here, in the classroom-series
-footers, and in the verification command below, together.
+`pages.json` is the single source for this list. Change it there, then run
+`node scripts/render-pages.js --write`; `--check` fails when this table, the verification
+command line, or a classroom footer has drifted from it.
 
-**Program surface**
+<!-- BEGIN GENERATED pages-table — written by scripts/render-pages.js from pages.json; do not edit by hand -->
 
-- **`index.html`** — program overview, eight-week core + three-week extension schedule, the Monday
-  sequence, owner/issue map, evidence snapshot, and links to the detailed project board. It is
-  preserved as a dated snapshot of the Week 12 start page; see the historical note on the page itself.
-- **`freshlens.html`** — FreshLens product framing, local claim-loop boundary, convergence plan,
-  readiness matrix, owner lanes, and a collapsed historical Week 7 record fenced as history.
-- **`provenance.html`** — research reference for signed decision evidence. It explicitly separates
-  local binding/mock-anchor proof from blocked durability and external-trust work.
-- **`w1.html`** — beginner Week 1 tutorial with copy controls, persisted step progress, and an
-  optional timer.
-- **`ledger.html`** — the Program Ledger reader. It fetches `ledger.json` and `uptime.json` at
-  runtime and renders them; it hardcodes no row, no total, and no date.
-- **`how-it-works.html`** — the system map in plain language: apps, AI boundary, storage, and the
-  release/watcher robots.
+| # | Page | Series | Title | What it is |
+|---|---|---|---|---|
+| 1 | `index.html` | Program surface 1 | Program overview | Program overview, eight-week core plus three-week extension schedule, the Monday sequence, owner/issue map, evidence snapshot, and links to the detailed project board. Preserved as a dated snapshot of the Week 12 start page; see the historical note on the page itself. |
+| 2 | `freshlens.html` | Program surface 2 | FreshLens | FreshLens product framing, local claim-loop boundary, convergence plan, readiness matrix, owner lanes, and a collapsed historical Week 7 record fenced as history. |
+| 3 | `provenance.html` | Program surface 3 | Provenance receipts | Research reference for signed decision evidence. It explicitly separates local binding and mock-anchor proof from blocked durability and external-trust work. |
+| 4 | `w1.html` | Program surface 4 | Week 1 tutorial | Beginner Week 1 tutorial with copy controls, persisted step progress, and an optional timer. |
+| 5 | `ledger.html` | Program surface 5 | Program Ledger | The Program Ledger reader. It fetches ledger.json and uptime.json at runtime and renders them; it hardcodes no row, no total, and no date. |
+| 6 | `how-it-works.html` | Program surface 6 | How Xpired works | The system map in plain language: apps, the AI boundary, storage, and the release and watcher robots. |
+| 7 | `day-of-a-change.html` | Classroom series 1 | A day of a change | Eleven stations from brief to post-deploy record. |
+| 8 | `automation.html` | Classroom series 2 | The automation inventory | The inventory of workflows, backend schedulers, watchers, and agent lanes, each with a status label and a "must never do" boundary. |
+| 9 | `ml-loop.html` | Classroom series 3 | The ML loop today | The five-stage ML pipeline and its consent boundaries. |
+| 10 | `ground-truths.html` | Classroom series 4 | Ground truths | Fifteen ranked ground truths with evidence labels. |
+| 11 | `lesson-plan.html` | Classroom series 5 | Lesson plan | Six lessons plus one stretch exercise a student can run on a free account. |
+| 12 | `diagrams.html` | Classroom series 6 | The system in pictures | The rendered system diagrams and the presentation track. |
 
-**Classroom series** — six pages, read in a fixed order. All six carry the same ordered footer nav,
-and every one of the six must list all six.
+The site is 12 HTML pages. This table is generated: add or remove a page in `pages.json` and
+re-run `node scripts/render-pages.js --write`. The classroom series is read in the order above,
+and every one of its pages carries a footer listing all of them.
 
-1. **`day-of-a-change.html`** — eleven stations from brief to post-deploy record.
-2. **`automation.html`** — the inventory of workflows, backend schedulers, watchers, and agent lanes,
-   each with a status label and a "must never do" boundary.
-3. **`ml-loop.html`** — the five-stage ML pipeline and its consent boundaries.
-4. **`ground-truths.html`** — fifteen ranked ground truths with evidence labels.
-5. **`lesson-plan.html`** — six lessons plus one stretch exercise a student can run on a free account.
-6. **`diagrams.html`** — the rendered system diagrams and the presentation track.
+<!-- END GENERATED pages-table — written by scripts/render-pages.js from pages.json; do not edit by hand -->
 
 **Data and tooling**
 
@@ -48,13 +45,33 @@ and every one of the six must list all six.
   `validated` stamp. Nothing generates it; the stamp is the only freshness claim it makes.
 - **`uptime.json`** — a hand-maintained cloud-uptime snapshot. It carries `curated_at` and
   `"source": "hand-maintained"` precisely because no producer writes it. `ledger.html` renders it.
+- **`pages.json`** — the single source for which pages exist: `file`, `title`, `series`,
+  `series_order` and `summary` per page. The table and the verification command line above are
+  generated from it, and the classroom footers are checked against it.
 - **`scripts/validate-ledger.js`** — the gate behind both files. No dependencies. It enforces the
   entry schema, the verdict vocabulary, the rule that VERIFIED requires at least one openable public
   link and REPORTED requires zero, and the `uptime.json` shape. `--stamp` rewrites the `validated`
-  stamp with a sha256 of the entries, so an edited ledger with an untouched stamp fails.
+  stamp with a sha256 of the entries, so an edited ledger with an untouched stamp fails. `--site`
+  applies the same evidence rule to the pages: every VERIFIED badge needs an openable public link in
+  its own block, no page may redefine VERIFIED without that requirement, `pages.json` must agree with
+  `ls *.html`, and the denied names and terms must appear in no `.html`, `.md` or `.json` file. It
+  fails closed: the badge parser and the denylist matcher are proved against built-in fixtures before
+  the tree is scanned, and fewer than 20 badges site-wide is itself a failure.
+- **`scripts/denylist.json`** — the denied personal names and out-of-scope terms, stored as salted
+  digests rather than in clear text, so keeping them off the site does not publish them in the
+  repository instead. See `scripts/README-denylist.md`.
+- **`scripts/render-pages.js`** — generates the page table and verification command line in this file
+  from `pages.json`, checks the six classroom footers against it, and fails when `pages.json` and
+  `ls *.html` disagree.
+- **`scripts/check-mermaid.sh`** — re-renders every `assets/diagrams/*.mmd` with `mmdc` and compares
+  the result against the committed `.png`. It renders each source twice, so a diagram that will not
+  draw identically twice is reported as unverifiable by name rather than as changed. It is local-only
+  and fails closed: with no `mmdc` on the machine it reports that it cannot verify rather than
+  passing.
 - **`assets/diagrams/`** — `system-map`, `plan-order` and `where-robots-run` as both `.mmd` source and
-  committed `.png`, plus `system-map-lr.png`. Nothing today re-renders the PNGs from the `.mmd`, so a
-  change to one must be made to the other by hand.
+  committed `.png`, plus `system-map-lr.png`, the same system map at a smaller scale, which shares
+  `system-map.mmd` and is therefore on the check's explicit allowlist. As of 2026-09-03 only
+  `where-robots-run.png` reproduces from its committed source; see the automation lane report.
 
 All pages use relative links for local navigation and link to exact GitHub issues, pull requests,
 commits, and documents when those identities matter.
@@ -83,21 +100,28 @@ Then open `http://127.0.0.1:8000/`.
 There is no repository-pinned package manifest. The current review workflow uses an ephemeral HTML
 validator plus browser inspection:
 
+<!-- BEGIN GENERATED verification — written by scripts/render-pages.js from pages.json; do not edit by hand -->
+
 ```bash
 node scripts/validate-ledger.js
-npx --yes html-validate index.html freshlens.html provenance.html w1.html ledger.html \
-  how-it-works.html day-of-a-change.html automation.html ml-loop.html ground-truths.html \
-  lesson-plan.html diagrams.html
+node scripts/validate-ledger.js --site
+node scripts/render-pages.js --check
+npx --yes html-validate index.html freshlens.html provenance.html w1.html \
+  ledger.html how-it-works.html day-of-a-change.html automation.html \
+  ml-loop.html ground-truths.html lesson-plan.html diagrams.html
 python3 ~/.codex/skills/design-quality-gate/scripts/check-ai-tells.py \
-  index.html freshlens.html provenance.html w1.html ledger.html \
-  how-it-works.html day-of-a-change.html automation.html ml-loop.html ground-truths.html \
-  lesson-plan.html diagrams.html
+  index.html freshlens.html provenance.html w1.html \
+  ledger.html how-it-works.html day-of-a-change.html automation.html \
+  ml-loop.html ground-truths.html lesson-plan.html diagrams.html
+bash scripts/check-mermaid.sh
 git diff --check
 ```
 
-Every page must be named on both command lines. A validator that is pointed at a subset of the site
-reports a clean result for pages it never opened, which is the same failure the hub teaches against.
-`ls *.html | wc -l` must equal the number of files listed above.
+Every one of the 12 pages is named on both command lines, and both lists are generated from
+`pages.json`. A validator pointed at a subset reports a clean result for pages it never opened,
+which is the same failure the hub teaches against.
+
+<!-- END GENERATED verification — written by scripts/render-pages.js from pages.json; do not edit by hand -->
 
 Also inspect all twelve pages in a real browser at desktop and mobile widths. Check skip links, main
 landmarks, focus visibility, disclosure targets, table overflow, broken assets, and horizontal
@@ -119,8 +143,8 @@ verify the deployed revision and live URLs separately.
   July 2026.
 - Evidence vocabulary is program-wide and is not redefined per page: **VERIFIED** requires at least
   one public link a reader can open; a citation that resolves only inside the private product
-  repository is **REPORTED**. `scripts/validate-ledger.js` enforces this for `ledger.json`;
-  `ground-truths.html` and `lesson-plan.html` must state the same rule in their legends.
+  repository is **REPORTED**. `scripts/validate-ledger.js` enforces this for `ledger.json` and
+  `node scripts/validate-ledger.js --site` enforces it on every page, legends included.
 - No personal name other than the program lead's appears on any page, and no GitHub handle of a
   cohort member appears anywhere. Use role labels ("a Week 12 intern", "the cohort", "two
   reviewers", "Faculty co-lead"), or let an issue or pull-request number carry the identity.
