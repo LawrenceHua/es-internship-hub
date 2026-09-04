@@ -271,9 +271,9 @@
 <main id="main">
     <section class="label-guide" aria-labelledby="label-heading">
         <h2 id="label-heading" class="sr-only">How to read the labels</h2>
-        <div class="label-card verified"><span class="chip verified">VERIFIED</span><p>Read in the cited file, commit, receipt, or workflow.</p></div>
+        <div class="label-card verified"><span class="chip verified">VERIFIED</span><p>Backed by at least one public link a reader can open and check. A citation that resolves only inside the private product repository is REPORTED, not VERIFIED.</p></div>
         <div class="label-card inferred"><span class="chip inferred">INFERRED</span><p>A synthesis drawn from evidence, not a directly stored fact.</p></div>
-        <div class="label-card reported"><span class="chip reported">REPORTED</span><p>Stated in a lane report, without a public artifact to inspect here.</p></div>
+        <div class="label-card reported"><span class="chip reported">REPORTED</span><p>Read in the cited file, commit, receipt, or workflow, but inside the private product repository &mdash; so there is no public artifact to inspect here.</p></div>
     </section>
 
     <section class="starter" aria-labelledby="starter-title">
@@ -299,7 +299,7 @@
         <article class="exercise-card">
             <div class="lesson-number"><span>LESSON</span><strong>01</strong></div>
             <div class="exercise-body">
-                <div class="exercise-head"><h3>Write the brief before the code</h3><span class="chip verified">VERIFIED</span></div>
+                <div class="exercise-head"><h3>Write the brief before the code</h3><span class="chip reported">REPORTED</span></div>
                 <p class="principle"><span class="field-label">Principle</span>Automation starts as a one-page contract: scope, the proving command, and what must not happen.</p>
                 <div class="example"><p><span class="field-label">Xpired example</span>The lane brief fixes the facts, deliverables, decisive command, one mutation that must fail, and the prohibitions in <code>es-ops/briefs/20260901<wbr>-B0-kpi-truth-and-dead-plists.md</code>.</p></div>
                 <div class="exercise"><p><span class="field-label">20-minute exercise</span>Write a half-page brief for one chore in your project. End with the exact shell command that proves it is done. Trade briefs with a partner and ask them to run the command without extra instructions.</p></div>
@@ -310,7 +310,7 @@
         <article class="exercise-card">
             <div class="lesson-number"><span>LESSON</span><strong>02</strong></div>
             <div class="exercise-body">
-                <div class="exercise-head"><h3>A checklist is not a gate</h3><span class="chip verified">VERIFIED</span></div>
+                <div class="exercise-head"><h3>A checklist is not a gate</h3><span class="chip reported">REPORTED</span></div>
                 <p class="principle"><span class="field-label">Principle</span>If a person must remember a check, it will eventually be skipped. Put the check in the path of the change.</p>
                 <div class="example"><p><span class="field-label">Xpired example</span>On August 8, 2026, two submission preconditions were wrong while a readable checklist still existed. <code>ios_apps/fastlane/asc/asc_presubmit_check.py</code> became the executable gate; private product repository commit <code>eb555954</code> records the related live-listing correction.</p></div>
                 <div class="exercise"><p><span class="field-label">20-minute exercise</span>Choose one “before you submit” sentence from your README. Turn it into a GitHub Actions step that fails the pull request when the condition is false. Break the condition and confirm a red run.</p></div>
@@ -321,7 +321,7 @@
         <article class="exercise-card">
             <div class="lesson-number"><span>LESSON</span><strong>03</strong></div>
             <div class="exercise-body">
-                <div class="exercise-head"><h3>Read back every write</h3><span class="chip verified">VERIFIED</span></div>
+                <div class="exercise-head"><h3>Read back every write</h3><span class="chip reported">REPORTED</span></div>
                 <p class="principle"><span class="field-label">Principle</span>The test of a change is the second call, not the first call’s exit code.</p>
                 <div class="example"><p><span class="field-label">Xpired example</span><code>ios_apps/fastlane/asc/asc_reconcile.py</code> reads the version and build again after every change and returns stable failure codes. The August 8, 2026 drift incident is recorded in private product repository commit <code>eb555954</code>.</p></div>
                 <div class="exercise"><p><span class="field-label">20-minute exercise</span>Create a GitHub issue through the API. Write a script that fetches it again and fails unless the body matches. Edit the issue by hand, run the script again, and watch it catch the drift.</p></div>
@@ -332,7 +332,7 @@
         <article class="exercise-card">
             <div class="lesson-number"><span>LESSON</span><strong>04</strong></div>
             <div class="exercise-body">
-                <div class="exercise-head"><h3>Gate on counts, not vibes</h3><span class="chip verified">VERIFIED</span></div>
+                <div class="exercise-head"><h3>Gate on counts, not vibes</h3><span class="chip reported">REPORTED</span></div>
                 <p class="principle"><span class="field-label">Principle</span>A checker that can silently find nothing is worse than no checker.</p>
                 <div class="example"><p><span class="field-label">Xpired example</span><code>.github/workflows/release-contracts.yml</code> derives test totals from collection and refuses success below its recorded <code>MINIMUM_GATED_FILES</code> floor, which rises as tests are added. The file records the bad pattern that found zero paths and could have produced a green check.</p></div>
                 <div class="exercise"><p><span class="field-label">20-minute exercise</span>Add a workflow step that counts the test files in your repo and fails below today’s number. Delete one test file on a practice branch and confirm that the workflow refuses the change.</p></div>
@@ -343,7 +343,7 @@
         <article class="exercise-card">
             <div class="lesson-number"><span>LESSON</span><strong>05</strong></div>
             <div class="exercise-body">
-                <div class="exercise-head"><h3>Stamp identity into what you ship</h3><span class="chip verified">VERIFIED</span></div>
+                <div class="exercise-head"><h3>Stamp identity into what you ship</h3><span class="chip reported">REPORTED</span></div>
                 <p class="principle"><span class="field-label">Principle</span>If you cannot prove which bytes are live, you cannot audit a bug report or choose the right rollback.</p>
                 <div class="example"><p><span class="field-label">Xpired example</span><code>backend/Dockerfile</code> adds the release commit to the image, and <code>.github/workflows/fly-deploy.yml</code> promotes the same immutable digest that passed the canary check.</p></div>
                 <div class="exercise"><p><span class="field-label">20-minute exercise</span>Add a <code>/version</code> endpoint or footer that prints <code>git rev-parse HEAD</code> at build time. Publish two GitHub Pages revisions or run two local builds and confirm that the value changes.</p></div>
@@ -354,9 +354,9 @@
         <article class="exercise-card">
             <div class="lesson-number"><span>LESSON</span><strong>06</strong></div>
             <div class="exercise-body">
-                <div class="exercise-head"><h3>Make consent and deletion real</h3><span class="chip verified">VERIFIED</span></div>
+                <div class="exercise-head"><h3>Make consent and deletion real</h3><span class="chip reported">REPORTED</span></div>
                 <p class="principle"><span class="field-label">Principle</span>A “yes” is perishable. Re-check it at the moment of use, and make “no” remove the data.</p>
-                <div class="example"><p><span class="field-label">Xpired example</span><code>backend/server/services/training_consent.py</code> uses a live-consent lease and a tombstone. Private product repository commit <code>3be85e17</code> fixed the September 1, 2026 cached echo defect, and 37 pinned tests fence the withdrawal path.</p></div>
+                <div class="example"><p><span class="field-label">Xpired example</span><code>backend/server/services/training_consent.py</code> uses a live-consent lease and a tombstone. Private product repository commit <code>3be85e17</code> fixed the September 1, 2026 cached echo defect, and four dedicated consent test suites fence the withdrawal path.</p></div>
                 <div class="exercise"><p><span class="field-label">20-minute exercise</span>In a toy mailing list, make unsubscribe delete the row. Write a test that signs up, unsubscribes, and then asserts that the query returns zero rows.</p></div>
                 <div class="ground-link"><span>First ground truth to build</span><a href="ground-truths.html#gt8">GT8: Read consent back before data moves</a></div>
             </div>
@@ -387,6 +387,7 @@
             <li><a href="ml-loop.html">3. The ML loop today</a></li>
             <li><a href="ground-truths.html">4. Ground truths</a></li>
             <li><a href="lesson-plan.html" aria-current="page">5. Lesson plan</a></li>
+            <li><a href="diagrams.html">6. The system in pictures</a></li>
         </ol>
     </nav>
 </main>

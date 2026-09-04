@@ -263,9 +263,9 @@
 <main id="main">
     <section class="label-guide" aria-labelledby="label-heading">
         <h2 id="label-heading" class="sr-only">How to read the labels</h2>
-        <div class="label-card verified"><span class="chip verified">VERIFIED</span><p>Read in the cited file, commit, receipt, or workflow.</p></div>
+        <div class="label-card verified"><span class="chip verified">VERIFIED</span><p>Backed by at least one public link a reader can open and check. A citation that resolves only inside the private product repository is REPORTED, not VERIFIED.</p></div>
         <div class="label-card inferred"><span class="chip inferred">INFERRED</span><p>A synthesis drawn from evidence, not a directly stored fact.</p></div>
-        <div class="label-card reported"><span class="chip reported">REPORTED</span><p>Stated in a lane report, without a public artifact to inspect here.</p></div>
+        <div class="label-card reported"><span class="chip reported">REPORTED</span><p>Read in the cited file, commit, receipt, or workflow, but inside the private product repository &mdash; so there is no public artifact to inspect here.</p></div>
     </section>
 
     <section class="intro" aria-labelledby="intro-title">
@@ -287,7 +287,7 @@
         <article class="truth-card" id="gt1">
             <div class="rank"><small>RANK</small><strong>01</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Read back every write</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Read back every write</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>After an external change, the system reads the server again and compares the stored result.</p>
                 <blockquote class="quote-src"><pre>    dry_run_requires_write = not args.apply and selection.writes_planned &gt; 0
     print(
@@ -311,7 +311,7 @@
         <article class="truth-card" id="gt2">
             <div class="rank"><small>RANK</small><strong>02</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Probe the outside world</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Probe the outside world</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The live store record through signed read-only requests, rather than through local documentation.</p>
                 <blockquote><p>&ldquo;Nothing here mutates ASC &mdash; the version PATCH and build attach are deliberately separate actions, because reading the state and changing it should never be one keystroke apart.&rdquo;</p><cite><code>ios_apps/fastlane/asc/asc_state.py</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>The August 8, 2026 listing drift showed that a local file could be tidy while the outside system stayed wrong. Private product repository commit <code>eb555954</code> kept the live probe beside the repair.</p><p><span class="field-label">What it makes impossible</span>Documentation quietly becoming the source of a false operational claim.</p></div>
@@ -322,7 +322,7 @@
         <article class="truth-card" id="gt3">
             <div class="rank"><small>RANK</small><strong>03</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Refuse the wrong build at the parser</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Refuse the wrong build at the parser</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>Whether the requested build is the one reviewed candidate, before any network call can begin.</p>
                 <blockquote><p>&ldquo;Bump this in the same commit that moves the release to a new build; R6's pin-uniqueness sweep checks this constant against every other pin in the repo.&rdquo;</p><cite><code>ios_apps/fastlane/asc/asc_presubmit_check.py</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>Release discipline tightened after the August listing incidents. On August 30, 2026, private product repository commit <code>a57b9bf5</code> hardened the 4.3.4 submission path around one reviewed candidate.</p><p><span class="field-label">What it makes impossible</span>Uploading or checking a different binary because someone mistyped a build number.</p></div>
@@ -333,7 +333,7 @@
         <article class="truth-card" id="gt4">
             <div class="rank"><small>RANK</small><strong>04</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Derive test counts from collection</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Derive test counts from collection</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The exact tests the runner collects, their reviewed floor, passed count, and skip count.</p>
                 <blockquote><p>&ldquo;Every gated inventory below is DERIVED, never typed. Each file's expected count comes from a <code>--collect-only</code> pass over the exact selection the suite executes, so adding a test to a gated file can no longer red this job on a stale literal; the historical literal survives as <code>&lt;label&gt;_floor</code>, which still fails closed on shrinkage.&rdquo;</p><cite><code>.github/workflows/release-contracts.yml</code>: the derived-count gate (B15, commit <code>b0cdd703</code>), quoted from source</cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>Hand-typed totals became stale when tests were added and could stay green when tests disappeared. Private product repository commit <code>b0cdd703</code> replaced them with counts derived from pytest collection on September 1, 2026.</p><p><span class="field-label">What it makes impossible</span>A deleted test passing because the expected total was never measured.</p></div>
@@ -344,7 +344,7 @@
         <article class="truth-card" id="gt5">
             <div class="rank"><small>RANK</small><strong>05</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Make the gate prove it found work</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Make the gate prove it found work</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The workflow must discover at least the <code>MINIMUM_GATED_FILES</code> floor recorded in the workflow itself before it may report success; the floor rises as tests are added, so the page must derive it rather than hand-type it.</p>
                 <blockquote><p>&ldquo;The first cut of this step used <code>(^|[[:space:]])</code> as a leading anchor and extracted ZERO paths under the grep on the runner host, which without the floor would have been a green step that checked nothing.&rdquo;</p><cite><code>.github/workflows/release-contracts.yml</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>On August 18, 2026, a first-cut pattern extracted zero paths on the runner host. Private product repository commit <code>94c4305b</code> recorded the near-miss and added the presence floor.</p><p><span class="field-label">What it makes impossible</span>A green checkmark from a checker that silently inspected nothing.</p></div>
@@ -355,7 +355,7 @@
         <article class="truth-card" id="gt6">
             <div class="rank"><small>RANK</small><strong>06</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Hash source identity into the artifact</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Hash source identity into the artifact</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The release commit and source manifest that the built container claims to contain.</p>
                 <blockquote><p>&ldquo;ARG RELEASE_GIT_SHA=unbound&rdquo;</p><cite><code>backend/Dockerfile</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>Scanner release hardening needed a running artifact to identify its own source. Private product repository commit <code>424ff232</code> added the source-bound core release lane on August 10, 2026.</p><p><span class="field-label">What it makes impossible</span>A deployment claiming to represent a commit when its bytes cannot prove that identity.</p></div>
@@ -366,7 +366,7 @@
         <article class="truth-card" id="gt7">
             <div class="rank"><small>RANK</small><strong>07</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Let the runner write the receipt</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Let the runner write the receipt</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>Whether the release gate created a new, private, durable receipt instead of accepting one from the claimant.</p>
                 <blockquote><p>&ldquo;Every release mutation remains BLOCKED even if copied to the fixed install path.&rdquo;</p><cite><code>tools/shopper-release-runner/runner.c</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>The release boundary needed success evidence that a worker could not mint for itself. Private product repository commit <code>835b85ed</code> added the fail-closed runner, authored August 21, 2026 (the committer date is August 22, 2026).</p><p><span class="field-label">What it makes impossible</span>The process asking for approval also manufacturing its own proof of success.</p></div>
@@ -377,7 +377,7 @@
         <article class="truth-card" id="gt8">
             <div class="rank"><small>RANK</small><strong>08</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Read consent back before data moves</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Read consent back before data moves</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>Whether the server confirms the current opt-in and still grants live consent at the moment of a training write.</p>
                 <blockquote><p>&ldquo;A stored <code>user_consented_upload</code> bit is only historical evidence that a copy was permitted at capture time; it is not authority to adjudicate or export after the shopper withdraws consent.&rdquo;</p><cite><code>backend/server/services/training_consent.py</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>A cached preference could echo an old opt-in and resurrect withdrawn consent across devices. Private product repository commit <code>3be85e17</code> closed that path on September 1, 2026.</p><p><span class="field-label">What it makes impossible</span>Using data after the person withdrew permission.</p></div>
@@ -388,7 +388,7 @@
         <article class="truth-card" id="gt9">
             <div class="rank"><small>RANK</small><strong>09</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Bind every product claim to source</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Bind every product claim to source</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>Whether the source anchors behind each store claim still exist and still support the words.</p>
                 <blockquote class="quote-src"><pre>- Do not report freshness, condition, ripeness, expiration dates, prices, brands as separate items, or positions/coordinates.</pre><cite><code>backend/server/routes/fridge.py</code>: the OFF-prompt line, quoted in full</cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>A 395-line rewrite left claim citations pointing at unrelated code. Private product repository commit <code>d06cb00e</code> created the rewrite on August 20, 2026, and the ledger test records that citation-rot incident.</p><p><span class="field-label">What it makes impossible</span>A public claim surviving after the proof beneath it has moved or disappeared.</p></div>
@@ -399,7 +399,7 @@
         <article class="truth-card" id="gt10">
             <div class="rank"><small>RANK</small><strong>10</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Make publication fail closed</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Make publication fail closed</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The published file hashes, source-tree digest, approved copy registry, expiry dates, and forbidden claim patterns.</p>
                 <blockquote><p>&ldquo;There is deliberately no auto-approve/update mode.&rdquo;</p><cite><code>verify-publication.js</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>The August 2, 2026 public-claim audit followed August overclaim incidents. Related private product repository commit <code>eb555954</code> recorded the live listing mismatch on August 8, 2026.</p><p><span class="field-label">What it makes impossible</span>A redesign quietly bringing back a public claim that evidence already refuted.</p></div>
@@ -410,7 +410,7 @@
         <article class="truth-card" id="gt11">
             <div class="rank"><small>RANK</small><strong>11</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Make feature flags fail closed</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Make feature flags fail closed</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>A value must spell <code>true</code> in any case to enable irreversible automation; nothing else counts, while unreachable remains unknown rather than off.</p>
                 <blockquote><p>&ldquo;A timeout is never a pass and never &lsquo;the flag is off.&rsquo;&rdquo;</p><cite><code>backend/server/tests/test_fridge_condition_health_stage.py</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>A runtime setting could contradict the store promise without a source change. Private product repository commit <code>c0908ee3</code> closed a fail-open scanner mount on August 17, 2026.</p><p><span class="field-label">What it makes impossible</span>A typo, alternate truthy value, or unreachable service silently turning a risky lane on.</p></div>
@@ -421,7 +421,7 @@
         <article class="truth-card" id="gt12">
             <div class="rank"><small>RANK</small><strong>12</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Promote the digest you verified</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Promote the digest you verified</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The immutable canary image digest, the production digest after deployment, and the prior rollback artifact.</p>
                 <blockquote class="quote-src"><pre># before heavy CI or any Fly authentication. Production promotes the exact
 # registry digest proven on canary; it never rebuilds source.</pre><cite><code>.github/workflows/fly-deploy.yml</code> header comment: the digest pin itself lives at lines 477-485</cite></blockquote>
@@ -433,10 +433,10 @@
         <article class="truth-card" id="gt13">
             <div class="rank"><small>RANK</small><strong>13</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Refuse starved training classes</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Refuse starved training classes</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>Every model head has supervised rows, and every evaluation class has at least 40 examples per split.</p>
                 <blockquote><p>&ldquo;Training is refused rather than completing with a head that received no gradient.&rdquo;</p><cite><code>scripts/train_capture_multitask_b4.py</code></cite></blockquote>
-                <div class="story-grid"><p><span class="field-label">How it was formed</span>Commit <code>9b259f7c</code> records the defective run dated August 11, 2026: 170,817 rows silently resolved to a sentinel and the quality head took no gradient for eight healthy-looking epochs, while all 1,072 &ldquo;degraded&rdquo; records sat in train so validation and test could not see them. Commit <code>d22d2436</code> on September 1, 2026 added the degraded-class refusal and pinned its floor in a test; the trainer now refuses to complete with a head that received no gradient.</p><p><span class="field-label">What it makes impossible</span>A model checkpoint advertising a skill that it never practiced or evaluated.</p></div>
+                <div class="story-grid"><p><span class="field-label">How it was formed</span>Commit <code>9b259f7c</code> records the defective run dated August 11, 2026: 170,817 rows silently resolved to a sentinel and the quality head took no gradient for eight healthy-looking epochs, while all 1,072 &ldquo;degraded&rdquo; records sat in train so validation and test could not see them. The refusals themselves came from two other commits: <code>9b259f7c</code> added <code>assert_supervision()</code>, which raises the sentence quoted above, and <code>94a6abe5</code> added <code>assert_class_coverage()</code>, which exits rather than train on a starved class. Commit <code>d22d2436</code> on September 1, 2026 added degraded-class evaluation support and pinned the floor in a new test. The trainer now refuses to complete with a head that received no gradient, and it checks three times: before the model is built, at load, and again at the end of the run.</p><p><span class="field-label">What it makes impossible</span>A model checkpoint advertising a skill that it never practiced or evaluated.</p></div>
                 <p class="student-reuse"><span class="field-label">Student reuse</span>Count examples per class and split before you calculate accuracy.</p>
             </div>
         </article>
@@ -444,7 +444,7 @@
         <article class="truth-card" id="gt14">
             <div class="rank"><small>RANK</small><strong>14</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Bind screenshots to source</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Bind screenshots to source</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The source commit, source manifest, executable hash, and individual image hashes behind store screenshots.</p>
                 <blockquote><p>&ldquo;&quot;schema_version&quot;: 2&rdquo;</p><cite><code>ios_apps/fastlane/screenshots/shopper/capture-receipt.json</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>A stale set showed a dormant login screen, and a later check found listing bytes that differed from the contract. Private product repository commit <code>e990c33f</code> bound the 4.3.4 recapture on August 30, 2026.</p><p><span class="field-label">What it makes impossible</span>Publishing store art that nobody can trace to a source revision.</p></div>
@@ -455,7 +455,7 @@
         <article class="truth-card" id="gt15">
             <div class="rank"><small>RANK</small><strong>15</strong></div>
             <div class="truth-body">
-                <div class="truth-head"><h2>Say what a receipt cannot prove</h2><span class="chip verified">VERIFIED</span></div>
+                <div class="truth-head"><h2>Say what a receipt cannot prove</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The exact provenance binding a receipt claims, plus the binding it explicitly does not claim.</p>
                 <blockquote><p>&ldquo;A file cannot truthfully contain the hash of a future commit that contains that file.&rdquo;</p><cite><code>.design-factory/evidence/inventory-selection/inventory-selection-repair-receipt.json</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>Evidence hardening exposed a circular promise: a receipt cannot contain the future hash of the commit that will contain it. Private product repository commit <code>d42baaf7</code> recorded the honest boundary on August 15, 2026.</p><p><span class="field-label">What it makes impossible</span>Fabricated provenance or a historical result quietly being relabeled as current.</p></div>
@@ -478,6 +478,7 @@
             <li><a href="ml-loop.html">3. The ML loop today</a></li>
             <li><a href="ground-truths.html" aria-current="page">4. Ground truths</a></li>
             <li><a href="lesson-plan.html">5. Lesson plan</a></li>
+            <li><a href="diagrams.html">6. The system in pictures</a></li>
         </ol>
     </nav>
 </main>
