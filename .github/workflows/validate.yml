@@ -1,0 +1,61 @@
+# The gates that keep this hub honest, run on every pull request.
+#
+# The audit that produced these scripts found the opposite arrangement: checks
+# that existed but were only ever run by hand, on a subset of the pages, by the
+# person who had just edited them. Nothing here needs an install step, so there
+# is no excuse for that.
+#
+# Every check runs even when an earlier one fails. A run that stops at the first
+# failure reports a clean result for the checks it never reached, which is the
+# same defect these scripts exist to catch.
+name: validate
+
+on:
+  pull_request:
+    branches: [main]
+  # Manual re-runs. GitHub only offers this once the file is on the default
+  # branch, so it does nothing until this pull request is merged.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The scripts use Node's standard library only — no package.json, no
+      # install, nothing to cache. Pinning the version keeps a Node upgrade on
+      # the runner from changing what the gates mean.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Ledger — schema, verdict vocabulary, evidence rule, stamp
+        run: node scripts/validate-ledger.js
+
+      - name: Site — evidence rule on every page, legends, and the denylist
+        if: ${{ !cancelled() }}
+        run: node scripts/validate-ledger.js --site
+
+      - name: Pages — pages.json against `ls *.html`, the footers, and the docs
+        if: ${{ !cancelled() }}
+        run: node scripts/render-pages.js --check
+
+      # scripts/check-mermaid.sh is deliberately NOT run here.
+      #
+      # It re-renders each assets/diagrams/*.mmd with mermaid-cli and compares
+      # sha256 against the committed PNG. mermaid-cli renders through a headless
+      # Chromium it downloads on first use, so in CI the check would need a
+      # ~150 MB network fetch and a browser install on every run — and the exact
+      # renderer build decides the bytes, so a hosted runner's Chromium and a
+      # laptop's Chrome would disagree about diagrams nobody touched. A gate that
+      # fails for reasons unrelated to the change teaches people to ignore it.
+      #
+      # It therefore stays local and fails closed: with no mmdc on the machine it
+      # reports CANNOT-VERIFY (exit 2) rather than passing. Run it before any pull
+      # request that touches assets/diagrams/:
+      #
+      #     bash scripts/check-mermaid.sh
