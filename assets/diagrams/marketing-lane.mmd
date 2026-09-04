@@ -1,0 +1,11 @@
+flowchart LR
+  Q["Human-approved queue<br/>the only marketing row that exists today"]
+  LK["LinkedIn poster lane<br/>linkedin_queue_runner.py<br/>plist not installed"]
+  EM["Expiry-email digest EM1<br/>built, default-off flag,<br/>blocked unmerged"]
+  HB["Monday heartbeat → #es-growth<br/>LIVE, a monitor not marketing output"]
+  Q -. DARK until the owner turns it on .-> LK
+  Q -. DARK until the flag merges and flips .-> EM
+  classDef dark fill:#f1eafa,stroke:#654280,stroke-dasharray:5,color:#654280;
+  classDef live fill:#e8f3ee,stroke:#3d8b6a,color:#1a3c34;
+  class LK,EM dark;
+  class HB live;

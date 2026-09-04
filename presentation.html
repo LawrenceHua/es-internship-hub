@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The 9/10 Presentation | Xpired</title>
+<meta name="description" content="The deck for the September 10 class talk: seven stations that run the business end to end, what each one must never do, and the four decisions that stay human.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#1a3c34;--primary-mid:#2a5a4a;--leaf:#3d8b6a;--leaf-soft:#e8f3ee;--ink:#17241f;--muted:#5c6f66;--line:#dfe8e2;--bg:#f7faf8;--card:#ffffff;--amber:#b07a1f;--amber-soft:#faf1dd;--sky:#2f6b9e;--sky-soft:#e7f0f8;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
+a{color:var(--primary-mid);font-weight:700}
+.skip{position:fixed;z-index:5;left:8px;top:8px;transform:translateY(-160%);padding:8px 12px;background:var(--primary);color:#fff;border-radius:7px}
+.skip:focus{transform:translateY(0)}
+a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:3px}
+/* Scoped to the header bar on purpose: this page also carries
+   <nav class="series"> at the end of the reading flow, and a bare
+   `nav` selector pins that one over the hero as well. */
+body>.nav{height:56px;position:fixed;z-index:3;inset:0 0 auto;background:#fffefdf2;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.navin,.wrap{max-width:1120px;margin:auto;padding:0 20px}
+.navin{height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:8px;color:var(--primary);text-decoration:none;font-weight:800}
+.mark{width:25px;height:25px}
+.back{display:inline-flex;align-items:center;min-height:24px;font-size:14px;color:var(--muted);text-decoration:none}
+.hero{margin-top:56px;padding:70px 20px 62px;background:linear-gradient(130deg,var(--primary),var(--primary-mid));color:#fff}
+.heroin{max-width:900px;margin:auto}
+.eyebrow,.chip{font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.eyebrow{color:#b8ddc8}
+.hero h1{font-size:clamp(36px,7vw,61px);line-height:1;letter-spacing:-.045em;margin:12px 0}
+.hero p{max-width:62ch;font-size:18px;color:#d9ebe0}
+.section{padding:52px 0 0}
+.section h2{font-size:clamp(25px,4vw,34px);line-height:1.12;letter-spacing:-.025em;margin:9px 0}
+.section h3{font-size:19px;margin:26px 0 4px}
+.lead{max-width:70ch;color:var(--muted)}
+.chip{display:inline-block;padding:4px 9px;border-radius:999px;white-space:nowrap}
+.verified{background:var(--sky-soft);color:var(--sky)}
+.reported{background:var(--amber-soft);color:var(--amber)}
+.inferred{background:var(--amber-soft);color:var(--amber)}
+.live{background:var(--leaf-soft);color:var(--primary-mid)}
+.dark{background:#f1eafa;color:#654280}
+.offline{background:#e8edeb;color:var(--muted)}
+.legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0 0}
+.legend div{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+.legend p{margin:8px 0 0;color:var(--muted);font-size:13.5px}
+figure{margin:26px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px}
+figure img{display:block;width:100%;height:auto;border-radius:8px}
+/* At 390 the rendered text inside these PNGs is a few pixels tall, so the image
+   is also a link to the full-size asset. The caption says so, because a linked
+   image with no affordance reads as decoration. */
+.full-size{display:block;border-radius:8px}
+.full-size:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.full-size-note{display:inline-flex;align-items:center;min-height:24px;font:700 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.full-size-note:hover{color:var(--primary-mid)}
+figcaption{font-weight:800;font-size:17px;margin:0 0 8px}
+figure p{color:var(--muted);font-size:15px;margin:6px 0}
+details{margin:10px 0 0}
+summary{cursor:pointer;font-weight:700;color:var(--primary-mid)}
+pre{overflow-x:auto;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;font:500 12.5px/1.5 var(--mono)}
+/* Diagram source: indentation is the structure, so it scrolls instead of
+   wrapping. The label is pinned to the left edge so it stays put while you
+   scroll, and tabindex makes the scroll keyboard-reachable. */
+pre::before{content:"scrolls sideways \2192";position:sticky;left:0;display:block;width:max-content;margin:0 0 8px;font:700 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+pre:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+@media(min-width:1120px){pre::before{display:none}}
+.caption{color:var(--muted);font-size:14px;margin:12px 0}
+.stations{display:grid;gap:14px;margin:24px 0 0}
+.station{display:grid;grid-template-columns:64px minmax(0,1fr);background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.station-num{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;padding-top:18px;background:var(--primary);color:#fff}
+.station-num span{font:700 10px var(--mono);letter-spacing:.12em;color:#9ecbb2}
+.station-num strong{font-size:1.7rem;line-height:1;letter-spacing:-.04em}
+.station-body{min-width:0;padding:16px 20px 18px}
+.station-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.station-head h3{margin:0;font-size:1.25rem;letter-spacing:-.015em}
+.station-chips{display:flex;flex-wrap:wrap;gap:6px}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.field{min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.field b{display:block;font:700 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.field p{margin:0;font-size:14px;color:var(--ink)}
+.field.never{border-left:4px solid var(--amber)}
+code{font:500 .88em var(--mono);color:var(--primary-mid);overflow-wrap:anywhere}
+.station figure{margin:14px 0 0;padding:14px}
+.callout{margin:20px 0;border-left:5px solid var(--amber);background:var(--amber-soft);border-radius:0 13px 13px 0;padding:18px}
+.callout p{margin:6px 0 0}
+.gates{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0 0}
+.gate-card{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--amber);border-radius:11px;padding:13px 14px}
+.gate-card b{display:block;font-size:15px;margin-bottom:4px}
+.gate-card p{margin:0;color:var(--muted);font-size:13.5px}
+.series{margin:42px 0 0;padding:18px 20px;border:1px solid var(--line);border-radius:13px;background:var(--card)}
+.series-title{margin:0 0 10px;font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.series-list{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.series-list a{display:block;padding:7px 11px;border-radius:8px;text-decoration:none;font-weight:650;color:var(--muted)}
+.series-list a:hover{background:var(--leaf-soft);color:var(--primary-mid)}
+.series-list a[aria-current="page"]{background:var(--leaf-soft);color:var(--primary-mid)}
+.foot{margin-top:58px;padding:25px 20px;text-align:center;background:var(--primary);color:#cfe4d8;font-size:14px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-color-scheme: dark){
+:root{--ink:#e6ece9;--muted:#a9b7b0;--line:#2b3530;--bg:#0f1413;--card:#171e1b;--leaf-soft:#152420;--amber-soft:#26200f;--sky-soft:#0f1d27}
+body{background:var(--bg);color:var(--ink)}
+body>.nav{background:rgba(15,20,19,.92)}
+a,.brand,code,.series-list a:hover,.series-list a[aria-current="page"]{color:#9fd0b8}
+.back{color:var(--muted)}
+.series,.callout,figure,.legend div,.field,.gate-card,pre{border-color:var(--line)}
+pre{background:#0c100f}
+.dark{background:#221a2e;color:#c9b3e0}
+}
+p a,li a,td a,strong a,span a{padding-block:.25rem}
+@media(max-width:860px){
+.legend{grid-template-columns:1fr}
+.fields{grid-template-columns:1fr}
+.gates{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+.navin,.wrap{padding:0 16px}
+.hero{padding:55px 16px}
+.station{grid-template-columns:44px minmax(0,1fr)}
+.station-num strong{font-size:1.3rem}
+.gates{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Page navigation"><div class="navin"><a class="brand" href="index.html"><svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#1a3c34"/><path d="M8 24 A16 16 0 0 1 24 8" stroke="#3d8b6e" stroke-width="2.5" stroke-linecap="round" fill="none"/><line x1="8" y1="24" x2="8" y2="19" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="#e0a106"/></svg>Xpired</a><a class="back" href="diagrams.html#presentation">Back to the diagrams</a></div></nav>
+<main id="main"><header class="hero"><div class="heroin"><span class="eyebrow">Classroom deck · September 10</span><h1>The 9/10 presentation: how the business runs itself</h1><p>One owner, one product, no employees. Seven stations fire on schedules and leave evidence a skeptic can re-check, and four decisions stay with the owner on purpose. This page is the deck; every station names what fires, what it must never do, and where the evidence lands.</p></div></header><div class="wrap">
+
+<section class="section"><span class="chip reported">REPORTED</span><span class="chip inferred">INFERRED</span><h2>How to read this deck</h2>
+<p class="lead">Station facts are read from cited records on the owner's machine and in the private product repository, so they carry the REPORTED label: a reader cannot open the primary source from here. The closing contrast, what the machines do versus what the owner still decides, is a synthesis and carries INFERRED. Status chips tell live from dark: LIVE means the capability is firing as described in its evidence, DARK means built but not running, and nothing dark is ever implied to be live.</p>
+<div class="legend">
+<div><span class="chip reported">REPORTED</span><p>Read in the cited file, receipt, or workflow inside the private workspace.</p></div>
+<div><span class="chip live">LIVE</span><p>Firing as described in its evidence on 2026-09-04.</p></div>
+<div><span class="chip dark">DARK</span><p>Built and gated, not running. The default state, not a failure.</p></div>
+</div>
+</section>
+
+<section class="section"><span class="chip reported">REPORTED</span><h2>The whole loop on one slide</h2>
+<p class="lead">Open the talk here. Seven stages run left to right, the feedback path closes the circle back to shoppers, and the three diamonds are the owner's decisions, drawn where they sit in the chain. Click the picture for full size.</p>
+<figure>
+<figcaption>The end-to-end loop, with the human gates drawn in</figcaption>
+<a class="full-size" href="assets/diagrams/business-loop.png" target="_blank" rel="noopener"><img src="assets/diagrams/business-loop.png" alt="Flowchart of seven stages in a loop: marketing, feedback, the ML system, development, backend and releases, the frontend hub, and ops monitoring, ending at shoppers, whose feedback and scan corrections flow back to the feedback stage. Diamonds mark the owner's merge, release dispatch, and post approval." loading="lazy"></a>
+<p><a class="full-size-note" href="assets/diagrams/business-loop.png" target="_blank" rel="noopener">Open full size ↗</a></p>
+<details><summary>Mermaid source (business-loop.mmd)</summary>
+<pre tabindex="0" role="group" aria-label="Scrollable diagram source">
+flowchart LR
+  subgraph MKT["1 · Marketing"]
+    M["Human-approved queue&lt;br/&gt;lanes DARK until the owner turns them on"]
+  end
+  subgraph FBK["2 · Feedback"]
+    F["feedback_digest.py&lt;br/&gt;daily 09:15 → #es-daily"]
+  end
+  subgraph MLS["3 · ML system"]
+    S["flywheel steward daily 09:05&lt;br/&gt;gated draft cards, never auto-fixes"]
+  end
+  subgraph DEV["4 · Development"]
+    G["PR gates on 5 studio runners&lt;br/&gt;Sauce nightly 23:17 · a11y 08:47"]
+  end
+  subgraph REL["5 · Backend + releases"]
+    R["canary then the exact digest&lt;br/&gt;promote is owner-dispatched"]
+  end
+  subgraph HUB["6 · Frontend + hub"]
+    P["producers + validate.yml CI&lt;br/&gt;ledger evidence rule"]
+  end
+  subgraph OPS["7 · Ops monitoring"]
+    W["supervisor + health fingerprint&lt;br/&gt;#es-incidents on change"]
+  end
+  U["Shoppers"]
+  MKT --&gt; FBK --&gt; MLS --&gt; DEV --&gt; MG{{"owner merges"}} --&gt; REL --&gt; RG{{"owner dispatches release"}} --&gt; HUB --&gt; OPS --&gt; U
+  MA{{"owner approves every post"}} -. switched on .-&gt; MKT
+  U -. "feedback + scan corrections" .-&gt; FBK
+  OPS -. watches .-&gt; REL
+  OPS -. watches .-&gt; MLS
+</pre>
+</details>
+</figure>
+</section>
+
+<section class="section"><span class="chip reported">REPORTED</span><h2>Seven stations, in the order the talk tells them</h2>
+<p class="lead">Each station names what fires with its real cadence, the boundary it must never cross, and the record it leaves behind. The order is the story order, not a data-flow diagram: marketing first because it is mostly dark, and that is the first lesson.</p>
+<div class="stations">
+
+<article class="station">
+<div class="station-num"><span>STATION</span><strong>01</strong></div>
+<div class="station-body">
+<div class="station-head"><h3>Marketing</h3><span class="station-chips"><span class="chip dark">DARK</span><span class="chip live">LIVE</span></span></div>
+<p>The honest station. The marketing-posts row in <a href="how-it-works.html#matrix">how it works</a> is a human-approved queue marked in development: nothing in it fires by itself. A LinkedIn poster lane exists at <code>~/es-ops/marketing/linkedin_queue_runner.py</code>, but its launchd plist is not installed. A daily expiry-email digest (EM1) is built and blocked unmerged behind a default-off flag. The one live growth-adjacent signal is the Monday heartbeat to <code>#es-growth</code>, and that is a monitor, not marketing output.</p>
+<div class="fields">
+<div class="field"><b>What fires</b><p>The Monday heartbeat to <code>#es-growth</code>. Everything else waits: designed, gated, and dark until the owner turns it on.</p></div>
+<div class="field never"><b>Must never</b><p>Post without owner approval, or let a default-off flag flip itself. Fail-closed defaults are the lesson, not the embarrassment.</p></div>
+<div class="field"><b>Evidence lands</b><p><code>~/es-ops/marketing/</code>, the how-it-works marketing row, and the Monday heartbeat line in <code>#es-growth</code>.</p></div>
+</div>
+<figure>
+<figcaption>The marketing lane, drawn honestly</figcaption>
+<a class="full-size" href="assets/diagrams/marketing-lane.png" target="_blank" rel="noopener"><img src="assets/diagrams/marketing-lane.png" alt="Flowchart of the marketing lane: a human-approved queue feeds two dashed dark lanes, a LinkedIn poster whose plist is not installed and an expiry-email digest behind a default-off flag, plus a live Monday heartbeat to es-growth labeled as a monitor, not marketing output." loading="lazy"></a>
+<p><a class="full-size-note" href="assets/diagrams/marketing-lane.png" target="_blank" rel="noopener">Open full size ↗</a></p>
+<details><summary>Mermaid source (marketing-lane.mmd)</summary>
+<pre tabindex="0" role="group" aria-label="Scrollable diagram source">
+flowchart LR
+  Q["Human-approved queue&lt;br/&gt;the only marketing row that exists today"]
+  LK["LinkedIn poster lane&lt;br/&gt;linkedin_queue_runner.py&lt;br/&gt;plist not installed"]
+  EM["Expiry-email digest EM1&lt;br/&gt;built, default-off flag,&lt;br/&gt;blocked unmerged"]
+  HB["Monday heartbeat → #es-growth&lt;br/&gt;LIVE, a monitor not marketing output"]
+  Q -. DARK until the owner turns it on .-&gt; LK
+  Q -. DARK until the flag merges and flips .-&gt; EM
+  classDef dark fill:#f1eafa,stroke:#654280,stroke-dasharray:5,color:#654280;
+  classDef live fill:#e8f3ee,stroke:#3d8b6a,color:#1a3c34;
+  class LK,EM dark;
+  class HB live;
+</pre>
+</details>
+</figure>
+</div>
+</article>
+
+<article class="station">
+<div class="station-num"><span>STATION</span><strong>02</strong></div>
+<div class="station-body">
+<div class="station-head"><h3>Feedback</h3><span class="station-chips"><span class="chip live">LIVE</span></span></div>
+<p>Shopper feedback and scan corrections land in the production database. Every morning, launchd <code>com.lawrencehua.es-feedback-digest</code> (daily 09:15) runs <code>~/.openclaw/tools/feedback_digest/feedback_digest.py</code>, which pulls <code>/feedback/unreviewed</code> and <code>/scan-feedback/admin/corrections</code> from production and posts the queue to Slack <code>#es-daily</code>. The first live run was observed 2026-09-04 at 09:35 ET. From there the routing is human: digest to owner brief in <code>es-ops/briefs</code> to pull request. Scanner corrections also feed the ML loop, flag-only per the owner's 2026-09-03 decision.</p>
+<div class="fields">
+<div class="field"><b>What fires</b><p><code>feedback_digest.py</code> via launchd, daily 09:15, posting the unreviewed queue to <code>#es-daily</code>.</p></div>
+<div class="field never"><b>Must never</b><p>Open a pull request or apply a correction by itself. The digest reports; a person routes.</p></div>
+<div class="field"><b>Evidence lands</b><p>The <code>#es-daily</code> post and <code>~/.openclaw/workspace/memory/feedback_digest/</code>.</p></div>
+</div>
+<figure>
+<figcaption>The feedback pipeline, from app to app again</figcaption>
+<a class="full-size" href="assets/diagrams/feedback-loop.png" target="_blank" rel="noopener"><img src="assets/diagrams/feedback-loop.png" alt="Flowchart of the feedback pipeline: shopper feedback and scan corrections land in the production database, a daily 09:15 digest posts the queue to es-daily, an owner brief becomes a pull request, release gates pass, an owner-dispatched release ships an app update back to shoppers, with corrections feeding ML training data flag-only." loading="lazy"></a>
+<p><a class="full-size-note" href="assets/diagrams/feedback-loop.png" target="_blank" rel="noopener">Open full size ↗</a></p>
+<details><summary>Mermaid source (feedback-loop.mmd)</summary>
+<pre tabindex="0" role="group" aria-label="Scrollable diagram source">
+flowchart LR
+  A["Shopper feedback + scan corrections&lt;br/&gt;land in the app"] --&gt; DB[("Production DB")]
+  DB --&gt; DIG["feedback_digest.py&lt;br/&gt;launchd daily 09:15"]
+  DIG --&gt; SLK["#es-daily&lt;br/&gt;unreviewed queue"]
+  SLK --&gt; BRF["Owner brief&lt;br/&gt;es-ops/briefs"]
+  BRF --&gt; PR["Pull request"]
+  PR --&gt; CI{{"release-contracts +&lt;br/&gt;asc-gate-tests gates"}}
+  CI --&gt; RLS["Release&lt;br/&gt;owner-dispatched"]
+  RLS --&gt; APP["App update reaches shoppers"]
+  APP --&gt; A
+  DB -. "corrections feed the ML loop,&lt;br/&gt;flag-only per 2026-09-03 decision" .-&gt; MLX["ML training data"]
+</pre>
+</details>
+</figure>
+</div>
+</article>
+
+<article class="station">
+<div class="station-num"><span>STATION</span><strong>03</strong></div>
+<div class="station-body">
+<div class="station-head"><h3>The ML system</h3><span class="station-chips"><span class="chip live">LIVE</span></span></div>
+<p>A flywheel, not an autopilot. The flywheel steward (launchd <code>com.lawrencehua.es-flywheel-steward</code>, daily 09:05, <code>~/system-map/comms/es_flywheel_steward.py</code>) watches the QUALITY, STORED, DEPLOYED, and ACTIVE axes, posts to <code>#es-daily</code>, and writes <code>~/system-map/_data/es-flywheel/steward-latest.json</code>. A dead-man heartbeat (daily 12:15) watches the steward itself. The mesh bridge (daily 09:35) turns findings into gated draft fix cards and never auto-applies them. Retrain gates are on-demand with auto-promote off by owner decision, and a serving canary probes the content gate every 30 minutes.</p>
+<div class="fields">
+<div class="field"><b>What fires</b><p>Steward 09:05, dead-man heartbeat 12:15, mesh bridge 09:35, serving canary every 30 minutes.</p></div>
+<div class="field never"><b>Must never</b><p>Apply its own fix card or promote a model. Findings become drafts; a person decides.</p></div>
+<div class="field"><b>Evidence lands</b><p><code>steward-latest.json</code>, the <code>#es-daily</code> posts, and the heartbeat watching the steward.</p></div>
+</div>
+</div>
+</article>
+
+<article class="station">
+<div class="station-num"><span>STATION</span><strong>04</strong></div>
+<div class="station-body">
+<div class="station-head"><h3>Development</h3><span class="station-chips"><span class="chip live">LIVE</span></span></div>
+<p>Every pull request runs the required checks <code>release-contracts</code> and <code>asc-gate-tests</code>, plus <code>shopper-tests</code> on iOS paths, on five self-hosted runners on the studio Mac. Test counts are derived from collection, not typed by hand, so a deleted suite fails the gate instead of shrinking it. Overnight, a Sauce real-device matrix runs nightly at 23:17 and an accessibility monitor runs daily at 08:47.</p>
+<div class="fields">
+<div class="field"><b>What fires</b><p>Required PR checks on every push, the 23:17 real-device matrix, the 08:47 a11y monitor.</p></div>
+<div class="field never"><b>Must never</b><p>Pass with a deleted suite, a hand-typed count, or an unverified toolchain.</p></div>
+<div class="field"><b>Evidence lands</b><p>The check run on each pull request and the nightly device summary record.</p></div>
+</div>
+</div>
+</article>
+
+<article class="station">
+<div class="station-num"><span>STATION</span><strong>05</strong></div>
+<div class="station-body">
+<div class="station-head"><h3>Backend and releases</h3><span class="station-chips"><span class="chip live">LIVE</span></span></div>
+<p>The Fly release is protected: <code>.github/workflows/fly-deploy.yml</code> builds once, checks a canary with a signed probe, and promotes the exact same registry digest, and only the owner can dispatch it. The App Store chain is deliberately gated: the fastlane signing and upload lanes are tombstones (<code>Fastfile:1120-1293</code>), the real authority is a local root-helper runbook, and <code>release_readiness_gate.py</code> blocks Submit until every precondition reads true. An ASC verdict watcher polls every 30 minutes, and a daily release dry-run at 07:00 exercises the whole path without authority.</p>
+<div class="fields">
+<div class="field"><b>What fires</b><p>Owner-dispatched Fly releases, the 30-minute verdict watcher, the 07:00 dry-run that proves the path without using it.</p></div>
+<div class="field never"><b>Must never</b><p>Rebuild between canary and production, or submit without the readiness gate. Tombstones must never run.</p></div>
+<div class="field"><b>Evidence lands</b><p>The dispatch receipt, the promoted digest, <code>state/es-asc-verdict-latest.json</code>.</p></div>
+</div>
+</div>
+</article>
+
+<article class="station">
+<div class="station-num"><span>STATION</span><strong>06</strong></div>
+<div class="station-body">
+<div class="station-head"><h3>Frontend and this hub</h3><span class="station-chips"><span class="chip live">LIVE</span><span class="chip reported">REPORTED</span></span></div>
+<p>The hub eats its own cooking. Two producers, <code>emit_automation_inventory.py</code> and <code>emit_release_state.py</code>, read the machine and regenerate the inventory and release-state blocks; they are human-run by design and say so on the page, which is why they carry REPORTED. The <code>validate.yml</code> workflow runs the ledger, site, and page gates on every pull request, the ledger evidence rule binds claims to receipts, and a salted-digest denylist keeps banned names out of copy.</p>
+<div class="fields">
+<div class="field"><b>What fires</b><p><code>validate.yml</code> on every pull request; producers regenerate blocks when the owner runs them.</p></div>
+<div class="field never"><b>Must never</b><p>Report completion without an anchor, or pass a check that found nothing.</p></div>
+<div class="field"><b>Evidence lands</b><p>This repository: generated blocks with stamps, the ledger, and the checks named on <a href="ARCHITECTURE.md">ARCHITECTURE.md</a>.</p></div>
+</div>
+</div>
+</article>
+
+<article class="station">
+<div class="station-num"><span>STATION</span><strong>07</strong></div>
+<div class="station-body">
+<div class="station-head"><h3>Ops monitoring</h3><span class="station-chips"><span class="chip live">LIVE</span></span></div>
+<p>The robots that watch the robots. A supervisor heals five enumerated stale jobs every 900 seconds, with an audit record per heal. A health fingerprint and KPI watch run every 30 minutes and post to <code>#es-incidents</code> only on a state change. A production smoke probe fires daily at 09:20, the overseer digest lands in <code>#es-daily</code> at 08:40, a 03:30 job consolidates the day's learning, and the <code>@Expired</code> Slack bot, live since 2026-09-04, answers intern questions grounded in immutable repository snapshots.</p>
+<div class="fields">
+<div class="field"><b>What fires</b><p>Supervisor every 900 s, fingerprint and KPI every 30 min, smoke 09:20, overseer 08:40, dream 03:30, the bot on mention.</p></div>
+<div class="field never"><b>Must never</b><p>Heal silently without an audit trail, or alert on an unmeasured claim.</p></div>
+<div class="field"><b>Evidence lands</b><p><code>#es-incidents</code> on change, <code>#es-daily</code> digests, and the bot's snapshot-grounded answers.</p></div>
+</div>
+</div>
+</article>
+
+</div>
+</section>
+
+<section class="section"><span class="chip inferred">INFERRED</span><h2>What a human still does</h2>
+<p class="lead">The punchline of the talk. Every station above ends at one of four decisions, and none of them is scheduled:</p>
+<div class="gates">
+<div class="gate-card"><b>Merge</b><p>Gates can refuse a pull request forever; only the owner merges what passed.</p></div>
+<div class="gate-card"><b>Release</b><p>The deploy workflow does not run until the owner dispatches it, pinned to one build.</p></div>
+<div class="gate-card"><b>Promotion</b><p>No model, fix card, or flag ever promotes or flips itself. Auto-promote is off by decision, not by accident.</p></div>
+<div class="gate-card"><b>Marketing approval</b><p>Every post waits for a human OK, and the lanes stay dark until the owner switches them on.</p></div>
+</div>
+<div class="callout"><b>The contrast to land on</b><p>The machines measure, digest, gate, rehearse, heal, and prove. The owner decides. That is what "automated end to end" actually means here: a paper trail written by machines, closing in on four decisions a person makes on purpose.</p></div>
+</section>
+
+<nav class="series" aria-label="Classroom reading order">
+<p class="series-title">Classroom series: read in this order</p>
+<ol class="series-list">
+<li><a href="day-of-a-change.html">1. A day of a change</a></li>
+<li><a href="automation.html">2. The automation inventory</a></li>
+<li><a href="ml-loop.html">3. The ML loop today</a></li>
+<li><a href="ground-truths.html">4. Ground truths</a></li>
+<li><a href="lesson-plan.html">5. Lesson plan</a></li>
+<li><a href="diagrams.html">6. The system in pictures</a></li>
+<li><a href="presentation.html" aria-current="page">7. The 9/10 presentation</a></li>
+</ol>
+</nav>
+
+</div></main><footer class="foot">Xpired classroom notes, with evidence labels kept visible.</footer></body></html>

@@ -1,0 +1,28 @@
+flowchart LR
+  subgraph MKT["1 · Marketing"]
+    M["Human-approved queue<br/>lanes DARK until the owner turns them on"]
+  end
+  subgraph FBK["2 · Feedback"]
+    F["feedback_digest.py<br/>daily 09:15 → #es-daily"]
+  end
+  subgraph MLS["3 · ML system"]
+    S["flywheel steward daily 09:05<br/>gated draft cards, never auto-fixes"]
+  end
+  subgraph DEV["4 · Development"]
+    G["PR gates on 5 studio runners<br/>Sauce nightly 23:17 · a11y 08:47"]
+  end
+  subgraph REL["5 · Backend + releases"]
+    R["canary then the exact digest<br/>promote is owner-dispatched"]
+  end
+  subgraph HUB["6 · Frontend + hub"]
+    P["producers + validate.yml CI<br/>ledger evidence rule"]
+  end
+  subgraph OPS["7 · Ops monitoring"]
+    W["supervisor + health fingerprint<br/>#es-incidents on change"]
+  end
+  U["Shoppers"]
+  MKT --> FBK --> MLS --> DEV --> MG{{"owner merges"}} --> REL --> RG{{"owner dispatches release"}} --> HUB --> OPS --> U
+  MA{{"owner approves every post"}} -. switched on .-> MKT
+  U -. "feedback + scan corrections" .-> FBK
+  OPS -. watches .-> REL
+  OPS -. watches .-> MLS
