@@ -434,7 +434,7 @@
                 <div class="truth-head"><h2>Promote the digest you verified</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The immutable canary image digest, the production digest after deployment, and the prior rollback artifact.</p>
                 <blockquote class="quote-src"><pre># before heavy CI or any Fly authentication. Production promotes the exact
-# registry digest proven on canary; it never rebuilds source.</pre><cite><code>.github/workflows/fly-deploy.yml</code> header comment: the digest pin itself lives at lines 477-485</cite></blockquote>
+# registry digest proven on canary; it never rebuilds source.</pre><cite><code>.github/workflows/fly-deploy.yml</code> header comment: the digest pin itself lives at lines 463-466</cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>Release hardening needed canary proof to follow the same bytes into production. Private product repository commit <code>8eb44a5f</code> pinned the candidate digest on August 2, 2026.</p><p><span class="field-label">What it makes impossible</span>&ldquo;Worked in canary&rdquo; referring to different bytes from the ones promoted.</p></div>
                 <p class="student-reuse"><span class="field-label">Student reuse</span>Promote an immutable artifact, not a source branch, and save the rollback identity first.</p>
             </div>
