@@ -45,6 +45,22 @@ and every one of its pages carries a footer listing all of them.
   `validated` stamp. Nothing generates it; the stamp is the only freshness claim it makes.
 - **`uptime.json`** — a hand-maintained cloud-uptime snapshot. It carries `curated_at` and
   `"source": "hand-maintained"` precisely because no producer writes it. `ledger.html` renders it.
+- **`automation.json`** — the watcher inventory `automation.html` renders. Generated, not typed:
+  `emit_automation_inventory.py` reads `launchctl list`, the job definitions on the owner's Mac, and
+  the mtime of each job's declared output, and derives the status from those three — loaded with a
+  fresh artifact is live, a definition present but not loaded is dark, a retired definition is
+  retired. It carries `generated_at`, which the page shows.
+- **`automation-copy.json`** — the human half of that inventory, keyed by launchd label: what a job
+  does and what it must never do. It owns meaning and nothing else; cadence, freshness and status
+  come from the machine. A job the producer finds in scope with no entry here renders as
+  **undocumented**, which is how a job nobody has described surfaces instead of being silently
+  absent from the page.
+- **`release-state.json`** — where the product actually is: the App Store review state and how long
+  it has been waiting, the commit the production server reports, how far behind the release branch
+  that is, and whether any in-house model is loaded. `emit_release_state.py` writes it and the
+  matching block on `index.html`, `freshlens.html` and `how-it-works.html`. Every source is private
+  to the owner's machine or is an endpoint this site does not name, so the block is REPORTED, never
+  VERIFIED, and it states when each source was read.
 - **`pages.json`** — the single source for which pages exist: `file`, `title`, `series`,
   `series_order` and `summary` per page. The table and the verification command line above are
   generated from it, and the classroom footers are checked against it.
@@ -67,11 +83,27 @@ and every one of its pages carries a footer listing all of them.
   the result against the committed `.png`. It renders each source twice, so a diagram that will not
   draw identically twice is reported as unverifiable by name rather than as changed. It is local-only
   and fails closed: with no `mmdc` on the machine it reports that it cannot verify rather than
-  passing.
+  passing. It keeps two allowlists, each on its own counter so a PASS never absorbs one: PNGs with no
+  `.mmd` of their own, and PNGs this machine cannot re-render twice alike. An entry on the second
+  list does not say the picture is right; it says this gate cannot answer for it, and the script
+  records the measurement and the date a human last compared the two by eye.
 - **`assets/diagrams/`** — `system-map`, `plan-order` and `where-robots-run` as both `.mmd` source and
   committed `.png`, plus `system-map-lr.png`, the same system map at a smaller scale, which shares
-  `system-map.mmd` and is therefore on the check's explicit allowlist. As of 2026-09-03 only
-  `where-robots-run.png` reproduces from its committed source; see the automation lane report.
+  `system-map.mmd` and is therefore on the no-source allowlist. As of 2026-09-04 `system-map.png` and
+  `where-robots-run.png` reproduce from their committed sources; `plan-order.png` does not reproduce
+  on this machine at all and is on the unreproducible allowlist with its measurement.
+
+Two producers write into this repository from outside it, because the facts they publish only exist
+on the owner's machine: **`es-ops/bin/emit_automation_inventory.py`** and
+**`es-ops/bin/emit_release_state.py`**. Each writes its `.json` and rewrites one marker-delimited
+generated region on the pages, in the same `<!-- BEGIN GENERATED … -->` idiom `render-pages.js` uses,
+so a hand edit inside a region is overwritten rather than quietly kept. Both are fail-closed in the
+same way: if a source cannot be read — no `launchctl`, no health response, an unparseable artifact —
+the producer exits 2 and leaves every published file byte-identical, so a page can show an old
+`generated_at` but can never show an empty table or a blank state. Both also re-check the exact text
+they are about to write against `scripts/denylist.json`, using a matcher that proves itself against
+the validator's canary first, so a denied name is refused at the producer instead of waiting for the
+next gate run. Neither is scheduled; a human runs them and commits the result.
 
 All pages use relative links for local navigation and link to exact GitHub issues, pull requests,
 commits, and documents when those identities matter.
