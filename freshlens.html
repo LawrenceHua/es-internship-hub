@@ -49,6 +49,8 @@
             --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* The header is fixed, so a fragment jump has to stop below it. */
+        html { scroll-padding-top: 76px; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text);
@@ -68,7 +70,9 @@
 
         .freshness-rule { height: 2px; border: none; border-radius: 2px; background: linear-gradient(90deg, var(--fresh) 0%, var(--caution) 58%, var(--urgent) 100%); }
 
-        nav {
+        /* Scoped to the header bar: any other <nav> on the page belongs in the
+           reading flow, and a bare `nav` selector would pin it over the hero. */
+        body > nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border); padding: 0 2rem;
@@ -116,7 +120,7 @@
         .hero-rule { margin-top: 1.75rem; width: 200px; max-width: 60%; }
 
         .wrap { max-width: 920px; margin: 0 auto; padding: 0 2rem; }
-        section.block { padding: 3.5rem 0; border-bottom: 1px solid var(--border); scroll-margin-top: 76px; }
+        section.block { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
         section.block:last-of-type { border-bottom: none; }
         h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
         .lead { color: var(--text-secondary); font-size: 1.02rem; margin-bottom: 1.75rem; max-width: 680px; }
@@ -152,6 +156,19 @@
             padding: 1.25rem; overflow-x: auto; font-size: 0.82rem; line-height: 1.7;
             font-family: var(--mono);
         }
+        /* The pipeline block is ASCII art: its columns only line up if the lines
+           are not wrapped, so it scrolls sideways at every width. The label is
+           pinned to the left edge of the viewport so it stays put while you
+           scroll, and tabindex on the block makes the scroll keyboard-reachable
+           — the same affordance the readiness tables already use. */
+        pre.scroll-x::before {
+            content: "scrolls sideways \2192";
+            position: sticky; left: 0;
+            display: block; width: max-content; margin-bottom: 0.6rem;
+            font-size: 0.66rem; font-weight: 700; letter-spacing: 0.07em;
+            text-transform: uppercase; color: var(--accent-muted);
+        }
+        pre.scroll-x:focus-visible { outline: 2px solid var(--accent-muted); outline-offset: 3px; }
 
         .weeks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
         .week {
@@ -214,7 +231,7 @@
         .status-label.shipped { color: #725000; background: #fff0bd; }
         .status-label.blocked { color: #8d2118; background: #ffe1df; }
         .status-label.inconclusive { color: #554b72; background: #ece8f7; }
-        .week6-details { margin-top: 1.25rem; border-top: 1px solid var(--border); padding-top: 0.9rem; scroll-margin-top: 76px; }
+        .week6-details { margin-top: 1.25rem; border-top: 1px solid var(--border); padding-top: 0.9rem; }
         .week6-details > summary { color: var(--primary); font-weight: 700; cursor: pointer; }
         .week6-details[open] > summary { margin-bottom: 0.8rem; }
 
@@ -231,6 +248,32 @@
         .footer-brand { display: flex; align-items: center; gap: 0.55rem; color: rgba(255,255,255,0.85); }
         .footer-copy { max-width: 920px; margin: 1.5rem auto 0; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.78rem; color: rgba(255,255,255,0.5); }
         footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
+
+        /* WCAG 2.2 target size: reference links inside prose get a 24px-tall hit
+           area. padding-block grows the target without moving the text line. */
+        p a, li a, td a, dd a, strong a, span a, .status-callout a { padding-block: 0.25rem; }
+        .back-link, .nav-week-link { display: inline-flex; align-items: center; min-height: 24px; }
+
+        /* 860, not 760: the table's own min-width is 720px and the wrap only
+           gets viewport − 108px of chrome, so 768px still cut the last column.
+           Below this width each row becomes a stacked card, which is the same
+           treatment automation.html already uses for its wide table. */
+        @media (max-width: 860px) {
+            .readiness-table-wrap { overflow-x: visible; }
+            .readiness-table { min-width: 0; display: block; }
+            .readiness-table thead { display: none; }
+            .readiness-table tbody, .readiness-table tr { display: block; }
+            .readiness-table tr { border-bottom: 1px solid var(--border); padding: 0.5rem 0; }
+            .readiness-table tbody tr:last-child { border-bottom: 0; }
+            .readiness-table td { display: block; border-bottom: 0; padding: 0.35rem 0.9rem; }
+            .readiness-table td:first-child, .readiness-table td:nth-child(2) { width: auto; }
+            .readiness-table td::before {
+                content: attr(data-label); display: block;
+                font-family: var(--mono); font-size: 0.63rem; font-weight: 700;
+                letter-spacing: 0.06em; text-transform: uppercase;
+                color: var(--text-tertiary); margin-bottom: 0.15rem;
+            }
+        }
 
         @media (max-width: 760px) {
             .hero h1 { font-size: 2.1rem; }
@@ -366,7 +409,7 @@
     <section class="block">
         <h2>Target architecture</h2>
         <p class="lead">A FastAPI service that puts a capped, audited policy <em>around</em> the freshness model. The current local candidate remains human-review-only and verifies the receipt-binding/mock-anchor boundary; it is not a durable production or issuance architecture.</p>
-        <pre>in-app photo (item) + receipt
+        <pre class="scroll-x" tabindex="0" role="group" aria-label="Scrollable ASCII pipeline diagram">in-app photo (item) + receipt
    |
    v
 [ cap check ] -&gt; [ duplicate check ] -&gt; [ capture-metadata check ]   (ALL before the model)
@@ -500,49 +543,49 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Local claim core</td>
-                            <td><span class="status-label verified">VERIFIED</span></td>
-                            <td>Human review, assigned-store authorization, $15 per rolling 30 days and $10 per claim ceilings, revision-safe policy writes, signed decision binding, mock-anchor verification, retry protection, redaction, and account-scoped reporting are exercised together in the local candidate.</td>
+                            <td data-label="Surface">Local claim core</td>
+                            <td data-label="Status"><span class="status-label verified">VERIFIED</span></td>
+                            <td data-label="Evidence and next gate">Human review, assigned-store authorization, $15 per rolling 30 days and $10 per claim ceilings, revision-safe policy writes, signed decision binding, mock-anchor verification, retry protection, redaction, and account-scoped reporting are exercised together in the local candidate.</td>
                         </tr>
                         <tr>
-                            <td>Rendered web UX</td>
-                            <td><span class="status-label inconclusive">INCONCLUSIVE</span></td>
-                            <td>Rendered Chromium evidence exists for older candidate <code>941d030</code>. Later JavaScript, identity, styling, and integration changes are not covered, so the merged <code>b6f9665</code> baseline still needs the same archived browser/accessibility pass.</td>
+                            <td data-label="Surface">Rendered web UX</td>
+                            <td data-label="Status"><span class="status-label inconclusive">INCONCLUSIVE</span></td>
+                            <td data-label="Evidence and next gate">Rendered Chromium evidence exists for older candidate <code>941d030</code>. Later JavaScript, identity, styling, and integration changes are not covered, so the merged <code>b6f9665</code> baseline still needs the same archived browser/accessibility pass.</td>
                         </tr>
                         <tr>
-                            <td>Native + TestFlight</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>All eight device-result rows prove only named historical build 3.4.5 (<code>2026072201</code>), not current source. Scanner and inventory behavior were exercised, but the distributed build lacks the joined claim-submission, status, and reviewer-decision states; exact archive-to-source lineage remains <code>INCONCLUSIVE</code>. The retired immediate-return flow must not be reconnected.</td>
+                            <td data-label="Surface">Native + TestFlight</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">All eight device-result rows prove only named historical build 3.4.5 (<code>2026072201</code>), not current source. Scanner and inventory behavior were exercised, but the distributed build lacks the joined claim-submission, status, and reviewer-decision states; exact archive-to-source lineage remains <code>INCONCLUSIVE</code>. The retired immediate-return flow must not be reconnected.</td>
                         </tr>
                         <tr>
-                            <td>Freshness, OOD + detector</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>The evaluated freshness artifact fails its quality gate; representative OOD evidence and an approved multi-item detector are missing. Model output remains advisory and quarantined.</td>
+                            <td data-label="Surface">Freshness, OOD + detector</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">The evaluated freshness artifact fails its quality gate; representative OOD evidence and an approved multi-item detector are missing. Model output remains advisory and quarantined.</td>
                         </tr>
                         <tr>
-                            <td>Recipe serving</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>Fail-closed validation is present, but the approved shopper-serving corpus has 0 rows. Approval, a frozen evaluation contract, and passing release floors are required before serving.</td>
+                            <td data-label="Surface">Recipe serving</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">Fail-closed validation is present, but the approved shopper-serving corpus has 0 rows. Approval, a frozen evaluation contract, and passing release floors are required before serving.</td>
                         </tr>
                         <tr>
-                            <td>Authorized evidence data</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>The candidate has 0 of the required 60 privacy-clean calibration photos. Synthetic golden-path fixtures do not replace authorized empirical data.</td>
+                            <td data-label="Surface">Authorized evidence data</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">The candidate has 0 of the required 60 privacy-clean calibration photos. Synthetic golden-path fixtures do not replace authorized empirical data.</td>
                         </tr>
                         <tr>
-                            <td>Durability + external trust</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>Claims, policy, retry, evidence, and anchor intent are still process-local. Database constraints, private object storage, transaction/outbox recovery, retention, migration, and independently verified external anchoring remain product work.</td>
+                            <td data-label="Surface">Durability + external trust</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">Claims, policy, retry, evidence, and anchor intent are still process-local. Database constraints, private object storage, transaction/outbox recovery, retention, migration, and independently verified external anchoring remain product work.</td>
                         </tr>
                         <tr>
-                            <td>Approved-amount issuance</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>No refund, credit, payout, redemption, settlement, or issuance contract is implemented. A bounded human decision is not proof that money moved.</td>
+                            <td data-label="Surface">Approved-amount issuance</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">No refund, credit, payout, redemption, settlement, or issuance contract is implemented. A bounded human decision is not proof that money moved.</td>
                         </tr>
                         <tr>
-                            <td>Website publication</td>
-                            <td><span class="status-label verified">VERIFIED</span></td>
-                            <td>Hub <a href="https://github.com/LawrenceHua/es-internship-hub/pull/10" target="_blank" rel="noopener">PR #10</a> was approved on its exact head and merged as <code>f6f0f4e</code> on July 27; post-deploy probes confirmed all four production pages byte-identical to that revision at 11:50 UTC. This page is that deployment. Publication proves the hub is live, not any FreshLens app capability.</td>
+                            <td data-label="Surface">Website publication</td>
+                            <td data-label="Status"><span class="status-label verified">VERIFIED</span></td>
+                            <td data-label="Evidence and next gate">Hub <a href="https://github.com/LawrenceHua/es-internship-hub/pull/10" target="_blank" rel="noopener">PR #10</a> was approved on its exact head and merged as <code>f6f0f4e</code> on July 27; post-deploy probes confirmed all four production pages byte-identical to that revision at 11:50 UTC. This page is that deployment. Publication proves the hub is live, not any FreshLens app capability.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -622,49 +665,49 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Build + unit baseline</td>
-                            <td><span class="status-label verified">VERIFIED</span></td>
-                            <td>Draft app PR #21 at <code>3bcb6df</code> passed 172 Swift tests across 55 suites, a generic Simulator build, 702 backend tests, and a 176-test combined security gate. Its local build is <code>3.4.5 (2026060801)</code>; it is not the TestFlight archive.</td>
+                            <td data-label="Area">Build + unit baseline</td>
+                            <td data-label="Status"><span class="status-label verified">VERIFIED</span></td>
+                            <td data-label="Evidence and next gate">Draft app PR #21 at <code>3bcb6df</code> passed 172 Swift tests across 55 suites, a generic Simulator build, 702 backend tests, and a 176-test combined security gate. Its local build is <code>3.4.5 (2026060801)</code>; it is not the TestFlight archive.</td>
                         </tr>
                         <tr>
-                            <td>Screen coverage</td>
-                            <td><span class="status-label inconclusive">INCONCLUSIVE</span></td>
-                            <td>The current full Simulator UI target passed 31 execution instances / 28 logical tests with zero failures or skips, and seven representative layouts were inspected. The 225 SwiftUI <code>View</code> declarations are components and states, not 225 proven screens; full device-size, accessibility, error-state, and production-navigation coverage remains open.</td>
+                            <td data-label="Area">Screen coverage</td>
+                            <td data-label="Status"><span class="status-label inconclusive">INCONCLUSIVE</span></td>
+                            <td data-label="Evidence and next gate">The current full Simulator UI target passed 31 execution instances / 28 logical tests with zero failures or skips, and seven representative layouts were inspected. The 225 SwiftUI <code>View</code> declarations are components and states, not 225 proven screens; full device-size, accessibility, error-state, and production-navigation coverage remains open.</td>
                         </tr>
                         <tr>
-                            <td>OTA model bootstrap</td>
-                            <td><span class="status-label verified">VERIFIED</span></td>
-                            <td>Both v4 Core ML artifacts downloaded, checksum-validated, compiled, and loaded after a clean simulator install in about 23 seconds. Offline-first, cellular, and physical-iPhone behavior are outside this proof.</td>
+                            <td data-label="Area">OTA model bootstrap</td>
+                            <td data-label="Status"><span class="status-label verified">VERIFIED</span></td>
+                            <td data-label="Evidence and next gate">Both v4 Core ML artifacts downloaded, checksum-validated, compiled, and loaded after a clean simulator install in about 23 seconds. Offline-first, cellular, and physical-iPhone behavior are outside this proof.</td>
                         </tr>
                         <tr>
-                            <td>Produce type CV</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>On 2,092 held-out images covering 67 classes, the primary OTA type head reached 76.1% top-1, 86.2% top-5, and 0.688 macro-F1. It needs per-class repair and real-camera confirmation before a release claim.</td>
+                            <td data-label="Area">Produce type CV</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">On 2,092 held-out images covering 67 classes, the primary OTA type head reached 76.1% top-1, 86.2% top-5, and 0.688 macro-F1. It needs per-class repair and real-camera confirmation before a release claim.</td>
                         </tr>
                         <tr>
-                            <td>Freshness CV</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>On the current 264-record leak-screened gold set, the OTA quality head scored 0.311 macro-F1 and 0% spoiled recall: none of 91 spoiled images was predicted spoiled, and 48 were called fresh. It fails the gold and calibration gates.</td>
+                            <td data-label="Area">Freshness CV</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">On the current 264-record leak-screened gold set, the OTA quality head scored 0.311 macro-F1 and 0% spoiled recall: none of 91 spoiled images was predicted spoiled, and 48 were called fresh. It fails the gold and calibration gates.</td>
                         </tr>
                         <tr>
-                            <td>OOD + whole-scene CV</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>The live hover gate accepted 20 of 28 QR images as <code>beans</code>, all labeled fresh; a black frame also passed the hover threshold. No operational object detector is bundled or served, so a full-frame fallback is not multi-item detection.</td>
+                            <td data-label="Area">OOD + whole-scene CV</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">The live hover gate accepted 20 of 28 QR images as <code>beans</code>, all labeled fresh; a black frame also passed the hover threshold. No operational object detector is bundled or served, so a full-frame fallback is not multi-item detection.</td>
                         </tr>
                         <tr>
-                            <td>Receipt + claim/return</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>Receipt/OCR and return screens are absent from production navigation, legacy <code>/shopper/*</code> routes return 404, and PR #148 defines contracts rather than live routes. Do not activate the legacy immediate-refund flow.</td>
+                            <td data-label="Area">Receipt + claim/return</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">Receipt/OCR and return screens are absent from production navigation, legacy <code>/shopper/*</code> routes return 404, and PR #148 defines contracts rather than live routes. Do not activate the legacy immediate-refund flow.</td>
                         </tr>
                         <tr>
-                            <td>Physical TestFlight run</td>
-                            <td><span class="status-label shipped">CODE-SHIPPED-NOT-VERIFIED</span></td>
-                            <td>Build <code>3.4.5 (2026072201)</code> is valid in the internal TestFlight group. Two interns independently reached real-camera freshness results, then recorded <code>NOT_PRESENT</code>/<code>GAP</code> because receipt, claim, reviewer, and return completion were absent. The July 23 repair tree is not in that build.</td>
+                            <td data-label="Area">Physical TestFlight run</td>
+                            <td data-label="Status"><span class="status-label shipped">CODE-SHIPPED-NOT-VERIFIED</span></td>
+                            <td data-label="Evidence and next gate">Build <code>3.4.5 (2026072201)</code> is valid in the internal TestFlight group. Two interns independently reached real-camera freshness results, then recorded <code>NOT_PRESENT</code>/<code>GAP</code> because receipt, claim, reviewer, and return completion were absent. The July 23 repair tree is not in that build.</td>
                         </tr>
                         <tr>
-                            <td>Feedback + recipe safety</td>
-                            <td><span class="status-label blocked">BLOCKED</span></td>
-                            <td>Draft app PR #21 locally verifies a 30-field dietary round trip and fail-closed recipe-safety contract. That is interface safety evidence, not recipe-model quality or a working retraining loop; the Week 6 recipe corpus, model, evaluation, fallback, and demo remain separate required work.</td>
+                            <td data-label="Area">Feedback + recipe safety</td>
+                            <td data-label="Status"><span class="status-label blocked">BLOCKED</span></td>
+                            <td data-label="Evidence and next gate">Draft app PR #21 locally verifies a 30-field dietary round trip and fail-closed recipe-safety contract. That is interface safety evidence, not recipe-model quality or a working retraining loop; the Week 6 recipe corpus, model, evaluation, fallback, and demo remain separate required work.</td>
                         </tr>
                     </tbody>
                 </table>

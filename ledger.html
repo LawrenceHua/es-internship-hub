@@ -36,7 +36,8 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        /* The header is fixed, so a fragment jump has to stop below it. */
+        html { scroll-behavior: smooth; scroll-padding-top: 72px; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text);
@@ -54,7 +55,9 @@
         }
         .skip-link:focus { transform: translateY(0); }
 
-        nav {
+        /* Scoped to the header bar: any other <nav> on the page belongs in the
+           reading flow, and a bare `nav` selector would pin it over the hero. */
+        body > nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border); padding: 0 2rem;
@@ -98,10 +101,13 @@
         .verdict-guide dd { margin-top: 0.2rem; color: var(--text-secondary); font-size: 0.84rem; }
 
         .scroll-region { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
-        /* One column per verdict in the legend, whatever that count becomes. */
+        /* One column per verdict in the legend, whatever that count becomes — but
+           they wrap onto further rows rather than running off the right edge.
+           Nine verdicts at minmax(125px) needed 1206px and only ever fit at no
+           viewport the site is read at. */
         .summary-strip {
-            min-width: max-content; margin-top: 1.75rem; display: grid;
-            grid-auto-flow: column; grid-auto-columns: minmax(125px, 1fr); gap: 0.65rem;
+            margin-top: 1.75rem; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(125px, 1fr)); gap: 0.65rem;
         }
         .summary-item { border: 1px solid var(--border); border-radius: var(--radius); padding: 0.85rem; background: var(--surface-alt); }
         .summary-count { display: block; color: var(--primary); font-size: 1.55rem; font-weight: 800; line-height: 1; }
@@ -170,11 +176,16 @@
         .uptime-table th { color: var(--primary); font-family: var(--mono); font-size: 0.68rem; }
         .empty-counted { margin-top: 1.2rem; color: var(--text-secondary); font-size: 0.9rem; }
 
+        /* WCAG 2.2 target size: reference links inside prose get a 24px-tall hit
+           area. padding-block grows the target without moving the text line. */
+        p a, li a, td a, dd a, strong a, span a { padding-block: 0.25rem; }
+        .nav-actions a { display: inline-flex; align-items: center; min-height: 24px; }
+
         noscript p { margin-top: 1.2rem; padding: 0.9rem; background: var(--surface-alt); border-left: 3px solid var(--caution); }
         footer { margin-top: 5rem; padding: 2.2rem 1.25rem; background: var(--primary); color: rgba(255,255,255,0.7); text-align: center; font-size: 0.8rem; }
 
         @media (max-width: 768px) {
-            nav { padding: 0 1.25rem; }
+            body > nav { padding: 0 1.25rem; }
             .hero { padding: 4.5rem 1.25rem 3rem; }
             main { width: min(100% - 2rem, 920px); }
             section { padding-top: 3rem; }
@@ -187,7 +198,7 @@
             .deliverable { padding: 0.75rem; }
         }
         @media (max-width: 320px) {
-            nav { padding: 0 0.8rem; }
+            body > nav { padding: 0 0.8rem; }
             main { width: min(100% - 1.4rem, 920px); }
             .nav-actions { gap: 0.45rem; }
             .nav-actions a { font-size: 0.7rem; }

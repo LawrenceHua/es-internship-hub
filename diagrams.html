@@ -12,7 +12,7 @@
 <style>
 :root{--primary:#1a3c34;--primary-mid:#2a5a4a;--leaf:#3d8b6a;--leaf-soft:#e8f3ee;--ink:#17241f;--muted:#5c6f66;--line:#dfe8e2;--bg:#f7faf8;--card:#ffffff;--amber:#b07a1f;--amber-soft:#faf1dd;--sky:#2f6b9e;--sky-soft:#e7f0f8;--mono:'JetBrains Mono',monospace}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
 a{color:var(--primary-mid);font-weight:700}
 .skip{position:fixed;z-index:5;left:8px;top:8px;transform:translateY(-160%);padding:8px 12px;background:var(--primary);color:#fff;border-radius:7px}
@@ -55,11 +55,24 @@ a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:
 .foot{margin-top:58px;padding:25px 20px;text-align:center;background:var(--primary);color:#cfe4d8;font-size:14px}
 figure{margin:26px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px}
 figure img{display:block;width:100%;height:auto;border-radius:8px}
+/* At 390 the rendered text inside these PNGs is a few pixels tall, so the image
+   is also a link to the full-size asset. The caption says so, because a linked
+   image with no affordance reads as decoration. */
+.full-size{display:block;border-radius:8px}
+.full-size:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.full-size-note{display:inline-flex;align-items:center;min-height:24px;font:700 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.full-size-note:hover{color:var(--primary-mid)}
 figcaption{font-weight:800;font-size:17px;margin:0 0 8px}
 figure p{color:var(--muted);font-size:15px;margin:6px 0}
 details{margin:10px 0 0}
 summary{cursor:pointer;font-weight:700;color:var(--primary-mid)}
 pre{overflow-x:auto;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;font:500 12.5px/1.5 var(--mono)}
+/* Diagram source: indentation is the structure, so it scrolls instead of
+   wrapping. The label is pinned to the left edge so it stays put while you
+   scroll, and tabindex makes the scroll keyboard-reachable. */
+pre::before{content:"scrolls sideways \2192";position:sticky;left:0;display:block;width:max-content;margin:0 0 8px;font:700 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+pre:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+@media(min-width:1120px){pre::before{display:none}}
 .track{counter-reset:slide;margin:22px 0 0;padding:0;list-style:none;display:grid;gap:12px}
 .track li{position:relative;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 16px 16px 58px}
 .track li::before{counter-increment:slide;content:counter(slide);position:absolute;left:16px;top:16px;width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;font:700 14px/28px var(--mono);text-align:center}
@@ -76,6 +89,9 @@ a,.brand,code,.series-list a:hover,.series-list a[aria-current="page"]{color:#9f
 .chip.flagged{border-color:var(--amber)}
 pre{background:#0c100f}
 }
+p a,li a,td a,dd a,strong a,span a{padding-block:.25rem}
+.back{display:inline-flex;align-items:center;min-height:24px}
+
 @media(max-width:620px){
 .navin,.wrap{padding:0 16px}
 .hero{padding:55px 16px}
@@ -93,10 +109,11 @@ pre{background:#0c100f}
 
 <figure>
 <figcaption>1. The Xpired system map</figcaption>
-<img src="assets/diagrams/system-map.png" alt="System map flowchart in reading order: the watcher service and its dead-man service; how a pull request becomes a release through the studio Mac and GitHub gates, then canary, then production; what a shopper touches; the always-on server side with the consent-gated learning loop; and the internship hub that shows the work." loading="lazy">
+<a class="full-size" href="assets/diagrams/system-map.png" target="_blank" rel="noopener"><img src="assets/diagrams/system-map.png" alt="System map flowchart in reading order: the watcher service and its dead-man service; how a pull request becomes a release through the studio Mac and GitHub gates, then canary, then production; what a shopper touches; the always-on server side with the consent-gated learning loop; and the internship hub that shows the work." loading="lazy"></a>
+<p><a class="full-size-note" href="assets/diagrams/system-map.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <p>Read it in order: the watchers keep an eye on everything; then how a pull request becomes a release; the shopper's app talks to the server; and the learning loop only ever uses photos a shopper explicitly opted in, which a person checks before any model is promoted.</p>
 <details><summary>Mermaid source (system-map.mmd)</summary>
-<pre>
+<pre tabindex="0" role="group" aria-label="Scrollable diagram source">
 flowchart TB
   subgraph SHOPPER["What a shopper touches"]
     direction TB
@@ -166,10 +183,11 @@ flowchart TB
 
 <figure>
 <figcaption>2. Where the robots run</figcaption>
-<img src="assets/diagrams/where-robots-run.png" alt="Two-lane flowchart. The Studio Mac lane holds Xcode builds and tests, a device farm, and the human release keystroke, none of which count in the uptime number. The cloud lane lists six watchers - App Store watcher, health watcher, uptime check, gate canary, deploy drift, nightly smoke - watched by a dead-man service once switched on." loading="lazy">
+<a class="full-size" href="assets/diagrams/where-robots-run.png" target="_blank" rel="noopener"><img src="assets/diagrams/where-robots-run.png" alt="Two-lane flowchart. The Studio Mac lane holds Xcode builds and tests, a device farm, and the human release keystroke, none of which count in the uptime number. The cloud lane lists six watchers - App Store watcher, health watcher, uptime check, gate canary, deploy drift, nightly smoke - watched by a dead-man service once switched on." loading="lazy"></a>
+<p><a class="full-size-note" href="assets/diagrams/where-robots-run.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <p>Where the automated checks run. Written on 2026-09-02, when the cloud watcher service had just been built: it switches on once the team lead adds its keys, and from then on a separate dead-man service pages a person if any watcher goes quiet. Steps that need Xcode or the studio computer only happen when a person is there, so they are not counted in the uptime number.</p>
 <details><summary>Mermaid source (where-robots-run.mmd)</summary>
-<pre>
+<pre tabindex="0" role="group" aria-label="Scrollable diagram source">
 flowchart LR
   subgraph CLOUD["Cloud service, two regions. Built this week; switches on when the team lead adds the keys"]
     direction TB
@@ -197,10 +215,11 @@ flowchart LR
 
 <figure>
 <figcaption>3. The order of work that week</figcaption>
-<img src="assets/diagrams/plan-order.png" alt="Flowchart of the week's three parallel tracks. Track 1 moves monitors to the cloud with a three-day soak and a seven-day measurement before any uptime number is published. Track 2 re-enables photo training consent, re-shoots the store screenshots, and ends at a team-lead submission. Track 3 fixes the how-it-works page and ships the program ledger." loading="lazy">
+<a class="full-size" href="assets/diagrams/plan-order.png" target="_blank" rel="noopener"><img src="assets/diagrams/plan-order.png" alt="Flowchart of the week's three parallel tracks. Track 1 moves monitors to the cloud with a three-day soak and a seven-day measurement before any uptime number is published. Track 2 re-enables photo training consent, re-shoots the store screenshots, and ends at a team-lead submission. Track 3 fixes the how-it-works page and ships the program ledger." loading="lazy"></a>
+<p><a class="full-size-note" href="assets/diagrams/plan-order.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <p>The order of work for that week, in three lanes that ran at the same time. Boxes are steps, arrows show what had to finish before the next step could start, and the diamond shapes are the team lead's decisions.</p>
 <details><summary>Mermaid source (plan-order.mmd)</summary>
-<pre>
+<pre tabindex="0" role="group" aria-label="Scrollable diagram source">
 flowchart LR
   subgraph T0[First: make the dashboards tell the truth]
     H0[Fix the health check that was crying wolf, and the alert that could not send]
