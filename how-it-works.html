@@ -136,6 +136,15 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 .ledger-link{font-size:14px;margin:-12px 0 20px}
 
 /* automation matrix */
+/* The generated release-state block. Its markup is written by
+   es-ops/bin/emit_release_state.py and is identical on every page that carries
+   it, so the styling is scoped here rather than reusing a page-local class. */
+.release-state{margin:22px 0;padding:18px 20px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:0 13px 13px 0;color:var(--muted);font-size:14px;line-height:1.55}
+.release-state strong{color:var(--ink)}
+.release-state .chip.reported{background:var(--amber-soft);color:var(--amber)}
+.release-state .state-list{margin:10px 0 0;padding-left:20px}
+.release-state .state-list li{margin:2px 0}
+.release-state .caption{margin:10px 0 0;font-size:13px}
 .matrix{display:flex;flex-direction:column;gap:10px;margin:20px 0}
 .mrow{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
 .mrow .mic{font-size:19px;width:26px;text-align:center;flex:0 0 auto}
@@ -312,6 +321,9 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
   <span class="secnum">AUTOMATION AT A GLANCE</span>
   <h2>Which flows are automated?</h2>
   <p class="lead">Same honesty rule, in one place: what runs itself, what a person still signs off on, and how we check it.</p>
+<!-- BEGIN GENERATED release-state — written by es-ops/bin/emit_release_state.py from the review watchers, the production health endpoint and a local commit count; do not edit by hand -->
+<div class="release-state"><span class="chip reported">REPORTED</span> <strong>Where the product actually is today.</strong> Version 4.3.4 has been waiting for App Store review since 2026-08-31T01:15Z, about 4.3 days. The running server is commit 66dde0e1 of the private product repository, 240 commits behind origin/release/4.2.2, and it reports its deployment provenance as ready; no in-house model is loaded in production.<ul class="state-list"><li><code>custom_model_available</code>: false</li><li><code>ood_evaluator_loaded</code>: false</li><li><code>produce_crop_classifier_loaded</code>: false</li><li><code>yolo_loaded</code>: false</li></ul><p class="caption">Generated 2026-09-04T09:06:02Z by <code>es-ops/bin/emit_release_state.py</code> from the review watcher (read 2026-09-04T08:37:45Z), the production health endpoint, and a local commit count against origin/release/4.2.2. Every source is private to the owner's machine or is an endpoint this site does not name, so a reader cannot open one: this block is reported, not independently checkable. If any source cannot be read the producer writes nothing, so an old timestamp here means the last successful reading and never a blank.</p></div>
+<!-- END GENERATED release-state — written by es-ops/bin/emit_release_state.py from the review watchers, the production health endpoint and a local commit count; do not edit by hand -->
   <div class="matrix">
     <div class="mrow"><span class="mic">📷</span><span class="mname">Fridge scan</span>
       <span class="mchips"><span class="chip auto">automated</span><span class="chip cloud">runs in the cloud</span></span>

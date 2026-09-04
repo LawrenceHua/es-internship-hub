@@ -1,0 +1,90 @@
+{
+  "schema_version": "xpired-hub-automation-copy-v1",
+  "note": "The human half of the watcher inventory. This file owns meaning: what a job does, and what it must never do. It owns nothing else. Status, cadence, last exit and output age are derived per run by es-ops/bin/emit_automation_inventory.py from launchctl and the job definitions on the owner's Mac, and written to automation.json. Rows are keyed by launchd label and render in the order below; a job the producer finds in scope with no entry here renders as \"undocumented\", which is how a job nobody has described surfaces instead of being silently absent. Prose is plain text: `backticks` become code, and nothing else becomes markup. Seeded 2026-09-04 from the hand-typed table this replaced.",
+  "fields": {
+    "label": "the launchd label, which is what joins this row to the machine",
+    "display": "what the table calls it; omit to use the script path launchd runs",
+    "artifact": "the output this job is supposed to leave behind, so its freshness can be measured",
+    "fresh_after_seconds": "how old that output may be before the row reads STALE; omit to derive twice the cadence",
+    "by_hand": "true for a row that is deliberately not an automation, so it can never be counted as one"
+  },
+  "rows": [
+    {
+      "label": "com.lawrence.es-asc-verdict",
+      "display": "es_asc_verdict_watch.py",
+      "what_it_does": "Reads the external review verdict on an interval and writes `es-ops/state/es-asc-verdict-latest.json`.",
+      "must_never_do": "Replace a live readback with a local document.",
+      "artifact": "~/es-ops/state/es-asc-verdict-latest.json"
+    },
+    {
+      "label": "com.lawrence.es-health-fingerprint",
+      "display": "es_health_fingerprint.py",
+      "what_it_does": "Makes five bounded GET requests and three local freshness checks, and alerts only on a state change.",
+      "must_never_do": "Alert on an unmeasured claim.",
+      "artifact": "~/es-ops/state/health-fingerprint-latest.json"
+    },
+    {
+      "label": "com.lawrence.es-kpi-watch",
+      "display": "es_kpi_watch.py",
+      "what_it_does": "Checks semantic probe assertions instead of treating a bare HTTP success as proof.",
+      "must_never_do": "Treat a bare HTTP success as proof.",
+      "artifact": "~/system-map/_data/kpi_state.json"
+    },
+    {
+      "label": "com.lawrence.es-ops-supervisor",
+      "display": "es_ops_supervisor.py",
+      "what_it_does": "Checks watcher heartbeats and performs bounded heals with an audit record.",
+      "must_never_do": "Heal silently without an audit trail.",
+      "artifact": "~/es-ops/state/supervisor-latest.json"
+    },
+    {
+      "label": "com.lawrence.ai-ops-healthcheck",
+      "display": "automation_healthcheck.py",
+      "what_it_does": "Checks launchd exit codes and scheduled-job state with flap-damped alerts. It is the tick this inventory producer rides on.",
+      "must_never_do": "Turn a flapping job into noise.",
+      "artifact": "~/system-map/_data/healthcheck_state.json"
+    },
+    {
+      "label": "com.expiredsolutions.sauce-nightly",
+      "display": "Nightly real-device matrix",
+      "what_it_does": "Runs the newest candidate on physical devices and writes a summary record.",
+      "must_never_do": "Substitute an emulator result.",
+      "artifact": "~/es-ops/state/sauce-runner/NIGHTLY-LATEST.txt"
+    },
+    {
+      "id": "xpired-release-desk",
+      "by_hand": true,
+      "display": "xpired-release-desk.html",
+      "cadence": "no schedule; a human refreshes it",
+      "what_it_does": "A planner-maintained status page, refreshed by hand; not an automation. It carries review hours, pull request states, and an owner click list.",
+      "must_never_do": "Present its status page as independent release proof, or be listed as a scheduled job. Nothing schedules it.",
+      "artifact": "~/es-ops/state/xpired-release-desk.html"
+    },
+    {
+      "label": "com.lawrencehua.es-prod-smoke",
+      "display": "es_smoke_watch.py",
+      "what_it_does": "A scheduled daily production POST probe that posts a green or incident line.",
+      "must_never_do": "Be presented as dormant while it is scheduled and posting.",
+      "artifact": "~/system-map/_data/es-flywheel/smoke-latest.json"
+    },
+    {
+      "label": "com.lawrence.model-improve",
+      "display": "model-improve",
+      "what_it_does": "This was a nightly self-improvement daemon that fired into a deleted script.",
+      "must_never_do": "Run a deleted script."
+    },
+    {
+      "label": "com.lawrence.ai-agent-council",
+      "display": "Agent council group chat",
+      "what_it_does": "This was a recurring summary of known facts.",
+      "must_never_do": "Restate facts as a substitute for measurement."
+    },
+    {
+      "label": "com.es.b11-intern-post-20260902",
+      "display": "One-shot intern-post fallback",
+      "what_it_does": "Posted diagrams once and wrote `es-ops/state/b11-posted.json`.",
+      "must_never_do": "Repeat after its one successful run.",
+      "artifact": "~/es-ops/state/b11-posted.json"
+    }
+  ]
+}

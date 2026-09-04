@@ -1,0 +1,30 @@
+{
+  "schema_version": "xpired-hub-release-state-v1",
+  "generated_at": "2026-09-04T09:06:02Z",
+  "generated_by": "es-ops/bin/emit_release_state.py",
+  "evidence_label": "REPORTED",
+  "note": "Derived per run from the owner's review watchers, the production health endpoint, and a local commit count. Every source is private or unnamed here, so a reader cannot open one and the label is REPORTED rather than VERIFIED. The production host is deliberately not published. If any source cannot be read this file is left exactly as it was and the producer exits 2.",
+  "app_store": {
+    "state": "WAITING_FOR_REVIEW",
+    "version": "4.3.4",
+    "waiting_since": "2026-08-31T01:15Z",
+    "hours_waiting": 103.9,
+    "as_of": "2026-09-04T08:37:45Z",
+    "source": "es-ops/state/es-asc-verdict-latest.json + es-ops/state/asc-72h-posted.json"
+  },
+  "backend": {
+    "release_git_sha_short": "66dde0e1",
+    "provenance_ready": true,
+    "source_url_valid": true,
+    "provenance_reason": null,
+    "commits_behind": 240,
+    "release_branch": "origin/release/4.2.2",
+    "source": "the production health endpoint (host withheld) + git rev-list --count in the private product clone"
+  },
+  "ml": {
+    "custom_model_available": false,
+    "ood_evaluator_loaded": false,
+    "produce_crop_classifier_loaded": false,
+    "yolo_loaded": false
+  }
+}
