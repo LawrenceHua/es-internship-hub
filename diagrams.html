@@ -36,6 +36,7 @@ a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:
 .lead{max-width:70ch;color:var(--muted)}
 .chip{display:inline-block;padding:4px 9px;border-radius:999px;white-space:nowrap}
 .verified{background:var(--sky-soft);color:var(--sky)}
+.reported{background:var(--amber-soft);color:var(--amber)}
 .inferred{background:var(--amber-soft);color:var(--amber)}
 .live{background:var(--leaf-soft);color:var(--primary-mid)}
 .dark{background:#f1eafa;color:#654280}
@@ -86,14 +87,14 @@ pre{background:#0c100f}
 <nav class="nav" aria-label="Page navigation"><div class="navin"><a class="brand" href="index.html"><svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#1a3c34"/><path d="M8 24 A16 16 0 0 1 24 8" stroke="#3d8b6e" stroke-width="2.5" stroke-linecap="round" fill="none"/><line x1="8" y1="24" x2="8" y2="19" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="8" x2="19" y2="8" stroke="#2e9e5b" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="#e0a106"/></svg>Xpired</a><a class="back" href="how-it-works.html">Back to how it works</a></div></nav>
 <main id="main"><header class="hero"><div class="heroin"><span class="eyebrow">Classroom system map</span><h1>The system in pictures</h1><p>The diagrams posted to the intern channel on 2026-09-02, kept here with their sources, plus the draft running order for the 9/10 presentation.</p></div></header><div class="wrap">
 
-<section class="section"><span class="chip verified">VERIFIED</span><span class="chip planned">PLANNED</span><h2>How to read this page</h2><p class="lead">Each picture was reviewed against the system it describes before it was posted. A VERIFIED chip means the picture matched the shipped system on 2026-09-02, the day it was posted to the intern channel; the caption says so in the past tense on purpose, because the system keeps moving. PLANNED marks the presentation section: a draft running order, not a finished deck. Every picture also ships its Mermaid source so anyone can re-render or fix it instead of redrawing from a screenshot.</p></section>
+<section class="section"><span class="chip verified">VERIFIED</span><span class="chip planned">PLANNED</span><h2>How to read this page</h2><p class="lead">Each picture was reviewed against the system it describes before it was posted. A VERIFIED chip means the picture matched the shipped system on 2026-09-02, the day it was posted to the intern channel, backed by a public link a reader can open and check; the caption says so in the past tense on purpose, because the system keeps moving. PLANNED marks the presentation section: a draft running order, not a finished deck. Every picture also ships its Mermaid source so anyone can re-render or fix it instead of redrawing from a screenshot.</p></section>
 
-<section class="section" id="posted"><span class="chip verified">VERIFIED</span><h2>The three posted diagrams</h2><p class="lead">Posted to the 2026 intern channel on 2026-09-02 with the walkthrough text quoted under each picture.</p>
+<section class="section" id="posted"><span class="chip reported">REPORTED</span><h2>The three posted diagrams</h2><p class="lead">Posted to the 2026 intern channel on 2026-09-02 with the walkthrough text quoted under each picture.</p>
 
 <figure>
 <figcaption>1. The Xpired system map</figcaption>
-<img src="assets/diagrams/system-map.png" alt="System map flowchart. Left: the watcher service and its dead-man service. Middle: how a pull request becomes a release through the studio Mac and GitHub gates, then canary, then production. Right: what a shopper touches, the always-on server side, and the consent-gated learning loop. Top: the internship hub shows the work." loading="lazy">
-<p>Read it left to right: the watchers on the left keep an eye on everything; the middle is how a pull request becomes a release; the shopper's app talks to the server; and the learning loop on the right only ever uses photos a shopper explicitly opted in, which a person checks before any model is promoted.</p>
+<img src="assets/diagrams/system-map.png" alt="System map flowchart in reading order: the watcher service and its dead-man service; how a pull request becomes a release through the studio Mac and GitHub gates, then canary, then production; what a shopper touches; the always-on server side with the consent-gated learning loop; and the internship hub that shows the work." loading="lazy">
+<p>Read it in order: the watchers keep an eye on everything; then how a pull request becomes a release; the shopper's app talks to the server; and the learning loop only ever uses photos a shopper explicitly opted in, which a person checks before any model is promoted.</p>
 <details><summary>Mermaid source (system-map.mmd)</summary>
 <pre>
 flowchart TB
