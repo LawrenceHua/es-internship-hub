@@ -23,18 +23,26 @@
   --mono:'JetBrains Mono',monospace;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
 .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
 a{color:var(--primary-mid)}
 
-/* header */
-.top{background:var(--primary);color:#eef6f1;padding:10px 0}
-.top .wrap{display:flex;align-items:center;gap:14px;justify-content:space-between}
-.top a{color:#cfe4d8;text-decoration:none;font-size:14px;font-weight:600}
-.brand{font-weight:800;letter-spacing:-.01em}
+/* header — the skip link + fixed bar the other eleven pages ship */
+.skip{position:fixed;z-index:5;left:8px;top:8px;transform:translateY(-160%);padding:8px 12px;background:var(--primary);color:#fff;border-radius:7px;text-decoration:none;font-weight:700}
+.skip:focus{transform:translateY(0)}
+a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:3px}
+.nav{height:56px;position:fixed;z-index:3;inset:0 0 auto;background:#fffefdf2;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.navin{max-width:1040px;margin:auto;padding:0 22px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:8px;color:var(--primary);text-decoration:none;font-weight:800;letter-spacing:-.01em}
+.navlinks{display:flex;align-items:center;gap:16px}
+.back{display:inline-flex;align-items:center;min-height:24px;font-size:14px;color:var(--muted);text-decoration:none;font-weight:600}
 
-.hero{background:linear-gradient(180deg,var(--primary) 0%,var(--primary-mid) 100%);color:#fff;padding:64px 0 84px;text-align:center}
+/* WCAG 2.2 target size: reference links inside prose get a 24px-tall hit area.
+   padding-block grows the target without moving the text line. */
+p a,li a,td a,dd a,strong a,span a{padding-block:.25rem}
+
+.hero{margin-top:56px;background:linear-gradient(180deg,var(--primary) 0%,var(--primary-mid) 100%);color:#fff;padding:64px 0 84px;text-align:center}
 h1{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}
 .hero p{color:#d7e8de;max-width:52ch;margin:0 auto;font-size:18px}
 .hero a{color:#fff}
@@ -77,6 +85,13 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 
 /* BPMN */
 .bpmn{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px;margin:20px 0;overflow-x:auto}
+/* A swimlane grid means something by column position, so it cannot be stacked
+   without destroying the diagram. It keeps scrolling, and says so: the label is
+   pinned to the left edge so it stays put while you scroll, and tabindex makes
+   the scroll keyboard-reachable. */
+.bpmn::before{content:"scrolls sideways \2192";position:sticky;left:0;display:block;width:max-content;margin:2px 0 8px;font:700 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.bpmn:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+@media(min-width:1000px){.bpmn::before{display:none}}
 .bp{display:grid;grid-template-columns:110px repeat(6,1fr);min-width:860px}
 .bp .lane{grid-column:1;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;color:#fff;background:var(--primary-mid);border-radius:8px;margin:4px 6px 4px 0;padding:6px;text-transform:uppercase;writing-mode:horizontal-tb;text-align:center}
 .bp .row{display:contents}
@@ -95,6 +110,17 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 .bot{background:var(--primary);color:#e7f2ea;border-radius:14px;padding:18px;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
 .bot.on{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){.bot{opacity:1;transform:none;transition:none}}
+
+/* 820, not 700: .flowrow's own min-width is 720px and .flow only gets
+   viewport - 34px, so 768 still cut the last stop off the right edge. */
+@media(max-width:820px){
+  .flow{overflow-x:visible}
+  .flowrow{flex-direction:column;align-items:stretch;min-width:0;gap:18px}
+  .rail,.dot{display:none}
+  .stop{display:flex;align-items:center;gap:14px;text-align:left}
+  .stop .ic{margin:0;flex:0 0 auto}
+  .stop small{max-width:none;margin:2px 0 0}
+}
 .bot .ic{font-size:28px}
 .bot h3{margin:8px 0 4px;font-size:16.5px;color:#fff}
 .bot p{margin:0 0 10px;color:#b9d4c4;font-size:13.5px}
@@ -133,11 +159,13 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 </head>
 <body>
 
-<div class="top"><div class="wrap">
-  <span class="brand">🥬 Xpired</span>
-  <nav><a href="index.html">← Internship Hub</a> <a href="ledger.html">Ledger</a></nav>
-</div></div>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Page navigation"><div class="navin">
+  <a class="brand" href="index.html">🥬 Xpired</a>
+  <span class="navlinks"><a class="back" href="index.html">← Internship Hub</a> <a class="back" href="ledger.html">Ledger</a></span>
+</div></nav>
 
+<main id="main">
 <div class="hero"><div class="wrap">
   <span class="kicker">System map · classroom edition</span>
   <h1>How Xpired Works</h1>
@@ -211,7 +239,8 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
   <span class="secnum">THE FLOW, FORMALLY</span>
   <h2>One scan as a BPMN diagram</h2>
   <p class="lead">The same journey, drawn the way process engineers draw it: five lanes, one decision diamond.</p>
-  <div class="bpmn"><div class="bp">
+  <div class="bpmn" tabindex="0" role="group" aria-label="Scrollable swimlane diagram">
+  <div class="bp">
     <div class="row">
       <div class="lane">User</div>
       <div class="cell"><div class="event" title="start">📷</div></div>
@@ -327,6 +356,8 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 </div>
 
 </div>
+
+</main>
 
 <div class="foot"><div class="wrap"><b>Xpired</b> · truth-first by design. When we don't know, we say so.</div></div>
 

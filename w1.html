@@ -48,6 +48,8 @@
             --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* The header is fixed, so a fragment jump has to stop below it. */
+        html { scroll-padding-top: 72px; }
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--surface); line-height: 1.6; -webkit-font-smoothing: antialiased; }
         a { color: var(--accent); }
         a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
@@ -57,7 +59,9 @@
         .freshness-rule { height: 2px; border: none; border-radius: 2px; background: linear-gradient(90deg, var(--fresh) 0%, var(--caution) 58%, var(--urgent) 100%); }
 
         /* Nav */
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 1.5rem; }
+        /* Scoped to the header bar: any other <nav> on the page belongs in the
+           reading flow, and a bare `nav` selector would pin it over the hero. */
+        body > nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 1.5rem; }
         .nav-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
         .nav-brand { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; font-size: 0.95rem; color: var(--primary); letter-spacing: -0.01em; text-decoration: none; }
         .brand-mark { width: 22px; height: 22px; flex-shrink: 0; display: block; }
@@ -87,10 +91,15 @@
 
         /* Code + prompt blocks */
         .copyable { position: relative; margin: 0.85rem 0; }
-        .copy-btn { position: absolute; top: 0.5rem; right: 0.5rem; font-family: var(--mono); font-size: 0.6rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 0.2rem 0.45rem; cursor: pointer; transition: all 0.15s; }
+        .copy-btn { position: absolute; top: 0.5rem; right: 0.5rem; min-height: 24px; font-family: var(--mono); font-size: 0.6rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 0.3rem 0.5rem; cursor: pointer; transition: all 0.15s; }
         .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* WCAG 2.2 target size: reference links inside prose get a 24px-tall hit
+           area. padding-block grows the target without moving the text line. */
+        p a, li a, td a, dd a, strong a, span a { padding-block: 0.25rem; }
+        .back-link, .footer-inner a { display: inline-flex; align-items: center; min-height: 24px; }
         .copy-btn.copied { color: var(--fresh); border-color: var(--fresh); }
-        pre.code { font-family: var(--mono); font-size: 0.78rem; line-height: 1.6; background: #11221d; color: #cfe8dc; border-radius: 8px; padding: 0.85rem 1rem; overflow-x: auto; white-space: pre; }
+        pre.code { font-family: var(--mono); font-size: 0.78rem; line-height: 1.6; background: #11221d; color: #cfe8dc; border-radius: 8px; padding: 0.85rem 1rem; white-space: pre-wrap; word-break: break-word; }
         pre.code .c { color: var(--accent-muted); }
         pre.prompt { font-family: var(--mono); font-size: 0.78rem; line-height: 1.6; background: var(--surface-alt); color: var(--text); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 0.85rem 1rem; white-space: pre-wrap; word-break: break-word; }
         .prompt-label { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); margin: 0 0 0.3rem 0.1rem; }
@@ -118,8 +127,8 @@
         .step-head .step-title { flex: 1; min-width: 0; }
         .step-title h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
         .step-time { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
-        .step-check { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 600; color: var(--text-tertiary); cursor: pointer; white-space: nowrap; user-select: none; }
-        .step-check input { accent-color: var(--accent); width: 15px; height: 15px; }
+        .step-check { display: inline-flex; align-items: center; min-height: 24px; padding: 0.2rem 0; gap: 0.4rem; font-size: 0.72rem; font-weight: 600; color: var(--text-tertiary); cursor: pointer; white-space: nowrap; user-select: none; }
+        .step-check input { accent-color: var(--accent); width: 20px; height: 20px; margin: 0; }
         .step-body { padding-top: 0.75rem; }
         .step-body p { font-size: 0.9rem; }
         .step-body ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }

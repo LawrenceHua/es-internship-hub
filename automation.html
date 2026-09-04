@@ -12,7 +12,7 @@
 <style>
 :root{--primary:#1a3c34;--primary-mid:#2a5a4a;--leaf:#3d8b6a;--leaf-soft:#e8f3ee;--ink:#17241f;--muted:#5c6f66;--line:#dfe8e2;--bg:#f7faf8;--card:#ffffff;--amber:#b07a1f;--amber-soft:#faf1dd;--sky:#2f6b9e;--sky-soft:#e7f0f8;--mono:'JetBrains Mono',monospace}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
 a{color:var(--primary-mid);font-weight:700}
 .skip{position:fixed;z-index:5;left:8px;top:8px;transform:translateY(-160%);padding:8px 12px;background:var(--primary);color:#fff;border-radius:7px}
@@ -23,7 +23,7 @@ a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:
 .navin{height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:8px;color:var(--primary);text-decoration:none;font-weight:800}
 .mark{width:25px;height:25px}
-.back{font-size:14px;color:var(--muted);text-decoration:none}
+.back{display:inline-flex;align-items:center;min-height:24px;font-size:14px;color:var(--muted);text-decoration:none}
 .hero{margin-top:56px;padding:70px 20px 62px;background:linear-gradient(130deg,var(--primary),var(--primary-mid));color:#fff}
 .heroin{max-width:900px;margin:auto}
 .eyebrow,.chip{font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase}
@@ -73,9 +73,10 @@ th{background:#1c2521}
 .tablewrap,.series,.callout{border-color:var(--line)}
 .chip.flagged{border-color:var(--amber)}
 }
-@media(max-width:620px){
-.navin,.wrap{padding:0 16px}
-.hero{padding:55px 16px}
+/* 860, not 620: the table's own min-width is 800px and .tablewrap only gets
+   viewport - 40px of chrome, so 768 still cut the Status column off the right
+   edge. The narrow-phone padding stays where it was. */
+@media(max-width:860px){
 .tablewrap{overflow-x:visible;margin-left:0;margin-right:0}
 table{min-width:0;display:block;font-size:13px}
 caption{display:block}
@@ -86,6 +87,10 @@ tbody tr:last-child{border-bottom:0}
 td{display:block;border-bottom:0;padding:6px 14px}
 td::before{content:attr(data-label);display:block;font:700 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
 td:first-child{font-size:14px}
+}
+@media(max-width:620px){
+.navin,.wrap{padding:0 16px}
+.hero{padding:55px 16px}
 }
 </style>
 </head>

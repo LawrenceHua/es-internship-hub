@@ -49,6 +49,8 @@
             --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* The header is fixed, so a fragment jump has to stop below it. */
+        html { scroll-padding-top: 72px; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text);
@@ -63,7 +65,9 @@
 
         .freshness-rule { height: 2px; border: none; border-radius: 2px; background: linear-gradient(90deg, var(--fresh) 0%, var(--caution) 58%, var(--urgent) 100%); }
 
-        nav {
+        /* Scoped to the header bar: any other <nav> on the page belongs in the
+           reading flow, and a bare `nav` selector would pin it over the hero. */
+        body > nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border); padding: 0 2rem;
@@ -146,6 +150,23 @@
             padding: 1.25rem; overflow-x: auto; font-size: 0.82rem; line-height: 1.7;
             font-family: var(--mono);
         }
+        /* The chain block is box-drawing art: its columns only line up if the
+           lines are not wrapped, so it scrolls sideways at every width. The
+           label is pinned to the left edge so it stays put while you scroll,
+           and tabindex makes the scroll keyboard-reachable. */
+        pre.scroll-x::before {
+            content: "scrolls sideways \2192";
+            position: sticky; left: 0;
+            display: block; width: max-content; margin-bottom: 0.6rem;
+            font-size: 0.66rem; font-weight: 700; letter-spacing: 0.07em;
+            text-transform: uppercase; color: var(--accent-muted);
+        }
+        pre.scroll-x:focus-visible { outline: 2px solid var(--accent-muted); outline-offset: 3px; }
+
+        /* WCAG 2.2 target size: reference links inside prose get a 24px-tall hit
+           area. padding-block grows the target without moving the text line. */
+        p a, li a, td a, dd a, strong a, span a { padding-block: 0.25rem; }
+        .back-link { display: inline-flex; align-items: center; min-height: 24px; }
 
         .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
         .btn {
@@ -279,7 +300,7 @@
     <section class="block">
         <h2>Architecture</h2>
         <p class="lead">The merged FastAPI prototype signs a decision artifact and verifies its fingerprint through a local mock anchor. The current closeout plan keeps durable storage and public anchoring blocked behind separate prerequisites and release authority.</p>
-        <pre>scan a photo
+        <pre class="scroll-x" tabindex="0" role="group" aria-label="Scrollable provenance chain diagram">scan a photo
    │
    ▼
 [ 1. HASH ]   SHA-256(photo + store + lot_code + time + score + items)  ──►  digest
