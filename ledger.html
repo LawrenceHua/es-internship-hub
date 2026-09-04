@@ -238,7 +238,7 @@
 
     <section aria-labelledby="entries-heading">
         <h2 id="entries-heading">Checked work</h2>
-        <p class="section-lead">Rows are grouped by the part of the program they describe. Each row lists the public links you can open to check it yourself. Most of this week's work sits inside the canonical product repository, which stays out of scope for the internship, so there is nothing public to open for those rows and they say <strong>REPORTED</strong> rather than VERIFIED. The &ldquo;Checked by&rdquo; line still names who checked each one.</p>
+        <p class="section-lead">Rows are grouped by lane &mdash; the part of the program they describe &mdash; and each group heading carries its own row count. Each row lists the public links you can open to check it yourself. Most of this week's work sits inside the canonical product repository, which stays out of scope for the internship, so there is nothing public to open for those rows and they say <strong>REPORTED</strong> rather than VERIFIED. The &ldquo;Checked by&rdquo; line still names who checked each one.</p>
         <p class="loading" id="ledger-state" role="status" aria-live="polite">Loading the ledger.</p>
         <div class="ledger-groups" id="ledger-groups"></div>
         <noscript><p>The ledger needs JavaScript; you can read the plain <a href="ledger.json">ledger data here</a>.</p></noscript>
@@ -343,13 +343,16 @@
      * hash of the entries, so an edited file with an untouched stamp fails the
      * script rather than quietly keeping this line.
      */
-    const renderValidationStamp = (validated) => {
+    const renderValidationStamp = (validated, coverage) => {
         const target = document.getElementById('ledger-validated');
+        const covered = coverage && typeof coverage.from === 'string' && typeof coverage.to === 'string'
+            ? `This ledger covers ${formatDate(coverage.from)} to ${formatDate(coverage.to)}. `
+            : '';
         if (!validated || typeof validated !== 'object' || typeof validated.script !== 'string' || typeof validated.at !== 'string') {
-            setText(target, 'This ledger carries no validation stamp.');
+            setText(target, `${covered}This ledger carries no validation stamp.`);
             return;
         }
-        setText(target, `Checked by ${validated.script} on ${formatDate(validated.at)}. Run it yourself from the repository root.`);
+        setText(target, `${covered}Checked by ${validated.script} on ${formatDate(validated.at)}. Run it yourself from the repository root.`);
     };
 
     const renderLedger = (data) => {
@@ -357,7 +360,7 @@
             throw new Error('Ledger data is incomplete');
         }
 
-        renderValidationStamp(data.validated);
+        renderValidationStamp(data.validated, data.window);
 
         const verdictGuide = document.getElementById('verdict-guide');
         const summaryStrip = document.getElementById('summary-strip');
@@ -461,7 +464,8 @@
     const sanitizeUptime = (raw) => {
         const clean = {};
         if (!raw || typeof raw !== 'object') return clean;
-        if (typeof raw.generated_at === 'string') clean.generated_at = raw.generated_at;
+        if (typeof raw.curated_at === 'string') clean.curated_at = raw.curated_at;
+        if (typeof raw.source === 'string') clean.source = raw.source;
         if (Number.isInteger(raw.window_days)) clean.window_days = raw.window_days;
         if (typeof raw.status === 'string') clean.status = raw.status;
         if (Array.isArray(raw.counted)) clean.counted = sanitizeCounted(raw.counted);
@@ -497,7 +501,7 @@
         const countedRoot = document.getElementById('uptime-counted');
 
         setText(headline, data.status === 'not_started' ? 'Measurement has not started' : 'Cloud uptime measurement');
-        setText(asof, `as of ${formatDate(snapshotDate)}`);
+        setText(asof, `${data.source || 'hand-maintained'}, curated ${formatDate(snapshotDate)}. Nothing generates this snapshot.`);
         setText(document.getElementById('uptime-denominator'), denominatorSentence(data.not_counted || {}));
         setText(document.getElementById('uptime-note'), typeof data.note === 'string' ? data.note : '');
 
@@ -552,7 +556,7 @@
 
     const loadUptime = async () => {
         const snapshot = sanitizeUptime(await fetchJson('uptime.json'));
-        renderUptime(snapshot, snapshot.generated_at);
+        renderUptime(snapshot, snapshot.curated_at);
     };
 
     fetchJson('ledger.json')

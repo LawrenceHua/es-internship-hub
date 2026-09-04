@@ -1,6 +1,7 @@
 {
   "schema_version": "xpired-uptime-v1",
-  "generated_at": "2026\u002d09\u002d01T21:00:00Z",
+  "curated_at": "2026\u002d09\u002d01T21:00:00Z",
+  "source": "hand\u002dmaintained",
   "window_days": 7,
   "status": "not_started",
   "counted": [],

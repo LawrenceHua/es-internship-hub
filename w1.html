@@ -387,7 +387,7 @@ claude          <span class="c"># log in on first run, then type /help</span></p
                     <button class="copy-btn" type="button">Copy</button>
 <pre class="prompt">Create a skill called game-review for this project. It should read game.py and check for common beginner bugs (missing input validation, bare except clauses, magic numbers), then print a short bulleted report. Save it so I can run it again with /game-review.</pre>
                 </div>
-                <p class="learn"><strong>You&rsquo;re learning:</strong> &ldquo;skills&rdquo; like <code class="kbd">/plan</code> and <code class="kbd">/code-review</code> are real, reusable commands &mdash; and you can write your own.</p>
+                <p class="learn"><strong>You&rsquo;re learning:</strong> &ldquo;skills&rdquo; like <code class="kbd">/code-review</code> are real, reusable commands &mdash; and you can write your own. Plan mode is a permission mode you cycle into with <code class="kbd">Shift+Tab</code>, not a command.</p>
             </div>
         </div>
 
@@ -489,8 +489,7 @@ play()</pre>
                 <tr><td class="cmd">claude</td><td class="desc">Start an interactive session in the current project.</td></tr>
                 <tr><td class="cmd">/help</td><td class="desc">List every available command.</td></tr>
                 <tr><td class="cmd">@file</td><td class="desc">Pull a file (or folder) into the conversation as context.</td></tr>
-                <tr><td class="cmd">Shift+Tab</td><td class="desc">Cycle permission modes: default &rarr; accept-edits &rarr; plan.</td></tr>
-                <tr><td class="cmd">/plan</td><td class="desc">Enter Plan Mode &mdash; Claude proposes changes without making them.</td></tr>
+                <tr><td class="cmd">Shift+Tab</td><td class="desc">Cycle permission modes: default &rarr; accept-edits &rarr; plan. Plan mode is how Claude proposes changes without making them &mdash; it is a permission mode, not a slash command.</td></tr>
                 <tr><td class="cmd">/code-review</td><td class="desc">Review your current changes for bugs and cleanups.</td></tr>
                 <tr><td class="cmd">/security-review</td><td class="desc">Check your changes for security issues.</td></tr>
                 <tr><td class="cmd">/init</td><td class="desc">Generate a CLAUDE.md with your project&rsquo;s conventions.</td></tr>

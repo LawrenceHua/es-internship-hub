@@ -2,12 +2,12 @@
   "schema_version": "xpired-program-ledger-v1",
   "validated": {
     "script": "scripts/validate-ledger.js",
-    "at": "2026-09-02",
-    "entries_sha256": "975406bb7f8fa7ea73bf245331ff4e099415bf03f698f834d65aebb5af5d94d8"
+    "at": "2026-09-04",
+    "entries_sha256": "0b55211ac15168364991888baa757e8f5ff17ffa2350ff7d28c3a76c63f092b3"
   },
   "window": {
     "from": "2026-08-25",
-    "to": "2026-09-01"
+    "to": "2026-09-03"
   },
   "verdict_key": {
     "VERIFIED": "checked a second time, by a different reviewer, by the planner re-running the implementer's own command, or by an automated gate, and the same result came back",
@@ -525,6 +525,86 @@
       "evidence": "The app itself was fixed this week, but the listing wording, the stored screenshot, and the automated check that pins that wording were deliberately left alone. Changing the words without recapturing the picture would make the listing wrong about the very image a reviewer opens. All three have to move together in one change before the next submission, and no current test fails to warn anyone about the gap.",
       "verified_by": "adversarial verifier",
       "date": "2026-09-01",
+      "links": []
+    },
+    {
+      "id": "L51",
+      "lane": "Behind-the-scenes reliability",
+      "deliverable": "A required automated check was failing on every second run for reasons that had nothing to do with the change being tested, which quietly teaches everyone reading it to ignore a red result.",
+      "verdict": "REPORTED",
+      "evidence": "The failure was traced to two runs on the same isolated build machine sharing one scratch directory, so the second run tripped over what the first one left behind. A fix was briefed the same day. Until it landed, a real failure and a false one looked identical on the dashboard.",
+      "verified_by": "planner",
+      "date": "2026-09-03",
+      "links": []
+    },
+    {
+      "id": "L52",
+      "lane": "Behind-the-scenes reliability",
+      "deliverable": "Every test run on the shared build machines now gets its own scratch build directory, so one run can no longer poison the next.",
+      "verdict": "REPORTED",
+      "evidence": "Merged the same night, and the leak is closed on both build machines. The first attempt at this fix carried a serious defect of its own; it was caught before it was pushed rather than after, which is the only reason it never reached anyone.",
+      "verified_by": "planner",
+      "date": "2026-09-03",
+      "links": []
+    },
+    {
+      "id": "L53",
+      "lane": "Shopper experience polish",
+      "deliverable": "A change that read as fully green in fact carried four separate failures nobody could see, including one line of app code that did not compile at all.",
+      "verdict": "REPORTED",
+      "evidence": "The unit test suite for that change was being cancelled before it ever got as far as building, so its result was neither a pass nor a fail and the summary read as clean. This is the clearest lesson of the week: a check that never runs is not a check that passed.",
+      "verified_by": "planner",
+      "date": "2026-09-03",
+      "links": []
+    },
+    {
+      "id": "L54",
+      "lane": "Shopper experience polish",
+      "deliverable": "The local receipt, binding and mock-anchor work that had been sitting in review was merged and then independently re-checked.",
+      "verdict": "REPORTED",
+      "evidence": "The re-check was run against the merged result rather than against the proposed change, and it came back clean. Nothing about it is deployed to the live service; that remains a separate, human-approved step.",
+      "verified_by": "planner",
+      "date": "2026-09-03",
+      "links": []
+    },
+    {
+      "id": "L55",
+      "lane": "Shopper experience polish",
+      "deliverable": "Items a shopper types in by hand never reach the copy of their pantry the server serves back to them, so reinstalling the app loses that typed history.",
+      "verdict": "REPORTED",
+      "evidence": "A probe against the live service found the two halves writing to and reading from different places. The setting that would join them up exists but is off by default, so the loss is happening now, on the live service, and nothing in the test suite reports it.",
+      "verified_by": "planner",
+      "date": "2026-09-03",
+      "links": []
+    },
+    {
+      "id": "L56",
+      "lane": "Recommendation model training",
+      "deliverable": "A lane refused to finish its own assigned step, because completing it as written would have meant signing a statement only a separate reviewer is allowed to sign.",
+      "verdict": "REPORTED",
+      "evidence": "Instead of producing the finished attestation, it produced the inputs to one and marked them explicitly as not attested, then parked the work rather than shipping it. This is the clearest example this week of a receipt saying what it cannot prove.",
+      "verified_by": "planner",
+      "date": "2026-09-03",
+      "links": []
+    },
+    {
+      "id": "L57",
+      "lane": "Server reliability and security",
+      "deliverable": "The work to reconcile the two versions of the server's code that had drifted apart was merged, with all three required automated checks green.",
+      "verdict": "REPORTED",
+      "evidence": "This supersedes the earlier row that recorded one of those three checks failing on exactly the version being proposed. It is merged and re-verified on the merged result. It has still not been deployed to the live server, which stays a separate, human-approved step.",
+      "verified_by": "planner",
+      "date": "2026-09-03",
+      "links": []
+    },
+    {
+      "id": "L58",
+      "lane": "Behind-the-scenes reliability",
+      "deliverable": "The automatic monitor can read everything again, but it still cannot send a message, by choice, and the live service has no alerting attached to it at all.",
+      "verdict": "REPORTED",
+      "evidence": "The monitor's stale view of the system was refreshed and it now runs read-only: it reads everything and posts nothing. Turning posting on is one owner action. Separately a second steward sits in a warning state, and no error-reporting or alerting service is wired to the live service, so a fault there would page nobody.",
+      "verified_by": "planner",
+      "date": "2026-09-03",
       "links": []
     }
   ]

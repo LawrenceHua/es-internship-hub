@@ -160,7 +160,7 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 <div class="sec" id="frontend">
   <span class="secnum">FRONT END</span>
   <h2>Two apps people touch</h2>
-  <p class="lead">Native iPhone apps. They take photos and show answers; no AI runs on the phone.</p>
+  <p class="lead">Native iPhone apps. They take photos and show answers; the app ships no model and runs no on-device inference, and dormant scanner code sits behind a compile-time flag.</p>
   <div class="cards">
     <div class="card"><div class="ic">🛒</div><h3>Xpired for Shoppers</h3><p>Your fridge, tracked. Photo in, dates out.</p>
       <div class="io"><span class="pill in">in: camera</span><span class="pill out">out: what to use, when</span><span class="pill run">runs: on your phone</span></div></div>
@@ -186,9 +186,9 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
   <h2>The AI names your food. It never guesses freshness.</h2>
   <p class="lead">Today a vision model identifies what's in the photo, and identification is all it does. Freshness comes from data, not from a guess. <a href="ml-loop.html">See the ML loop and its consent boundaries.</a></p>
   <div class="cards">
-    <div class="card"><div class="ic">🧠</div><h3>Vision AI</h3><p>Looks at the photo, returns food names. Third-party today; in-house models are being evaluated to take the lead, with the third party as backup.</p>
+    <div class="card"><div class="ic">🧠</div><h3>Vision AI</h3><p>Looks at the photo, returns food names. Identification runs on a third-party model; in-house candidates are being evaluated but none has been promoted, and no fallback between the two is implemented.</p>
       <div class="io"><span class="pill in">in: photo</span><span class="pill out">out: "milk, lettuce, eggs"</span><span class="pill run">runs: per scan</span></div></div>
-    <div class="card"><div class="ic">🔬</div><h3>The evidence gate</h3><p>Before any in-house model ships, it must pass hard safety gates, including almost never calling spoiled food fresh. None has cleared the bar yet; until one does, identification runs on a third-party model and nothing judges freshness.</p>
+    <div class="card"><div class="ic">🔬</div><h3>The evidence gate</h3><p>Before any in-house model ships, it must pass hard safety gates: at most 1 in 100 truly-spoiled items may be called fresh on the release evidence set (1 in 50 under each hard lighting or angle condition); a separate promotion check tolerates up to 1 in 10. None has cleared the bar yet; until one does, identification runs on a third-party model and nothing judges freshness.</p>
       <div class="io"><span class="pill in">in: candidate model</span><span class="pill out">out: ship / not yet</span><span class="pill run">runs: before any launch</span></div></div>
   </div>
   <div class="rule">🤝 <b>The honesty rule:</b> if we can't back an answer with data, the app says <b>"we don't know"</b> instead of making something up. That rule costs us features, and it's why you can trust the ones we keep.</div>
@@ -200,7 +200,7 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
   <div class="cards">
     <div class="card"><div class="ic">🗄️</div><h3>Database</h3><p>MongoDB stores accounts, pantry items, and scan history.</p>
       <div class="io"><span class="pill in">in: every change</span><span class="pill out">out: your pantry</span></div></div>
-    <div class="card"><div class="ic">🖼️</div><h3>Image storage</h3><p>Tigris object storage holds the photos themselves.</p>
+    <div class="card"><div class="ic">🖼️</div><h3>Image storage</h3><p>Tigris object storage holds the photos themselves, and one bucket also holds model candidates under a <code>models/candidates/</code> prefix. Its environment variable names are legacy <code>R2_*</code> names, which do not name the provider in use.</p>
       <div class="io"><span class="pill in">in: photos</span><span class="pill out">out: secure links</span></div></div>
     <div class="card"><div class="ic">📚</div><h3>Shelf-life table</h3><p>Curated food-storage data is the source of every date.</p>
       <div class="io"><span class="pill in">in: a food name</span><span class="pill out">out: a date, or "not covered"</span></div></div>
@@ -260,11 +260,11 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
     <div class="bot"><div class="ic">🚀</div><h3>Release robot</h3><p>A human approves and starts every deploy. The robot builds it, rehearses it on the twin, and undoes any failure automatically.</p>
       <div class="io"><span class="pill run">trigger: one approval</span></div>
       <div class="mini">build once → rehearse on the twin →<br>same build to production →<br>any failure = automatic undo</div></div>
-    <div class="bot"><div class="ic">🛡️</div><h3>Gatekeeper</h3><p>Blocks any pull request that fails a test, including unit suites and release contracts. No exceptions.</p>
+    <div class="bot"><div class="ic">🛡️</div><h3>Gatekeeper</h3><p>Blocks any pull request that fails release contracts, the external-review gate or shopper tests. The data-quality gate is the exception: both of its jobs skip on pull requests entirely.</p>
       <div class="io"><span class="pill in">in: every push/PR</span><span class="pill out">out: green or blocked</span><span class="pill run">trigger: each push/PR</span></div></div>
     <div class="bot"><div class="ic">🍎</div><h3>Store watcher</h3><p>Watches the App Store review status so nobody refreshes a dashboard.</p>
       <div class="io"><span class="pill out">out: chat alert</span><span class="pill run">trigger: every 30 min</span></div></div>
-    <div class="bot"><div class="ic">🩺</div><h3>Health watcher</h3><p>Runs 7 real checks every 30 minutes: production health, the canary twin, App Store watcher freshness, backups, and domain status. It pages a human when something changes.</p>
+    <div class="bot"><div class="ic">🩺</div><h3>Health watcher</h3><p>Makes 5 bounded network probes and 3 local freshness checks every 30 minutes, and alerts only on a state change. The probes cover production health, production readiness, the canary twin, the interns proxy and the custom domain; the local checks cover backup verification, App Store watcher freshness and supervisor freshness.</p>
       <div class="io"><span class="pill out">out: page a human</span><span class="pill run">trigger: every 30 min</span></div></div>
   </div>
   <div class="run-list">
