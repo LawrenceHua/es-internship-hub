@@ -26,11 +26,11 @@
     "internal_group_last_build": "2026090701",
     "internal_state": "IN_BETA_TESTING",
     "external_public_link_group_last_build": "2026090701",
-    "external_state": "WAITING_FOR_BETA_REVIEW",
-    "external_link_serves": "2026080404",
+    "external_state": "IN_BETA_TESTING",
+    "external_link_serves": "2026090701",
     "public_users": 0,
-    "as_of": "2026-09-07T14:03:15Z",
-    "source": "es-ops/release-0907/receipts/20260907T140322Z-testflight-distribute.json (readback_internal_builds, readback_external_builds, readback_betaDetail)"
+    "as_of": "2026-09-07T17:39:34Z",
+    "source": "es-ops/release-0907/receipts/20260907T173934.135749Z-state.json (build betaAppReviewSubmission APPROVED 2026-09-07T07:03:18-07:00)"
   },
   "ml": {
     "custom_model_available": false,
