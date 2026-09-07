@@ -2,51 +2,46 @@
   "schema_version": "xpired-hub-pages-v1",
   "note": "The single source for which pages exist. ARCHITECTURE.md's page table and its html-validate command line are generated from this file, and the classroom-series footers are checked against it. Change this file first: scripts/render-pages.js --write regenerates the document, scripts/render-pages.js --check fails when the document or a footer has drifted, and scripts/validate-ledger.js --site fails when this list and `ls *.html` disagree.",
   "series_titles": {
-    "program": "Program surface",
-    "classroom": "Classroom series"
+    "home": "Show and tell",
+    "product": "How it is built",
+    "classroom": "Classroom series",
+    "archive": "Program archive"
   },
   "pages": [
     {
       "file": "index.html",
-      "title": "Program overview",
-      "series": "program",
+      "title": "Show and tell",
+      "series": "home",
       "series_order": 1,
-      "summary": "Program overview, eight-week core plus three-week extension schedule, the Monday sequence, owner/issue map, evidence snapshot, and links to the detailed project board. Preserved as a dated snapshot of the Week 12 start page; see the historical note on the page itself."
+      "summary": "The front door for the September 10 show-and-tell: what Xpired does today, the business loop, what is true right now (read live from release-state.json), how the system is built, the automations that run unattended, and a build-your-own guide, with the internship program archived at the bottom."
     },
     {
-      "file": "freshlens.html",
-      "title": "FreshLens",
-      "series": "program",
+      "file": "build-your-own.html",
+      "title": "Build your own",
+      "series": "home",
       "series_order": 2,
-      "summary": "FreshLens product framing, local claim-loop boundary, convergence plan, readiness matrix, owner lanes, and a collapsed historical Week 7 record fenced as history."
-    },
-    {
-      "file": "provenance.html",
-      "title": "Provenance receipts",
-      "series": "program",
-      "series_order": 3,
-      "summary": "Research reference for signed decision evidence. It explicitly separates local binding and mock-anchor proof from blocked durability and external-trust work."
-    },
-    {
-      "file": "w1.html",
-      "title": "Week 1 tutorial",
-      "series": "program",
-      "series_order": 4,
-      "summary": "Beginner Week 1 tutorial with copy controls, persisted step progress, and an optional timer."
-    },
-    {
-      "file": "ledger.html",
-      "title": "Program Ledger",
-      "series": "program",
-      "series_order": 5,
-      "summary": "The Program Ledger reader. It fetches ledger.json and uptime.json at runtime and renders them; it hardcodes no row, no total, and no date."
+      "summary": "The pattern in plain language for running a one-founder product company with AI agents: agents write, gates verify, a human presses release. The minimum stack to copy, what to copy first, what it costs, and three lessons drawn from the program ledger."
     },
     {
       "file": "how-it-works.html",
       "title": "How Xpired works",
-      "series": "program",
-      "series_order": 6,
+      "series": "product",
+      "series_order": 1,
       "summary": "The system map in plain language: apps, the AI boundary, storage, and the release and watcher robots."
+    },
+    {
+      "file": "ledger.html",
+      "title": "Program Ledger",
+      "series": "product",
+      "series_order": 2,
+      "summary": "The Program Ledger reader. It fetches ledger.json and uptime.json at runtime and renders them; it hardcodes no row, no total, and no date."
+    },
+    {
+      "file": "provenance.html",
+      "title": "Provenance receipts",
+      "series": "product",
+      "series_order": 3,
+      "summary": "Research reference for signed decision evidence. It explicitly separates local binding and mock-anchor proof from blocked durability and external-trust work."
     },
     {
       "file": "day-of-a-change.html",
@@ -77,25 +72,39 @@
       "summary": "Fifteen ranked ground truths with evidence labels."
     },
     {
-      "file": "lesson-plan.html",
-      "title": "Lesson plan",
-      "series": "classroom",
-      "series_order": 5,
-      "summary": "Six lessons plus one stretch exercise a student can run on a free account."
-    },
-    {
       "file": "diagrams.html",
       "title": "The system in pictures",
       "series": "classroom",
-      "series_order": 6,
-      "summary": "System diagrams with their Mermaid sources, phone layouts, and the daily timeline, rollback path and service cost checklist for the 9/10 presentation."
+      "series_order": 5,
+      "summary": "System diagrams with their Mermaid sources, phone layouts, and the daily timeline, rollback path and service cost checklist."
+    },
+    {
+      "file": "w1.html",
+      "title": "Week 1 tutorial (moved)",
+      "series": "archive",
+      "series_order": 1,
+      "summary": "One-line redirect stub. The beginner Week 1 tutorial moved to program/w1.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged."
+    },
+    {
+      "file": "lesson-plan.html",
+      "title": "Lesson plan (moved)",
+      "series": "archive",
+      "series_order": 2,
+      "summary": "One-line redirect stub. The six-lesson plan moved to program/lesson-plan.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged."
     },
     {
       "file": "presentation.html",
-      "title": "The 9/10 presentation",
-      "series": "classroom",
-      "series_order": 7,
-      "summary": "The September 10 class deck: a readable business loop, seven dated stations with human boundaries, and teaching diagrams for schedules, release failures and service costs."
+      "title": "The 9/10 presentation (moved)",
+      "series": "archive",
+      "series_order": 3,
+      "summary": "One-line redirect stub. The original September 10 internship deck moved to program/presentation.html; the current site's front door supersedes it for the new audience."
+    },
+    {
+      "file": "freshlens.html",
+      "title": "FreshLens (moved)",
+      "series": "archive",
+      "series_order": 4,
+      "summary": "One-line redirect stub. The FreshLens program page moved to program/freshlens.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged."
     }
   ]
 }
