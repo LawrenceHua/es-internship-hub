@@ -1,11 +1,9 @@
-flowchart LR
-  Q["Human-approved queue<br/>the only marketing row that exists today"]
-  LK["LinkedIn poster lane<br/>linkedin_queue_runner.py<br/>plist not installed"]
-  EM["Expiry-email digest EM1<br/>built, default-off flag,<br/>blocked unmerged"]
-  HB["Monday heartbeat → #es-growth<br/>LIVE, a monitor not marketing output"]
-  Q -. DARK until the owner turns it on .-> LK
-  Q -. DARK until the flag merges and flips .-> EM
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+  Q["REPORTED<br/>2026-09-04<br/>Human-approved queue<br/>Marketing waits for approval"]
+  LK["REPORTED<br/>2026-09-04<br/>LinkedIn poster lane: DARK<br/>linkedin_queue_runner.py<br/>Plist not installed"]
+  EM["FLAG-GATED<br/>2026-09-04<br/>Expiry-email digest EM1<br/>Built, default-off flag<br/>Blocked unmerged"]
+  HB["REPORTED<br/>2026-09-04<br/>Separate signal: LIVE<br/>Monday heartbeat → #es-growth<br/>Monitoring, not marketing"]
+  Q -. reading order .-> LK -. reading order .-> EM -. reading order .-> HB
   classDef dark fill:#f1eafa,stroke:#654280,stroke-dasharray:5,color:#654280;
-  classDef live fill:#e8f3ee,stroke:#3d8b6a,color:#1a3c34;
   class LK,EM dark;
-  class HB live;

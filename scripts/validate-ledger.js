@@ -273,7 +273,7 @@ const validateUptime = (uptime) => {
 const PAGES_PATH = path.join(ROOT, 'pages.json');
 const DENYLIST_PATH = path.join(ROOT, 'scripts', 'denylist.json');
 const SITE_MIN_BADGES = 20;
-const SCAN_EXTENSIONS = new Set(['.html', '.md', '.json']);
+const SCAN_EXTENSIONS = new Set(['.html', '.md', '.mmd', '.json']);
 const SKIP_DIRS = new Set(['.git', 'node_modules', '.vercel', '.github']);
 
 const EVIDENCE_VERDICTS = new Set([
@@ -828,6 +828,8 @@ const runSelfTests = (matcher, denylist) => {
 
 /* --- the site gate -------------------------------------------------------- */
 
+const emDashPattern = () => /\u2014|&mdash;?|&#0*8212;?|&#x0*2014;?/gi;
+
 const runSite = () => {
     const pages = readJson(PAGES_PATH);
     const denylist = readJson(DENYLIST_PATH);
@@ -839,6 +841,10 @@ const runSite = () => {
 
     const matcher = denylistMatcher(denylist);
     runSelfTests(matcher, denylist).forEach(fail);
+    ['\u2014', '&mdash;', '&#8212;', '&#x2014;', '&#X02014;', '&MDASH;'].forEach((form) => {
+        if (!emDashPattern().test(form)) fail('em-dash self-test missed a prohibited form');
+    });
+    if (emDashPattern().test('a comma, a colon: and a period.')) fail('em-dash self-test rejected clean punctuation');
 
     // pages.json is the single source for the file list.
     const onDisk = fs.readdirSync(ROOT).filter((name) => name.endsWith('.html')).sort();
@@ -876,6 +882,9 @@ const runSite = () => {
     let definitionsChecked = 0;
     onDisk.forEach((file) => {
         const html = fs.readFileSync(path.join(ROOT, file), 'utf8');
+        for (const hit of html.matchAll(emDashPattern())) {
+            fail(`${file}:${lineOf(html, hit.index)}: em dash or encoded em dash must be replaced with plain punctuation`);
+        }
         const { badges, nodes } = collectBadges(html, repoFiles);
         totalBadges += badges.length;
         badges.forEach((badge) => {
@@ -933,7 +942,7 @@ const runSite = () => {
     }
     console.log(
         `VALIDATE-SITE result=PASS pages=${onDisk.length} badges=${totalBadges} verified=${verifiedBadges} ` +
-        `legends=${legendBadges} definitions=${definitionsChecked} filesScanned=${scanned.length} violations=0`
+        `legends=${legendBadges} definitions=${definitionsChecked} filesScanned=${scanned.length} emDashForms=PASS violations=0`
     );
 };
 

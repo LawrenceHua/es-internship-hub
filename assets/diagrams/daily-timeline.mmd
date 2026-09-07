@@ -1,0 +1,31 @@
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+J0["REPORTED<br/>2026-09-07<br/>daily at 03:30 · RETIRED<br/>com.lawrence.<br/>model-improve<br/>Retired: deleted script"]
+  J1["REPORTED<br/>2026-09-07<br/>daily at 03:30 · LIVE<br/>com.lawrence.<br/>es-dream<br/>Consolidates the day's learning"]
+  J0 -. clock order .-> J1
+  J2["REPORTED<br/>2026-09-07<br/>daily at 04:00 · DARK<br/>com.lawrence.<br/>es-feature-auto<br/>Output not documented"]
+  J1 -. clock order .-> J2
+  J3["REPORTED<br/>2026-09-07<br/>daily at 04:00 · DARK<br/>com.lawrence.<br/>es-feature-dryrun<br/>Output not documented"]
+  J2 -. clock order .-> J3
+  J4["REPORTED<br/>2026-09-07<br/>daily at 07:00 · LIVE<br/>com.lawrence.<br/>es-release-dryrun<br/>Release rehearsal, no authority"]
+  J3 -. clock order .-> J4
+  J5["REPORTED<br/>2026-09-07<br/>daily at 07:30 · RETIRED<br/>com.es.<br/>b11-intern-post-20260902<br/>b11-posted.json (one-shot)"]
+  J4 -. clock order .-> J5
+  J6["REPORTED<br/>2026-09-07<br/>daily at 08:00 · LIVE<br/>com.lawrence.<br/>xpired-launch-sentinel<br/>Output not documented"]
+  J5 -. clock order .-> J6
+  J7["REPORTED<br/>2026-09-07<br/>daily at 08:40 · LIVE<br/>com.lawrence.<br/>es-overseer-digest<br/>Digest → #es-daily"]
+  J6 -. clock order .-> J7
+  J8["REPORTED<br/>2026-09-07<br/>daily at 08:47 · LIVE<br/>com.lawrence.<br/>xpired-a11y-monitor<br/>Accessibility monitoring"]
+  J7 -. clock order .-> J8
+  J9["REPORTED<br/>2026-09-07<br/>daily at 09:05 · LIVE<br/>com.lawrencehua.<br/>es-flywheel-steward<br/>steward-latest.json"]
+  J8 -. clock order .-> J9
+  J10["REPORTED<br/>2026-09-07<br/>daily at 09:15 · LIVE<br/>com.lawrencehua.<br/>es-feedback-digest<br/>Unreviewed queue → #es-daily"]
+  J9 -. clock order .-> J10
+  J11["REPORTED<br/>2026-09-07<br/>daily at 09:20 · LIVE<br/>com.lawrencehua.<br/>es-prod-smoke<br/>smoke-latest.json"]
+  J10 -. clock order .-> J11
+  J12["REPORTED<br/>2026-09-07<br/>daily at 09:35 · LIVE<br/>com.lawrencehua.<br/>es-mesh-bridge<br/>Gated draft fix cards"]
+  J11 -. clock order .-> J12
+  J13["REPORTED<br/>2026-09-07<br/>daily at 12:15 · LIVE<br/>com.lawrencehua.<br/>es-flywheel-heartbeat<br/>Watches steward freshness"]
+  J12 -. clock order .-> J13
+  J14["REPORTED<br/>2026-09-07<br/>daily at 23:17 · LIVE<br/>com.expiredsolutions.<br/>sauce-nightly<br/>Nightly device summary"]
+  J13 -. clock order .-> J14

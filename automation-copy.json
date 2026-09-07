@@ -6,7 +6,9 @@
     "display": "what the table calls it; omit to use the script path launchd runs",
     "artifact": "the output this job is supposed to leave behind, so its freshness can be measured",
     "fresh_after_seconds": "how old that output may be before the row reads STALE; omit to derive twice the cadence",
-    "by_hand": "true for a row that is deliberately not an automation, so it can never be counted as one"
+    "by_hand": "true for a row that is deliberately not an automation, so it can never be counted as one",
+    "source": "the existing classroom station from which this prose was copied",
+    "observed_at": "the date of the curated prose snapshot, separate from the machine reading"
   },
   "rows": [
     {
@@ -85,6 +87,112 @@
       "what_it_does": "Posted diagrams once and wrote `es-ops/state/b11-posted.json`.",
       "must_never_do": "Repeat after its one successful run.",
       "artifact": "~/es-ops/state/b11-posted.json"
+    },
+    {
+      "label": "com.lawrencehua.es-feedback-digest",
+      "what_it_does": "Shopper feedback and scan corrections land in the production database. Every morning, launchd `com.lawrencehua.es-feedback-digest` (daily 09:15) runs `~/.openclaw/tools/feedback_digest/feedback_digest.py`, which pulls `/feedback/unreviewed` and `/scan-feedback/admin/corrections` from production and posts the queue to Slack `#es-daily`. The first live run was observed 2026-09-04 at 09:35 ET. From there the routing is human: digest to owner brief in `es-ops/briefs` to pull request. Scanner corrections also feed the ML loop, flag-only per the owner's 2026-09-03 decision.",
+      "must_never_do": "Open a pull request or apply a correction by itself. The digest reports; a person routes.",
+      "source": "presentation.html, station 02",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "com.lawrencehua.es-flywheel-steward",
+      "what_it_does": "The flywheel steward (launchd `com.lawrencehua.es-flywheel-steward`, daily 09:05, `~/system-map/comms/es_flywheel_steward.py`) watches the QUALITY, STORED, DEPLOYED, and ACTIVE axes, posts to `#es-daily`, and writes `~/system-map/_data/es-flywheel/steward-latest.json`.",
+      "must_never_do": "Apply its own fix card or promote a model. Findings become drafts; a person decides.",
+      "source": "presentation.html, station 03",
+      "observed_at": "2026-09-04",
+      "artifact": "~/system-map/_data/es-flywheel/steward-latest.json"
+    },
+    {
+      "label": "com.lawrencehua.es-flywheel-heartbeat",
+      "what_it_does": "A dead-man heartbeat (daily 12:15) watches the steward itself.",
+      "must_never_do": "Apply its own fix card or promote a model. Findings become drafts; a person decides.",
+      "source": "presentation.html, station 03",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "com.lawrencehua.es-mesh-bridge",
+      "what_it_does": "The mesh bridge (daily 09:35) turns findings into gated draft fix cards and never auto-applies them.",
+      "must_never_do": "Apply its own fix card or promote a model. Findings become drafts; a person decides.",
+      "source": "presentation.html, station 03",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "com.lawrence.xpired-gate-canary",
+      "what_it_does": "a serving canary probes the content gate every 30 minutes.",
+      "must_never_do": "Apply its own fix card or promote a model. Findings become drafts; a person decides.",
+      "source": "presentation.html, station 03",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "com.lawrence.xpired-a11y-monitor",
+      "what_it_does": "Overnight, a Sauce real-device matrix runs nightly at 23:17 and an accessibility monitor runs daily at 08:47.",
+      "must_never_do": "Pass with a deleted suite, a hand-typed count, or an unverified toolchain.",
+      "source": "presentation.html, station 04",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "com.lawrence.es-release-dryrun",
+      "what_it_does": "a daily release dry-run at 07:00 exercises the whole path without authority.",
+      "must_never_do": "Rebuild between canary and production, or submit without the readiness gate. Tombstones must never run.",
+      "source": "presentation.html, station 05",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "com.lawrence.es-overseer-digest",
+      "what_it_does": "the overseer digest lands in `#es-daily` at 08:40",
+      "must_never_do": "Heal silently without an audit trail, or alert on an unmeasured claim.",
+      "source": "presentation.html, station 07",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "com.lawrence.es-dream",
+      "what_it_does": "a 03:30 job consolidates the day's learning",
+      "must_never_do": "Heal silently without an audit trail, or alert on an unmeasured claim.",
+      "source": "presentation.html, station 07",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "com.lawrence.es-expired-agent",
+      "what_it_does": "the `@Expired` Slack bot, live since 2026-09-04, answers intern questions grounded in immutable repository snapshots.",
+      "must_never_do": "Heal silently without an audit trail, or alert on an unmeasured claim.",
+      "source": "presentation.html, station 07",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "ci-local.runner.es-intern-freshlens-mini",
+      "what_it_does": "Every pull request runs the required checks `release-contracts` and `asc-gate-tests`, plus `shopper-tests` on iOS paths, on five self-hosted runners on the studio Mac. Test counts are derived from collection, not typed by hand, so a deleted suite fails the gate instead of shrinking it.",
+      "must_never_do": "Pass with a deleted suite, a hand-typed count, or an unverified toolchain.",
+      "source": "presentation.html, station 04",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "ci-local.runner.es-intern-product-sandbox-mini",
+      "what_it_does": "Every pull request runs the required checks `release-contracts` and `asc-gate-tests`, plus `shopper-tests` on iOS paths, on five self-hosted runners on the studio Mac. Test counts are derived from collection, not typed by hand, so a deleted suite fails the gate instead of shrinking it.",
+      "must_never_do": "Pass with a deleted suite, a hand-typed count, or an unverified toolchain.",
+      "source": "presentation.html, station 04",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "ci-local.runner.es-isolated-runner",
+      "what_it_does": "Every pull request runs the required checks `release-contracts` and `asc-gate-tests`, plus `shopper-tests` on iOS paths, on five self-hosted runners on the studio Mac. Test counts are derived from collection, not typed by hand, so a deleted suite fails the gate instead of shrinking it.",
+      "must_never_do": "Pass with a deleted suite, a hand-typed count, or an unverified toolchain.",
+      "source": "presentation.html, station 04",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "ci-local.runner.es-mini-runner",
+      "what_it_does": "Every pull request runs the required checks `release-contracts` and `asc-gate-tests`, plus `shopper-tests` on iOS paths, on five self-hosted runners on the studio Mac. Test counts are derived from collection, not typed by hand, so a deleted suite fails the gate instead of shrinking it.",
+      "must_never_do": "Pass with a deleted suite, a hand-typed count, or an unverified toolchain.",
+      "source": "presentation.html, station 04",
+      "observed_at": "2026-09-04"
+    },
+    {
+      "label": "ci-local.runner.expiredsolutionsweb-mini",
+      "what_it_does": "Every pull request runs the required checks `release-contracts` and `asc-gate-tests`, plus `shopper-tests` on iOS paths, on five self-hosted runners on the studio Mac. Test counts are derived from collection, not typed by hand, so a deleted suite fails the gate instead of shrinking it.",
+      "must_never_do": "Pass with a deleted suite, a hand-typed count, or an unverified toolchain.",
+      "source": "presentation.html, station 04",
+      "observed_at": "2026-09-04"
     }
   ]
 }

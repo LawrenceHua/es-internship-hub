@@ -21,9 +21,8 @@
 # check, so "I could not verify" is never reported as a pass.
 #
 # Every source is rendered twice, per diagram, and not just once for a probe.
-# One of this repository's own diagrams renders to different bytes every time
-# while the other two are stable, so a single probe would have "proved"
-# determinism and then reported that diagram as changed on every run, for ever.
+# A single successful probe does not prove that every source renders
+# deterministically. Each source must reproduce independently.
 # A gate that fails for reasons unrelated to the change is a gate people learn
 # to ignore, so an unrepeatable diagram is reported as unverifiable by name.
 #
@@ -44,28 +43,7 @@ DIAGRAMS="${ROOT}/assets/diagrams"
 # an existing diagram rather than an unregenerable picture.
 ALLOWLIST_ORPHAN_PNG=("system-map-lr.png")
 
-# Diagrams whose source will not render byte-identically on this machine, so
-# sha256 cannot tell a stale picture from renderer noise. An entry here is not
-# "this diagram is fine"; it is "this gate cannot answer for this diagram", and
-# it is reported on its own counter so a PASS never absorbs it.
-#
-# plan-order.png, measured 2026-09-04 on this machine (mmdc from
-# node v22.22.2, Google Chrome headless, the pinned `-s 3`):
-#   - 5 renders of the committed source gave 4 distinct sha256, all 2352x498;
-#   - the committed PNG is 2652x3243, which no local render reproduces;
-#   - the committed picture is the top-down layout while the source's first
-#     line reads `flowchart LR`, and forcing `flowchart TD` or `TB` gives
-#     2352x2874 with a distinct sha256 on all 6 further renders.
-#   - the two pictures were compared by eye on 2026-09-04: same fourteen
-#     nodes, same edges, same dotted "uptime numbers" edge, same subgraph
-#     titles. The content is the plan the source describes; the direction and
-#     the scale are not what this toolchain produces.
-# So this is a real reproducibility gap and not only renderer noise. It is
-# allowlisted to keep the gate usable, and the drift is recorded here so the
-# entry cannot quietly become permanent: regenerating plan-order.png from the
-# source on this toolchain, or pinning the source to the direction the picture
-# was drawn in, would remove the need for the entry.
-ALLOWLIST_UNREPRODUCIBLE_PNG=("plan-order.png")
+# All source-backed PNGs must reproduce. No renderer exceptions remain.
 
 TMPDIR_RUN="$(mktemp -d "${TMPDIR:-/tmp}/check-mermaid.XXXXXX")"
 cleanup() { rm -rf "${TMPDIR_RUN}"; }
@@ -176,13 +154,6 @@ if [ "${#sources[@]}" -eq 0 ]; then
     cannot_verify "no .mmd sources were found in ${DIAGRAMS}. A check that finds nothing proves nothing."
 fi
 
-is_allowlisted_unreproducible() {
-    local base="$1" entry
-    for entry in "${ALLOWLIST_UNREPRODUCIBLE_PNG[@]}"; do
-        [ "${base}" = "${entry}" ] && return 0
-    done
-    return 1
-}
 
 failures=0
 unverifiable=0
@@ -195,16 +166,6 @@ for source in "${sources[@]}"; do
     if [ ! -f "${committed}" ]; then
         echo "FAIL ${name}.mmd has no committed ${name}.png beside it" >&2
         failures=$((failures + 1))
-        continue
-    fi
-    # The unreproducible allowlist is consulted BEFORE rendering: a source
-    # allowlisted for nondeterminism must never reach the byte-compare, because
-    # on runs where it happens to render deterministically the compare would
-    # still fail against an older committed layout. (2026-09-04: observed live —
-    # plan-order.png flapped FAIL/PASS between runs of the same script version.)
-    if is_allowlisted_unreproducible "${name}.png"; then
-        echo "NOTE ${name}.png is on the unreproducible-renderer allowlist: this gate did NOT check it. See the allowlist comment for the by-eye comparison date."
-        allowlisted=$((allowlisted + 1))
         continue
     fi
     if ! render "${source}" "${TMPDIR_RUN}/${name}-1.png"; then
@@ -223,12 +184,6 @@ for source in "${sources[@]}"; do
     first="$(sha "${TMPDIR_RUN}/${name}-1.png")"
     second="$(sha "${TMPDIR_RUN}/${name}-2.png")"
     if [ "${first}" != "${second}" ]; then
-        if is_allowlisted_unreproducible "${name}.png"; then
-            echo "NOTE ${name}.png does not render byte-identically twice here and is allowlisted: this gate did NOT check it."
-            echo "     committed is $(dimensions "${committed}"), a re-render is $(dimensions "${TMPDIR_RUN}/${name}-1.png"); see the allowlist comment in this script for the measurement and the date it was last compared by eye."
-            allowlisted=$((allowlisted + 1))
-            continue
-        fi
         echo "CANNOT-VERIFY ${name}.png: this source does not render byte-identically twice on this machine" >&2
         echo "     (${first} then ${second}), so sha256 cannot tell a stale diagram from renderer noise." >&2
         echo "     committed ${committed##*/} is $(dimensions "${committed}"), a re-render is $(dimensions "${TMPDIR_RUN}/${name}-1.png") — compare those by eye." >&2

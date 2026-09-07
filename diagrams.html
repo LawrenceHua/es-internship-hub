@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#1a3c34;--primary-mid:#2a5a4a;--leaf:#3d8b6a;--leaf-soft:#e8f3ee;--ink:#17241f;--muted:#5c6f66;--line:#dfe8e2;--bg:#f7faf8;--card:#ffffff;--amber:#b07a1f;--amber-soft:#faf1dd;--sky:#2f6b9e;--sky-soft:#e7f0f8;--mono:'JetBrains Mono',monospace}
+:root{--primary:#1a3c34;--primary-mid:#2a5a4a;--leaf:#3d8b6a;--leaf-soft:#e8f3ee;--ink:#17241f;--muted:#5c6f66;--line:#dfe8e2;--bg:#f7faf8;--card:#ffffff;--amber:#7a520f;--amber-soft:#faf1dd;--sky:#2f6b9e;--sky-soft:#e7f0f8;--mono:'JetBrains Mono',monospace}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
@@ -55,9 +55,7 @@ a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:
 .foot{margin-top:58px;padding:25px 20px;text-align:center;background:var(--primary);color:#cfe4d8;font-size:14px}
 figure{margin:26px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px}
 figure img{display:block;width:100%;height:auto;border-radius:8px}
-/* At 390 the rendered text inside these PNGs is a few pixels tall, so the image
-   is also a link to the full-size asset. The caption says so, because a linked
-   image with no affordance reads as decoration. */
+/* Narrow sources keep labels readable on phones; the full-size link also supports zoom. */
 .full-size{display:block;border-radius:8px}
 .full-size:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 .full-size-note{display:inline-flex;align-items:center;min-height:24px;font:700 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-decoration:none}
@@ -80,7 +78,7 @@ pre:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 .track span{color:var(--muted);font-size:14.5px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media (prefers-color-scheme: dark){
-:root{--ink:#e6ece9;--muted:#a9b7b0;--line:#2b3530;--bg:#0f1413;--card:#171e1b;--leaf-soft:#152420;--amber-soft:#26200f;--sky-soft:#0f1d27}
+:root{--ink:#e6ece9;--muted:#a9b7b0;--line:#2b3530;--bg:#0f1413;--card:#171e1b;--leaf-soft:#152420;--amber:#d9b36a;--amber-soft:#26200f;--sky-soft:#0f1d27}
 body{background:var(--bg);color:var(--ink)}
 .nav{background:rgba(15,20,19,.92)}
 a,.brand,code,.series-list a:hover,.series-list a[aria-current="page"]{color:#9fd0b8}
@@ -96,6 +94,13 @@ p a,li a,td a,dd a,strong a,span a{padding-block:.25rem}
 .navin,.wrap{padding:0 16px}
 .hero{padding:55px 16px}
 }
+
+@media(prefers-color-scheme:dark){.chip.live{color:#9fd0b8}.chip.verified{color:#8fbcd9}.chip.reported,.chip.inferred,.chip.flagged,.chip.planned{color:#d9b36a}.chip.retired,.chip.offline{background:#27312c;color:#c4d0c9}}
+
+.narrow-diagram{max-width:480px;margin-inline:auto}
+.diagram-evidence{font-size:13px;color:var(--muted)}
+figure,figure p,figcaption,summary{overflow-wrap:anywhere}
+@media(max-width:640px){.station{grid-template-columns:1fr}.station-num{flex-direction:row;justify-content:flex-start;padding:10px 14px}.station-num strong{font-size:1rem}.station-body{padding:14px}.station figure{padding:10px}figure{padding:12px}}
 </style>
 </head>
 <body>
@@ -109,9 +114,10 @@ p a,li a,td a,dd a,strong a,span a{padding-block:.25rem}
 
 <figure>
 <figcaption>1. The Xpired system map</figcaption>
-<a class="full-size" href="assets/diagrams/system-map.png" target="_blank" rel="noopener"><img src="assets/diagrams/system-map.png" alt="System map flowchart in reading order: the watcher service and its dead-man service; how a pull request becomes a release through the studio Mac and GitHub gates, then canary, then production; what a shopper touches; the always-on server side with the consent-gated learning loop; and the internship hub that shows the work." loading="lazy"></a>
+<a class="full-size" href="assets/diagrams/system-map.png" target="_blank" rel="noopener"><picture><source media="(max-width: 640px)" srcset="assets/diagrams/system-map-mobile.png"><img src="assets/diagrams/system-map.png" alt="System map flowchart in reading order: the watcher service and its dead-man service; how a pull request becomes a release through the studio Mac and GitHub gates, then canary, then production; what a shopper touches; the always-on server side with the consent-gated learning loop; and the internship hub that shows the work." loading="lazy"></picture></a>
 <p><a class="full-size-note" href="assets/diagrams/system-map.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <p>Read it in order: the watchers keep an eye on everything; then how a pull request becomes a release; the shopper's app talks to the server; and the learning loop only ever uses photos a shopper explicitly opted in, which a person checks before any model is promoted.</p>
+<p class="diagram-evidence"><span class="chip reported">REPORTED</span> Historical snapshot observed <time datetime="2026-09-02">2026-09-02</time>. The phone variant groups the same material in reading order. <a href="assets/diagrams/system-map-mobile.mmd">Mobile Mermaid source</a>.</p>
 <details><summary>Mermaid source (system-map.mmd)</summary>
 <pre tabindex="0" role="group" aria-label="Scrollable diagram source">
 flowchart TB
@@ -183,13 +189,14 @@ flowchart TB
 
 <figure>
 <figcaption>2. Where the robots run</figcaption>
-<a class="full-size" href="assets/diagrams/where-robots-run.png" target="_blank" rel="noopener"><img src="assets/diagrams/where-robots-run.png" alt="Two-lane flowchart. The Studio Mac lane holds Xcode builds and tests, a device farm, and the human release keystroke, none of which count in the uptime number. The cloud lane lists six watchers - App Store watcher, health watcher, uptime check, gate canary, deploy drift, nightly smoke - watched by a dead-man service once switched on." loading="lazy"></a>
+<a class="full-size" href="assets/diagrams/where-robots-run.png" target="_blank" rel="noopener"><picture><source media="(max-width: 640px)" srcset="assets/diagrams/where-robots-run-mobile.png"><img src="assets/diagrams/where-robots-run.png" alt="Two-lane flowchart. The Studio Mac lane holds Xcode builds and tests, a device farm, and the human release keystroke, none of which count in the uptime number. The cloud lane lists six watchers - App Store watcher, health watcher, uptime check, gate canary, deploy drift, nightly smoke - watched by a dead-man service once switched on." loading="lazy"></picture></a>
 <p><a class="full-size-note" href="assets/diagrams/where-robots-run.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <p>Where the automated checks run. Written on 2026-09-02, when the cloud watcher service had just been built: it switches on once the team lead adds its keys, and from then on a separate dead-man service pages a person if any watcher goes quiet. Steps that need Xcode or the studio computer only happen when a person is there, so they are not counted in the uptime number.</p>
+<p class="diagram-evidence"><span class="chip reported">REPORTED</span> Historical snapshot observed <time datetime="2026-09-02">2026-09-02</time>. The phone variant groups the same material in reading order. <a href="assets/diagrams/where-robots-run-mobile.mmd">Mobile Mermaid source</a>.</p>
 <details><summary>Mermaid source (where-robots-run.mmd)</summary>
 <pre tabindex="0" role="group" aria-label="Scrollable diagram source">
 flowchart LR
-  subgraph CLOUD["Cloud service, two regions. Built this week; switches on when the team lead adds the keys"]
+  subgraph CLOUD["Cloud service, two regions. REPORTED, built as of 2026-09-02; switches on when the team lead adds the keys"]
     direction TB
     C1[App Store watcher]
     C2[health watcher]
@@ -215,22 +222,24 @@ flowchart LR
 
 <figure>
 <figcaption>3. The order of work that week</figcaption>
-<a class="full-size" href="assets/diagrams/plan-order.png" target="_blank" rel="noopener"><img src="assets/diagrams/plan-order.png" alt="Flowchart of the week's three parallel tracks. Track 1 moves monitors to the cloud with a three-day soak and a seven-day measurement before any uptime number is published. Track 2 re-enables photo training consent, re-shoots the store screenshots, and ends at a team-lead submission. Track 3 fixes the how-it-works page and ships the program ledger." loading="lazy"></a>
+<a class="full-size" href="assets/diagrams/plan-order.png" target="_blank" rel="noopener"><picture><source media="(max-width: 640px)" srcset="assets/diagrams/plan-order-mobile.png"><img src="assets/diagrams/plan-order.png" alt="Flowchart of the week's three parallel tracks. Track 1 moves monitors to the cloud with a three-day soak and a seven-day measurement before any uptime number is published. Track 2 re-enables photo training consent, re-shoots the store screenshots, and ends at a team-lead submission. Track 3 fixes the how-it-works page and ships the program ledger." loading="lazy"></picture></a>
 <p><a class="full-size-note" href="assets/diagrams/plan-order.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <p>The order of work for that week, in three lanes that ran at the same time. Boxes are steps, arrows show what had to finish before the next step could start, and the diamond shapes are the team lead's decisions.</p>
+<p class="diagram-evidence"><span class="chip planned">PLANNED</span> Historical plan observed <time datetime="2026-09-02">2026-09-02</time>. The mobile version groups the three parallel tracks in reading order. <a href="assets/diagrams/plan-order-mobile.mmd">Mobile Mermaid source</a>.</p>
 <details><summary>Mermaid source (plan-order.mmd)</summary>
 <pre tabindex="0" role="group" aria-label="Scrollable diagram source">
-flowchart LR
-  subgraph T0[First: make the dashboards tell the truth]
+flowchart TB
+%%{init: {"deterministicIds":true,"deterministicIDSeed":"plan-order-20260907","theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+  subgraph T0["First: make the dashboards&lt;br/&gt;tell the truth"]
     H0[Fix the health check that was crying wolf, and the alert that could not send]
   end
-  subgraph T1[Track 1: monitors that run when the studio machine is off]
+  subgraph T1["Track 1: monitors&lt;br/&gt;when the studio machine is off"]
     O1[Move the watcher code to its own private repo] --&gt; O2[Run it in the cloud in two regions, with a dead-man service watching it]
     O2 --&gt; O3[Prove what is deployed matches what was reviewed]
-    O2 --&gt; S1([Three-day side-by-side soak: cloud and studio must agree])
+    O2 --&gt; S1["Three-day side-by-side soak: cloud and studio must agree"]
     O3 --&gt; S1
     S1 --&gt; C1[Retire the studio copies, one at a time, nothing deleted]
-    C1 --&gt; W7([Seven full days measured before any uptime number is published])
+    C1 --&gt; W7["Seven full days measured before any uptime number is published"]
   end
   subgraph T2[Track 2: the next app version]
     B1[Give shoppers a working way to turn photo training back on] --&gt; P1[Re-shoot the six App Store screenshots on the fixed code]
@@ -252,7 +261,7 @@ flowchart LR
 </figure>
 </section>
 
-<section class="section" id="presentation"><span class="chip live">LIVE</span><h2>The 9/10 presentation</h2><p class="lead">The deck now exists as its own page: <a href="presentation.html">The 9/10 presentation</a> opens on the end-to-end loop, walks seven stations from marketing to ops monitoring, and closes on the four decisions that stay with the owner. The three diagrams posted on 2026-09-02 remain below as backup deep-dives if the room wants to go somewhere specific.</p>
+<section class="section" id="presentation"><span class="chip live">LIVE</span><h2>The 9/10 presentation</h2><p class="lead">The deck now exists as its own page: <a href="presentation.html">The 9/10 presentation</a> opens on the end-to-end loop, walks seven stations from marketing to ops monitoring, and closes on the four decisions that stay with the owner. The three diagrams posted on 2026-09-02 remain above as backup deep-dives if the room wants to go somewhere specific.</p>
 
 <ol class="track">
 <li><b>The deck</b><span>One page that tells the whole story in talk order: the loop diagram, then seven stations, each with what fires, what it must never do, and where the evidence lands. Source: <a href="presentation.html">The 9/10 presentation</a>.</span></li>
@@ -267,6 +276,83 @@ flowchart LR
 
 <div class="callout"><b>Still open for the team lead</b><p>Talk length, audience, and whether a live demo joins the slides. The recipe-capability picture also changes when 4.3.6 ships (fridge-confirmed rows join recipes under typical guidance), so any screenshot for this deck should be captured after that release, not before.</p></div>
 </section>
+
+<section class="section" id="teaching-diagrams"><h2>Schedule, failure and cost</h2><figure id="daily-timeline">
+<figcaption>A day on the automation clock</figcaption>
+<p class="diagram-evidence"><span class="chip reported">REPORTED</span> Observed <time datetime="2026-09-07T01:58:54Z">2026-09-07T01:58:54Z</time>. Source: <a href="automation.json">automation.json</a>.</p>
+<a class="full-size" href="assets/diagrams/daily-timeline.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/daily-timeline.png" alt="Clock order, not dependencies. Each box names the launchd label, schedule, status and output described in the inventory. DARK and RETIRED entries are definitions, not active runs. Times retain the job definitions&#x27; local clock; the reading stamp is UTC." loading="lazy"></a>
+<p>Clock order, not dependencies. Each box names the launchd label, schedule, status and output described in the inventory. DARK and RETIRED entries are definitions, not active runs. Times retain the job definitions' local clock; the reading stamp is UTC.</p>
+<p><a class="full-size-note" href="assets/diagrams/daily-timeline.png" target="_blank" rel="noopener">Open full size ↗</a></p>
+<details><summary>Mermaid source (daily-timeline.mmd)</summary><pre tabindex="0" role="group" aria-label="Scrollable diagram source">
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+J0["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 03:30 · RETIRED&lt;br/&gt;com.lawrence.&lt;br/&gt;model-improve&lt;br/&gt;Retired: deleted script"]
+  J1["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 03:30 · LIVE&lt;br/&gt;com.lawrence.&lt;br/&gt;es-dream&lt;br/&gt;Consolidates the day's learning"]
+  J0 -. clock order .-&gt; J1
+  J2["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 04:00 · DARK&lt;br/&gt;com.lawrence.&lt;br/&gt;es-feature-auto&lt;br/&gt;Output not documented"]
+  J1 -. clock order .-&gt; J2
+  J3["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 04:00 · DARK&lt;br/&gt;com.lawrence.&lt;br/&gt;es-feature-dryrun&lt;br/&gt;Output not documented"]
+  J2 -. clock order .-&gt; J3
+  J4["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 07:00 · LIVE&lt;br/&gt;com.lawrence.&lt;br/&gt;es-release-dryrun&lt;br/&gt;Release rehearsal, no authority"]
+  J3 -. clock order .-&gt; J4
+  J5["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 07:30 · RETIRED&lt;br/&gt;com.es.&lt;br/&gt;b11-intern-post-20260902&lt;br/&gt;b11-posted.json (one-shot)"]
+  J4 -. clock order .-&gt; J5
+  J6["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 08:00 · LIVE&lt;br/&gt;com.lawrence.&lt;br/&gt;xpired-launch-sentinel&lt;br/&gt;Output not documented"]
+  J5 -. clock order .-&gt; J6
+  J7["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 08:40 · LIVE&lt;br/&gt;com.lawrence.&lt;br/&gt;es-overseer-digest&lt;br/&gt;Digest → #es-daily"]
+  J6 -. clock order .-&gt; J7
+  J8["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 08:47 · LIVE&lt;br/&gt;com.lawrence.&lt;br/&gt;xpired-a11y-monitor&lt;br/&gt;Accessibility monitoring"]
+  J7 -. clock order .-&gt; J8
+  J9["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 09:05 · LIVE&lt;br/&gt;com.lawrencehua.&lt;br/&gt;es-flywheel-steward&lt;br/&gt;steward-latest.json"]
+  J8 -. clock order .-&gt; J9
+  J10["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 09:15 · LIVE&lt;br/&gt;com.lawrencehua.&lt;br/&gt;es-feedback-digest&lt;br/&gt;Unreviewed queue → #es-daily"]
+  J9 -. clock order .-&gt; J10
+  J11["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 09:20 · LIVE&lt;br/&gt;com.lawrencehua.&lt;br/&gt;es-prod-smoke&lt;br/&gt;smoke-latest.json"]
+  J10 -. clock order .-&gt; J11
+  J12["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 09:35 · LIVE&lt;br/&gt;com.lawrencehua.&lt;br/&gt;es-mesh-bridge&lt;br/&gt;Gated draft fix cards"]
+  J11 -. clock order .-&gt; J12
+  J13["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 12:15 · LIVE&lt;br/&gt;com.lawrencehua.&lt;br/&gt;es-flywheel-heartbeat&lt;br/&gt;Watches steward freshness"]
+  J12 -. clock order .-&gt; J13
+  J14["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 23:17 · LIVE&lt;br/&gt;com.expiredsolutions.&lt;br/&gt;sauce-nightly&lt;br/&gt;Nightly device summary"]
+  J13 -. clock order .-&gt; J14
+</pre></details>
+</figure><figure id="rollback-path">
+<figcaption>When a release fails</figcaption>
+<p class="diagram-evidence"><span class="chip reported">REPORTED</span> Source read <time datetime="2026-09-07">2026-09-07</time>: private product repository, <code>.github/workflows/fly-deploy.yml</code> (automatic rollback and receipt steps) and <code>backend/scripts/shopper_core_fly_release.sh</code> (rollback helpers, EXIT receipt, apply failure paths). This describes code paths, not an observed successful deploy.</p>
+<a class="full-size" href="assets/diagrams/rollback-path.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/rollback-path.png" alt="The diagram lists conditional failure cases, not sequential releases. A canary failure stops promotion. After promotion begins, the local operator restores both prior images and verifies them. The workflow restores production only when the captured image bindings are safe; unknown images refuse rollback. Failed restoration requires a person. Receipts preserve what actually happened." loading="lazy"></a>
+<p>The diagram lists conditional failure cases, not sequential releases. A canary failure stops promotion. After promotion begins, the local operator restores both prior images and verifies them. The workflow restores production only when the captured image bindings are safe; unknown images refuse rollback. Failed restoration requires a person. Receipts preserve what actually happened.</p>
+<p><a class="full-size-note" href="assets/diagrams/rollback-path.png" target="_blank" rel="noopener">Open full size ↗</a></p>
+<details><summary>Mermaid source (rollback-path.mmd)</summary><pre tabindex="0" role="group" aria-label="Scrollable diagram source">
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+  A["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;Release fails&lt;br/&gt;Keep the prior image digests&lt;br/&gt;and identify the failed phase"]
+  B["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;If canary fails before promotion&lt;br/&gt;Local operator restores canary&lt;br/&gt;Production was not promoted"]
+  C["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;If production promotion fails&lt;br/&gt;Restore prior production digest&lt;br/&gt;Local operator also restores&lt;br/&gt;the prior canary image"]
+  D["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;Whichever restore applies&lt;br/&gt;Verify exact image identity&lt;br/&gt;and every machine's health"]
+  E["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;If restoration cannot verify&lt;br/&gt;CRITICAL: a person intervenes&lt;br/&gt;The release stays failed"]
+  F["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;Always preserve receipts&lt;br/&gt;Record failed or rolled back&lt;br/&gt;Never claim applied on failure"]
+  A -. phase-specific cases .-&gt; B
+  B -. alternative case .-&gt; C
+  C --&gt; D -. failed check .-&gt; E --&gt; F
+</pre></details>
+</figure><figure id="cost-flow">
+<figcaption>Follow the work to its service invoice</figcaption>
+<p class="diagram-evidence"><span class="chip reported">REPORTED</span> <span class="chip inferred">INFERRED</span> <span class="chip planned">PLANNED</span> Observed <time datetime="2026-09-07">2026-09-07</time>. Sources: <a href="automation.json">automation.json</a>, <code>es-ops/sauce-runner/README.md</code> (plan-only and provider minutes), <code>es-ops/reports/es-full-audit-20260905/report-source.md</code> (model usage), and the release source cited above. Billing records were not read.</p>
+<a class="full-size" href="assets/diagrams/cost-flow.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/cost-flow.png" alt="The arrows are a service checklist, not a payment pipeline. Scheduled device sessions consume provider minutes. Model calls and retries consume usage. Deploy and rollback imply compute use. Apple membership and Vercel billing still need owner records, so those boxes stay PLANNED. No dollar amounts or paid-tier claims are inferred." loading="lazy"></a>
+<p>The arrows are a service checklist, not a payment pipeline. Scheduled device sessions consume provider minutes. Model calls and retries consume usage. Deploy and rollback imply compute use. Apple membership and Vercel billing still need owner records, so those boxes stay PLANNED. No dollar amounts or paid-tier claims are inferred.</p>
+<p><a class="full-size-note" href="assets/diagrams/cost-flow.png" target="_blank" rel="noopener">Open full size ↗</a></p>
+<details><summary>Mermaid source (cost-flow.mmd)</summary><pre tabindex="0" role="group" aria-label="Scrollable diagram source">
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+A["PLANNED&lt;br/&gt;2026-09-07&lt;br/&gt;Apple Developer Program&lt;br/&gt;Membership / renewal invoice&lt;br/&gt;Owner checks billing record&lt;br/&gt;No scheduled charge proven"]
+  F["INFERRED&lt;br/&gt;2026-09-07&lt;br/&gt;Fly&lt;br/&gt;Deploy + rollback use compute&lt;br/&gt;Running services use capacity&lt;br/&gt;Invoice not read"]
+  V["PLANNED&lt;br/&gt;2026-09-07&lt;br/&gt;Vercel&lt;br/&gt;Connected builds + hosting&lt;br/&gt;Owner checks plan and usage&lt;br/&gt;Paid tier not established"]
+  M["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;Model APIs&lt;br/&gt;Provider calls consume usage&lt;br/&gt;Image calls and retries matter&lt;br/&gt;Invoice not read"]
+  S["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;Sauce Labs&lt;br/&gt;Nightly 23:17 device sessions&lt;br/&gt;consume provider minutes&lt;br/&gt;Plan-only uses zero minutes"]
+  O["PLANNED&lt;br/&gt;2026-09-07&lt;br/&gt;Owner reconciles invoices&lt;br/&gt;against dated run receipts&lt;br/&gt;No invoice inferred from a green job"]
+  A -. service checklist .-&gt; F -. service checklist .-&gt; V -. service checklist .-&gt; M -. service checklist .-&gt; S --&gt; O
+</pre></details>
+</figure></section>
 
 <nav class="series" aria-label="Classroom reading order">
 <p class="series-title">Classroom series: read in this order</p>

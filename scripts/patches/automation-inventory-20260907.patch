@@ -1,0 +1,123 @@
+--- a/es-ops/bin/emit_automation_inventory.py
++++ b/es-ops/bin/emit_automation_inventory.py
+@@ -57,0 +58 @@
++import shlex
+@@ -364,12 +365,60 @@
+-    """The script a job runs, or nothing.
+-
+-    Some jobs are a shell invoked with -c and a whole program as one argument.
+-    Publishing that string would put an environment-file path and a pipeline on
+-    a public page to say "it runs a script", so an argument that is not a plain
+-    path is not a script name and this returns nothing instead.
+-    """
+-    for argument in arguments[1:] or []:
+-        if argument.endswith((".py", ".sh", ".js", ".mjs", ".rb")) and not INLINE_SHELL_RE.search(argument):
+-            return display_path(argument)
+-    if arguments and not INLINE_SHELL_RE.search(arguments[0]):
+-        return display_path(arguments[0])
++    """Resolve wrappers without executing shell text or publishing assignments."""
++    args = list(arguments)
++    while args:
++        command = Path(args[0]).name
++        if command == "env":
++            args.pop(0)
++            while args and (args[0].startswith("-") or "=" in args[0]):
++                option = args.pop(0)
++                if option in ("-u", "--unset", "-C", "--chdir") and args:
++                    args.pop(0)
++                elif option in ("-S", "--split-string") and args:
++                    try:
++                        args = shlex.split(args.pop(0)) + args
++                    except ValueError:
++                        return ""
++            continue
++        if command in ("sh", "bash", "zsh", "dash", "ksh"):
++            args.pop(0)
++            while args and args[0].startswith("-"):
++                option = args.pop(0)
++                if "c" in option:
++                    if not args:
++                        return ""
++                    try:
++                        lexer = shlex.shlex(args[0], posix=True, punctuation_chars=";&|")
++                        lexer.whitespace_split = True
++                        tokens = list(lexer)
++                    except ValueError:
++                        return ""
++                    segment = []
++                    for token in tokens + [";"]:
++                        if token in (";", "&&", "||", "|", "&"):
++                            if segment and segment[0] not in ("set", "source", ".", "export", "cd"):
++                                found = script_of(segment)
++                                if found:
++                                    return found
++                            segment = []
++                        else:
++                            segment.append(token)
++                    return ""
++            continue
++        if re.fullmatch(r"python(?:[0-9.]+)?|node|ruby|perl", command):
++            args.pop(0)
++            while args and args[0].startswith("-"):
++                option = args.pop(0)
++                if option in ("-c", "-m", "-e"):
++                    return ""  # Inline code and module names are not script paths.
++            continue
++        if command == "exec" or "=" in args[0]:
++            args.pop(0)
++            continue
++        raw = args[0]
++        for prefix in ("$HOME/", "${HOME}/"):
++            if raw.startswith(prefix):
++                raw = str(Path.home()) + "/" + raw[len(prefix):]
++        if re.fullmatch(r"[A-Za-z0-9_./~+@-]+", raw) and (
++            "/" in raw or raw.endswith((".py", ".sh", ".js", ".mjs", ".rb"))
++        ):
++            return display_path(raw)
++        return ""
+@@ -480,0 +530,2 @@
++        "copy_source": entry.get("source"),
++        "copy_observed_at": entry.get("observed_at"),
+@@ -512 +563 @@
+-        return f"{seconds} s ago"
++        return f"{seconds} s before this reading"
+@@ -514 +565 @@
+-        return f"{round(seconds / 60)} min ago"
++        return f"{round(seconds / 60)} min before this reading"
+@@ -516,2 +567,2 @@
+-        return f"{seconds / 3600:.1f} h ago"
+-    return f"{seconds / 86400:.1f} days ago"
++        return f"{seconds / 3600:.1f} h before this reading"
++    return f"{seconds / 86400:.1f} days before this reading"
+@@ -525,2 +576,2 @@
+-        "<thead><tr><th>Automation</th><th>What it does</th><th>Must never do</th>"
+-        "<th>Cadence</th><th>Last output</th><th>Status</th></tr></thead><tbody>"
++        "<thead><tr><th scope=\"col\">Automation</th><th scope=\"col\">What it does</th><th scope=\"col\">Must never do</th>"
++        "<th scope=\"col\">Cadence</th><th scope=\"col\">Last output</th><th scope=\"col\">Status</th></tr></thead><tbody>"
+@@ -530,0 +582,2 @@
++        if row.get("copy_observed_at"):
++            what += f'<p class="caption">Prose snapshot: <time datetime="{html.escape(row["copy_observed_at"])}">{html.escape(row["copy_observed_at"])}</time>, {inline(row["copy_source"] or "automation-copy.json")}.</p>'
+@@ -543 +596,4 @@
+-            f'<td data-label="Status"><span class="chip {chip}">{html.escape(row["status"])}</span></td></tr>'
++            f'<td data-label="Status"><span class="chip {chip}">{html.escape(row["status"])}</span> '
++            f'<span class="chip reported">REPORTED</span><br>'
++            f'<time datetime="{html.escape(document["generated_at"])}">Observed {html.escape(document["generated_at"][:10])}</time><br>'
++            f'{inline(row["status_reason"])}</td></tr>'
+@@ -547 +603 @@
+-        f'<p class="caption">Generated {html.escape(document["generated_at"])} by '
++        f'<p class="caption"><span class="chip reported">REPORTED</span> Generated <time datetime="{html.escape(document["generated_at"])}">{html.escape(document["generated_at"])}</time> by '
+@@ -558 +614 @@
+-    return "\n".join(lines)
++    return "\n".join([lines[-1], *lines[:-1]])
+@@ -567 +623 @@
+-    return f"<em>{UNDOCUMENTED}</em> &mdash; this job is on the machine and no one has described it yet.{script}"
++    return f"<em>{UNDOCUMENTED}</em> : this job is on the machine and no one has described it yet.{script}"
+@@ -571 +627 @@
+-    return f"<em>{UNDOCUMENTED}</em> &mdash; its boundary has not been written down, which is itself the finding."
++    return f"<em>{UNDOCUMENTED}</em> : its boundary has not been written down, which is itself the finding."
+@@ -576 +632 @@
+-        f"<!-- {edge} GENERATED {REGION} — written by {PRODUCER} "
++        f"<!-- {edge} GENERATED {REGION}: written by {PRODUCER} "
+@@ -582,0 +639,2 @@
++    for edge in ("BEGIN", "END"):
++        page = page.replace(marker(edge).replace(": written", " \u2014 written"), marker(edge))

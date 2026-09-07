@@ -88,14 +88,14 @@
       "title": "The system in pictures",
       "series": "classroom",
       "series_order": 6,
-      "summary": "The rendered system diagrams with their sources, plus the backup deep-dives for the 9/10 presentation."
+      "summary": "System diagrams with their Mermaid sources, phone layouts, and the daily timeline, rollback path and service cost checklist for the 9/10 presentation."
     },
     {
       "file": "presentation.html",
       "title": "The 9/10 presentation",
       "series": "classroom",
       "series_order": 7,
-      "summary": "The deck for the September 10 class talk: the end-to-end loop diagram, seven stations from marketing to ops monitoring with what fires, what each must never do, and where the evidence lands, closing on the four decisions that stay human."
+      "summary": "The September 10 class deck: a readable business loop, seven dated stations with human boundaries, and teaching diagrams for schedules, release failures and service costs."
     }
   ]
 }

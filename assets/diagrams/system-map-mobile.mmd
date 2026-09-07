@@ -1,0 +1,10 @@
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+W["REPORTED<br/>2026-09-02<br/>Watchers + dead-man service<br/>Watch health, review,<br/>uptime and deploy drift<br/>One chat line on change"]
+  S["REPORTED<br/>2026-09-02<br/>Pull request → gates<br/>Studio: Xcode + store checks<br/>GitHub: server + consent<br/>Then the release branch"]
+  R["REPORTED<br/>2026-09-02<br/>Release → canary → production<br/>Receipt of the deployed code<br/>Team lead submits to Apple"]
+  A["REPORTED<br/>2026-09-02<br/>Shopper app → server<br/>Groceries → planning dates<br/>→ recipe ideas"]
+  B["REPORTED<br/>2026-09-02<br/>API → database<br/>Vision provider names items<br/>Photo storage excluded there"]
+  L["REPORTED<br/>2026-09-02<br/>Consent → training photos<br/>→ retrain → verdict<br/>A person promotes"]
+  H["REPORTED<br/>2026-09-02<br/>Internship hub<br/>How it works + program ledger<br/>Verdicts and uptime evidence"]
+  W -. reading order .-> S -. reading order .-> R -. reading order .-> A -. reading order .-> B -. reading order .-> L -. reading order .-> H

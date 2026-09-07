@@ -1,0 +1,10 @@
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+C["REPORTED<br/>2026-09-02<br/>Cloud service, two regions<br/>Built as of 2026-09-02<br/>Waits for owner setup"]
+  W["FLAG-GATED<br/>2026-09-02<br/>Six cloud watchers<br/>App Store · health · uptime<br/>Gate canary · deploy drift<br/>Nightly smoke"]
+  DM["FLAG-GATED<br/>2026-09-02<br/>Dead-man service<br/>Watches all six<br/>once switched on"]
+  S["REPORTED<br/>2026-09-02<br/>Separate lane: Studio Mac<br/>Xcode builds and tests<br/>Device farm<br/>Human release keystroke"]
+  N["REPORTED<br/>2026-09-02<br/>Studio steps are excluded<br/>from the uptime number"]
+  C --> W --> DM
+  DM ~~~ S
+  S --> N
