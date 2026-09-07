@@ -20,21 +20,22 @@ command line, or a classroom footer has drifted from it.
 
 | # | Page | Series | Title | What it is |
 |---|---|---|---|---|
-| 1 | `index.html` | Program surface 1 | Program overview | Program overview, eight-week core plus three-week extension schedule, the Monday sequence, owner/issue map, evidence snapshot, and links to the detailed project board. Preserved as a dated snapshot of the Week 12 start page; see the historical note on the page itself. |
-| 2 | `freshlens.html` | Program surface 2 | FreshLens | FreshLens product framing, local claim-loop boundary, convergence plan, readiness matrix, owner lanes, and a collapsed historical Week 7 record fenced as history. |
-| 3 | `provenance.html` | Program surface 3 | Provenance receipts | Research reference for signed decision evidence. It explicitly separates local binding and mock-anchor proof from blocked durability and external-trust work. |
-| 4 | `w1.html` | Program surface 4 | Week 1 tutorial | Beginner Week 1 tutorial with copy controls, persisted step progress, and an optional timer. |
-| 5 | `ledger.html` | Program surface 5 | Program Ledger | The Program Ledger reader. It fetches ledger.json and uptime.json at runtime and renders them; it hardcodes no row, no total, and no date. |
-| 6 | `how-it-works.html` | Program surface 6 | How Xpired works | The system map in plain language: apps, the AI boundary, storage, and the release and watcher robots. |
-| 7 | `day-of-a-change.html` | Classroom series 1 | A day of a change | Eleven stations from brief to post-deploy record. |
-| 8 | `automation.html` | Classroom series 2 | The automation inventory | The inventory of workflows, backend schedulers, watchers, and agent lanes, each with a status label and a "must never do" boundary. |
-| 9 | `ml-loop.html` | Classroom series 3 | The ML loop today | The five-stage ML pipeline and its consent boundaries. |
-| 10 | `ground-truths.html` | Classroom series 4 | Ground truths | Fifteen ranked ground truths with evidence labels. |
-| 11 | `lesson-plan.html` | Classroom series 5 | Lesson plan | Six lessons plus one stretch exercise a student can run on a free account. |
-| 12 | `diagrams.html` | Classroom series 6 | The system in pictures | System diagrams with their Mermaid sources, phone layouts, and the daily timeline, rollback path and service cost checklist for the 9/10 presentation. |
-| 13 | `presentation.html` | Classroom series 7 | The 9/10 presentation | The September 10 class deck: a readable business loop, seven dated stations with human boundaries, and teaching diagrams for schedules, release failures and service costs. |
+| 1 | `index.html` | Show and tell 1 | Show and tell | The front door for the September 10 show-and-tell: what Xpired does today, the business loop, what is true right now (read live from release-state.json), how the system is built, the automations that run unattended, and a build-your-own guide, with the internship program archived at the bottom. |
+| 2 | `build-your-own.html` | Show and tell 2 | Build your own | The pattern in plain language for running a one-founder product company with AI agents: agents write, gates verify, a human presses release. The minimum stack to copy, what to copy first, what it costs, and three lessons drawn from the program ledger. |
+| 3 | `how-it-works.html` | How it is built 1 | How Xpired works | The system map in plain language: apps, the AI boundary, storage, and the release and watcher robots. |
+| 4 | `ledger.html` | How it is built 2 | Program Ledger | The Program Ledger reader. It fetches ledger.json and uptime.json at runtime and renders them; it hardcodes no row, no total, and no date. |
+| 5 | `provenance.html` | How it is built 3 | Provenance receipts | Research reference for signed decision evidence. It explicitly separates local binding and mock-anchor proof from blocked durability and external-trust work. |
+| 6 | `day-of-a-change.html` | Classroom series 1 | A day of a change | Eleven stations from brief to post-deploy record. |
+| 7 | `automation.html` | Classroom series 2 | The automation inventory | The inventory of workflows, backend schedulers, watchers, and agent lanes, each with a status label and a "must never do" boundary. |
+| 8 | `ml-loop.html` | Classroom series 3 | The ML loop today | The five-stage ML pipeline and its consent boundaries. |
+| 9 | `ground-truths.html` | Classroom series 4 | Ground truths | Fifteen ranked ground truths with evidence labels. |
+| 10 | `diagrams.html` | Classroom series 5 | The system in pictures | System diagrams with their Mermaid sources, phone layouts, and the daily timeline, rollback path and service cost checklist. |
+| 11 | `w1.html` | Program archive 1 | Week 1 tutorial (moved) | One-line redirect stub. The beginner Week 1 tutorial moved to program/w1.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged. |
+| 12 | `lesson-plan.html` | Program archive 2 | Lesson plan (moved) | One-line redirect stub. The six-lesson plan moved to program/lesson-plan.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged. |
+| 13 | `presentation.html` | Program archive 3 | The 9/10 presentation (moved) | One-line redirect stub. The original September 10 internship deck moved to program/presentation.html; the current site's front door supersedes it for the new audience. |
+| 14 | `freshlens.html` | Program archive 4 | FreshLens (moved) | One-line redirect stub. The FreshLens program page moved to program/freshlens.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged. |
 
-The site is 13 HTML pages. This table is generated: add or remove a page in `pages.json` and
+The site is 14 HTML pages. This table is generated: add or remove a page in `pages.json` and
 re-run `node scripts/render-pages.js --write`. The classroom series is read in the order above,
 and every one of its pages carries a footer listing all of them.
 
@@ -158,20 +159,20 @@ validator plus browser inspection:
 node scripts/validate-ledger.js
 node scripts/validate-ledger.js --site
 node scripts/render-pages.js --check
-npx --yes html-validate index.html freshlens.html provenance.html w1.html \
-  ledger.html how-it-works.html day-of-a-change.html automation.html \
-  ml-loop.html ground-truths.html lesson-plan.html diagrams.html \
-  presentation.html
+npx --yes html-validate index.html build-your-own.html how-it-works.html ledger.html \
+  provenance.html day-of-a-change.html automation.html ml-loop.html \
+  ground-truths.html diagrams.html w1.html lesson-plan.html \
+  presentation.html freshlens.html
 python3 ~/.codex/skills/design-quality-gate/scripts/check-ai-tells.py \
-  index.html freshlens.html provenance.html w1.html \
-  ledger.html how-it-works.html day-of-a-change.html automation.html \
-  ml-loop.html ground-truths.html lesson-plan.html diagrams.html \
-  presentation.html
+  index.html build-your-own.html how-it-works.html ledger.html \
+  provenance.html day-of-a-change.html automation.html ml-loop.html \
+  ground-truths.html diagrams.html w1.html lesson-plan.html \
+  presentation.html freshlens.html
 bash scripts/check-mermaid.sh
 git diff --check
 ```
 
-Every one of the 13 pages is named on both command lines, and both lists are generated from
+Every one of the 14 pages is named on both command lines, and both lists are generated from
 `pages.json`. A validator pointed at a subset reports a clean result for pages it never opened,
 which is the same failure the hub teaches against.
 
