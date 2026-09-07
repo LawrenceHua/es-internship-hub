@@ -1,0 +1,12 @@
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+  H["PLANNED<br/>2026-09-02<br/>First: truthful dashboards<br/>Fix health-check noise<br/>and the unsent alert"]
+  M["PLANNED<br/>2026-09-02<br/>Track 1: move monitors<br/>Private repo → cloud<br/>Two regions + dead-man service"]
+  S["PLANNED<br/>2026-09-02<br/>Prove deployed identity<br/>Three-day side-by-side soak<br/>Retire studio copies singly"]
+  U["PLANNED<br/>2026-09-02<br/>Measure seven full days<br/>before publishing uptime<br/>Uptime feeds the ledger"]
+  A["PLANNED<br/>2026-09-02<br/>Parallel track 2: app<br/>Restore photo-training choice<br/>Retake six store screenshots"]
+  G["PLANNED<br/>2026-09-02<br/>Store copy + claims check<br/>One submission-gate script<br/>Lead: setup, merge, release<br/>Then submit the new version"]
+  L["PLANNED<br/>2026-09-02<br/>Parallel track 3: show work<br/>Fix page lint → ledger verdicts<br/>Team lead reviews and merges"]
+  H -. reading order .-> M --> S --> U
+  U -. reading order .-> A --> G
+  G -. reading order .-> L

@@ -1,0 +1,9 @@
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+A["PLANNED<br/>2026-09-07<br/>Apple Developer Program<br/>Membership / renewal invoice<br/>Owner checks billing record<br/>No scheduled charge proven"]
+  F["INFERRED<br/>2026-09-07<br/>Fly<br/>Deploy + rollback use compute<br/>Running services use capacity<br/>Invoice not read"]
+  V["PLANNED<br/>2026-09-07<br/>Vercel<br/>Connected builds + hosting<br/>Owner checks plan and usage<br/>Paid tier not established"]
+  M["REPORTED<br/>2026-09-07<br/>Model APIs<br/>Provider calls consume usage<br/>Image calls and retries matter<br/>Invoice not read"]
+  S["REPORTED<br/>2026-09-07<br/>Sauce Labs<br/>Nightly 23:17 device sessions<br/>consume provider minutes<br/>Plan-only uses zero minutes"]
+  O["PLANNED<br/>2026-09-07<br/>Owner reconciles invoices<br/>against dated run receipts<br/>No invoice inferred from a green job"]
+  A -. service checklist .-> F -. service checklist .-> V -. service checklist .-> M -. service checklist .-> S --> O

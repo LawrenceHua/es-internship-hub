@@ -101,7 +101,7 @@
         .verdict-guide dd { margin-top: 0.2rem; color: var(--text-secondary); font-size: 0.84rem; }
 
         .scroll-region { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
-        /* One column per verdict in the legend, whatever that count becomes — but
+        /* One column per verdict in the legend, whatever that count becomes: but
            they wrap onto further rows rather than running off the right edge.
            Nine verdicts at minmax(125px) needed 1206px and only ever fit at no
            viewport the site is read at. */
@@ -249,7 +249,7 @@
 
     <section aria-labelledby="entries-heading">
         <h2 id="entries-heading">Checked work</h2>
-        <p class="section-lead">Rows are grouped by lane &mdash; the part of the program they describe &mdash; and each group heading carries its own row count. Each row lists the public links you can open to check it yourself. Most of this week's work sits inside the canonical product repository, which stays out of scope for the internship, so there is nothing public to open for those rows and they say <strong>REPORTED</strong> rather than VERIFIED. The &ldquo;Checked by&rdquo; line still names who checked each one.</p>
+        <p class="section-lead">Rows are grouped by lane: the part of the program they describe: and each group heading carries its own row count. Each row lists the public links you can open to check it yourself. Most of this week's work sits inside the canonical product repository, which stays out of scope for the internship, so there is nothing public to open for those rows and they say <strong>REPORTED</strong> rather than VERIFIED. The &ldquo;Checked by&rdquo; line still names who checked each one.</p>
         <p class="loading" id="ledger-state" role="status" aria-live="polite">Loading the ledger.</p>
         <div class="ledger-groups" id="ledger-groups"></div>
         <noscript><p>The ledger needs JavaScript; you can read the plain <a href="ledger.json">ledger data here</a>.</p></noscript>
@@ -340,7 +340,7 @@
             anchor.target = '_blank';
             anchor.rel = 'noopener';
             anchor.title = link.url;
-            const host = setText(document.createElement('span'), ` ${new URL(link.url).hostname} — opens in a new tab`);
+            const host = setText(document.createElement('span'), ` ${new URL(link.url).hostname}: opens in a new tab`);
             host.className = 'link-host';
             item.append(anchor, host);
             list.append(item);

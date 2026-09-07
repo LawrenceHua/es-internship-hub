@@ -31,8 +31,8 @@ command line, or a classroom footer has drifted from it.
 | 9 | `ml-loop.html` | Classroom series 3 | The ML loop today | The five-stage ML pipeline and its consent boundaries. |
 | 10 | `ground-truths.html` | Classroom series 4 | Ground truths | Fifteen ranked ground truths with evidence labels. |
 | 11 | `lesson-plan.html` | Classroom series 5 | Lesson plan | Six lessons plus one stretch exercise a student can run on a free account. |
-| 12 | `diagrams.html` | Classroom series 6 | The system in pictures | The rendered system diagrams with their sources, plus the backup deep-dives for the 9/10 presentation. |
-| 13 | `presentation.html` | Classroom series 7 | The 9/10 presentation | The deck for the September 10 class talk: the end-to-end loop diagram, seven stations from marketing to ops monitoring with what fires, what each must never do, and where the evidence lands, closing on the four decisions that stay human. |
+| 12 | `diagrams.html` | Classroom series 6 | The system in pictures | System diagrams with their Mermaid sources, phone layouts, and the daily timeline, rollback path and service cost checklist for the 9/10 presentation. |
+| 13 | `presentation.html` | Classroom series 7 | The 9/10 presentation | The September 10 class deck: a readable business loop, seven dated stations with human boundaries, and teaching diagrams for schedules, release failures and service costs. |
 
 The site is 13 HTML pages. This table is generated: add or remove a page in `pages.json` and
 re-run `node scripts/render-pages.js --write`. The classroom series is read in the order above,
@@ -48,9 +48,9 @@ and every one of its pages carries a footer listing all of them.
   `"source": "hand-maintained"` precisely because no producer writes it. `ledger.html` renders it.
 - **`automation.json`** — the watcher inventory `automation.html` renders. Generated, not typed:
   `emit_automation_inventory.py` reads `launchctl list`, the job definitions on the owner's Mac, and
-  the mtime of each job's declared output, and derives the status from those three — loaded with a
+  the mtime of each job's declared output, and derives the status from those three: loaded with a
   fresh artifact is live, a definition present but not loaded is dark, a retired definition is
-  retired. It carries `generated_at`, which the page shows.
+  retired. It carries `generated_at`, which the page shows above the inventory table. Output ages explicitly say "before this reading".
 - **`automation-copy.json`** — the human half of that inventory, keyed by launchd label: what a job
   does and what it must never do. It owns meaning and nothing else; cadence, freshness and status
   come from the machine. A job the producer finds in scope with no entry here renders as
@@ -71,7 +71,8 @@ and every one of its pages carries a footer listing all of them.
   stamp with a sha256 of the entries, so an edited ledger with an untouched stamp fails. `--site`
   applies the same evidence rule to the pages: every VERIFIED badge needs an openable public link in
   its own block, no page may redefine VERIFIED without that requirement, `pages.json` must agree with
-  `ls *.html`, and the denied names and terms must appear in no `.html`, `.md` or `.json` file. It
+  `ls *.html`, and the denied names and terms must appear in no `.html`, `.md`, `.mmd` or `.json` file.
+  Literal and encoded em dashes are rejected in HTML, including generated comments. It
   fails closed: the badge parser and the denylist matcher are proved against built-in fixtures before
   the tree is scanned, and fewer than 20 badges site-wide is itself a failure.
 - **`scripts/denylist.json`** — the denied personal names and out-of-scope terms, stored as salted
@@ -80,19 +81,25 @@ and every one of its pages carries a footer listing all of them.
 - **`scripts/render-pages.js`** — generates the page table and verification command line in this file
   from `pages.json`, checks the six classroom footers against it, and fails when `pages.json` and
   `ls *.html` disagree.
-- **`scripts/check-mermaid.sh`** — re-renders every `assets/diagrams/*.mmd` with `mmdc` and compares
-  the result against the committed `.png`. It renders each source twice, so a diagram that will not
-  draw identically twice is reported as unverifiable by name rather than as changed. It is local-only
-  and fails closed: with no `mmdc` on the machine it reports that it cannot verify rather than
-  passing. It keeps two allowlists, each on its own counter so a PASS never absorbs one: PNGs with no
-  `.mmd` of their own, and PNGs this machine cannot re-render twice alike. An entry on the second
-  list does not say the picture is right; it says this gate cannot answer for it, and the script
-  records the measurement and the date a human last compared the two by eye.
-- **`assets/diagrams/`** — `system-map`, `plan-order` and `where-robots-run` as both `.mmd` source and
-  committed `.png`, plus `system-map-lr.png`, the same system map at a smaller scale, which shares
-  `system-map.mmd` and is therefore on the no-source allowlist. As of 2026-09-04 `system-map.png` and
-  `where-robots-run.png` reproduce from their committed sources; `plan-order.png` does not reproduce
-  on this machine at all and is on the unreproducible allowlist with its measurement.
+- **`scripts/check-mermaid.sh`** re-renders each source twice using `mmdc --quiet -s 3`
+  and requires both PNG hashes to equal the committed PNG. Every source-backed picture is checked;
+  no renderer exception remains. `system-map-lr.png` is the existing alternate-scale picture on the
+  no-source allowlist.
+- **`assets/diagrams/`** holds the original system, work-order and runtime-location diagrams,
+  the business and feedback loops, phone variants of the system, work-order and runtime-location maps,
+  and the daily timeline, rollback path and service cost checklist. Phone labels are wrapped
+  in the source instead of shrinking a wide diagram. The timeline is a dated reading of
+  `automation.json`, including inactive schedule definitions labeled DARK or RETIRED.
+- **`scripts/check-classroom.py`** reads `pages.json`, captures every page at 390 and 1440 pixels,
+  checks page overflow, console errors and broken images, and measures evidence-chip contrast
+  from computed foreground/background styles in light and dark mode. It also measures the
+  business-loop CSS height and requires at least 600 pixels at the phone width.
+- **`scripts/test-automation-producer.py`** runs offline wrapper, command-resolution, freshness,
+  marker migration and refusal regressions against the external producers. It does not run a job.
+- **`scripts/refresh-release-state.py`** invokes the external release producer for this checkout,
+  adapting its legacy generated-comment punctuation in memory. This keeps its source probes and
+  fail-closed writes while using the site's plain-punctuation marker format. The external release
+  producer itself is unchanged; use this entry point for future refreshes of this branch.
 
 Two producers write into this repository from outside it, because the facts they publish only exist
 on the owner's machine: **`es-ops/bin/emit_automation_inventory.py`** and
@@ -104,7 +111,19 @@ the producer exits 2 and leaves every published file byte-identical, so a page c
 `generated_at` but can never show an empty table or a blank state. Both also re-check the exact text
 they are about to write against `scripts/denylist.json`, using a matcher that proves itself against
 the validator's canary first, so a denied name is refused at the producer instead of waiting for the
-next gate run. Neither is scheduled; a human runs them and commits the result.
+next gate run. Scheduling and publication are external to this repository. Refreshes do not commit or publish by themselves.
+
+Refresh only the checkout you intend to review:
+
+```bash
+python3 ~/es-ops/bin/emit_automation_inventory.py --hub "$PWD"
+python3 scripts/refresh-release-state.py
+```
+
+The release-state wrapper accepts `--dry-run`. A scheduler still calling the external
+release producer directly must adopt the repository wrapper when this marker-format
+change is merged. Scheduler definitions are outside this PR's write scope.
+
 
 All pages use relative links for local navigation and link to exact GitHub issues, pull requests,
 commits, and documents when those identities matter.
@@ -158,7 +177,7 @@ which is the same failure the hub teaches against.
 
 <!-- END GENERATED verification — written by scripts/render-pages.js from pages.json; do not edit by hand -->
 
-Also inspect all twelve pages in a real browser at desktop and mobile widths. Check skip links, main
+Also inspect every page in `pages.json` in a real browser at desktop and mobile widths. Check skip links, main
 landmarks, focus visibility, disclosure targets, table overflow, broken assets, and horizontal
 clipping. Passing these local checks does not prove production publication; after an approved merge,
 verify the deployed revision and live URLs separately.

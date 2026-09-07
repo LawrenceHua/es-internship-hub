@@ -1,28 +1,14 @@
-flowchart LR
-  subgraph MKT["1 · Marketing"]
-    M["Human-approved queue<br/>lanes DARK until the owner turns them on"]
-  end
-  subgraph FBK["2 · Feedback"]
-    F["feedback_digest.py<br/>daily 09:15 → #es-daily"]
-  end
-  subgraph MLS["3 · ML system"]
-    S["flywheel steward daily 09:05<br/>gated draft cards, never auto-fixes"]
-  end
-  subgraph DEV["4 · Development"]
-    G["PR gates on 5 studio runners<br/>Sauce nightly 23:17 · a11y 08:47"]
-  end
-  subgraph REL["5 · Backend + releases"]
-    R["canary then the exact digest<br/>promote is owner-dispatched"]
-  end
-  subgraph HUB["6 · Frontend + hub"]
-    P["producers + validate.yml CI<br/>ledger evidence rule"]
-  end
-  subgraph OPS["7 · Ops monitoring"]
-    W["supervisor + health fingerprint<br/>#es-incidents on change"]
-  end
-  U["Shoppers"]
-  MKT --> FBK --> MLS --> DEV --> MG{{"owner merges"}} --> REL --> RG{{"owner dispatches release"}} --> HUB --> OPS --> U
-  MA{{"owner approves every post"}} -. switched on .-> MKT
-  U -. "feedback + scan corrections" .-> FBK
-  OPS -. watches .-> REL
-  OPS -. watches .-> MLS
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+M["REPORTED<br/>2026-09-04<br/>1 · Marketing queue<br/>DARK until owner approval"]
+  F["REPORTED<br/>2026-09-04<br/>2 · Feedback digest<br/>09:15 → unreviewed queue"]
+  L["REPORTED<br/>2026-09-04<br/>3 · ML steward, 09:05<br/>Draft findings for a person"]
+  D["REPORTED<br/>2026-09-04<br/>4 · Development<br/>PR gates + device checks"]
+  MG{"REPORTED<br/>2026-09-04<br/>Owner merges"}
+  RG{"REPORTED<br/>2026-09-04<br/>Owner dispatches<br/>release"}
+  R["REPORTED<br/>2026-09-04<br/>5 · Backend release<br/>Canary → exact digest"]
+  H["REPORTED<br/>2026-09-04<br/>6 · Frontend + hub<br/>Producers + evidence gates"]
+  O["REPORTED<br/>2026-09-04<br/>7 · Ops monitoring<br/>Watch release + ML state"]
+  U["REPORTED<br/>2026-09-04<br/>Shoppers<br/>Feedback + scan corrections"]
+  B["REPORTED<br/>2026-09-04<br/>Loop returns to stage 2<br/>A person routes findings"]
+  M --> F --> L --> D --> MG --> RG --> R --> H --> O --> U --> B

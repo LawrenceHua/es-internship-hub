@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#1a3c34;--primary-mid:#2a5a4a;--leaf:#3d8b6a;--leaf-soft:#e8f3ee;--ink:#17241f;--muted:#5c6f66;--line:#dfe8e2;--bg:#f7faf8;--card:#ffffff;--amber:#b07a1f;--amber-soft:#faf1dd;--sky:#2f6b9e;--sky-soft:#e7f0f8;--mono:'JetBrains Mono',monospace}
+:root{--primary:#1a3c34;--primary-mid:#2a5a4a;--leaf:#3d8b6a;--leaf-soft:#e8f3ee;--ink:#17241f;--muted:#5c6f66;--line:#dfe8e2;--bg:#f7faf8;--card:#ffffff;--amber:#7a520f;--amber-soft:#faf1dd;--sky:#2f6b9e;--sky-soft:#e7f0f8;--mono:'JetBrains Mono',monospace}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
@@ -49,9 +49,7 @@ body>.nav{height:56px;position:fixed;z-index:3;inset:0 0 auto;background:#fffefd
 .legend p{margin:8px 0 0;color:var(--muted);font-size:13.5px}
 figure{margin:26px 0 8px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px}
 figure img{display:block;width:100%;height:auto;border-radius:8px}
-/* At 390 the rendered text inside these PNGs is a few pixels tall, so the image
-   is also a link to the full-size asset. The caption says so, because a linked
-   image with no affordance reads as decoration. */
+/* Narrow sources keep labels readable on phones; the full-size link also supports zoom. */
 .full-size{display:block;border-radius:8px}
 .full-size:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 .full-size-note{display:inline-flex;align-items:center;min-height:24px;font:700 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-decoration:none}
@@ -99,7 +97,7 @@ code{font:500 .88em var(--mono);color:var(--primary-mid);overflow-wrap:anywhere}
 .foot{margin-top:58px;padding:25px 20px;text-align:center;background:var(--primary);color:#cfe4d8;font-size:14px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media (prefers-color-scheme: dark){
-:root{--ink:#e6ece9;--muted:#a9b7b0;--line:#2b3530;--bg:#0f1413;--card:#171e1b;--leaf-soft:#152420;--amber-soft:#26200f;--sky-soft:#0f1d27}
+:root{--ink:#e6ece9;--muted:#a9b7b0;--line:#2b3530;--bg:#0f1413;--card:#171e1b;--leaf-soft:#152420;--amber:#d9b36a;--amber-soft:#26200f;--sky-soft:#0f1d27}
 body{background:var(--bg);color:var(--ink)}
 body>.nav{background:rgba(15,20,19,.92)}
 a,.brand,code,.series-list a:hover,.series-list a[aria-current="page"]{color:#9fd0b8}
@@ -121,6 +119,13 @@ p a,li a,td a,strong a,span a{padding-block:.25rem}
 .station-num strong{font-size:1.3rem}
 .gates{grid-template-columns:1fr}
 }
+
+@media(prefers-color-scheme:dark){.chip.live{color:#9fd0b8}.chip.verified{color:#8fbcd9}.chip.reported,.chip.inferred,.chip.flagged,.chip.planned{color:#d9b36a}.chip.retired,.chip.offline{background:#27312c;color:#c4d0c9}}
+
+.narrow-diagram{max-width:480px;margin-inline:auto}
+.diagram-evidence{font-size:13px;color:var(--muted)}
+figure,figure p,figcaption,summary{overflow-wrap:anywhere}
+@media(max-width:640px){.station{grid-template-columns:1fr}.station-num{flex-direction:row;justify-content:flex-start;padding:10px 14px}.station-num strong{font-size:1rem}.station-body{padding:14px}.station figure{padding:10px}figure{padding:12px}}
 </style>
 </head>
 <body>
@@ -137,42 +142,28 @@ p a,li a,td a,strong a,span a{padding-block:.25rem}
 </div>
 </section>
 
-<section class="section"><span class="chip reported">REPORTED</span><h2>The whole loop on one slide</h2>
-<p class="lead">Open the talk here. Seven stages run left to right, the feedback path closes the circle back to shoppers, and the three diamonds are the owner's decisions, drawn where they sit in the chain. Click the picture for full size.</p>
+<section class="section"><span class="chip reported">REPORTED</span><h2>The whole loop on one slide</h2><p class="caption">Station evidence observed <time datetime="2026-09-04">2026-09-04</time>.</p>
+<p class="lead">Open the talk here. Read the seven stages from top to bottom. Marketing starts with owner approval; the diamonds mark merge and release dispatch. Shoppers return feedback to stage 2. Click the picture for full size.</p>
 <figure>
 <figcaption>The end-to-end loop, with the human gates drawn in</figcaption>
-<a class="full-size" href="assets/diagrams/business-loop.png" target="_blank" rel="noopener"><img src="assets/diagrams/business-loop.png" alt="Flowchart of seven stages in a loop: marketing, feedback, the ML system, development, backend and releases, the frontend hub, and ops monitoring, ending at shoppers, whose feedback and scan corrections flow back to the feedback stage. Diamonds mark the owner's merge, release dispatch, and post approval." loading="lazy"></a>
+<a class="full-size" href="assets/diagrams/business-loop.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/business-loop.png" alt="Flowchart of seven stages in a loop: marketing, feedback, the ML system, development, backend and releases, the frontend hub, and ops monitoring, ending at shoppers, whose feedback and scan corrections flow back to the feedback stage. Diamonds mark the owner's merge, release dispatch, and post approval." loading="lazy"></a>
 <p><a class="full-size-note" href="assets/diagrams/business-loop.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <details><summary>Mermaid source (business-loop.mmd)</summary>
 <pre tabindex="0" role="group" aria-label="Scrollable diagram source">
-flowchart LR
-  subgraph MKT["1 · Marketing"]
-    M["Human-approved queue&lt;br/&gt;lanes DARK until the owner turns them on"]
-  end
-  subgraph FBK["2 · Feedback"]
-    F["feedback_digest.py&lt;br/&gt;daily 09:15 → #es-daily"]
-  end
-  subgraph MLS["3 · ML system"]
-    S["flywheel steward daily 09:05&lt;br/&gt;gated draft cards, never auto-fixes"]
-  end
-  subgraph DEV["4 · Development"]
-    G["PR gates on 5 studio runners&lt;br/&gt;Sauce nightly 23:17 · a11y 08:47"]
-  end
-  subgraph REL["5 · Backend + releases"]
-    R["canary then the exact digest&lt;br/&gt;promote is owner-dispatched"]
-  end
-  subgraph HUB["6 · Frontend + hub"]
-    P["producers + validate.yml CI&lt;br/&gt;ledger evidence rule"]
-  end
-  subgraph OPS["7 · Ops monitoring"]
-    W["supervisor + health fingerprint&lt;br/&gt;#es-incidents on change"]
-  end
-  U["Shoppers"]
-  MKT --&gt; FBK --&gt; MLS --&gt; DEV --&gt; MG{{"owner merges"}} --&gt; REL --&gt; RG{{"owner dispatches release"}} --&gt; HUB --&gt; OPS --&gt; U
-  MA{{"owner approves every post"}} -. switched on .-&gt; MKT
-  U -. "feedback + scan corrections" .-&gt; FBK
-  OPS -. watches .-&gt; REL
-  OPS -. watches .-&gt; MLS
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+M["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;1 · Marketing queue&lt;br/&gt;DARK until owner approval"]
+  F["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;2 · Feedback digest&lt;br/&gt;09:15 → unreviewed queue"]
+  L["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;3 · ML steward, 09:05&lt;br/&gt;Draft findings for a person"]
+  D["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;4 · Development&lt;br/&gt;PR gates + device checks"]
+  MG{"REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Owner merges"}
+  RG{"REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Owner dispatches&lt;br/&gt;release"}
+  R["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;5 · Backend release&lt;br/&gt;Canary → exact digest"]
+  H["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;6 · Frontend + hub&lt;br/&gt;Producers + evidence gates"]
+  O["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;7 · Ops monitoring&lt;br/&gt;Watch release + ML state"]
+  U["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Shoppers&lt;br/&gt;Feedback + scan corrections"]
+  B["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Loop returns to stage 2&lt;br/&gt;A person routes findings"]
+  M --&gt; F --&gt; L --&gt; D --&gt; MG --&gt; RG --&gt; R --&gt; H --&gt; O --&gt; U --&gt; B
 </pre>
 </details>
 </figure>
@@ -186,6 +177,7 @@ flowchart LR
 <div class="station-num"><span>STATION</span><strong>01</strong></div>
 <div class="station-body">
 <div class="station-head"><h3>Marketing</h3><span class="station-chips"><span class="chip dark">DARK</span><span class="chip live">LIVE</span></span></div>
+<p class="caption"><span class="chip reported">REPORTED</span> Station snapshot observed <time datetime="2026-09-04">2026-09-04</time>. See the <a href="automation.html">inventory</a> for the latest machine reading.</p>
 <p>The honest station. The marketing-posts row in <a href="how-it-works.html#matrix">how it works</a> is a human-approved queue marked in development: nothing in it fires by itself. A LinkedIn poster lane exists at <code>~/es-ops/marketing/linkedin_queue_runner.py</code>, but its launchd plist is not installed. A daily expiry-email digest (EM1) is built and blocked unmerged behind a default-off flag. The one live growth-adjacent signal is the Monday heartbeat to <code>#es-growth</code>, and that is a monitor, not marketing output.</p>
 <div class="fields">
 <div class="field"><b>What fires</b><p>The Monday heartbeat to <code>#es-growth</code>. Everything else waits: designed, gated, and dark until the owner turns it on.</p></div>
@@ -194,21 +186,19 @@ flowchart LR
 </div>
 <figure>
 <figcaption>The marketing lane, drawn honestly</figcaption>
-<a class="full-size" href="assets/diagrams/marketing-lane.png" target="_blank" rel="noopener"><img src="assets/diagrams/marketing-lane.png" alt="Flowchart of the marketing lane: a human-approved queue feeds two dashed dark lanes, a LinkedIn poster whose plist is not installed and an expiry-email digest behind a default-off flag, plus a live Monday heartbeat to es-growth labeled as a monitor, not marketing output." loading="lazy"></a>
+<a class="full-size" href="assets/diagrams/marketing-lane.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/marketing-lane.png" alt="Flowchart of the marketing lane: a human-approved queue feeds two dashed dark lanes, a LinkedIn poster whose plist is not installed and an expiry-email digest behind a default-off flag, plus a live Monday heartbeat to es-growth labeled as a monitor, not marketing output." loading="lazy"></a>
 <p><a class="full-size-note" href="assets/diagrams/marketing-lane.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <details><summary>Mermaid source (marketing-lane.mmd)</summary>
 <pre tabindex="0" role="group" aria-label="Scrollable diagram source">
-flowchart LR
-  Q["Human-approved queue&lt;br/&gt;the only marketing row that exists today"]
-  LK["LinkedIn poster lane&lt;br/&gt;linkedin_queue_runner.py&lt;br/&gt;plist not installed"]
-  EM["Expiry-email digest EM1&lt;br/&gt;built, default-off flag,&lt;br/&gt;blocked unmerged"]
-  HB["Monday heartbeat → #es-growth&lt;br/&gt;LIVE, a monitor not marketing output"]
-  Q -. DARK until the owner turns it on .-&gt; LK
-  Q -. DARK until the flag merges and flips .-&gt; EM
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+  Q["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Human-approved queue&lt;br/&gt;Marketing waits for approval"]
+  LK["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;LinkedIn poster lane: DARK&lt;br/&gt;linkedin_queue_runner.py&lt;br/&gt;Plist not installed"]
+  EM["FLAG-GATED&lt;br/&gt;2026-09-04&lt;br/&gt;Expiry-email digest EM1&lt;br/&gt;Built, default-off flag&lt;br/&gt;Blocked unmerged"]
+  HB["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Separate signal: LIVE&lt;br/&gt;Monday heartbeat → #es-growth&lt;br/&gt;Monitoring, not marketing"]
+  Q -. reading order .-&gt; LK -. reading order .-&gt; EM -. reading order .-&gt; HB
   classDef dark fill:#f1eafa,stroke:#654280,stroke-dasharray:5,color:#654280;
-  classDef live fill:#e8f3ee,stroke:#3d8b6a,color:#1a3c34;
   class LK,EM dark;
-  class HB live;
 </pre>
 </details>
 </figure>
@@ -219,6 +209,7 @@ flowchart LR
 <div class="station-num"><span>STATION</span><strong>02</strong></div>
 <div class="station-body">
 <div class="station-head"><h3>Feedback</h3><span class="station-chips"><span class="chip live">LIVE</span></span></div>
+<p class="caption"><span class="chip reported">REPORTED</span> Station snapshot observed <time datetime="2026-09-04">2026-09-04</time>. See the <a href="automation.html">inventory</a> for the latest machine reading.</p>
 <p>Shopper feedback and scan corrections land in the production database. Every morning, launchd <code>com.lawrencehua.es-feedback-digest</code> (daily 09:15) runs <code>~/.openclaw/tools/feedback_digest/feedback_digest.py</code>, which pulls <code>/feedback/unreviewed</code> and <code>/scan-feedback/admin/corrections</code> from production and posts the queue to Slack <code>#es-daily</code>. The first live run was observed 2026-09-04 at 09:35 ET. From there the routing is human: digest to owner brief in <code>es-ops/briefs</code> to pull request. Scanner corrections also feed the ML loop, flag-only per the owner's 2026-09-03 decision.</p>
 <div class="fields">
 <div class="field"><b>What fires</b><p><code>feedback_digest.py</code> via launchd, daily 09:15, posting the unreviewed queue to <code>#es-daily</code>.</p></div>
@@ -227,21 +218,21 @@ flowchart LR
 </div>
 <figure>
 <figcaption>The feedback pipeline, from app to app again</figcaption>
-<a class="full-size" href="assets/diagrams/feedback-loop.png" target="_blank" rel="noopener"><img src="assets/diagrams/feedback-loop.png" alt="Flowchart of the feedback pipeline: shopper feedback and scan corrections land in the production database, a daily 09:15 digest posts the queue to es-daily, an owner brief becomes a pull request, release gates pass, an owner-dispatched release ships an app update back to shoppers, with corrections feeding ML training data flag-only." loading="lazy"></a>
+<a class="full-size" href="assets/diagrams/feedback-loop.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/feedback-loop.png" alt="Flowchart of the feedback pipeline: shopper feedback and scan corrections land in the production database, a daily 09:15 digest posts the queue to es-daily, an owner brief becomes a pull request, release gates pass, an owner-dispatched release ships an app update back to shoppers, with corrections feeding ML training data flag-only." loading="lazy"></a>
 <p><a class="full-size-note" href="assets/diagrams/feedback-loop.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <details><summary>Mermaid source (feedback-loop.mmd)</summary>
 <pre tabindex="0" role="group" aria-label="Scrollable diagram source">
-flowchart LR
-  A["Shopper feedback + scan corrections&lt;br/&gt;land in the app"] --&gt; DB[("Production DB")]
-  DB --&gt; DIG["feedback_digest.py&lt;br/&gt;launchd daily 09:15"]
-  DIG --&gt; SLK["#es-daily&lt;br/&gt;unreviewed queue"]
-  SLK --&gt; BRF["Owner brief&lt;br/&gt;es-ops/briefs"]
-  BRF --&gt; PR["Pull request"]
-  PR --&gt; CI{{"release-contracts +&lt;br/&gt;asc-gate-tests gates"}}
-  CI --&gt; RLS["Release&lt;br/&gt;owner-dispatched"]
-  RLS --&gt; APP["App update reaches shoppers"]
-  APP --&gt; A
-  DB -. "corrections feed the ML loop,&lt;br/&gt;flag-only per 2026-09-03 decision" .-&gt; MLX["ML training data"]
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+A["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Shopper feedback&lt;br/&gt;+ scan corrections"]
+  DB["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Production database&lt;br/&gt;Corrections also feed ML data&lt;br/&gt;FLAG-GATED&lt;br/&gt;2026-09-03"]
+  DIG["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;feedback_digest.py&lt;br/&gt;launchd daily 09:15"]
+  SLK["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;#es-daily&lt;br/&gt;Unreviewed queue"]
+  BRF["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Owner brief&lt;br/&gt;es-ops/briefs"]
+  PR["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Pull request&lt;br/&gt;release-contracts&lt;br/&gt;+ asc-gate-tests"]
+  RLS["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Owner-dispatched release&lt;br/&gt;App update reaches shoppers"]
+  LOOP["REPORTED&lt;br/&gt;2026-09-04&lt;br/&gt;Feedback returns&lt;br/&gt;to the start of this loop"]
+  A --&gt; DB --&gt; DIG --&gt; SLK --&gt; BRF --&gt; PR --&gt; RLS --&gt; LOOP
 </pre>
 </details>
 </figure>
@@ -252,6 +243,7 @@ flowchart LR
 <div class="station-num"><span>STATION</span><strong>03</strong></div>
 <div class="station-body">
 <div class="station-head"><h3>The ML system</h3><span class="station-chips"><span class="chip live">LIVE</span></span></div>
+<p class="caption"><span class="chip reported">REPORTED</span> Station snapshot observed <time datetime="2026-09-04">2026-09-04</time>. See the <a href="automation.html">inventory</a> for the latest machine reading.</p>
 <p>A flywheel, not an autopilot. The flywheel steward (launchd <code>com.lawrencehua.es-flywheel-steward</code>, daily 09:05, <code>~/system-map/comms/es_flywheel_steward.py</code>) watches the QUALITY, STORED, DEPLOYED, and ACTIVE axes, posts to <code>#es-daily</code>, and writes <code>~/system-map/_data/es-flywheel/steward-latest.json</code>. A dead-man heartbeat (daily 12:15) watches the steward itself. The mesh bridge (daily 09:35) turns findings into gated draft fix cards and never auto-applies them. Retrain gates are on-demand with auto-promote off by owner decision, and a serving canary probes the content gate every 30 minutes.</p>
 <div class="fields">
 <div class="field"><b>What fires</b><p>Steward 09:05, dead-man heartbeat 12:15, mesh bridge 09:35, serving canary every 30 minutes.</p></div>
@@ -265,6 +257,7 @@ flowchart LR
 <div class="station-num"><span>STATION</span><strong>04</strong></div>
 <div class="station-body">
 <div class="station-head"><h3>Development</h3><span class="station-chips"><span class="chip live">LIVE</span></span></div>
+<p class="caption"><span class="chip reported">REPORTED</span> Station snapshot observed <time datetime="2026-09-04">2026-09-04</time>. See the <a href="automation.html">inventory</a> for the latest machine reading.</p>
 <p>Every pull request runs the required checks <code>release-contracts</code> and <code>asc-gate-tests</code>, plus <code>shopper-tests</code> on iOS paths, on five self-hosted runners on the studio Mac. Test counts are derived from collection, not typed by hand, so a deleted suite fails the gate instead of shrinking it. Overnight, a Sauce real-device matrix runs nightly at 23:17 and an accessibility monitor runs daily at 08:47.</p>
 <div class="fields">
 <div class="field"><b>What fires</b><p>Required PR checks on every push, the 23:17 real-device matrix, the 08:47 a11y monitor.</p></div>
@@ -278,6 +271,7 @@ flowchart LR
 <div class="station-num"><span>STATION</span><strong>05</strong></div>
 <div class="station-body">
 <div class="station-head"><h3>Backend and releases</h3><span class="station-chips"><span class="chip live">LIVE</span></span></div>
+<p class="caption"><span class="chip reported">REPORTED</span> Station snapshot observed <time datetime="2026-09-04">2026-09-04</time>. See the <a href="automation.html">inventory</a> for the latest machine reading.</p>
 <p>The Fly release is protected: <code>.github/workflows/fly-deploy.yml</code> builds once, checks a canary with a signed probe, and promotes the exact same registry digest, and only the owner can dispatch it. The App Store chain is deliberately gated: the fastlane signing and upload lanes are tombstones (<code>Fastfile: upload_shopper_candidate_gated and friends</code>), the real authority is a local root-helper runbook, and <code>release_readiness_gate.py</code> blocks Submit until every precondition reads true. An ASC verdict watcher polls every 30 minutes, and a daily release dry-run at 07:00 exercises the whole path without authority.</p>
 <div class="fields">
 <div class="field"><b>What fires</b><p>Owner-dispatched Fly releases, the 30-minute verdict watcher, the 07:00 dry-run that proves the path without using it.</p></div>
@@ -291,6 +285,7 @@ flowchart LR
 <div class="station-num"><span>STATION</span><strong>06</strong></div>
 <div class="station-body">
 <div class="station-head"><h3>Frontend and this hub</h3><span class="station-chips"><span class="chip live">LIVE</span><span class="chip reported">REPORTED</span></span></div>
+<p class="caption"><span class="chip reported">REPORTED</span> Station snapshot observed <time datetime="2026-09-04">2026-09-04</time>. See the <a href="automation.html">inventory</a> for the latest machine reading.</p>
 <p>The hub eats its own cooking. Two producers, <code>emit_automation_inventory.py</code> and <code>emit_release_state.py</code>, read the machine and regenerate the inventory and release-state blocks; they are human-run by design and say so on the page, which is why they carry REPORTED. The <code>validate.yml</code> workflow runs the ledger, site, and page gates on every pull request, the ledger evidence rule binds claims to receipts, and a salted-digest denylist keeps banned names out of copy.</p>
 <div class="fields">
 <div class="field"><b>What fires</b><p><code>validate.yml</code> on every pull request; producers regenerate blocks when the owner runs them.</p></div>
@@ -304,6 +299,7 @@ flowchart LR
 <div class="station-num"><span>STATION</span><strong>07</strong></div>
 <div class="station-body">
 <div class="station-head"><h3>Ops monitoring</h3><span class="station-chips"><span class="chip live">LIVE</span></span></div>
+<p class="caption"><span class="chip reported">REPORTED</span> Station snapshot observed <time datetime="2026-09-04">2026-09-04</time>. See the <a href="automation.html">inventory</a> for the latest machine reading.</p>
 <p>The robots that watch the robots. A supervisor heals five enumerated stale jobs every 900 seconds, with an audit record per heal. A health fingerprint and KPI watch run every 30 minutes and post to <code>#es-incidents</code> only on a state change. A production smoke probe fires daily at 09:20, the overseer digest lands in <code>#es-daily</code> at 08:40, a 03:30 job consolidates the day's learning, and the <code>@Expired</code> Slack bot, live since 2026-09-04, answers intern questions grounded in immutable repository snapshots.</p>
 <div class="fields">
 <div class="field"><b>What fires</b><p>Supervisor every 900 s, fingerprint and KPI every 30 min, smoke 09:20, overseer 08:40, dream 03:30, the bot on mention.</p></div>
@@ -326,6 +322,83 @@ flowchart LR
 </div>
 <div class="callout"><b>The contrast to land on</b><p>The machines measure, digest, gate, rehearse, heal, and prove. The owner decides. That is what "automated end to end" actually means here: a paper trail written by machines, closing in on four decisions a person makes on purpose.</p></div>
 </section>
+
+<section class="section" id="teaching-diagrams"><h2>Schedule, failure and cost</h2><figure id="daily-timeline">
+<figcaption>A day on the automation clock</figcaption>
+<p class="diagram-evidence"><span class="chip reported">REPORTED</span> Observed <time datetime="2026-09-07T01:58:54Z">2026-09-07T01:58:54Z</time>. Source: <a href="automation.json">automation.json</a>.</p>
+<a class="full-size" href="assets/diagrams/daily-timeline.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/daily-timeline.png" alt="Clock order, not dependencies. Each box names the launchd label, schedule, status and output described in the inventory. DARK and RETIRED entries are definitions, not active runs. Times retain the job definitions&#x27; local clock; the reading stamp is UTC." loading="lazy"></a>
+<p>Clock order, not dependencies. Each box names the launchd label, schedule, status and output described in the inventory. DARK and RETIRED entries are definitions, not active runs. Times retain the job definitions' local clock; the reading stamp is UTC.</p>
+<p><a class="full-size-note" href="assets/diagrams/daily-timeline.png" target="_blank" rel="noopener">Open full size ↗</a></p>
+<details><summary>Mermaid source (daily-timeline.mmd)</summary><pre tabindex="0" role="group" aria-label="Scrollable diagram source">
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+J0["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 03:30 · RETIRED&lt;br/&gt;com.lawrence.&lt;br/&gt;model-improve&lt;br/&gt;Retired: deleted script"]
+  J1["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 03:30 · LIVE&lt;br/&gt;com.lawrence.&lt;br/&gt;es-dream&lt;br/&gt;Consolidates the day's learning"]
+  J0 -. clock order .-&gt; J1
+  J2["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 04:00 · DARK&lt;br/&gt;com.lawrence.&lt;br/&gt;es-feature-auto&lt;br/&gt;Output not documented"]
+  J1 -. clock order .-&gt; J2
+  J3["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 04:00 · DARK&lt;br/&gt;com.lawrence.&lt;br/&gt;es-feature-dryrun&lt;br/&gt;Output not documented"]
+  J2 -. clock order .-&gt; J3
+  J4["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 07:00 · LIVE&lt;br/&gt;com.lawrence.&lt;br/&gt;es-release-dryrun&lt;br/&gt;Release rehearsal, no authority"]
+  J3 -. clock order .-&gt; J4
+  J5["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 07:30 · RETIRED&lt;br/&gt;com.es.&lt;br/&gt;b11-intern-post-20260902&lt;br/&gt;b11-posted.json (one-shot)"]
+  J4 -. clock order .-&gt; J5
+  J6["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 08:00 · LIVE&lt;br/&gt;com.lawrence.&lt;br/&gt;xpired-launch-sentinel&lt;br/&gt;Output not documented"]
+  J5 -. clock order .-&gt; J6
+  J7["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 08:40 · LIVE&lt;br/&gt;com.lawrence.&lt;br/&gt;es-overseer-digest&lt;br/&gt;Digest → #es-daily"]
+  J6 -. clock order .-&gt; J7
+  J8["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 08:47 · LIVE&lt;br/&gt;com.lawrence.&lt;br/&gt;xpired-a11y-monitor&lt;br/&gt;Accessibility monitoring"]
+  J7 -. clock order .-&gt; J8
+  J9["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 09:05 · LIVE&lt;br/&gt;com.lawrencehua.&lt;br/&gt;es-flywheel-steward&lt;br/&gt;steward-latest.json"]
+  J8 -. clock order .-&gt; J9
+  J10["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 09:15 · LIVE&lt;br/&gt;com.lawrencehua.&lt;br/&gt;es-feedback-digest&lt;br/&gt;Unreviewed queue → #es-daily"]
+  J9 -. clock order .-&gt; J10
+  J11["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 09:20 · LIVE&lt;br/&gt;com.lawrencehua.&lt;br/&gt;es-prod-smoke&lt;br/&gt;smoke-latest.json"]
+  J10 -. clock order .-&gt; J11
+  J12["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 09:35 · LIVE&lt;br/&gt;com.lawrencehua.&lt;br/&gt;es-mesh-bridge&lt;br/&gt;Gated draft fix cards"]
+  J11 -. clock order .-&gt; J12
+  J13["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 12:15 · LIVE&lt;br/&gt;com.lawrencehua.&lt;br/&gt;es-flywheel-heartbeat&lt;br/&gt;Watches steward freshness"]
+  J12 -. clock order .-&gt; J13
+  J14["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 23:17 · LIVE&lt;br/&gt;com.expiredsolutions.&lt;br/&gt;sauce-nightly&lt;br/&gt;Nightly device summary"]
+  J13 -. clock order .-&gt; J14
+</pre></details>
+</figure><figure id="rollback-path">
+<figcaption>When a release fails</figcaption>
+<p class="diagram-evidence"><span class="chip reported">REPORTED</span> Source read <time datetime="2026-09-07">2026-09-07</time>: private product repository, <code>.github/workflows/fly-deploy.yml</code> (automatic rollback and receipt steps) and <code>backend/scripts/shopper_core_fly_release.sh</code> (rollback helpers, EXIT receipt, apply failure paths). This describes code paths, not an observed successful deploy.</p>
+<a class="full-size" href="assets/diagrams/rollback-path.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/rollback-path.png" alt="The diagram lists conditional failure cases, not sequential releases. A canary failure stops promotion. After promotion begins, the local operator restores both prior images and verifies them. The workflow restores production only when the captured image bindings are safe; unknown images refuse rollback. Failed restoration requires a person. Receipts preserve what actually happened." loading="lazy"></a>
+<p>The diagram lists conditional failure cases, not sequential releases. A canary failure stops promotion. After promotion begins, the local operator restores both prior images and verifies them. The workflow restores production only when the captured image bindings are safe; unknown images refuse rollback. Failed restoration requires a person. Receipts preserve what actually happened.</p>
+<p><a class="full-size-note" href="assets/diagrams/rollback-path.png" target="_blank" rel="noopener">Open full size ↗</a></p>
+<details><summary>Mermaid source (rollback-path.mmd)</summary><pre tabindex="0" role="group" aria-label="Scrollable diagram source">
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+  A["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;Release fails&lt;br/&gt;Keep the prior image digests&lt;br/&gt;and identify the failed phase"]
+  B["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;If canary fails before promotion&lt;br/&gt;Local operator restores canary&lt;br/&gt;Production was not promoted"]
+  C["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;If production promotion fails&lt;br/&gt;Restore prior production digest&lt;br/&gt;Local operator also restores&lt;br/&gt;the prior canary image"]
+  D["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;Whichever restore applies&lt;br/&gt;Verify exact image identity&lt;br/&gt;and every machine's health"]
+  E["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;If restoration cannot verify&lt;br/&gt;CRITICAL: a person intervenes&lt;br/&gt;The release stays failed"]
+  F["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;Always preserve receipts&lt;br/&gt;Record failed or rolled back&lt;br/&gt;Never claim applied on failure"]
+  A -. phase-specific cases .-&gt; B
+  B -. alternative case .-&gt; C
+  C --&gt; D -. failed check .-&gt; E --&gt; F
+</pre></details>
+</figure><figure id="cost-flow">
+<figcaption>Follow the work to its service invoice</figcaption>
+<p class="diagram-evidence"><span class="chip reported">REPORTED</span> <span class="chip inferred">INFERRED</span> <span class="chip planned">PLANNED</span> Observed <time datetime="2026-09-07">2026-09-07</time>. Sources: <a href="automation.json">automation.json</a>, <code>es-ops/sauce-runner/README.md</code> (plan-only and provider minutes), <code>es-ops/reports/es-full-audit-20260905/report-source.md</code> (model usage), and the release source cited above. Billing records were not read.</p>
+<a class="full-size" href="assets/diagrams/cost-flow.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/cost-flow.png" alt="The arrows are a service checklist, not a payment pipeline. Scheduled device sessions consume provider minutes. Model calls and retries consume usage. Deploy and rollback imply compute use. Apple membership and Vercel billing still need owner records, so those boxes stay PLANNED. No dollar amounts or paid-tier claims are inferred." loading="lazy"></a>
+<p>The arrows are a service checklist, not a payment pipeline. Scheduled device sessions consume provider minutes. Model calls and retries consume usage. Deploy and rollback imply compute use. Apple membership and Vercel billing still need owner records, so those boxes stay PLANNED. No dollar amounts or paid-tier claims are inferred.</p>
+<p><a class="full-size-note" href="assets/diagrams/cost-flow.png" target="_blank" rel="noopener">Open full size ↗</a></p>
+<details><summary>Mermaid source (cost-flow.mmd)</summary><pre tabindex="0" role="group" aria-label="Scrollable diagram source">
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+A["PLANNED&lt;br/&gt;2026-09-07&lt;br/&gt;Apple Developer Program&lt;br/&gt;Membership / renewal invoice&lt;br/&gt;Owner checks billing record&lt;br/&gt;No scheduled charge proven"]
+  F["INFERRED&lt;br/&gt;2026-09-07&lt;br/&gt;Fly&lt;br/&gt;Deploy + rollback use compute&lt;br/&gt;Running services use capacity&lt;br/&gt;Invoice not read"]
+  V["PLANNED&lt;br/&gt;2026-09-07&lt;br/&gt;Vercel&lt;br/&gt;Connected builds + hosting&lt;br/&gt;Owner checks plan and usage&lt;br/&gt;Paid tier not established"]
+  M["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;Model APIs&lt;br/&gt;Provider calls consume usage&lt;br/&gt;Image calls and retries matter&lt;br/&gt;Invoice not read"]
+  S["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;Sauce Labs&lt;br/&gt;Nightly 23:17 device sessions&lt;br/&gt;consume provider minutes&lt;br/&gt;Plan-only uses zero minutes"]
+  O["PLANNED&lt;br/&gt;2026-09-07&lt;br/&gt;Owner reconciles invoices&lt;br/&gt;against dated run receipts&lt;br/&gt;No invoice inferred from a green job"]
+  A -. service checklist .-&gt; F -. service checklist .-&gt; V -. service checklist .-&gt; M -. service checklist .-&gt; S --&gt; O
+</pre></details>
+</figure></section>
 
 <nav class="series" aria-label="Classroom reading order">
 <p class="series-title">Classroom series: read in this order</p>

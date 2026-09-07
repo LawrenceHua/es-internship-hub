@@ -1,0 +1,11 @@
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+  A["REPORTED<br/>2026-09-07<br/>Release fails<br/>Keep the prior image digests<br/>and identify the failed phase"]
+  B["REPORTED<br/>2026-09-07<br/>If canary fails before promotion<br/>Local operator restores canary<br/>Production was not promoted"]
+  C["REPORTED<br/>2026-09-07<br/>If production promotion fails<br/>Restore prior production digest<br/>Local operator also restores<br/>the prior canary image"]
+  D["REPORTED<br/>2026-09-07<br/>Whichever restore applies<br/>Verify exact image identity<br/>and every machine's health"]
+  E["REPORTED<br/>2026-09-07<br/>If restoration cannot verify<br/>CRITICAL: a person intervenes<br/>The release stays failed"]
+  F["REPORTED<br/>2026-09-07<br/>Always preserve receipts<br/>Record failed or rolled back<br/>Never claim applied on failure"]
+  A -. phase-specific cases .-> B
+  B -. alternative case .-> C
+  C --> D -. failed check .-> E --> F

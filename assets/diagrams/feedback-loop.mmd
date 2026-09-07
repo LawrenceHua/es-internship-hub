@@ -1,11 +1,11 @@
-flowchart LR
-  A["Shopper feedback + scan corrections<br/>land in the app"] --> DB[("Production DB")]
-  DB --> DIG["feedback_digest.py<br/>launchd daily 09:15"]
-  DIG --> SLK["#es-daily<br/>unreviewed queue"]
-  SLK --> BRF["Owner brief<br/>es-ops/briefs"]
-  BRF --> PR["Pull request"]
-  PR --> CI{{"release-contracts +<br/>asc-gate-tests gates"}}
-  CI --> RLS["Release<br/>owner-dispatched"]
-  RLS --> APP["App update reaches shoppers"]
-  APP --> A
-  DB -. "corrections feed the ML loop,<br/>flag-only per 2026-09-03 decision" .-> MLX["ML training data"]
+flowchart TB
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"18px","primaryColor":"#e8f3ee","primaryTextColor":"#17241f","primaryBorderColor":"#3d8b6a","lineColor":"#5c6f66"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":16,"rankSpacing":28,"padding":12}}}%%
+A["REPORTED<br/>2026-09-04<br/>Shopper feedback<br/>+ scan corrections"]
+  DB["REPORTED<br/>2026-09-04<br/>Production database<br/>Corrections also feed ML data<br/>FLAG-GATED<br/>2026-09-03"]
+  DIG["REPORTED<br/>2026-09-04<br/>feedback_digest.py<br/>launchd daily 09:15"]
+  SLK["REPORTED<br/>2026-09-04<br/>#es-daily<br/>Unreviewed queue"]
+  BRF["REPORTED<br/>2026-09-04<br/>Owner brief<br/>es-ops/briefs"]
+  PR["REPORTED<br/>2026-09-04<br/>Pull request<br/>release-contracts<br/>+ asc-gate-tests"]
+  RLS["REPORTED<br/>2026-09-04<br/>Owner-dispatched release<br/>App update reaches shoppers"]
+  LOOP["REPORTED<br/>2026-09-04<br/>Feedback returns<br/>to the start of this loop"]
+  A --> DB --> DIG --> SLK --> BRF --> PR --> RLS --> LOOP

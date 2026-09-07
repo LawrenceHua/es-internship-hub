@@ -239,7 +239,9 @@
             .truth-body { padding: 1.2rem 1rem 1.3rem; }
             .story-grid { grid-template-columns: 1fr; }
         }
-    </style>
+
+@media(prefers-color-scheme:dark){.chip.live{color:#9fd0b8}.chip.verified{color:#8fbcd9}.chip.reported,.chip.inferred,.chip.flagged,.chip.planned{color:#d9b36a}.chip.retired,.chip.offline{background:#27312c;color:#c4d0c9}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to ground truths</a>
@@ -275,7 +277,7 @@
         <h2 id="label-heading" class="sr-only">How to read the labels</h2>
         <div class="label-card verified"><span class="chip verified">VERIFIED</span><p>Backed by at least one public link a reader can open and check. A citation that resolves only inside the private product repository is REPORTED, not VERIFIED.</p></div>
         <div class="label-card inferred"><span class="chip inferred">INFERRED</span><p>A synthesis drawn from evidence, not a directly stored fact.</p></div>
-        <div class="label-card reported"><span class="chip reported">REPORTED</span><p>Read in the cited file, commit, receipt, or workflow, but inside the private product repository &mdash; so there is no public artifact to inspect here.</p></div>
+        <div class="label-card reported"><span class="chip reported">REPORTED</span><p>Read in the cited file, commit, receipt, or workflow, but inside the private product repository: so there is no public artifact to inspect here.</p></div>
     </section>
 
     <section class="intro" aria-labelledby="intro-title">
@@ -323,7 +325,7 @@
             <div class="truth-body">
                 <div class="truth-head"><h2>Probe the outside world</h2><span class="chip reported">REPORTED</span></div>
                 <p class="measure"><span class="field-label">What it measures</span>The live store record through signed read-only requests, rather than through local documentation.</p>
-                <blockquote><p>&ldquo;Nothing here mutates ASC &mdash; the version PATCH and build attach are deliberately separate actions, because reading the state and changing it should never be one keystroke apart.&rdquo;</p><cite><code>ios_apps/fastlane/asc/asc_state.py</code></cite></blockquote>
+                <blockquote><p>&ldquo;Nothing here mutates ASC: the version PATCH and build attach are deliberately separate actions, because reading the state and changing it should never be one keystroke apart.&rdquo;</p><cite><code>ios_apps/fastlane/asc/asc_state.py</code></cite></blockquote>
                 <div class="story-grid"><p><span class="field-label">How it was formed</span>The August 8, 2026 listing drift showed that a local file could be tidy while the outside system stayed wrong. Private product repository commit <code>eb555954</code> kept the live probe beside the repair.</p><p><span class="field-label">What it makes impossible</span>Documentation quietly becoming the source of a false operational claim.</p></div>
                 <p class="student-reuse"><span class="field-label">Student reuse</span>Before building on &ldquo;we already have this,&rdquo; write the smallest script that asks the live system.</p>
             </div>

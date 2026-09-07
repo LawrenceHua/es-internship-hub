@@ -245,7 +245,11 @@
             .ground-link { display: block; }
             .ground-link a { display: block; margin-top: 0.35rem; text-align: left; }
         }
-    </style>
+
+@media(prefers-color-scheme:dark){.chip.live{color:#9fd0b8}.chip.verified{color:#8fbcd9}.chip.reported,.chip.inferred,.chip.flagged,.chip.planned{color:#d9b36a}.chip.retired,.chip.offline{background:#27312c;color:#c4d0c9}}
+
+@media(prefers-color-scheme:dark){.chip.optional{color:#d9b36a}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to lesson plan</a>
@@ -281,7 +285,7 @@
         <h2 id="label-heading" class="sr-only">How to read the labels</h2>
         <div class="label-card verified"><span class="chip verified">VERIFIED</span><p>Backed by at least one public link a reader can open and check. A citation that resolves only inside the private product repository is REPORTED, not VERIFIED.</p></div>
         <div class="label-card inferred"><span class="chip inferred">INFERRED</span><p>A synthesis drawn from evidence, not a directly stored fact.</p></div>
-        <div class="label-card reported"><span class="chip reported">REPORTED</span><p>Read in the cited file, commit, receipt, or workflow, but inside the private product repository &mdash; so there is no public artifact to inspect here.</p></div>
+        <div class="label-card reported"><span class="chip reported">REPORTED</span><p>Read in the cited file, commit, receipt, or workflow, but inside the private product repository: so there is no public artifact to inspect here.</p></div>
     </section>
 
     <section class="starter" aria-labelledby="starter-title">
