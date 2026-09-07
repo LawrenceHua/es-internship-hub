@@ -3,13 +3,13 @@
   "generated_at": "2026-09-07T14:07:24Z",
   "generated_by": "es-ops/bin/emit_release_state.py",
   "evidence_label": "REPORTED",
-  "note": "Derived per run from the owner's review watchers, the production health endpoint, and a local commit count. Every source is private or unnamed here, so a reader cannot open one and the label is REPORTED rather than VERIFIED. The production host is deliberately not published. If any source cannot be read this file is left exactly as it was and the producer exits 2. This run's app_store block was entered by hand on 2026-09-07 from the owner's App Store Connect submission record (version 4.3.6, build 2026090701, WAITING_FOR_REVIEW, manual release type) because the producer's local waiting-since baseline (es-ops/state/asc-72h-posted.json) still reflected the prior 4.3.4 review cycle, which was cancelled and replaced by 4.3.6 this same day; running the producer unmodified would have published the stale version. The as_of timestamp below is the real review-watcher reading. The backend and ml blocks were read live from the production health endpoint and a local git count the same way the producer reads them.",
+  "note": "Derived per run from the owner's review watchers, the production health endpoint, and a local commit count. Every source is private or unnamed here, so a reader cannot open one and the label is REPORTED rather than VERIFIED. The production host is deliberately not published. If any source cannot be read this file is left exactly as it was and the producer exits 2. This run's app_store block was entered by hand on 2026-09-07 from the owner's App Store Connect submission record (version 4.3.6, build 2026090701, WAITING_FOR_REVIEW, manual release type) because the producer's local waiting-since baseline (es-ops/state/asc-72h-posted.json) still reflected the prior 4.3.4 review cycle, which was cancelled and replaced by 4.3.6 this same day; running the producer unmodified would have published the stale version. The as_of timestamp below is the real review-watcher reading, and hours_waiting is computed as of that as_of instant (13:36:40Z), not as of generated_at. The backend and ml blocks were read live from the production health endpoint and a local git count the same way the producer reads them. The testflight block was read from es-ops/release-0907/receipts/20260907T140322Z-testflight-distribute.json, the distribution receipt for build 2026090701, at its own as_of instant (2026-09-07T14:03:15Z), which is later than the app_store.as_of reading above.",
   "app_store": {
     "state": "WAITING_FOR_REVIEW",
     "version": "4.3.6",
     "build": "2026090701",
     "waiting_since": "2026-09-07T10:02Z",
-    "hours_waiting": 4.1,
+    "hours_waiting": 3.6,
     "as_of": "2026-09-07T13:36:40Z",
     "source": "es-ops/state/es-asc-verdict-latest.json + owner's App Store Connect submission record (hand-entered 2026-09-07 for the 4.3.6 cut, which replaced the cancelled 4.3.4 submission)"
   },
@@ -23,11 +23,14 @@
     "source": "the production health endpoint (host withheld) + git rev-list --count in the private product clone, against the 4.3.6 release branch"
   },
   "testflight": {
-    "internal_group_last_build": "2026081901",
-    "external_public_link_group_last_build": "2026080404",
-    "distributing_build": "2026090701",
-    "distributing_to": ["internal", "external public-link"],
-    "public_users": 0
+    "internal_group_last_build": "2026090701",
+    "internal_state": "IN_BETA_TESTING",
+    "external_public_link_group_last_build": "2026090701",
+    "external_state": "WAITING_FOR_BETA_REVIEW",
+    "external_link_serves": "2026080404",
+    "public_users": 0,
+    "as_of": "2026-09-07T14:03:15Z",
+    "source": "es-ops/release-0907/receipts/20260907T140322Z-testflight-distribute.json (readback_internal_builds, readback_external_builds, readback_betaDetail)"
   },
   "ml": {
     "custom_model_available": false,
