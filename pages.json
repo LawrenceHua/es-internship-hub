@@ -3,6 +3,7 @@
   "note": "The single source for which pages exist. ARCHITECTURE.md's page table and its html-validate command line are generated from this file, and the classroom-series footers are checked against it. Change this file first: scripts/render-pages.js --write regenerates the document, scripts/render-pages.js --check fails when the document or a footer has drifted, and scripts/validate-ledger.js --site fails when this list and `ls *.html` disagree.",
   "series_titles": {
     "home": "Show and tell",
+    "system": "Six connected systems",
     "product": "How it is built",
     "classroom": "Classroom series",
     "archive": "Program archive"
@@ -13,7 +14,7 @@
       "title": "Show and tell",
       "series": "home",
       "series_order": 1,
-      "summary": "The front door for the September 10 show-and-tell: what Xpired does today, the business loop, what is true right now (read live from release-state.json), how the system is built, the automations that run unattended, and a build-your-own guide, with the internship program archived at the bottom."
+      "summary": "The front door for the September 10 lecture: one founder directing six connected business and technical systems through bounded agents, evidence gates, human decisions and feedback. The last generated product readback is retained as an explicitly dated disclosure, not presented as current state."
     },
     {
       "file": "build-your-own.html",
@@ -21,6 +22,48 @@
       "series": "home",
       "series_order": 2,
       "summary": "The pattern in plain language for running a one-founder product company with AI agents: agents write, gates verify, a human presses release. The minimum stack to copy, what to copy first, what it costs, and three lessons drawn from the program ledger."
+    },
+    {
+      "file": "system-business.html",
+      "title": "Business system",
+      "series": "system",
+      "series_order": 1,
+      "summary": "How the founder identifies a problem, defines evidence, directs bounded work and owns business and release decisions."
+    },
+    {
+      "file": "system-marketing.html",
+      "title": "Marketing system",
+      "series": "system",
+      "series_order": 2,
+      "summary": "How evidence-backed promises, audience response and human publication approval connect marketing to product decisions."
+    },
+    {
+      "file": "system-frontend.html",
+      "title": "Frontend system",
+      "series": "system",
+      "series_order": 3,
+      "summary": "How the shopper interface and public teaching surfaces turn capability into clear, accessible and testable interactions."
+    },
+    {
+      "file": "system-backend.html",
+      "title": "Backend system",
+      "series": "system",
+      "series_order": 4,
+      "summary": "How API routes, services, persistence and manual release gates turn interface intent into bounded operations."
+    },
+    {
+      "file": "system-data.html",
+      "title": "Data and database system",
+      "series": "system",
+      "series_order": 5,
+      "summary": "How application records, curated reference data, consented feedback and training-eligible examples stay distinct."
+    },
+    {
+      "file": "system-ml.html",
+      "title": "Machine-learning system",
+      "series": "system",
+      "series_order": 6,
+      "summary": "How consent, dataset eligibility, candidate evaluation and human promotion keep machine learning evidence-gated."
     },
     {
       "file": "how-it-works.html",
