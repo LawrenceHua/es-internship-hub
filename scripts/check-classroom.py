@@ -2,7 +2,10 @@
 """Check every pages.json page at both teaching widths, in light and dark mode."""
 import argparse
 import json
+import re
 from pathlib import Path
+from urllib.parse import urljoin
+from urllib.request import urlopen
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -42,8 +45,18 @@ def main():
                 filename=item['file'];page=context.new_page();errors=[]
                 page.on('console',lambda msg:errors.append(msg.text) if msg.type=='error' else None)
                 page.on('pageerror',lambda error:errors.append(str(error)))
-                response=page.goto(args.base_url+'/'+filename,wait_until='networkidle',timeout=45000)
-                assert response.status==200 and response.body()==(ROOT/filename).read_bytes(), f'{filename}: served page is not this checkout'
+                source_url=args.base_url+'/'+filename
+                # Read the source bytes before Chrome follows a meta-refresh stub. Asking
+                # CDP for response.body() after that navigation races with Chrome deleting
+                # the original response identifier.
+                with urlopen(source_url,timeout=45) as served:
+                    served_status=served.status
+                    served_body=served.read()
+                assert served_status==200 and served_body==(ROOT/filename).read_bytes(), f'{filename}: served page is not this checkout'
+                refresh=re.search(rb'<meta[^>]+http-equiv=["\']refresh["\'][^>]+content=["\'][^"\']*url=([^"\']+)',served_body,re.I)
+                browser_url=urljoin(source_url,refresh.group(1).decode().strip()) if refresh else source_url
+                response=page.goto(browser_url,wait_until='networkidle',timeout=45000)
+                assert response and response.status==200, f'{filename}: browser navigation did not return HTTP 200'
                 page.evaluate("async()=>{await document.fonts.ready; await Promise.all([...document.images].map(async im=>{im.loading='eager';try{await im.decode()}catch{}}))}")
                 metrics=page.evaluate("()=>({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth,brokenImages:[...document.images].filter(im=>!im.complete||!im.naturalWidth).map(im=>im.getAttribute('src'))})")
                 light=page.evaluate(CONTRAST)
@@ -52,12 +65,12 @@ def main():
                 if width==390 and filename in ('presentation.html','diagrams.html'):
                     sources=['business-loop','feedback-loop','marketing-lane','daily-timeline','rollback-path','cost-flow'] if filename=='presentation.html' else ['system-map','where-robots-run','plan-order','daily-timeline','rollback-path','cost-flow']
                     for source in sources:
-                        image=page.locator(f'img[src="assets/diagrams/{source}.png"]')
+                        image=page.locator(f'img[src$="/{source}.png"], img[src="assets/diagrams/{source}.png"]')
                         if image.count():
                             image.screenshot(path=str(args.shots/f'{Path(filename).stem}-{source}-390.png'),style='.nav,.skip{visibility:hidden!important}')
                 business=None
                 if filename=='presentation.html' and width==390:
-                    business=page.locator('img[src="assets/diagrams/business-loop.png"]').evaluate('(el)=>({height:el.getBoundingClientRect().height,width:el.getBoundingClientRect().width})')
+                    business=page.locator('img[src$="/business-loop.png"], img[src="assets/diagrams/business-loop.png"]').evaluate('(el)=>({height:el.getBoundingClientRect().height,width:el.getBoundingClientRect().width})')
                     if business['height']<600:failures.append(f'{filename}: business-loop below 600 CSS px: {business}')
                 page.emulate_media(color_scheme='dark')
                 dark=page.evaluate(CONTRAST)
