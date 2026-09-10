@@ -145,6 +145,8 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 .release-state .state-list{margin:10px 0 0;padding-left:20px}
 .release-state .state-list li{margin:2px 0}
 .release-state .caption{margin:10px 0 0;font-size:13px}
+.release-summary{margin:22px 0;padding:14px 18px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:0 13px 13px 0;color:var(--muted);font-size:14px;line-height:1.55}
+.release-summary strong{color:var(--ink)}
 .matrix{display:flex;flex-direction:column;gap:10px;margin:20px 0}
 .mrow{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
 .mrow .mic{font-size:19px;width:26px;text-align:center;flex:0 0 auto}
@@ -172,7 +174,7 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
 @media(max-width:999px){.swimlane-cue{display:block}.swimlane-frame::after{content:"";position:absolute;right:1px;top:1px;bottom:1px;width:32px;border-radius:0 16px 16px 0;background:linear-gradient(to right,transparent,var(--card));pointer-events:none}}
 @media(prefers-color-scheme:dark){.swimlane-cue{color:#9fd0b8}}
 
-@media(prefers-color-scheme:dark){.release-state .chip.reported{background:#26200f;color:#d9b36a}}
+@media(prefers-color-scheme:dark){.release-state .chip.reported,.release-summary .chip.reported{background:#26200f;color:#d9b36a}}
 
 .chip.retired,.chip.human{color:#4e6057}
 @media(prefers-color-scheme:dark){.chip.retired,.chip.human{background:#27312c;color:#c4d0c9}}
@@ -334,9 +336,7 @@ h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-.015em;margi
   <span class="secnum">AUTOMATION AT A GLANCE</span>
   <h2>Which flows are automated?</h2>
   <p class="lead">Same honesty rule, in one place: what runs itself, what a person still signs off on, and how we check it.</p>
-<!-- BEGIN GENERATED release-state: written by es-ops/bin/emit_release_state.py from the review watchers, the production health endpoint and a local commit count; do not edit by hand -->
-<div class="release-state"><span class="chip reported">REPORTED</span> <strong>Where the product actually is today.</strong> Version 4.3.6 (build 2026090701) has been waiting for App Store review since 2026-09-07T10:02Z, about 3.6 hours as of the last reading. The running server is commit caf6bbb3 of the private product repository, 6 commits behind origin/release/4.3.6-cut-20260907, and it reports its deployment provenance as ready; no in-house model is loaded in production.<ul class="state-list"><li><code>custom_model_available</code>: false</li><li><code>ood_evaluator_loaded</code>: false</li><li><code>produce_crop_classifier_loaded</code>: false</li><li><code>yolo_loaded</code>: false</li></ul><p class="caption">Generated 2026-09-07T14:07:24Z by <code>es-ops/bin/emit_release_state.py</code> from the review watcher (read 2026-09-07T13:36:40Z), the production health endpoint, and a local commit count against origin/release/4.3.6-cut-20260907. Every source is private to the owner's machine or is an endpoint this site does not name, so a reader cannot open one: this block is reported, not independently checkable. If any source cannot be read the producer writes nothing, so an old timestamp here means the last successful reading and never a blank. The App Store block above was hand-entered this run from the owner's submission record because the producer's local waiting-since baseline still reflected the prior 4.3.4 cycle, which was cancelled and replaced by 4.3.6 the same day.</p></div>
-<!-- END GENERATED release-state: written by es-ops/bin/emit_release_state.py from the review watchers, the production health endpoint and a local commit count; do not edit by hand -->
+<p class="release-summary"><span class="chip reported">REPORTED</span> <strong>Release state as of 2026-09-07:</strong> version 4.3.6 (build 2026090701) has been waiting for App Store review since 2026-09-07, and no in-house model is loaded in production. The full generated disclosure lives in one place: <a href="index.html#release">the home page release readback</a>.</p>
   <div class="matrix">
     <div class="mrow"><span class="mic">📷</span><span class="mname">Fridge scan</span>
       <span class="mchips"><span class="chip auto">automated</span><span class="chip cloud">runs in the cloud</span></span>

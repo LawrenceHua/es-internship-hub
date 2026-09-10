@@ -93,18 +93,12 @@
         .hero p { max-width: 690px; margin: 1.35rem 0 0; color: rgba(255,255,255,0.84); font-size: 1.08rem; }
         .freshness-rule { height: 3px; border: 0; margin: 0; background: linear-gradient(90deg, var(--fresh), var(--caution), var(--urgent)); }
 
-        .label-guide {
-            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem;
+        .label-note {
             margin: -1.8rem 0 0; position: relative; z-index: 2;
-        }
-        .label-card {
-            background: var(--surface); border: 1px solid var(--border); border-top-width: 4px;
+            background: var(--surface); border: 1px solid var(--border);
             border-radius: var(--radius); padding: 1rem 1.05rem; box-shadow: var(--shadow-sm);
+            color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;
         }
-        .label-card.verified { border-top-color: var(--fresh); }
-        .label-card.inferred { border-top-color: var(--caution); }
-        .label-card.reported { border-top-color: #8b93a1; }
-        .label-card p { margin: 0.45rem 0 0; color: var(--text-secondary); font-size: 0.82rem; line-height: 1.45; }
         .chip {
             display: inline-flex; max-width: 100%; padding: 0.22rem 0.58rem;
             border: 1px solid var(--border); border-radius: 999px; background: #fff;
@@ -233,7 +227,7 @@
             .nav-actions a { font-size: 0.74rem; }
             .hero { padding: 4.3rem 1.25rem 3.5rem; }
             .hero-inner, main { width: min(100% - 1.5rem, 960px); }
-            .label-guide { grid-template-columns: 1fr; margin-top: -1rem; }
+            .label-note { margin-top: -1rem; }
             .starter { padding-top: 3rem; }
             .exercise-flow { grid-template-columns: 1fr; }
             .flow-step + .flow-step { border-left: 0; border-top: 1px solid var(--border); }
@@ -282,12 +276,7 @@
 <hr class="freshness-rule">
 
 <main id="main">
-    <section class="label-guide" aria-labelledby="label-heading">
-        <h2 id="label-heading" class="sr-only">How to read the labels</h2>
-        <div class="label-card verified"><span class="chip verified">VERIFIED</span><p>Backed by at least one public link a reader can open and check. A citation that resolves only inside the private product repository is REPORTED, not VERIFIED.</p></div>
-        <div class="label-card inferred"><span class="chip inferred">INFERRED</span><p>A synthesis drawn from evidence, not a directly stored fact.</p></div>
-        <div class="label-card reported"><span class="chip reported">REPORTED</span><p>Read in the cited file, commit, receipt, or workflow, but inside the private product repository: so there is no public artifact to inspect here.</p></div>
-    </section>
+    <p class="label-note">Every exercise card carries an evidence label. The label contract (VERIFIED / INFERRED / REPORTED) is defined once, on the canonical page: <a href="../ground-truths.html#label-heading">how to read the labels</a>.</p>
 
     <section class="starter" aria-labelledby="starter-title">
         <h2 id="starter-title">Bring one small repository</h2>
