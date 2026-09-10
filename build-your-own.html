@@ -907,7 +907,7 @@
             <span><strong>Gates verify.</strong> Required checks run on every pull request and read their pass/fail from a real test collection, not a hand-typed count, so a deleted test cannot quietly shrink the gate. See <a href="automation.html">the automation inventory</a> for what those checks actually are.</span>
         </div>
         <div class="deliverable blocked spaced">
-            <span><strong>A human presses release.</strong> The release workflow only runs when the founder dispatches it. No scheduler, watcher, or agent in this project is allowed to submit a build or promote a deploy on its own; the one place this shows up concretely today is <a href="ledger.html">the ledger</a>'s entry on the 4.3.6 App Store submission, still waiting on the founder's decision even though the review itself is out of anyone's hands.</span>
+            <span><strong>A human presses release.</strong> A submission or promotion needs the founder's decision and current readiness evidence. <a href="automation.html">The automation inventory</a> distinguishes prepared manual paths from observed releases; a workflow file does not prove that a release can run now. <a href="ledger.html">The ledger</a>'s 4.3.6 submission entry is a historical example, not today's review status.</span>
         </div>
     </div>
 </div>
@@ -917,22 +917,22 @@
     <div class="container">
         <div class="section-header">
             <h2>The minimum stack to copy</h2>
-            <p>Five pieces, all of them already running in this project. Every claim below is cited to <a href="automation.html">the automation inventory</a>, the single page that has to stay honest about what actually runs.</p>
+            <p>Five patterns to copy, with different kinds of evidence. <a href="automation.html">The automation inventory</a> separates source checks, manual release contracts, and dated watcher observations. Read each date and status before treating a capability as operational.</p>
         </div>
         <div class="deliverable verified spaced">
             <span><strong>Required checks that fail closed.</strong> Every pull request runs the required checks (release-contracts and asc-gate-tests, plus shopper-tests on iOS paths) before anything can merge. The test count is derived from collection at run time, not typed by hand, so a deleted suite fails the gate instead of shrinking it quietly.</span>
         </div>
-        <div class="deliverable verified spaced">
-            <span><strong>Canary, then promote, never rebuild.</strong> The release workflow (<code>fly-deploy.yml</code>) builds one image, checks a canary with a signed probe, and promotes that exact same digest to production. It never rebuilds between the canary check and the production release, and it rolls back on failure.</span>
+        <div class="deliverable reported spaced">
+            <span><strong>Canary, then promote, never rebuild.</strong> The manual <code>fly-canary-promote.yml</code> contract specifies one image, a canary check, and promotion of the same digest or rollback. The inventory labels this a manual contract awaiting runtime proof. A completed promotion needs its own current receipt.</span>
         </div>
-        <div class="deliverable verified spaced">
-            <span><strong>A release runbook that never has real authority by itself.</strong> A daily dry-run exercises the whole release path every morning without ever being allowed to submit anything; the real submit step still waits on a separate readiness check reading true, and on the founder's own decision.</span>
+        <div class="deliverable reported spaced">
+            <span><strong>A release runbook that never has real authority by itself.</strong> The dated inventory records a daily rehearsal that cannot submit by itself. Its September 9 teaching snapshot also identifies the manual release path as unavailable. Check the current run receipt and readiness evidence before relying on a rehearsal or submission.</span>
         </div>
-        <div class="deliverable verified spaced">
-            <span><strong>A nightly steward that reports, never applies.</strong> A daily steward watches code quality, storage, deployment, and activity, and posts what it finds to the team's Slack channel every morning. It can draft a fix card. It can never apply one; a person still decides.</span>
+        <div class="deliverable reported spaced">
+            <span><strong>A nightly steward that reports, never applies.</strong> The September 7 inventory describes a steward that reports on quality, storage, deployment, and activity. Its boundary is to draft findings for a person to decide. A current successful run needs fresh output evidence; a loaded job alone does not establish it.</span>
         </div>
-        <div class="deliverable verified spaced">
-            <span><strong>A Slack channel as the one operator inbox.</strong> The morning feedback digest and the flywheel steward both land in the same Slack channel, so the founder triages from one place instead of five separate logs. A separate Slack bot answers grounded questions from immutable snapshots of the repository, on request, and never edits anything itself.</span>
+        <div class="deliverable reported spaced">
+            <span><strong>A Slack channel as the one operator inbox.</strong> The dated inventory describes routing the feedback digest and steward findings into one channel for human triage, plus a read-only bot answering from repository snapshots. Copy the routing pattern; verify current delivery separately from the historical description.</span>
         </div>
     </div>
 </div>
@@ -974,7 +974,7 @@
     <div class="container">
         <div class="section-header">
             <h2>What it costs</h2>
-            <p>Small. The specifics, the parts of this that cost real money and the parts that ran free, are tracked honestly in <a href="ledger.html">the program ledger</a> rather than summarized here, because a summary is exactly the kind of number this guide promised not to invent.</p>
+            <p>Use dated entries in <a href="ledger.html">the program ledger</a> for recorded costs and their scope. This guide does not establish a current operating total; a historical entry or free run is not a current price quote.</p>
         </div>
     </div>
 </div>
@@ -1002,9 +1002,9 @@
         </div>
 
         <div class="lesson-card">
-            <span class="chip blocked">BLOCKED</span>
+            <span class="chip reported">REPORTED</span>
             <h3>The automation's job ends at the decision, not past it.</h3>
-            <p>The version currently waiting on Apple's review should not go live the moment it is approved. Apple's review itself is out of anyone's hands, and the team lead wants everything release-ready today, but the release button stays the lead's own call. This row of the ledger only turns green once that decision is recorded, and nothing automated is allowed to make it first.</p>
+            <p>The ledger's 4.3.6 submission entry records a release decision that remained with the owner, separate from Apple's review. That historical example illustrates the boundary: an external approval does not authorize an agent to release. Read a current review receipt before describing today's submission state.</p>
             <p class="source">Source: <a href="ledger.html">the program ledger</a>, entry L38, App Store submission lane.</p>
         </div>
     </div>
