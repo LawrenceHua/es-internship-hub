@@ -20,22 +20,28 @@ command line, or a classroom footer has drifted from it.
 
 | # | Page | Series | Title | What it is |
 |---|---|---|---|---|
-| 1 | `index.html` | Show and tell 1 | Show and tell | The front door for the September 10 show-and-tell: what Xpired does today, the business loop, what is true right now (read live from release-state.json), how the system is built, the automations that run unattended, and a build-your-own guide, with the internship program archived at the bottom. |
+| 1 | `index.html` | Show and tell 1 | Show and tell | The front door for the September 10 lecture: one founder directing six connected business and technical systems through bounded agents, evidence gates, human decisions and feedback. The last generated product readback is retained as an explicitly dated disclosure, not presented as current state. |
 | 2 | `build-your-own.html` | Show and tell 2 | Build your own | The pattern in plain language for running a one-founder product company with AI agents: agents write, gates verify, a human presses release. The minimum stack to copy, what to copy first, what it costs, and three lessons drawn from the program ledger. |
-| 3 | `how-it-works.html` | How it is built 1 | How Xpired works | The system map in plain language: apps, the AI boundary, storage, and the release and watcher robots. |
-| 4 | `ledger.html` | How it is built 2 | Program Ledger | The Program Ledger reader. It fetches ledger.json and uptime.json at runtime and renders them; it hardcodes no row, no total, and no date. |
-| 5 | `provenance.html` | How it is built 3 | Provenance receipts | Research reference for signed decision evidence. It explicitly separates local binding and mock-anchor proof from blocked durability and external-trust work. |
-| 6 | `day-of-a-change.html` | Classroom series 1 | A day of a change | Eleven stations from brief to post-deploy record. |
-| 7 | `automation.html` | Classroom series 2 | The automation inventory | The inventory of workflows, backend schedulers, watchers, and agent lanes, each with a status label and a "must never do" boundary. |
-| 8 | `ml-loop.html` | Classroom series 3 | The ML loop today | The five-stage ML pipeline and its consent boundaries. |
-| 9 | `ground-truths.html` | Classroom series 4 | Ground truths | Fifteen ranked ground truths with evidence labels. |
-| 10 | `diagrams.html` | Classroom series 5 | The system in pictures | System diagrams with their Mermaid sources, phone layouts, and the daily timeline, rollback path and service cost checklist. |
-| 11 | `w1.html` | Program archive 1 | Week 1 tutorial (moved) | One-line redirect stub. The beginner Week 1 tutorial moved to program/w1.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged. |
-| 12 | `lesson-plan.html` | Program archive 2 | Lesson plan (moved) | One-line redirect stub. The six-lesson plan moved to program/lesson-plan.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged. |
-| 13 | `presentation.html` | Program archive 3 | The 9/10 presentation (moved) | One-line redirect stub. The original September 10 internship deck moved to program/presentation.html; the current site's front door supersedes it for the new audience. |
-| 14 | `freshlens.html` | Program archive 4 | FreshLens (moved) | One-line redirect stub. The FreshLens program page moved to program/freshlens.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged. |
+| 3 | `system-business.html` | Six connected systems 1 | Business system | How the founder identifies a problem, defines evidence, directs bounded work and owns business and release decisions. |
+| 4 | `system-marketing.html` | Six connected systems 2 | Marketing system | How evidence-backed promises, audience response and human publication approval connect marketing to product decisions. |
+| 5 | `system-frontend.html` | Six connected systems 3 | Frontend system | How the shopper interface and public teaching surfaces turn capability into clear, accessible and testable interactions. |
+| 6 | `system-backend.html` | Six connected systems 4 | Backend system | How API routes, services, persistence and manual release gates turn interface intent into bounded operations. |
+| 7 | `system-data.html` | Six connected systems 5 | Data and database system | How application records, curated reference data, consented feedback and training-eligible examples stay distinct. |
+| 8 | `system-ml.html` | Six connected systems 6 | Machine-learning system | How consent, dataset eligibility, candidate evaluation and human promotion keep machine learning evidence-gated. |
+| 9 | `how-it-works.html` | How it is built 1 | How Xpired works | The system map in plain language: apps, the AI boundary, storage, and the release and watcher robots. |
+| 10 | `ledger.html` | How it is built 2 | Program Ledger | The Program Ledger reader. It fetches ledger.json and uptime.json at runtime and renders them; it hardcodes no row, no total, and no date. |
+| 11 | `provenance.html` | How it is built 3 | Provenance receipts | Research reference for signed decision evidence. It explicitly separates local binding and mock-anchor proof from blocked durability and external-trust work. |
+| 12 | `day-of-a-change.html` | Classroom series 1 | A day of a change | Eleven stations from brief to post-deploy record. |
+| 13 | `automation.html` | Classroom series 2 | The automation inventory | The inventory of workflows, backend schedulers, watchers, and agent lanes, each with a status label and a "must never do" boundary. |
+| 14 | `ml-loop.html` | Classroom series 3 | The ML loop today | The five-stage ML pipeline and its consent boundaries. |
+| 15 | `ground-truths.html` | Classroom series 4 | Ground truths | Fifteen ranked ground truths with evidence labels. |
+| 16 | `diagrams.html` | Classroom series 5 | The system in pictures | System diagrams with their Mermaid sources, phone layouts, and the daily timeline, rollback path and service cost checklist. |
+| 17 | `w1.html` | Program archive 1 | Week 1 tutorial (moved) | One-line redirect stub. The beginner Week 1 tutorial moved to program/w1.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged. |
+| 18 | `lesson-plan.html` | Program archive 2 | Lesson plan (moved) | One-line redirect stub. The six-lesson plan moved to program/lesson-plan.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged. |
+| 19 | `presentation.html` | Program archive 3 | The 9/10 presentation (moved) | One-line redirect stub. The original September 10 internship deck moved to program/presentation.html; the current site's front door supersedes it for the new audience. |
+| 20 | `freshlens.html` | Program archive 4 | FreshLens (moved) | One-line redirect stub. The FreshLens program page moved to program/freshlens.html when the site was reframed for the September 10 show-and-tell; the page itself is unchanged. |
 
-The site is 14 HTML pages. This table is generated: add or remove a page in `pages.json` and
+The site is 20 HTML pages. This table is generated: add or remove a page in `pages.json` and
 re-run `node scripts/render-pages.js --write`. The classroom series is read in the order above,
 and every one of its pages carries a footer listing all of them.
 
@@ -159,20 +165,22 @@ validator plus browser inspection:
 node scripts/validate-ledger.js
 node scripts/validate-ledger.js --site
 node scripts/render-pages.js --check
-npx --yes html-validate index.html build-your-own.html how-it-works.html ledger.html \
-  provenance.html day-of-a-change.html automation.html ml-loop.html \
-  ground-truths.html diagrams.html w1.html lesson-plan.html \
-  presentation.html freshlens.html
+npx --yes html-validate index.html build-your-own.html system-business.html system-marketing.html \
+  system-frontend.html system-backend.html system-data.html system-ml.html \
+  how-it-works.html ledger.html provenance.html day-of-a-change.html \
+  automation.html ml-loop.html ground-truths.html diagrams.html \
+  w1.html lesson-plan.html presentation.html freshlens.html
 python3 ~/.codex/skills/design-quality-gate/scripts/check-ai-tells.py \
-  index.html build-your-own.html how-it-works.html ledger.html \
-  provenance.html day-of-a-change.html automation.html ml-loop.html \
-  ground-truths.html diagrams.html w1.html lesson-plan.html \
-  presentation.html freshlens.html
+  index.html build-your-own.html system-business.html system-marketing.html \
+  system-frontend.html system-backend.html system-data.html system-ml.html \
+  how-it-works.html ledger.html provenance.html day-of-a-change.html \
+  automation.html ml-loop.html ground-truths.html diagrams.html \
+  w1.html lesson-plan.html presentation.html freshlens.html
 bash scripts/check-mermaid.sh
 git diff --check
 ```
 
-Every one of the 14 pages is named on both command lines, and both lists are generated from
+Every one of the 20 pages is named on both command lines, and both lists are generated from
 `pages.json`. A validator pointed at a subset reports a clean result for pages it never opened,
 which is the same failure the hub teaches against.
 
