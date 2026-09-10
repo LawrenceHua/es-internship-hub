@@ -279,9 +279,8 @@ flowchart TB
 
 <section class="section" id="teaching-diagrams"><h2>Schedule, failure and cost</h2><figure id="daily-timeline">
 <figcaption>A day on the automation clock</figcaption>
-<p class="diagram-evidence"><span class="chip reported">REPORTED</span> Observed <time datetime="2026-09-07T01:58:54Z">2026-09-07T01:58:54Z</time>. Source: <a href="automation.json">automation.json</a>.</p>
 <a class="full-size" href="assets/diagrams/daily-timeline.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/daily-timeline.png" alt="Clock order, not dependencies. Each box names the launchd label, schedule, status and output described in the inventory. DARK and RETIRED entries are definitions, not active runs. Times retain the job definitions&#x27; local clock; the reading stamp is UTC." loading="lazy"></a>
-<p>Clock order, not dependencies. Each box names the launchd label, schedule, status and output described in the inventory. DARK and RETIRED entries are definitions, not active runs. Times retain the job definitions' local clock; the reading stamp is UTC.</p>
+<p>The dated evidence line and the full walkthrough text for this picture are kept with the 9/10 deck, where this figure also appears: <a href="program/presentation.html#daily-timeline">read the deck's copy</a>. The image, alt text and Mermaid source above stay here so this page remains self-sufficient in the room.</p>
 <p><a class="full-size-note" href="assets/diagrams/daily-timeline.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <details><summary>Mermaid source (daily-timeline.mmd)</summary><pre tabindex="0" role="group" aria-label="Scrollable diagram source">
 flowchart TB
@@ -318,9 +317,8 @@ J0["REPORTED&lt;br/&gt;2026-09-07&lt;br/&gt;daily at 03:30 · RETIRED&lt;br/&gt;
 </pre></details>
 </figure><figure id="rollback-path">
 <figcaption>When a release fails</figcaption>
-<p class="diagram-evidence"><span class="chip reported">REPORTED</span> Source read <time datetime="2026-09-07">2026-09-07</time>: private product repository, <code>.github/workflows/fly-deploy.yml</code> (automatic rollback and receipt steps) and <code>backend/scripts/shopper_core_fly_release.sh</code> (rollback helpers, EXIT receipt, apply failure paths). This describes code paths, not an observed successful deploy.</p>
 <a class="full-size" href="assets/diagrams/rollback-path.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/rollback-path.png" alt="The diagram lists conditional failure cases, not sequential releases. A canary failure stops promotion. After promotion begins, the local operator restores both prior images and verifies them. The workflow restores production only when the captured image bindings are safe; unknown images refuse rollback. Failed restoration requires a person. Receipts preserve what actually happened." loading="lazy"></a>
-<p>The diagram lists conditional failure cases, not sequential releases. A canary failure stops promotion. After promotion begins, the local operator restores both prior images and verifies them. The workflow restores production only when the captured image bindings are safe; unknown images refuse rollback. Failed restoration requires a person. Receipts preserve what actually happened.</p>
+<p>The dated evidence line and the full walkthrough text for this picture are kept with the 9/10 deck, where this figure also appears: <a href="program/presentation.html#rollback-path">read the deck's copy</a>. The image, alt text and Mermaid source above stay here so this page remains self-sufficient in the room.</p>
 <p><a class="full-size-note" href="assets/diagrams/rollback-path.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <details><summary>Mermaid source (rollback-path.mmd)</summary><pre tabindex="0" role="group" aria-label="Scrollable diagram source">
 flowchart TB
@@ -337,9 +335,8 @@ flowchart TB
 </pre></details>
 </figure><figure id="cost-flow">
 <figcaption>Follow the work to its service invoice</figcaption>
-<p class="diagram-evidence"><span class="chip reported">REPORTED</span> <span class="chip inferred">INFERRED</span> <span class="chip planned">PLANNED</span> Observed <time datetime="2026-09-07">2026-09-07</time>. Sources: <a href="automation.json">automation.json</a>, <code>es-ops/sauce-runner/README.md</code> (plan-only and provider minutes), <code>es-ops/reports/es-full-audit-20260905/report-source.md</code> (model usage), and the release source cited above. Billing records were not read.</p>
 <a class="full-size" href="assets/diagrams/cost-flow.png" target="_blank" rel="noopener"><img class="narrow-diagram" src="assets/diagrams/cost-flow.png" alt="The arrows are a service checklist, not a payment pipeline. Scheduled device sessions consume provider minutes. Model calls and retries consume usage. Deploy and rollback imply compute use. Apple membership and Vercel billing still need owner records, so those boxes stay PLANNED. No dollar amounts or paid-tier claims are inferred." loading="lazy"></a>
-<p>The arrows are a service checklist, not a payment pipeline. Scheduled device sessions consume provider minutes. Model calls and retries consume usage. Deploy and rollback imply compute use. Apple membership and Vercel billing still need owner records, so those boxes stay PLANNED. No dollar amounts or paid-tier claims are inferred.</p>
+<p>The dated evidence line and the full walkthrough text for this picture are kept with the 9/10 deck, where this figure also appears: <a href="program/presentation.html#cost-flow">read the deck's copy</a>. The image, alt text and Mermaid source above stay here so this page remains self-sufficient in the room.</p>
 <p><a class="full-size-note" href="assets/diagrams/cost-flow.png" target="_blank" rel="noopener">Open full size ↗</a></p>
 <details><summary>Mermaid source (cost-flow.mmd)</summary><pre tabindex="0" role="group" aria-label="Scrollable diagram source">
 flowchart TB
